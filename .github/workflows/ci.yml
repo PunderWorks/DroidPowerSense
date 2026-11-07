@@ -1,0 +1,105 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ── Which parts of the repo did this change touch? ────────────────────────
+  # PRs only run the jobs relevant to what they change. Pushes to main always
+  # run everything. Editing this workflow counts as every area. Firmware jobs
+  # join here once src/ exists.
+  changes:
+    name: Detect Changed Areas
+    runs-on: ubuntu-latest
+    outputs:
+      pcb: ${{ github.event_name != 'pull_request' || steps.filter.outputs.pcb == 'true' }}
+      firmware: ${{ github.event_name != 'pull_request' || steps.filter.outputs.firmware == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            pcb:
+              - 'PCB/**'
+              - 'ci/**'
+              - 'scripts/spice/**'
+              - 'scripts/layout_pcb.py'
+              - 'manifest.kdl'
+              - '.github/workflows/ci.yml'
+            firmware:
+              - 'src/**'
+              - 'Cargo.toml'
+              - 'Cargo.lock'
+              - '.github/workflows/ci.yml'
+
+  # ── Stackup hardware design ───────────────────────────────────────────────
+  # The electrical design is PCB/stackup/board.kdl (Stackup KDL), not KiCad
+  # schematics. This checks it with the Cargo-locked Stackup CLI (ci/stackup,
+  # pinned with the parts library in manifest.kdl), verifies the purchasing BOM
+  # resolves cleanly, and fails if syncing the committed PCB from the design
+  # would change it, so the KDL and PCB/DroidPowerSense.kicad_pcb can't drift
+  # apart.
+  stackup:
+    name: Stackup Design + PCB Sync
+    needs: changes
+    if: needs.changes.outputs.pcb == 'true'
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkout Stackup KiCad plugin
+        uses: actions/checkout@v4
+        with:
+          repository: stackup-eda/stackup
+          ref: v0.2.0
+          path: stackup-tool
+
+      - name: Install Rust 1.96
+        run: rustup toolchain install 1.96.0 --profile minimal
+
+      - name: Check Stackup design
+        run: cargo +1.96.0 run --locked --manifest-path ci/stackup/Cargo.toml -- check PCB/stackup/board.kdl --locked
+
+      - name: Check purchasing BOM
+        run: cargo +1.96.0 run --locked --manifest-path ci/stackup/Cargo.toml -- bom PCB/stackup/board.kdl --locked -o /tmp/droidpowersense-bom.csv
+
+      - name: Install KiCad 10
+        run: |
+          sudo add-apt-repository --yes ppa:kicad/kicad-10.0-releases
+          sudo apt-get update
+          sudo apt-get install -y --install-recommends kicad
+
+      - name: Check PCB sync
+        run: |
+          /usr/bin/python3 ci/check_pcb_sync.py PCB/DroidPowerSense.kicad_pcb \
+            --stackup ci/stackup/target/debug/droidpowersense-stackup-check \
+            --plugin-dir stackup-tool/kicad-plugin
+
+  # ── Single required check ─────────────────────────────────────────────────
+  # The one status check to require on main. Jobs above may be skipped when a
+  # PR doesn't touch their area; this job always runs and fails if any job
+  # failed or was cancelled (skipped counts as passing). Add every new job to
+  # `needs` or it won't gate merges.
+  ci-result:
+    name: CI Result
+    if: always()
+    needs: [changes, stackup]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check job results
+        env:
+          RESULTS: ${{ toJSON(needs) }}
+        run: |
+          echo "$RESULTS" | jq -r 'to_entries[] | "\(.key): \(.value.result)"'
+          if echo "$RESULTS" | jq -e 'any(.[]; .result == "failure" or .result == "cancelled")' > /dev/null; then
+            echo "::error::One or more CI jobs failed or were cancelled."
+            exit 1
+          fi

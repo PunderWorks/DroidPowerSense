@@ -1,0 +1,501 @@
+                                                                          Share Feedback                     DATA SHEET
+                                                                          Your Opinion Matters             www.onsemi.com
+
+
+N-Channel Logic Level                                                                                  D
+
+Enhancement Mode Field
+Effect Transistor                                                                      G
+
+
+BSS138                                                                                                 S
+
+General Description
+  These N−Channel enhancement mode field effect transistors are
+produced using onsemi’s proprietary, high cell density, DMOS
+technology. These products have been designed to minimize on−state
+resistance while provide rugged, reliable, and fast switching
+                                                                                            SOT−23−3
+performance. These products are particularly suited for low voltage,                       CASE 318−08
+low current applications such as small servo motor control, power
+MOSFET gate drivers, and other switching applications.
+                                                                                     MARKING DIAGRAM
+Features
+• 0.22 A, 50 V                                                                                   3
+   ♦ RDS(on) = 3.5  @ VGS = 10 V                                                              Drain
+   ♦ RDS(on) = 6.0  @ VGS = 4.5 V
+                                                                                              SSMG
+• High Density Cell Design for Extremely Low RDS(on)                                            G
+• Rugged and Reliable
+• Compact Industry Standard SOT−23 Surface Mount Package                                 1           2
+• HBM Class 0A, MM Class M2 (Note 3)                                                    Gate       Source
+
+• This Device is Pb−Free and Halogen Free                                       SS      = Specific Device Code
+                                                                                M       = Date Code*
+                                                                                G       = Pb−Free Package
+                                                                            (Note: Microdot may be in either location)
+                                                                         *Date Code orientation and/or position may vary
+                                                                          depending upon manufacturing location.
+
+
+
+                                                                                ORDERING INFORMATION
+
+                                                                          Device           Package             Shipping†
+                                                                       BSS138,             SOT−23−3              3000 /
+                                                                       BSS138−G            (Pb−Free)           Tape & Reel
+
+                                                                       †For information on tape and reel specifications,
+                                                                        including part orientation and tape sizes, please
+                                                                        refer to our Tape and Reel Packaging Specification
+                                                                        Brochure, BRD8011/D.
+
+
+
+
+© Semiconductor Components Industries, LLC, 2005           1                                     Publication Order Number:
+April, 2024 − Rev. 7                                                                                            BSS138/D
+                                                                 BSS138
+
+ABSOLUTE MAXIMUM RATINGS TA = 25°C unless otherwise noted.
+   Symbol                                         Parameter                                                Ratings                 Unit
+     VDSS       Drain−Source Voltage                                                                         50                      V
+    VGSS        Gate−Source Voltage                                                                          ±20
+      ID        Drain Current – Continuous (Note 1)                                                          0.22                    A
+                Drain Current – Pulsed (Note 1)                                                              0.88
+      PD        Maximum Power Dissipation (Note 1)                                                           0.36                   W
+                Derate Above 25°C                                                                            2.8                  mW/°C
+   TJ, TSTG     Operating and Storage Junction Temperature Range                                         −55 to +150                °C
+      TL        Maximum Lead Temperature for Soldering Purposes, 1/16” from Case                             300
+                for 10 s
+Stresses exceeding those listed in the Maximum Ratings table may damage the device. If any of these limits are exceeded, device functionality
+should not be assumed, damage may occur and reliability may be affected.
+
+
+THERMAL CHARACTERISTICS TA = 25°C unless otherwise noted.
+   Symbol                                         Parameter                                                Ratings                 Unit
+     RJA       Thermal Resistance, Junction−to−Ambient (Note 1)                                             350                   °C/W
+
+
+ELECTRICAL CHARACTERISTICS TA = 25°C unless otherwise noted.
+   Symbol                       Parameter                            Test Conditions              Min        Typ       Max         Unit
+OFF CHARACTERISTICS
+    BVDSS       Drain–Source Breakdown Voltage                VGS = 0 V, ID = 250 A               50         −          −           V
+
+   V GS(th)    Breakdown Voltage Temperature                 ID = 250 μA, Referenced to            −         72         −        mV/°C
+                Coefficient                                   25°C
+     T J
+     IDSS       Zero Gate Voltage Drain Current               VDS = 50 V, VGS = 0 V                 −         −         0.5         A
+                                                              VDS = 50 V, VGS = 0 V,                −         −          5
+                                                              TJ = 125°C
+
+                                                              VDS = 30 V, VGS = 0 V                 −         −        100          nA
+     IGSS       Gate–Body Leakage                             VGS = ±20 V, VDS = 0 V                −         −        ±100
+ON CHARACTERISTICS
+    VGS(th)     Gate Threshold Voltage                        VDS = VGS, ID = 1 mA                 0.8       1.3        1.5          V
+
+   V GS(th)    Gate Threshold Voltage Temperature            ID = 1 mA, Referenced to 25°C         −         –2         −        mV/°C
+                Coefficient
+     T J
+   RDS(on)      Static Drain–Source On–Resistance             VGS = 10 V, ID = 0.22 A               −        0.7        3.5          
+                                                              VGS = 4.5 V, ID = 0.22 A              −        1.0        6.0          
+                                                              VGS = 10 V, ID = 0.22 A,              −        1.1        5.8
+                                                              TJ = 125°C
+
+     ID(on)     On–State Drain Current                        VGS = 10 V, VDS = 5 V                0.2        −          −           A
+     gFS        Forward Transconductance                      VDS = 10 V, ID = 0.22 A             0.12       0.5         −           S
+DYNAMIC CHARACTERISTICS
+     Ciss       Input Capacitance                             VDS = 25 V, VGS = 0 V,                −         27         −          pF
+                                                              f = 1.0 MHz
+     Coss       Output Capacitance                                                                  −         13         −          pF
+     Crss       Reverse Transfer Capacitance                                                        −         6          −          pF
+      RG        Gate Resistance                               VGS = 15 mV, f = 1.0 MHz              −         9          −           
+
+
+
+
+                                                           www.onsemi.com                                              Share Feedback
+                                                                     2                                                 Your Opinion Matters
+                                                                                            BSS138
+
+    ELECTRICAL CHARACTERISTICS TA = 25°C unless otherwise noted. (continued)
+                        Symbol                            Parameter                                  Test Conditions                                   Min        Typ            Max          Unit
+    SWITCHING CHARACTERISTICS
+                         td(on)           Turn–On Delay Time                             VDD = 30 V, ID = 0.29 A,                                       −         2.5             5            ns
+                                                                                         VGS = 10 V, RGEN = 6 
+                           tr             Turn–On Rise Time                                                                                             −             9           18           ns
+                         td(off)          Turn–Off Delay Time                                                                                           −         20              36           ns
+                           tf             Turn–Off Fall Time                                                                                            −             7           14           ns
+                          Qg              Total Gate Charge                              VDS = 25 V, ID = 0.22 A,                                       −         1.7             2.4          nC
+                                                                                         VGS = 10 V
+                         Qgs              Gate–Source Charge                                                                                            −         0.1             −            nC
+                         Qgd              Gate–Drain Charge                                                                                             −         0.4             −            nC
+    DRAIN−SOURCE DIODE CHARACTERISTICS AND MAXIMUM RATINGS
+                           IS             Maximum Continuous Drain–Source Diode Forward Current                                                         −             −          0.22           A
+                         VSD              Drain–Source Diode Forward Voltage             VGS = 0 V, IS = 0.44 A (Note 2)                                −         0.8             1.4           V
+Product parametric performance is indicated in the Electrical Characteristics for the listed test conditions, unless otherwise noted. Product
+performance may not be indicated by the Electrical Characteristics if operated under different conditions.
+1. RJA is the sum of the junction−to−case and case−to−ambient thermal resistance where the case thermal reference is defined as the solder
+   mounting surface of the drain pins. RJA is guaranteed by design while RJA is determined by the user’s board design.
+                   a) 350°C/W when mounted on a minimum pad.
+
+
+
+2. Pulse Test: Pulse Width ≤ 300 s, Duty Cycle ≤ 2.0%
+3. ESD between the gate and source serves only, no gate overvoltage rating is implied.
+
+                                                                               TYPICAL CHARACTERISTICS
+
+
+                           1                                                                                                  3.4
+                                    VGS = 10 V           4.5 V     3.5 V
+                                                                                                                               3
+
+
+
+                                                                                                     RDS(on), Normalized
+                         0.8
+                                                                                         3.0 V                                           VGS = 2.5 V
+                                     9V
+
+
+
+
+ID, Drain Current (A)
+                                                                                                                              2.6
+
+                         0.6                                                                                                                                  3.0 V
+                                                                                                                              2.2
+                                                                                                                                                                                3.5 V
+                                                                                                                                                                                              4.0 V
+
+
+
+                                                                                                 Drain−Source On−Resistance
+                                                                                         2.5 V                                1.8
+                         0.4
+                                                                                                                                                                                              4.5 V
+                                                                                                                              1.4                                                             6.0 V
+                         0.2                                                                                                                                                                  10 V
+                                                                                         2.0 V                                 1
+
+                           0                                                                                                  0.6
+                                0          0.5       1           1.5       2       2.5           3                                  0          0.2          0.4           0.6           0.8           1
+
+                                              VDS, Drain To Source Voltage (V)                                                                         ID, Drain Current (A)
+
+                                          Figure 1. On−Region Characteristics                                                           Figure 2. On−Resistance Variation with Drain
+                                                                                                                                                  Current and Gate Voltage
+
+
+
+
+                                                                                    www.onsemi.com                                                                              Share Feedback
+                                                                                                     3                                                                          Your Opinion Matters
+                                                                                                                  BSS138
+
+                                                                                       TYPICAL CHARACTERISTICS (continued)
+
+
+                                      2                                                                                                                            4.1
+                                               ID = 220 mA                                                                                                                                                                   ID = 110 mA
+                                     1.8
+
+
+
+    RDS(on), Normalized
+                                                                                                                                                                   3.5
+
+
+
+
+                                                                                                                                      RDS(on), On−Resistance (W)
+                                                VGS = 10 V
+
+                                     1.6
+                                                                                                                                                                   2.9
+                                     1.4
+                                                                                                                                                                   2.3
+
+
+
+
+Drain−Source On−Resistance
+                                     1.2
+                                                                                                                                                                                                       TA = 125°C
+                                                                                                                                                                   1.7
+                                      1
+
+                                     0.8                                                                                                                           1.1
+                                                                                                                                                                                      TA = 25°C
+
+                                     0.6                                                                                                                           0.5
+                                       −50       −25         0     25         50       75       100     125       150                                                    0           2                 4          6              8         10
+                                                            TJ, Junction Temperature (5C)                                                                                             VGS, Gate To Source Voltage (V)
+
+                                     Figure 3. On−Resistance Variation with Temperature                                                                                       Figure 4. On−Resistance Variation with
+                                                                                                                                                                                     Gate−to−Source Voltage
+                                     0.6                                                                                                                             1
+                                                                                                        25°C                                                                 VGS = 0 V
+                                                VDS = 10 V              TA = −55°C
+
+
+
+
+                                                                                                                        IS, Reverse Drain Current (A)
+                                     0.5
+                                                                                                                                                                                          TA = 125°C
+                                                                                                125°C                                                              0.1
+
+
+
+
+       ID, Drain Current (A)
+                                     0.4
+
+                                                                                                                                                                                                           25°C         −55°C
+                                     0.3                                                                                                                     0.01
+
+                                     0.2
+                                                                                                                                                        0.001
+                                     0.1
+
+                                      0                                                                                                   0.0001
+                                       0.5             1         1.5          2          2.5            3          3.5                                                   0      0.2         0.4             0.6        0.8           1     1.2
+                                                            VGS, Gate To Source Voltage (V)                                                                                     VSD, Body Diode Forward Voltage (V)
+
+                                                   Figure 5. Transfer Characteristics                                                                                    Figure 6. Body Diode Forward Voltage Variation
+                                                                                                                                                                              with Source Current and Temperature
+                                     10                                                                                                                            100
+                                               ID = 220 mA
+                                                                                  VDS = 8 V
+
+
+
+
+      VGS, Gate−Source Voltage (V)
+                                                                                                              25 V
+                                      8                                                                                                                             80
+
+
+
+
+                                                                                                                                      Capacitance (pF)
+                                                                                               30 V
+                                      6                                                                                                                            60
+
+
+                                      4                                                                                                                            40
+                                                                                                                                                                                                CISS
+                                                                                                                                                                                         COSS
+                                      2                                                                                                                            20
+                                                                                                                                                                              CRSS
+
+                                      0                                                                                                                             0
+                                           0     0.2       0.4   0.6    0.8        1     1.2     1.4        1.6   1.8                                                    0        10               20             30            40         50
+                                                                 Qg, Gate Charge (nC)                                                                                             VSD, Drain To Source Voltage (V)
+
+                                                 Figure 7. Gate Charge Characteristics                                                                                          Figure 8. Capacitance Characteristics
+
+
+
+
+                                                                                                            www.onsemi.com                                                                                             Share Feedback
+                                                                                                                     4                                                                                                 Your Opinion Matters
+                                                                                                       BSS138
+
+                                       10                                                                                                          5
+                                                                                                                                                                                               Single Pulse
+
+
+
+
+                                                                                                                P(pk), Peak Transient Power (W)
+                                                                                                                                                                                              RJA = 350°C/W
+                                                                                             100 s                                                4                                             TA = 25°C
+                                        1
+
+
+
+
+          ID, Drain Current (A)
+                                                   RDS(on) Limit                                  1 ms
+                                                                                                  10 ms                                            3
+                                       0.1
+                                                                                                   100 ms
+                                                                                                                                                   2
+
+                                                    VGS = 10 V                                        1s
+                              0.01
+                                                   Single Pulse                                       DC                                           1
+                                                  RJA = 350°C/W
+                                                     TA = 25°C
+                      0.001                                                                                                                        0
+                                             0                     1                  10                 100                                        0.001   0.01   0.1          1           10        100     1000
+                                                             VDS, Drain−Source Voltage (V)                                                                                t1, Time (s)
+
+                                                   Figure 9. Maximum Safe Operating Area                                                          Figure 10. Single Pulse Maximum Power Dissipation
+
+                                         1
+
+
+
+
+r(t), Normalized Effective Transient
+                                             D = 0.5
+
+                                           0.2
+                                       0.1 0.1                                                                                                                                            RJA(t)= r(t) * RJA
+                                                                                                                                                                                           RJA = 350°C/W
+                                                 0.05
+
+
+
+
+         Thermal Resistance
+                                       0.02                                                                                                                                          P(pk)
+                                  0.01 0.01                                                                                                                                                      t1
+
+                                                             Single Pulse                                                                                                                       t2
+                                                                                                                                                                                         TJ − TA = P * RJA(t)
+                                                                                                                                                                                         Duty Cycle, D = t1 / t2
+                          0.001
+                              0.0001                           0.001               0.01               0.1                                               1            10                      100             1000
+                                                                                                       t1, Time (s)
+
+                                                                                Figure 11. Transient Thermal Response Curve
+                                                                       Thermal characterization performed using the conditions described in Note 1a.
+                                                                       Transient thermal response will change depending on the circuit board design.
+
+
+
+
+                                                                                                 www.onsemi.com                                                                             Share Feedback
+                                                                                                            5                                                                               Your Opinion Matters
+                                                                                                                   MECHANICAL CASE OUTLINE
+                                                                                                                                                   PACKAGE DIMENSIONS
+
+
+
+                                                              SOT−23 (TO−236) 2.90x1.30x1.00 1.90P
+                                                                          CASE 318
+                                                                          ISSUE AU
+                                                                                                                                                                DATE 14 AUG 2024
+  SCALE 4:1
+
+
+
+
+                GENERIC
+            MARKING DIAGRAM*
+
+
+                         XXXMG
+                           G
+                  1
+
+          XXX = Specific Device Code
+          M = Date Code
+          G   = Pb−Free Package
+
+*This information is generic. Please refer to
+ device data sheet for actual part marking.
+ Pb−Free indicator, “G” or microdot “G”, may
+ or may not be present. Some products may
+ not follow the Generic Marking.
+
+
+
+
+                                                                            STYLES ON PAGE 2
+
+
+                                                                                         Electronic versions are uncontrolled except when accessed directly from the Document Repository.
+ DOCUMENT NUMBER:                          98ASB42226B                                   Printed versions are uncontrolled except when stamped “CONTROLLED COPY” in red.
+
+             DESCRIPTION:                  SOT−23 (TO−236) 2.90x1.30x1.00 1.90P                                                                                        PAGE 1 OF 2
+
+ onsemi and               are trademarks of Semiconductor Components Industries, LLC dba onsemi or its subsidiaries in the United States and/or other countries. onsemi reserves
+ the right to make changes without further notice to any products herein. onsemi makes no warranty, representation or guarantee regarding the suitability of its products for any particular
+ purpose, nor does onsemi assume any liability arising out of the application or use of any product or circuit, and specifically disclaims any and all liability, including without limitation
+ special, consequential or incidental damages. onsemi does not convey any license under its patent rights nor the rights of others.
+
+
+
+© Semiconductor Components Industries, LLC, 2019                                                                                                                       www.onsemi.com
+                                                              SOT−23 (TO−236) 2.90x1.30x1.00 1.90P
+                                                                          CASE 318
+                                                                          ISSUE AU
+                                                                                                                                                                DATE 14 AUG 2024
+
+
+
+
+STYLE 1 THRU 5:                STYLE 6:                         STYLE 7:                         STYLE 8:
+  CANCELLED                     PIN 1. BASE                      PIN 1. EMITTER                   PIN 1. ANODE
+                                    2. EMITTER                       2. BASE                          2. NO CONNECTION
+                                    3. COLLECTOR                     3. COLLECTOR                     3. CATHODE
+
+STYLE 9:                       STYLE 10:                        STYLE 11:             STYLE 12:                                  STYLE 13:                         STYLE 14:
+ PIN 1. ANODE                   PIN 1. DRAIN                     PIN 1. ANODE          PIN 1. CATHODE                             PIN 1. SOURCE                     PIN 1. CATHODE
+     2. ANODE                       2. SOURCE                        2. CATHODE            2. CATHODE                                 2. DRAIN                          2. GATE
+     3. CATHODE                     3. GATE                          3. CATHODE−ANODE      3. ANODE                                   3. GATE                           3. ANODE
+
+
+STYLE 15:                      STYLE 16:                        STYLE 17:                        STYLE 18:            STYLE 19:             STYLE 20:
+ PIN 1. GATE                    PIN 1. ANODE                     PIN 1. NO CONNECTION             PIN 1. NO CONNECTION PIN 1. CATHODE        PIN 1. CATHODE
+     2. CATHODE                     2. CATHODE                       2. ANODE                         2. CATHODE           2. ANODE              2. ANODE
+     3. ANODE                       3. CATHODE                       3. CATHODE                       3. ANODE             3. CATHODE−ANODE      3. GATE
+
+STYLE 21:                      STYLE 22:                        STYLE 23:                        STYLE 24:                       STYLE 25:                         STYLE 26:
+ PIN 1. GATE                    PIN 1. RETURN                    PIN 1. ANODE                     PIN 1. GATE                     PIN 1. ANODE                      PIN 1. CATHODE
+     2. SOURCE                      2. OUTPUT                        2. ANODE                         2. DRAIN                        2. CATHODE                        2. ANODE
+     3. DRAIN                       3. INPUT                         3. CATHODE                       3. SOURCE                       3. GATE                           3. NO CONNECTION
+
+STYLE 27:                      STYLE 28:
+ PIN 1. CATHODE                 PIN 1. ANODE
+     2. CATHODE                     2. ANODE
+     3. CATHODE                     3. ANODE
+
+
+
+
+                                                                                         Electronic versions are uncontrolled except when accessed directly from the Document Repository.
+ DOCUMENT NUMBER:                          98ASB42226B                                   Printed versions are uncontrolled except when stamped “CONTROLLED COPY” in red.
+
+             DESCRIPTION:                  SOT−23 (TO−236) 2.90x1.30x1.00 1.90P                                                                                        PAGE 2 OF 2
+
+ onsemi and               are trademarks of Semiconductor Components Industries, LLC dba onsemi or its subsidiaries in the United States and/or other countries. onsemi reserves
+ the right to make changes without further notice to any products herein. onsemi makes no warranty, representation or guarantee regarding the suitability of its products for any particular
+ purpose, nor does onsemi assume any liability arising out of the application or use of any product or circuit, and specifically disclaims any and all liability, including without limitation
+ special, consequential or incidental damages. onsemi does not convey any license under its patent rights nor the rights of others.
+
+
+
+© Semiconductor Components Industries, LLC, 2019                                                                                                                       www.onsemi.com
+ onsemi,                , and other names, marks, and brands are registered and/or common law trademarks of Semiconductor Components Industries, LLC dba “onsemi” or its affiliates
+ and/or subsidiaries in the United States and/or other countries. onsemi owns the rights to a number of patents, trademarks, copyrights, trade secrets, and other intellectual property.
+ A listing of onsemi’s product/patent coverage may be accessed at www.onsemi.com/site/pdf/Patent−Marking.pdf. onsemi reserves the right to make changes at any time to any
+ products or information herein, without notice. The information herein is provided “as−is” and onsemi makes no warranty, representation or guarantee regarding the accuracy of the
+ information, product features, availability, functionality, or suitability of its products for any particular purpose, nor does onsemi assume any liability arising out of the application or use
+ of any product or circuit, and specifically disclaims any and all liability, including without limitation special, consequential or incidental damages. Buyer is responsible for its products
+ and applications using onsemi products, including compliance with all laws, regulations and safety requirements or standards, regardless of any support or applications information
+ provided by onsemi. “Typical” parameters which may be provided in onsemi data sheets and/or specifications can and do vary in different applications and actual performance may
+ vary over time. All operating parameters, including “Typicals” must be validated for each customer application by customer’s technical experts. onsemi does not convey any license
+ under any of its intellectual property rights nor the rights of others. onsemi products are not designed, intended, or authorized for use as a critical component in life support systems
+ or any FDA Class 3 medical devices or medical devices with a same or similar classification in a foreign jurisdiction or any devices intended for implantation in the human body. Should
+ Buyer purchase or use onsemi products for any such unintended or unauthorized application, Buyer shall indemnify and hold onsemi and its officers, employees, subsidiaries, affiliates,
+ and distributors harmless against all claims, costs, damages, and expenses, and reasonable attorney fees arising out of, directly or indirectly, any claim of personal injury or death
+ associated with such unintended or unauthorized use, even if such claim alleges that onsemi was negligent regarding the design or manufacture of the part. onsemi is an Equal
+ Opportunity/Affirmative Action Employer. This literature is subject to all applicable copyright laws and is not for resale in any manner.
+
+
+ADDITIONAL INFORMATION
+    TECHNICAL PUBLICATIONS:                                                                               ONLINE SUPPORT: www.onsemi.com/support
+    Technical Library: www.onsemi.com/design/resources/technical−documentation                            For additional information, please contact your local Sales Representative at
+    onsemi Website: www.onsemi.com                                                                        www.onsemi.com/support/sales
+
+
+
+
+

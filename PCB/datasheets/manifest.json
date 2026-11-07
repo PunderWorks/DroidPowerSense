@@ -1,0 +1,98 @@
+{
+  "B360A": {
+    "fetched": "2026-11-07",
+    "file": "B360A.pdf",
+    "sha256": "19ab27e98e717e7012275062b715964897882f3ce95eab846f71d5f2b485ab5b",
+    "url": "https://www.diodes.com/assets/Datasheets/ds13004.pdf"
+  },
+  "B560C": {
+    "fetched": "2026-11-07",
+    "file": "B560C.pdf",
+    "sha256": "1fefc73bb16596e01cda57a2b6a4c59e9d2aacecf2f07f7337e0177b97845235",
+    "url": "https://www.diodes.com/assets/Datasheets/ds13012.pdf"
+  },
+  "BSS138": {
+    "fetched": "2026-11-07",
+    "file": "BSS138.pdf",
+    "sha256": "49616ccb1c7db6415391f12a707d3b26f51e096be3b84a789f4289e9075eb82f",
+    "url": "https://www.diodes.com/assets/Datasheets/ds30144.pdf"
+  },
+  "CSD18532Q5B": {
+    "fetched": "2026-11-07",
+    "file": "CSD18532Q5B.pdf",
+    "sha256": "19ae6322b0c76572012922dedbb54bc87fd11498f330b93c78e94ad35dda6305",
+    "url": "https://www.ti.com/lit/ds/symlink/csd18532q5b.pdf"
+  },
+  "CSS2H-2512": {
+    "fetched": "2026-11-07",
+    "file": "CSS2H-2512.pdf",
+    "sha256": "7e32b223f4b0f086d9e08cd5a4fb42e9935cf119db3dd9cf3ea7969bdd643909",
+    "url": "https://www.bourns.com/docs/Product-Datasheets/CSS2H-2512.pdf"
+  },
+  "ESP32-C5": {
+    "fetched": "2026-11-07",
+    "file": "ESP32-C5.pdf",
+    "sha256": "e3cb7ad57b6fdf165ded30bdb75b4972c92fbe0a9159666eb553999032f1dc22",
+    "url": "https://documentation.espressif.com/esp32-c5_datasheet_en.pdf"
+  },
+  "ESP32-C5-Zero-Schematic": {
+    "fetched": "2026-11-07",
+    "file": "ESP32-C5-Zero-Schematic.pdf",
+    "sha256": "b8fdb1aaa9ba8ad5bfaebbdbe7a721fe66acef1b3e6c7fadb148ae9b94003613",
+    "url": "https://raw.githubusercontent.com/waveshareteam/ESP32-C5-Zero/main/hardware/schematics/ESP32-C5-Zero.pdf"
+  },
+  "ESP32-C5-Zero-Size": {
+    "fetched": "2026-11-07",
+    "file": "ESP32-C5-Zero-Size.pdf",
+    "sha256": "013c4b91622a273a085ab6046cb5692adc79cdd45a103150bde63c1fb384fd9d",
+    "url": "https://raw.githubusercontent.com/waveshareteam/ESP32-C5-Zero/main/hardware/dimensions/esp32-c5-zero-Size.pdf"
+  },
+  "INA226": {
+    "fetched": "2026-11-07",
+    "file": "INA226.pdf",
+    "sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "url": "https://www.ti.com/lit/ds/symlink/ina226.pdf"
+  },
+  "JST-XH": {
+    "fetched": "2026-11-07",
+    "file": "JST-XH.pdf",
+    "sha256": "9426b136902f11900825077535e5c65032b7fbc31ffb59c5e9e1f463bb20fb90",
+    "url": "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf"
+  },
+  "LM5060": {
+    "fetched": "2026-11-07",
+    "file": "LM5060.pdf",
+    "sha256": "38a3fbe1f0f9700439bc174f3f65d83f3743c4a5b4fe479dca40976b12dfd125",
+    "url": "https://www.ti.com/lit/ds/symlink/lm5060.pdf"
+  },
+  "LMR14030": {
+    "fetched": "2026-11-07",
+    "file": "LMR14030.pdf",
+    "sha256": "60fab340a8d414e2ad9c1ba6a0da8e5edd202acabd464fb42163729100ef5b13",
+    "url": "https://www.ti.com/lit/ds/symlink/lmr14030-q1.pdf"
+  },
+  "SMBJ": {
+    "fetched": "2026-11-07",
+    "file": "SMBJ.pdf",
+    "sha256": "752945fa3acaf46947c4f9ffdca98027af4ffb4845c5250713f0b608a547d97f",
+    "url": "https://www.diodes.com/assets/Datasheets/ds19002.pdf"
+  },
+  "TCAN334": {
+    "fetched": "2026-11-07",
+    "file": "TCAN334.pdf",
+    "sha256": "bb89f067e6a7902867bf6b82eaab762167f403ae8464a29ec4f318ab0c71628f",
+    "url": "https://www.ti.com/lit/ds/symlink/tcan334.pdf"
+  },
+  "XT60PW-F": {
+    "fetched": "2026-11-07",
+    "file": "XT60PW-F.pdf",
+    "sha256": "c9e1f23a1f0786a6c91f3d447581274a7cf32cbbcb8dfbe9127a3ed114b68e49",
+    "url": "https://www.tme.eu/Document/de5bd3bf0d3edfdbe81edcfad47f5d29/XT60PW-F.pdf"
+  },
+  "XT60PW-M": {
+    "fetched": "2026-11-07",
+    "file": "XT60PW-M.pdf",
+    "sha256": "492810c844696e46bed4508080d069a13c3627d42c22d8c6631018064b7d52f4",
+    "url": "https://www.electrokit.com/upload/quick/7d/e6/5773_41023548-tds.pdf"
+  }
+}

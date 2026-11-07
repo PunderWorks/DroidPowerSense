@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "DroidPowerSense")(type "KiCad")(uri "${KIPRJMOD}/libraries/DroidPowerSense.pretty")(options "")(descr "DroidPowerSense custom and project-local footprints"))
+)

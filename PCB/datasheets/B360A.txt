@@ -1,0 +1,304 @@
+                                                                            Green                                                  B220/A - B260/A
+                                                                            2.0A SURFACE MOUNT SCHOTTKY BARRIER RECTIFIER
+
+
+Features                                                                            Mechanical Data
+   Guard Ring Die Construction for Transient Protection                                Case: SMA/SMB
+   Ideally Suited for Automated Assembly                                               Case Material: Molded Plastic. UL Flammability Classification
+   Low Power-Loss, High Efficiency                                                      Rating 94V-0
+   Surge Overload Rating to 50A Peak                                                   Moisture Sensitivity: Level 1 per J-STD-020
+   For Use in Low-Voltage, High-Frequency Inverters,                                   Terminals: Lead Free Plating (Matte Tin Finish). Solderable per
+    Free-Wheeling, and Polarity Protection Application                                   MIL-STD-202, Method 208
+   High-Temperature Soldering: +260°C/10 Second at Terminal                            Polarity: Cathode Band or Cathode Notch
+   Lead-Free Finish; RoHS Compliant (Notes 1 & 2)                                      Weight: SMA 0.064 grams (Approximate)
+   Halogen and Antimony Free. “Green” Device (Note 3)                                             SMB 0.093 grams (Approximate)
+   Qualified to AEC-Q101 Standards for High Reliability
+
+
+
+
+                                                                         SMA/SMB
+
+
+
+
+                                                               Top View             Bottom View
+
+
+
+
+Ordering Information (Note 4)
+          Part Number                              Qualification                                  Case                                 Packaging
+           B2xxA-13-F                                Standard                                     SMA                               5,000/Tape & Reel
+           B2xx-13-F                                 Standard                                     SMB                               3,000/Tape & Reel
+            B250Q-13                                Automotive                                    SMB                               3,000/Tape & Reel
+          B240AQ-13-F                               Automotive                                    SMA                               5,000/Tape & Reel
+          B240Q-13-F                                Automotive                                    SMB                               3,000/Tape & Reel
+* x = Device type, e.g. B260A-13-F (SMA package); B240-13-F (SMB package).
+Notes:    1. EU Directive 2002/95/EC (RoHS) & 2011/65/EU (RoHS 2) compliant. All applicable RoHS exemptions applied.
+          2. See http://www.diodes.com/quality/lead_free.html for more information about Diodes Incorporated’s definitions of Halogen- and Antimony-free, "Green"
+             and Lead-free.
+          3. Halogen- and Antimony-free "Green” products are defined as those which contain <900ppm bromine, <900ppm chlorine (<1500ppm total Br + Cl) and
+             <1000ppm antimony compounds.
+          4. For packaging details, go to our website at http://www.diodes.com/products/packages.html.
+          5. Automotive products are AEC-Q101 qualified and are PPAP capable. Automotive, AEC-Q101 and standard products are electrically and thermally the
+             same, except where specified. For more information, please refer to http://www.diodes.com/quality/product_compliance_definitions/.
+
+
+
+
+Marking Information
+
+
+
+                                                                         B2X0A = Product type marking code, ex: B220A (SMA package)
+                                                                         B2X0 = Product type marking code, ex: B230 (SMB package)
+                                                                             = Manufacturers’ code marking
+                                                                         YWW = Date code marking
+                                                                         Y = Last digit of year (ex: 5 for 2015)
+                                                                         WW = Week code (01 to 53)
+
+
+
+
+B220/A - B260/A                                                           1 of 5                                                                         July 2015
+Document number: DS13004 Rev. 22 - 2                                  www.diodes.com                                                            © Diodes Incorporated
+                                                                                                                                   B220/A - B260/A
+
+Maximum Ratings (@TA = +25°C, unless otherwise specified.)
+Single phase, half wave, 60Hz, resistive or inductive load. For capacitance load, derate current by 20%.
+                             Characteristic                                     Symbol      B220/A    B230/A     B240/A          B250/A    B260/A         Unit
+Peak Repetitive Reverse Voltage                                                  VRRM
+Working Peak Reverse Voltage                                                     VRWM            20       30          40           50        60            V
+DC Blocking Voltage                                                               VR
+RMS Reverse Voltage                                                             VR(RMS)          14       21          28           35        42            V
+Average Rectified Output Current                                                   IO                                 2.0                                  A
+Non-Repetitive Peak Forward Surge Current, 8.3ms
+                                                                                  IFSM                                50                                   A
+Single Half Sine-Wave Superimposed on Rated Load
+
+
+
+
+Thermal Characteristics
+                             Characteristic                                              Symbol                  Value                            Unit
+                                                                     SMA                                              25
+Typical Thermal Resistance, Junction to Lead                                              RθJL                                                 °C/W
+                                                                     SMB                                              20
+Operating and Storage Temperature Range                                                  TJ, TSTG              -65 to +150                        °C
+
+
+
+
+Electrical Characteristics (@TA = +25°C, unless otherwise specified.)
+                            Characteristic                                      Symbol      Min       Typ      Max          Unit          Test Condition
+                                                B220/A, B230/A, B240/A                                         0.50
+Forward Voltage Drop                                                              VF         —        —                      V      IF = 2.0A, TA = +25°C
+                                                        B250/A, B260/A                                         0.70
+                                                                                                               0.5                  @ Rated VR, TA = +25°C
+Leakage Current (Note 6)                                                          IR         —        —                     mA
+                                                                                                               20                   @ Rated VR, TA = +100°C
+Total Capacitance                                                                 CT         —        —        200          pF      VR = 40V, f = 1MHz
+ Note:     6. Short duration pulse test used to minimize self-heating effect.
+
+
+
+
+ B220/A - B260/A                                                              2 of 5                                                                     July 2015
+ Document number: DS13004 Rev. 22 - 2                                     www.diodes.com                                                      © Diodes Incorporated
+                                                                                                                                                                                                                                                               B220/A - B260/A
+
+                                                              10                                                                                                                                             100
+
+
+
+
+        IF, INSTANTANEOUS FORWARD CURRENT (A)                                                                                        IR, INSTANTANEOUS REVERSE CURRENT (mA)
+                                                                                                                                                                                                                         10
+
+
+                                                              1.0
+                                                                                                                                                                                                                  1.0
+
+
+
+                                                                                                                                                                                                                      0.1
+                                                              0.1
+
+                                                                                                                                                                                                      0.01
+
+
+                                                  0.01                                                                                                                               0.001
+                                                                    0           0.2       0.4       0.6       0.8    1.0                                                                   0  20      40     60     80   100     120 140
+                                                                        VF, INSTANTANEOUS FORWARD VOLTAGE (V)                                                                            PERCENT OF RATED PEAK REVERSE VOLTAGE (%)
+                                                                              Fig. 1 Typical Forward Characteristics                                                                           Fig. 2 Typical Reverse Characteristics
+                                       1,000                                                                                                                                           2.5
+
+
+
+
+                                                                                                                                                                       IF(AV), AVERAGE FORWARD CURRENT (A)
+                             CT, TOTAL CAPACITANCE (pF)
+                                                                                                                                                                                                                 2.0
+
+
+
+                                                                                                                                                                                                                  1.5
+
+                                                              100
+
+                                                                                                                                                                                                                  1.0
+
+
+
+                                                                                                                                                                                                                  0.5
+
+
+
+                                                               10                                                                                                                                                               0
+                                                                 0.1                    1              10              100                                                                                                       25        50        75       100       125       150
+                                                                                VR, DC REVERSE VOLTAGE (V)                                                                                                                                TT, TERMINAL TEMPERATURE (ºC)
+                                                                          Fig. 3 Total Capacitance vs. Reverse Voltage                                                                                                                   Fig. 4 Forward Current Derating Curve
+                                                              160                                                                                                                                                               50
+
+
+
+
+                       TA, DERATED AMBIENT TEMPERATURE (°C)                                                                                                                              IFSM, PEAK FORWARD SURGE CURRENT (A)
+                                                              150                                          Note 6
+                                                                                                           Note  7
+                                                              140
+                                                                                                                                                                                                                                40
+                                                              130
+                                                              120
+                                                              110
+                                                                                                                                                                                                                                30
+                                                              100
+                                                               90
+                                                               80
+                                                                                                                                                                                                                                20
+                                                               70
+                                                               60
+                                                               50                                                                                                                                                               10
+                                                               40
+                                                               30
+                                                               20                                                                                                                                                               0
+                                                                    0      4    8 12 16 20 24 28 32 36 40                                                                                                                            1                   10                   100
+                                                                                VR, DC REVERSE VOLTAGE (V)                                                                                                                                 NUMBER OF CYCLES AT 60 Hz
+                                                                                                                                                                                                                                Fig. 6 Max Non-Repetitive Peak Forward Surge Current
+                                                                         Fig. 5 Operating Temperature Derating (B240)
+
+Note:                                                         7. Device mounted on FR-4 PC board with minimum recommended pad layout pattern as per http://www.diodes.com.
+
+
+
+B220/A - B260/A                                                                                                            3 of 5                                                                                                                                                  July 2015
+Document number: DS13004 Rev. 22 - 2                                                                                   www.diodes.com                                                                                                                                     © Diodes Incorporated
+                                                                                                              B220/A - B260/A
+
+Package Outline Dimensions
+Please see AP02002 at http://www.diodes.com/datasheets/ap02002.pdf for the latest version.
+
+
+                                                         SMA/SMB
+
+                                        B                                 SMA                        SMB
+                                                                   Dim     Min    Max         Dim     Min    Max
+                                                                    A     2.29    2.92         A     3.30    3.94
+                                                                    B     4.00    4.60         B     4.06    4.57
+                        A                        C                  C     1.27    1.63         C     1.96    2.21
+                                                                    D     0.15    0.31         D     0.15    0.31
+                                                                     E    4.80    5.59          E    5.00    5.59
+                                                                    G     0.05    0.20         G     0.05    0.20
+                                                  D                 H     0.76    1.52         H     0.76    1.52
+                                                                     J    2.01    2.30          J    2.00    2.50
+                        J                                         All Dimensions in mm       All Dimensions in mm
+
+                             H           G
+                                        E
+
+
+
+
+Suggested Pad Layout
+Please see AP02001 at http://www.diodes.com/datasheets/ap02001.pdf for the latest version.
+
+
+
+                                                             SMA/SMB
+
+                                  X1                                        SMA                             SMB
+                    X                                              Dimensions Value (in mm)        Dimensions Value (in mm)
+                                                                       C          4.00                 C          4.30
+                                                                       G          1.50                 G          1.80
+                                                                       X          2.50                 X          2.50
+      Y                                                                X1         6.50                 X1         6.80
+                                                                       Y          1.70                 Y          2.30
+
+                                  G
+
+                                 C
+
+
+
+
+ B220/A - B260/A                                                  4 of 5                                                        July 2015
+ Document number: DS13004 Rev. 22 - 2                         www.diodes.com                                           © Diodes Incorporated
+                                                                                                                      B220/A - B260/A
+
+
+                                                              IMPORTANT NOTICE
+
+DIODES INCORPORATED MAKES NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, WITH REGARDS TO THIS DOCUMENT,
+INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+(AND THEIR EQUIVALENTS UNDER THE LAWS OF ANY JURISDICTION).
+
+Diodes Incorporated and its subsidiaries reserve the right to make modifications, enhancements, improvements, corrections or other changes
+without further notice to this document and any product described herein. Diodes Incorporated does not assume any liability arising out of the
+application or use of this document or any product described herein; neither does Diodes Incorporated convey any license under its patent or
+trademark rights, nor the rights of others. Any Customer or user of this document or products described herein in such applications shall assume
+all risks of such use and will agree to hold Diodes Incorporated and all the companies whose products are represented on Diodes Incorporated
+website, harmless against all damages.
+
+Diodes Incorporated does not warrant or accept any liability whatsoever in respect of any products purchased through unauthorized sales channel.
+Should Customers purchase or use Diodes Incorporated products for any unintended or unauthorized application, Customers shall indemnify and
+hold Diodes Incorporated and its representatives harmless against all claims, damages, expenses, and attorney fees arising out of, directly or
+indirectly, any claim of personal injury or death associated with such unintended or unauthorized application.
+
+Products described herein may be covered by one or more United States, international or foreign patents pending. Product names and markings
+noted herein may also be covered by one or more United States, international or foreign trademarks.
+
+This document is written in English but may be translated into multiple languages for reference. Only the English version of this document is the
+final and determinative format released by Diodes Incorporated.
+
+                                                                 LIFE SUPPORT
+
+Diodes Incorporated products are specifically not authorized for use as critical components in life support devices or systems without the express
+written approval of the Chief Executive Officer of Diodes Incorporated. As used herein:
+
+A. Life support devices or systems are devices or systems which:
+
+          1. are intended to implant into the body, or
+
+          2. support or sustain life and whose failure to perform when properly used in accordance with instructions for use provided in the
+             labeling can be reasonably expected to result in significant injury to the user.
+
+B. A critical component is any component in a life support device or system whose failure to perform can be reasonably expected to cause the
+   failure of the life support device or to affect its safety or effectiveness.
+
+Customers represent that they have all necessary expertise in the safety and regulatory ramifications of their life support devices or systems, and
+acknowledge and agree that they are solely responsible for all legal, regulatory and safety-related requirements concerning their products and any
+use of Diodes Incorporated products in such safety-critical, life support devices or systems, notwithstanding any devices- or systems-related
+information or support that may be provided by Diodes Incorporated. Further, Customers must fully indemnify Diodes Incorporated and its
+representatives against any damages arising out of the use of Diodes Incorporated products in such safety-critical, life support devices or systems.
+
+Copyright © 2015, Diodes Incorporated
+
+www.diodes.com
+
+
+
+
+B220/A - B260/A                                                     5 of 5                                                                 July 2015
+Document number: DS13004 Rev. 22 - 2                            www.diodes.com                                                    © Diodes Incorporated
+

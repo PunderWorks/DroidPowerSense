@@ -1,0 +1,425 @@
+// DroidPowerSense electrical design: high-current inline droid battery power sensor & protection
+// board with Waveshare ESP32-C5-Zero, LM5060 high-side protection controller driving back-to-back
+// 60 V CSD18532Q5B N-MOSFETs, INA226 + 1 mOhm 5 W shunt current/voltage monitor, LMR14030 40 V 5 V
+// buck converter, TCAN334G CAN FD transceiver, and 3.3 V / 5 V level-shifted UART.
+// Requirements, DC bias calculations, and SPICE verification are documented in ../README.md.
+
+use "@stackup/passives"
+use "@stackup/bus/can/tcan334g"
+use "@stackup/sensor/current/ina226"
+use "@stackup/discrete/fet/bss138"
+use "@stackup/discrete/bjt/mmbt3904"
+use "@stackup/discrete/diode/diode"
+use "@stackup/connector/header"
+use "@stackup/connector/jumper"
+use "./parts.kdl"
+
+// ── Purchasing catalog (stocked across Mouser, DigiKey, and LCSC/JLCPCB, checked 2026-11-07) ─────
+mpn "CC0603KRX7R9BB104" manufacturer="YAGEO" kind=capacitor value="100nF" rated_voltage="50V" {
+    catalog mouser="603-CC603KRX7R9BB104" digikey="311-1088-1-ND" lcsc="C14663"
+}
+mpn "CL10B103KB8NNNC" manufacturer="Samsung Electro-Mechanics" kind=capacitor value="10nF" rated_voltage="50V" {
+    catalog mouser="187-CL10B103KB8NNNC" digikey="1276-1009-1-ND" lcsc="C1589"
+}
+mpn "CL31A106KBHNNNE" manufacturer="Samsung Electro-Mechanics" kind=capacitor value="10µF" footprint="Capacitor_SMD:C_1206_3216Metric" rated_voltage="50V" {
+    catalog mouser="187-CL31A106KBHNNNE" digikey="1276-2876-1-ND" lcsc="C13585"
+}
+mpn "SRN6045TA-100M" manufacturer="Bourns" kind=inductor value="10µH" footprint="Inductor_SMD:L_Bourns_SRN6045TA" {
+    catalog mouser="652-SRN6045TA-100M" digikey="SRN6045TA-100MCT-ND" lcsc="C2046332"
+}
+mpn "CSS2H-2512R-1L00F" manufacturer="Bourns" kind=resistor value="1mΩ" footprint="Resistor_SMD:R_2512_6332Metric" {
+    catalog mouser="652-CSS2H-2512R1L00F" digikey="CSS2H-2512R-1L00FCT-ND" lcsc="C4175647"
+}
+mpn "RC0805FR-07120RL" manufacturer="YAGEO" kind=resistor value="120Ω" footprint="Resistor_SMD:R_0805_2012Metric" {
+    catalog mouser="603-RC0805FR-07120RL" digikey="311-120CRCT-ND" lcsc="C114245"
+}
+mpn "RC0603FR-071KL" manufacturer="YAGEO" kind=resistor value="1kΩ" {
+    catalog mouser="603-RC0603FR-071KL" digikey="311-1.00KHRCT-ND" lcsc="C22548"
+}
+mpn "RC0603FR-072K2L" manufacturer="YAGEO" kind=resistor value="2.2kΩ" {
+    catalog mouser="603-RC0603FR-072K2L" digikey="311-2.20KHRCT-ND" lcsc="C114662"
+}
+mpn "RC0603FR-074K7L" manufacturer="YAGEO" kind=resistor value="4.7kΩ" {
+    catalog mouser="603-RC0603FR-074K7L" digikey="311-4.70KHRCT-ND" lcsc="C99782"
+}
+mpn "RC0603FR-0710KL" manufacturer="YAGEO" kind=resistor value="10kΩ" {
+    catalog mouser="603-RC0603FR-0710KL" digikey="311-10.0KHRCT-ND" lcsc="C98220"
+}
+mpn "RC0603FR-0722KL" manufacturer="YAGEO" kind=resistor value="22kΩ" {
+    catalog mouser="603-RC0603FR-0722KL" digikey="311-22.0KHRCT-ND" lcsc="C114065"
+}
+mpn "RC0603FR-0733KL" manufacturer="YAGEO" kind=resistor value="33kΩ" {
+    catalog mouser="603-RC0603FR-0733KL" digikey="311-33.0KHRCT-ND" lcsc="C126359"
+}
+mpn "RC0603FR-0747KL" manufacturer="YAGEO" kind=resistor value="47kΩ" {
+    catalog mouser="603-RC0603FR-0747KL" digikey="311-47.0KHRCT-ND" lcsc="C105579"
+}
+mpn "RC0603FR-0756K2L" manufacturer="YAGEO" kind=resistor value="56.2kΩ" {
+    catalog mouser="603-RC0603FR-0756K2L" digikey="311-56.2KHRCT-ND" lcsc="C482887"
+}
+mpn "RC0603FR-07100KL" manufacturer="YAGEO" kind=resistor value="100kΩ" {
+    catalog mouser="603-RC0603FR-07100KL" digikey="311-100KHRCT-ND" lcsc="C14675"
+}
+mpn "RC0603FR-07180KL" manufacturer="YAGEO" kind=resistor value="180kΩ" {
+    catalog mouser="603-RC0603FR-07180KL" digikey="311-180KHRCT-ND" lcsc="C123419"
+}
+
+design droidpowersense {
+    stock { packages imperial="0603" }
+
+    match placement {
+        when kind=capacitor
+        when value="100nF"
+        set mpn="CC0603KRX7R9BB104"
+    }
+    match placement {
+        when kind=capacitor
+        when value="10nF"
+        set mpn="CL10B103KB8NNNC"
+    }
+    match placement {
+        when kind=capacitor
+        when value="10µF"
+        when footprint="Capacitor_SMD:C_1206_3216Metric"
+        set mpn="CL31A106KBHNNNE"
+    }
+    match placement {
+        when kind=inductor
+        when value="10µH"
+        when footprint="Inductor_SMD:L_Bourns_SRN6045TA"
+        set mpn="SRN6045TA-100M"
+    }
+    match placement {
+        when kind=resistor
+        when value="1mΩ"
+        when footprint="Resistor_SMD:R_2512_6332Metric"
+        set mpn="CSS2H-2512R-1L00F"
+    }
+    match placement {
+        when kind=resistor
+        when value="120Ω"
+        when footprint="Resistor_SMD:R_0805_2012Metric"
+        set mpn="RC0805FR-07120RL"
+    }
+    match placement {
+        when kind=resistor
+        when value="1kΩ"
+        set mpn="RC0603FR-071KL"
+    }
+    match placement {
+        when kind=resistor
+        when value="2.2kΩ"
+        set mpn="RC0603FR-072K2L"
+    }
+    match placement {
+        when kind=resistor
+        when value="4.7kΩ"
+        set mpn="RC0603FR-074K7L"
+    }
+    match placement {
+        when kind=resistor
+        when value="10kΩ"
+        set mpn="RC0603FR-0710KL"
+    }
+    match placement {
+        when kind=resistor
+        when value="22kΩ"
+        set mpn="RC0603FR-0722KL"
+    }
+    match placement {
+        when kind=resistor
+        when value="33kΩ"
+        set mpn="RC0603FR-0733KL"
+    }
+    match placement {
+        when kind=resistor
+        when value="47kΩ"
+        set mpn="RC0603FR-0747KL"
+    }
+    match placement {
+        when kind=resistor
+        when value="56.2kΩ"
+        set mpn="RC0603FR-0756K2L"
+    }
+    match placement {
+        when kind=resistor
+        when value="100kΩ"
+        set mpn="RC0603FR-07100KL"
+    }
+    match placement {
+        when kind=resistor
+        when value="180kΩ"
+        set mpn="RC0603FR-07180KL"
+    }
+
+    // ── High-Current Power Passthrough Connectors & Input/Output Protection ──────────────
+    // J_PWR_IN (XT60PW-M) mates with the battery's XT60-F female plug.
+    // J_PWR_OUT (XT60PW-F) mates with the droid harness's XT60-M male plug.
+    place xt60pw-m J_PWR_IN hand=#true note="Battery input (9-32V, 30A cont / 60A peak): pad 1 GND (-), pad 2 VBAT_IN (+)"
+    place xt60pw-f J_PWR_OUT hand=#true note="Protected passthrough output: pad 1 GND (-), pad 2 VOUT (+)"
+    set J_PWR_IN.POS net.voltage min="9.0V" max="32.0V"
+
+    // Bidirectional 1500 W SMC TVS on input so reverse battery polarity up to -33 V does not
+    // forward-conduct unlimited fault current.
+    place smcj33ca D_TVS_IN note="input surge clamp; bidirectional for reverse-polarity immunity"
+    circuit J_PWR_IN.POS D_TVS_IN.A1 name="VBAT_IN"
+
+    // ── Remote Power Switch (J_SW) & Reverse-Protected Control Rail (VSW_CTRL) ───────────
+    // When J_SW is open, VSW_CTRL is completely disconnected from VBAT_IN: zero off-state battery
+    // drain (< 1 uA leakage). When J_SW is closed, D_SW (B160-13-F, 60V 1A Schottky) supplies
+    // VSW_CTRL (~25 mA total) and blocks reverse battery polarity.
+    // J_SW pins 3-4 light a lit-when-on switch (see ../README.md, "Remote switch wiring"):
+    //   pin 1 BAT+  switch input (VBAT_IN)
+    //   pin 2 SW    switch output (VSW_RAW)
+    //   pin 3 LED-  return through Q_LED; also the GND terminal of 3-terminal (+/ACC/GND) lit switches
+    //   pin 4 LED+  +5V (only present while the switch is on) for switches with separate LED terminals
+    // Battery pins sit together at one end so a slipped wire never puts VBAT_IN on +5V.
+    place jst-xh-4 J_SW hand=#true note="Remote switch: 1 BAT+, 2 SW, 3 LED- (switched return), 4 LED+ (+5V)"
+    place b160 D_SW note="Reverse-polarity blocking Schottky for VSW_CTRL"
+    circuit J_PWR_IN.POS J_SW.1 name="VBAT_IN"
+    circuit J_SW.2 D_SW.A name="VSW_RAW"
+    set D_SW.K net.voltage min="8.5V" max="31.6V"
+    set D_SW.K net.name "VSW_CTRL"
+
+    // ── High-Side Protection Controller (LM5060) & Back-to-Back 60V MOSFETs (Q1, Q2) ─────
+    // Common-source back-to-back N-channel MOSFETs (Q1 blocks forward when off, Q2 blocks reverse
+    // polarity and back-feed when off). Driven by LM5060 charge pump (16.8V gate clamp).
+    // See scripts/spice/power_switch_sim.py and LM5060 datasheet Figure 41 (p. 27).
+    place lm5060 U_PROT
+    place capacitor C_PROT_VIN value="100nF" intent=decouple note="LM5060 VIN local bypass"
+    circuit D_SW.K U_PROT.VIN C_PROT_VIN.A name="VSW_CTRL"
+
+    // Back-to-back 60V 2.5mOhm N-MOSFETs (SON 5x6)
+    place csd18532q5b Q1 note="High-side forward switch MOSFET (drain=VBAT_IN, source=VSW_MID)"
+    place csd18532q5b Q2 note="High-side reverse-blocking MOSFET (source=VSW_MID, drain=VSW_OUT)"
+    circuit J_PWR_IN.POS Q1.DRAIN name="VBAT_IN"
+    circuit Q1.SOURCE Q2.SOURCE name="VSW_MID"
+
+    // Gate drive network: R_GATE limits reverse current into GATE pin during reverse polarity;
+    // D_GOFF bypasses R_GATE for 80 mA fast fault turn-off (LM5060 Figure 41).
+    place resistor R_GATE value="2.2kΩ" intent=damping note="LM5060 gate reverse-current limiter"
+    place b160 D_GOFF note="Fast gate discharge bypass Schottky (anode=GATE_FET, cathode=U_PROT.GATE)"
+    circuit U_PROT.GATE R_GATE.A D_GOFF.K name="GATE_DRV"
+    circuit R_GATE.B D_GOFF.A Q1.GATE Q2.GATE name="GATE_FET"
+
+    // Reverse-polarity VGS clamp (LM5060 Figure 41: Q3 NPN + D5 + R2):
+    // When VBAT_IN < 0V, Q1 body diode pulls VSW_MID negative; R_REV forward-biases Q_REV (NPN),
+    // clamping GATE_FET to VSW_MID (VGS = 0.1V) so Q2 stays strictly off during reverse battery.
+    place mmbt3904 Q_REV footprint="Package_TO_SOT_SMD:SOT-23" manufacturer=onsemi mpn=MMBT3904LT1G \
+        mouser="863-MMBT3904LT1G" digikey="MMBT3904LT1GOSCT-ND" lcsc=C81464 \
+        note="Clamps Q2 VGS to 0V during reverse polarity (LM5060 Fig. 41 Q3)"
+    place diode D_REV package=sod123 footprint="Diode_SMD:D_SOD-123" value="1N4148W-TP" \
+        manufacturer="Micro Commercial Components" mpn="1N4148W-TP" \
+        mouser="833-1N4148W-TP" digikey="1N4148W-TPMSCT-ND" lcsc=C77978 \
+        note="Protects Q_REV base-emitter against reverse breakdown during normal operation"
+    place resistor R_REV value="47kΩ" intent=bias note="Q_REV base bias to GND during reverse polarity"
+    circuit Q1.GATE Q_REV.COLLECTOR name="GATE_FET"
+    circuit Q1.SOURCE Q_REV.EMITTER D_REV.A name="VSW_MID"
+    circuit Q_REV.BASE D_REV.K R_REV.A name="REV_BASE"
+
+    // LM5060 SENSE, OUT, and TIMER (VDS overcurrent/short-circuit protection):
+    // R_SENSE = 22k (16 uA * 22k = 352 mV VDS threshold -> ~70A hardware short-circuit trip across Q1+Q2).
+    // R_OUT = 10k limits reverse current out of OUT pin to < 3 mA during reverse polarity.
+    // C_TIMER = 100nF sets ~33 ms startup VGS window and ~18 ms overcurrent latch delay.
+    place resistor R_SENSE value="22kΩ" intent=sense note="LM5060 VDS fault threshold programming"
+    place resistor R_OUT value="10kΩ" intent=protection note="LM5060 OUT pin reverse-polarity current limiter"
+    place capacitor C_TIMER value="100nF" intent=timing note="LM5060 fault timer capacitor"
+    circuit J_PWR_IN.POS R_SENSE.A name="VBAT_IN"
+    circuit R_SENSE.B U_PROT.SENSE name="PROT_SENSE"
+    circuit Q2.DRAIN R_OUT.A name="VSW_OUT"
+    circuit R_OUT.B U_PROT.OUT name="PROT_OUT"
+    circuit U_PROT.TIMER C_TIMER.A name="PROT_TIMER"
+
+    // LM5060 UVLO (33k / 10k -> ~7.5V battery rising UVLO) and OVP (180k / 10k -> ~38V OVP):
+    place resistor R_UVLO1 value="33kΩ" intent=divider
+    place resistor R_UVLO2 value="10kΩ" intent=divider
+    circuit D_SW.K R_UVLO1.A name="VSW_CTRL"
+    circuit R_UVLO1.B R_UVLO2.A U_PROT.UVLO name="PROT_UVLO"
+
+    place resistor R_OVP1 value="180kΩ" intent=divider
+    place resistor R_OVP2 value="10kΩ" intent=divider
+    circuit D_SW.K R_OVP1.A name="VSW_CTRL"
+    circuit R_OVP1.B R_OVP2.A U_PROT.OVP name="PROT_OVP"
+
+    // LM5060 EN divider (100k / 47k from VSW_CTRL -> 2.58V at 9V, 9.28V at 30V) + MCU cutoff N-FET:
+    // Driving PWR_CUTOFF high turns on Q_CUTOFF, pulling U_PROT.EN to GND (< 0.5V disabled state)
+    // and shutting off Q1/Q2 while keeping the MCU powered from VSW_CTRL to report telemetry.
+    place resistor R_EN1 value="100kΩ" intent=divider
+    place resistor R_EN2 value="47kΩ" intent=divider
+    place bss138 Q_CUTOFF footprint="Package_TO_SOT_SMD:SOT-23" manufacturer="Diodes Incorporated" mpn="BSS138-7-F" \
+        mouser="621-BSS138-7-F" digikey="BSS138-7-FDICT-ND" lcsc=C40912 \
+        note="MCU high-side cutoff override: pulls LM5060 EN low when IO1 is driven high"
+    place resistor R_CUTOFF_PD value="100kΩ" intent=pull-down note="Holds Q_CUTOFF off during MCU reset"
+    circuit D_SW.K R_EN1.A name="VSW_CTRL"
+    circuit R_EN1.B R_EN2.A Q_CUTOFF.DRAIN U_PROT.EN name="PROT_EN"
+    circuit U_MCU.IO1 Q_CUTOFF.GATE R_CUTOFF_PD.A name="PWR_CUTOFF"
+
+    // ── High-Side Current & Voltage Monitor (INA226 + 1 mOhm 5W 2512 Shunt) ──────────────
+    // R_SHUNT (CSS2H-2512R-1L00F, 1 mOhm 1% 5W) sits between VSW_OUT (Q2 drain) and VOUT (J_PWR_OUT.+).
+    // At 1 mOhm, INA226 (+/-81.92 mV full-scale, 2.5 uV LSB) resolves 2.5 mA/LSB up to +/-81.92 A.
+    // Dissipation at 30 A continuous is 0.9 W (18% of the 5 W rating); at 60 A peak, 3.6 W.
+    place resistor R_SHUNT value="1mΩ" intent=shunt footprint="Resistor_SMD:R_2512_6332Metric" \
+        note="1 mOhm 1% 5W metal-element current sense shunt (Bourns CSS2H-2512R-1L00F)"
+    place ina226 U_INA footprint="Package_SO:TSSOP-10_3x3mm_P0.5mm" mpn="INA226AIDGSR" \
+        mouser="595-INA226AIDGSR" digikey="296-30327-1-ND" lcsc=C49851 \
+        vs=U_MCU.v3v3 a0=gnd a1=gnd
+    circuit Q2.DRAIN R_SHUNT.A U_INA.VIN+ name="VSW_OUT"
+    circuit R_SHUNT.B U_INA.VIN- U_INA.VBUS J_PWR_OUT.POS name="VOUT"
+    set J_PWR_OUT.POS net.voltage min="0.0V" max="32.0V"
+
+    // Output inductive flyback clamp diode (B560C-13-F, 60V 5A / 100A surge SMC Schottky) and
+    // output bidirectional TVS (SMBJ33CA-13-F, 33V 600W SMB):
+    place b560c D_FLY note="Output inductive flyback freewheeling Schottky diode (anode=GND, cathode=VOUT)"
+    place smbj33ca D_TVS_OUT note="Output transient voltage suppressor"
+    circuit D_FLY.K D_TVS_OUT.A1 J_PWR_OUT.POS name="VOUT"
+
+    // Pre-MOSFET battery voltage ADC sense divider (100k / 10k = 11:1 from VSW_CTRL to IO6/ADC1_CH5)
+    // so firmware can read battery voltage even when Q1/Q2 are off.
+    place resistor R_VBAT_TOP value="100kΩ" intent=divider
+    place resistor R_VBAT_BOT value="10kΩ" intent=divider
+    place capacitor C_VBAT_ADC value="100nF" intent=filter
+    circuit D_SW.K R_VBAT_TOP.A name="VSW_CTRL"
+    circuit R_VBAT_TOP.B R_VBAT_BOT.A C_VBAT_ADC.A U_MCU.IO6 name="VBAT_ADC"
+
+    // ── 5V Step-Down Buck Converter (LMR14030SDDAR, 4-40V in -> 5.0V out) ────────────────
+    // Powers the Waveshare ESP32-C5-Zero (5V pin -> onboard MP1605GTF-Z 3.3V buck) and the 5V
+    // option on the UART VIO jumper (J_VIO).
+    place lmr14030 U_BUCK
+    place capacitor C_BUCK_IN1 value="10µF" footprint="Capacitor_SMD:C_1206_3216Metric" intent=bulk
+    place capacitor C_BUCK_IN2 value="10µF" footprint="Capacitor_SMD:C_1206_3216Metric" intent=bulk
+    place capacitor C_BUCK_IN3 value="100nF" intent=decouple
+    circuit D_SW.K U_BUCK.VIN C_BUCK_IN1.A C_BUCK_IN2.A C_BUCK_IN3.A name="VSW_CTRL"
+
+    place resistor R_BUCK_EN value="100kΩ" intent=pull-up
+    circuit D_SW.K R_BUCK_EN.A name="VSW_CTRL"
+    circuit R_BUCK_EN.B U_BUCK.EN name="BUCK_EN"
+
+    // RT = 100k sets fSW = 400 kHz (LMR14030 Eq. 3); SS = 10nF sets 2.5 ms soft-start.
+    place resistor R_BUCK_RT value="100kΩ" intent=timing
+    circuit U_BUCK.RT R_BUCK_RT.A name="BUCK_RT"
+    place capacitor C_BUCK_SS value="10nF" intent=timing
+    circuit U_BUCK.SS C_BUCK_SS.A name="BUCK_SS"
+
+    // Bootstrap capacitor (100nF), catch Schottky (B360A-13-F 60V 3A), and 10uH inductor (SRN6045TA-100M):
+    place capacitor C_BUCK_BOOT value="100nF" intent=bootstrap
+    circuit U_BUCK.BOOT C_BUCK_BOOT.A name="BUCK_BOOT"
+    place b360a D_BUCK note="Buck catch Schottky diode (60V 3A SMA)"
+    place inductor L_BUCK value="10µH" footprint="Inductor_SMD:L_Bourns_SRN6045TA"
+    circuit U_BUCK.SW C_BUCK_BOOT.B D_BUCK.K L_BUCK.A name="BUCK_SW"
+
+    // Feedback divider: VFB = 0.750V * (1 + 56.2k / 10k) = 4.965V
+    place resistor R_FB_TOP value="56.2kΩ" intent=feedback
+    place resistor R_FB_BOT value="10kΩ" intent=feedback
+    place capacitor C_BUCK_OUT1 value="10µF" footprint="Capacitor_SMD:C_1206_3216Metric" intent=bulk
+    place capacitor C_BUCK_OUT2 value="10µF" footprint="Capacitor_SMD:C_1206_3216Metric" intent=bulk
+    place capacitor C_BUCK_OUT3 value="100nF" intent=decouple
+    circuit L_BUCK.B R_FB_TOP.A C_BUCK_OUT1.A C_BUCK_OUT2.A C_BUCK_OUT3.A U_MCU.5V name="+5V"
+    set L_BUCK.B net.voltage min="4.8V" max="5.15V"
+    circuit R_FB_TOP.B R_FB_BOT.A U_BUCK.FB name="BUCK_FB"
+
+    // ── MCU (Waveshare ESP32-C5-Zero on Castellated Carrier Pads) ────────────────────────
+    // The module's onboard MP1605GTF-Z 2A synchronous buck regulates +5V to +3.3V and exports +3.3V
+    // on pin 3 (3V3) to power the carrier's 3.3V peripherals.
+    place esp32-c5-zero U_MCU hand=#true note="Waveshare ESP32-C5-Zero hand-soldered on castellated pads"
+    place capacitor C_3V3_1 value="100nF" intent=decouple
+    circuit U_MCU.3V3 C_3V3_1.A name="+3V3"
+    set U_MCU.3V3 net.voltage "3.3V"
+
+    // I2C bus to INA226 (IO2 = SDA, IO3 = SCL) with 4.7k pull-ups to +3V3:
+    place pull-up R_I2C_SDA node=U_MCU.IO2 rail=U_MCU.v3v3 value="4.7kΩ"
+    place pull-up R_I2C_SCL node=U_MCU.IO3 rail=U_MCU.v3v3 value="4.7kΩ"
+    circuit U_MCU.IO2 U_INA.SDA name="I2C_SDA"
+    circuit U_MCU.IO3 U_INA.SCL name="I2C_SCL"
+
+    // INA226 ALERT (open-drain -> IO4) and LM5060 nPGD (open-drain -> IO0):
+    place pull-up R_INA_ALERT node=U_MCU.IO4 rail=U_MCU.v3v3 value="10kΩ"
+    circuit U_MCU.IO4 U_INA.ALERT name="INA_ALERT"
+    place pull-up R_PROT_PGD node=U_MCU.IO0 rail=U_MCU.v3v3 value="10kΩ"
+    circuit U_MCU.IO0 U_PROT.nPGD name="PWR_PGOOD"
+
+    // Circuit 1 / Circuit 2 hardware identification jumper (J_CIRCUIT on IO7):
+    // Open = Circuit 1 (HIGH via 10k pull-up), Shorted = Circuit 2 (LOW to GND).
+    place pull-up R_CIRCUIT_PU node=U_MCU.IO7 rail=U_MCU.v3v3 value="10kΩ"
+    place jumper J_CIRCUIT footprint="Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" \
+        manufacturer="Würth Elektronik" mpn="61300211121" mouser="710-61300211121" digikey="732-5315-ND" lcsc=C2915055 hand=#true value="CIRCUIT_ID"
+    circuit U_MCU.IO7 J_CIRCUIT.A name="CIRCUIT_ID"
+
+    // Switched +3V3 power status LED:
+    place led-0603 D_PWR_LED
+    place resistor R_PWR_LED value="1kΩ" intent=current-limit
+    circuit U_MCU.3V3 R_PWR_LED.A name="+3V3"
+    circuit R_PWR_LED.B D_PWR_LED.A name="PWR_LED_A"
+
+    // Lit-switch LED driver: Q_LED low-side switch on J_SW.3 (LED-). R_LED_PU holds the gate high from
+    // the moment +3V3 is up, so the switch light is on whenever the board is, before firmware runs.
+    // Firmware may drive IO12 low to blink it (fault / cutoff / low battery). IO12 is U0RXD, not a
+    // strapping pin (ESP32-C5 datasheet p. 27); at reset it is an input with weak pull-up (p. 20).
+    // BSS138: 50 V VDSS, 0.22 A ID; VGS(th) 1.5 V max at 3.3 V gate (BSS138.pdf p. 2).
+    place bss138 Q_LED footprint="Package_TO_SOT_SMD:SOT-23" manufacturer="Diodes Incorporated" mpn="BSS138-7-F" \
+        mouser="621-BSS138-7-F" digikey="BSS138-7-FDICT-ND" lcsc=C40912 \
+        note="Lit remote switch LED low-side driver (J_SW.3 LED-)"
+    place pull-up R_LED_PU node=U_MCU.IO12 rail=U_MCU.v3v3 value="10kΩ"
+    circuit U_MCU.IO12 Q_LED.GATE name="SW_LED_EN"
+    circuit Q_LED.DRAIN J_SW.3 name="SW_LED_K"
+    circuit L_BUCK.B J_SW.4 name="+5V"
+
+    // ── CAN FD Interface (TCAN334G + Dual Daisy-Chain JST-XH + Termination Jumper) ───────
+    place tcan334g U_CAN footprint="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" mpn="TCAN334GDR" \
+        mouser="595-TCAN334GDR" digikey="296-43570-1-ND" lcsc=C189939 vcc=U_MCU.v3v3
+    nc U_CAN.STB U_CAN.SHDN note="Internal pull-downs select normal mode (compatible with TCAN330G/332G/334G/337G)"
+    circuit U_MCU.IO8 U_CAN.TXD name="CAN_TX"
+    circuit U_CAN.RXD U_MCU.IO9 name="CAN_RX"
+
+    place jst-xh-2 J_CAN1 hand=#true note="CAN in: pin 1 CANL, pin 2 CANH"
+    place jst-xh-2 J_CAN2 hand=#true note="CAN out (daisy-chain): pin 1 CANL, pin 2 CANH"
+    circuit U_CAN.CANH J_CAN1.2 J_CAN2.2 name="CANH"
+    circuit U_CAN.CANL J_CAN1.1 J_CAN2.1 name="CANL"
+
+    place resistor R_TERM value="120Ω" footprint="Resistor_SMD:R_0805_2012Metric" \
+        note="120 Ohm CAN bus termination resistor (0805)"
+    place jumper J_TERM footprint="Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" \
+        manufacturer="Würth Elektronik" mpn="61300211121" mouser="710-61300211121" digikey="732-5315-ND" lcsc=C2915055 hand=#true value="CAN_TERM"
+    circuit U_CAN.CANH R_TERM J_TERM U_CAN.CANL
+
+    // ── Level-Shifted UART Interface (J_UART JST-XH + J_VIO 3.3V/5V Jumper) ──────────────
+    // ESP32-C5 GPIOs are 3.3V-only (not 5V-tolerant), so both RX and TX use BSS138 level shifters
+    // between +3V3 and UART_VIO (selected by J_VIO: 1-2 = 3.3V, 2-3 = 5V).
+    place jst-xh-2 J_UART hand=#true note="UART: pin 1 RX (into this board), pin 2 TX (out of this board)"
+    place conn-1x3 J_VIO footprint="Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" \
+        manufacturer="Würth Elektronik" mpn="61300311121" mouser="710-61300311121" digikey="732-5316-ND" lcsc=C2915006 hand=#true value="3V3 | VIO | 5V"
+    circuit U_MCU.3V3 J_VIO.1 name="+3V3"
+    circuit L_BUCK.B J_VIO.3 name="+5V"
+    set J_VIO.2 net.name "UART_VIO"
+
+    // UART TX shifter (IO5 -> Q_TX -> J_UART.2):
+    place bss138 Q_TX footprint="Package_TO_SOT_SMD:SOT-23" manufacturer="Diodes Incorporated" mpn="BSS138-7-F" \
+        mouser="621-BSS138-7-F" digikey="BSS138-7-FDICT-ND" lcsc=C40912
+    place pull-up R_TX_3V3 node=U_MCU.IO5 rail=U_MCU.v3v3 value="4.7kΩ"
+    place resistor R_TX_VIO value="1kΩ" intent=pull-up
+    circuit U_MCU.3V3 Q_TX.GATE name="+3V3"
+    circuit U_MCU.IO5 Q_TX.SOURCE name="UART_TX_3V3"
+    circuit J_VIO.2 R_TX_VIO.A name="UART_VIO"
+    circuit R_TX_VIO.B Q_TX.DRAIN J_UART.2 name="UART_TX"
+
+    // UART RX shifter (J_UART.1 -> Q_RX -> IO10):
+    place bss138 Q_RX footprint="Package_TO_SOT_SMD:SOT-23" manufacturer="Diodes Incorporated" mpn="BSS138-7-F" \
+        mouser="621-BSS138-7-F" digikey="BSS138-7-FDICT-ND" lcsc=C40912
+    place pull-up R_RX_3V3 node=U_MCU.IO10 rail=U_MCU.v3v3 value="4.7kΩ"
+    place resistor R_RX_VIO value="4.7kΩ" intent=pull-up
+    circuit U_MCU.3V3 Q_RX.GATE name="+3V3"
+    circuit U_MCU.IO10 Q_RX.SOURCE name="UART_RX_3V3"
+    circuit J_VIO.2 R_RX_VIO.A name="UART_VIO"
+    circuit R_RX_VIO.B Q_RX.DRAIN J_UART.1 name="UART_RX"
+
+    // ── Ground ───────────────────────────────────────────────────────────────────────────
+    circuit U_MCU.GND J_PWR_IN.GND J_PWR_OUT.GND D_TVS_IN.A2 D_FLY.A D_TVS_OUT.A2 \
+        U_PROT.GND C_PROT_VIN.B R_REV.B C_TIMER.B R_UVLO2.B R_OVP2.B R_EN2.B \
+        Q_CUTOFF.SOURCE R_CUTOFF_PD.B R_VBAT_BOT.B C_VBAT_ADC.B \
+        U_BUCK.GND C_BUCK_IN1.B C_BUCK_IN2.B C_BUCK_IN3.B R_BUCK_RT.B C_BUCK_SS.B \
+        D_BUCK.A R_FB_BOT.B C_BUCK_OUT1.B C_BUCK_OUT2.B C_BUCK_OUT3.B \
+        C_3V3_1.B J_CIRCUIT.B D_PWR_LED.K Q_LED.SOURCE name="GND"
+
+    // ── Unconnected Daughterboard Pins ───────────────────────────────────────────────────
+    nc U_MCU.IO11 note="U0TXD: left free for the ROM boot log (J_UART uses UART1 on IO5/IO10)"
+    nc U_MCU.IO13 U_MCU.IO14 note="USB_N / USB_P: wired to the ESP32-C5-Zero's onboard USB-C connector"
+}
