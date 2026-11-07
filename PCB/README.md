@@ -32,10 +32,10 @@ Commit the synced PCB with the KDL. CI fails if syncing would change the committ
 | Switching | MOSFET switch so a fitted battery draws nothing while the droid is off. Switched by a remote low-power switch on a 4-pin JST-XH (switch + lit-switch LED). |
 | Lit switch | Support lit-when-on switches: 3-terminal (+ / ACC / GND) and separate-LED-terminal types. The light is on whenever the board is on, firmware can blink it, and it adds no off-state drain. |
 | Protection | Reverse polarity, input/output TVS, output flyback diode, over/under-voltage, overcurrent/short trip. |
-| MCU | ESP32-C5 (CAN FD + firmware), on castellated pads. Firmware in Rust. |
+| MCU | ESP32-C5 (CAN FD + firmware) on a plug-in module (sockets), serviceable and programmable in place over its USB-C. Firmware in Rust. |
 | Comms | CAN FD (two JST-XH for daisy-chain, jumper termination), UART (JST-XH, 3.3 V / 5 V jumper). |
 | Circuit ID | Firmware must tell circuit 1 from circuit 2. |
-| Board | 4 layers for the high-current path. |
+| Board | 70 × 50 mm, 4 layers for the high-current path, components on one side. Back-side area for an optional user-fitted heatsink. |
 | Sourcing | Mouser and DigiKey first; LCSC numbers recorded but JLCPCB is not the planned assembler. |
 
 ## Circuit
@@ -51,7 +51,7 @@ Commit the synced PCB with the KDL. CI fails if syncing would change the committ
 | Sensing | R_SHUNT (CSS2H-2512R-1L00F, 1 mΩ 5 W), U_INA (INA226) | ±81.92 A full scale, 2.5 mA/LSB. 0.9 W at 30 A, 3.6 W at 60 A. Bus voltage measured on VOUT. |
 | Battery ADC | R_VBAT_TOP 100 k / R_VBAT_BOT 10 k, C_VBAT_ADC | VSW_CTRL ÷ 11 into IO6, so battery voltage is readable with the MOSFETs off. |
 | 5 V | U_BUCK (LMR14030, 4-40 V), L_BUCK 10 µH, D_BUCK (B360A) | 400 kHz, FB 56.2 k/10 k → 4.97 V. Feeds the module's 5 V pin and the UART 5 V option. |
-| MCU | U_MCU (Waveshare ESP32-C5-Zero) | The module's own buck makes +3V3 for the carrier (pin 3). USB-C on the module is the programming path. The module has both an onboard ceramic antenna (J2, OA-W03) and an IPEX-1/U.FL connector (J3), chosen by an RF switch on internal GPIO26 (ANT_Ctrl, 200 k pull-up to 3V3; module schematic). Firmware must drive GPIO26 to select the onboard antenna. No U.FL-free variant exists (the -M SKU only adds headers). |
+| MCU | U_MCU (Waveshare ESP32-C5-Zero-M), J_MCU_L/J_MCU_R sockets | The module plugs into two 1x9 sockets. The module's own buck makes +3V3 for the carrier (pin 3). USB-C on the module is the programming path. The module has both an onboard ceramic antenna (J2, OA-W03) and an IPEX-1/U.FL connector (J3), chosen by an RF switch on internal GPIO26 (ANT_Ctrl, 200 k pull-up to 3V3; module schematic). Firmware must drive GPIO26 to select the onboard antenna. No U.FL-free variant exists (the -M SKU only adds headers). |
 | CAN FD | U_CAN (TCAN334GDR), J_CAN1/J_CAN2, R_TERM + J_TERM | 3.3 V transceiver, normal mode (STB/SHDN internal pull-downs). |
 | UART | J_UART, J_VIO, Q_TX/Q_RX (BSS138) + pull-ups | ESP32-C5 pins are not 5 V tolerant, so both directions are level-shifted. |
 | Circuit ID | J_CIRCUIT, R_CIRCUIT_PU | Open = circuit 1, shorted = circuit 2. |
@@ -103,26 +103,52 @@ needs. The labels sit over the tracks that run into each pin, which prints legib
 
 ## Layout
 
-90 × 66 mm, 4 layers (F.Cu / In1.Cu GND / In2.Cu power / B.Cu), four M3 holes. Power flows left to
-right along the top edge: J_PWR_IN → D_TVS_IN → Q1 → Q2 → R_SHUNT → D_TVS_OUT/D_FLY → J_PWR_OUT.
-CAN, UART and the jumpers sit on the right edge; the remote switch on the left. The ESP32-C5-Zero
-antenna overhangs the bottom edge with a keep-out on all layers.
+**70 × 50 mm**, 4 layers (F.Cu / In1.Cu GND / In2.Cu power / B.Cu), all parts on the top side.
+Placement and pours come from `scripts/layout_compact.py`; signal routing is done by hand in KiCad.
+
+```
+ ┌──────────────────────────────────────────────────────────────────┐
+ │ J1 XT60 │D1│ Q1 │ Q2 │ R12 │D6│ D5 │ J2 XT60   power row (y 0-17)    │
+ │  in     ├──┴─ gate clamp, LM5060, INA226 ─┤  out                     │
+ │ ○ PWR LED, dividers         CIRCUIT ID  ○                            │
+ │ J3 switch │ ESP32-C5-Zero-M │ VIO  U5 CAN  J5 CAN IN                  │
+ │ buck      │ on sockets,     │ level shift  J6 CAN OUT                 │
+ │ ○         │ antenna at edge │ J8 UART     ○                           │
+ └──────────────────────────────────────────────────────────────────┘
+```
+
+- **XT60 overhang.** Both XT60PW bodies overhang the side edges by about 5 mm; the pins and both
+  support pegs stay on the board (the datasheet land pattern fixes only the pins and the pegs 6 mm in
+  front of them). This is what lets D_TVS_IN, Q1, Q2, R_SHUNT, D_TVS_OUT and D_FLY fit in one row
+  between the connectors (0.2-0.4 mm between courtyards). DRC's silk-to-edge warnings on J1/J2 are
+  this overhang.
+- **ESP32 on sockets.** U_MCU is the ESP32-C5-Zero-M (headers pre-soldered) in two 1x9 sockets
+  (J_MCU_L/J_MCU_R, Sullins PPPC091LFBN-RC, 8.5 mm). The module sits ~11 mm up, so the USB-C plug
+  clears everything, low parts sit under the module (pull-ups, cutoff FET, ADC divider), and the
+  module can be swapped. The sockets are pinless BOM parts: their pins use U_MCU's holes. The antenna
+  end keeps its all-layer copper and footprint keep-out at the bottom edge.
+- **Mounting holes:** four M3, at the bottom corners and on the side edges just below the XT60s (the
+  top corners are under the connectors).
+- **Heatsink area (back, 40 × 13.5 mm under D_TVS_IN … D_FLY).** The back copper there is the
+  VBAT_IN / VSW_OUT / VOUT pours plus GND, under soldermask, tied to the top pours by stitching vias.
+  No through-hole tails land in it. An optional stick-on heatsink must go on with an **electrically
+  insulating** thermal pad or tape: bare metal would short the three power nets and bypass the switch.
+  The area is marked with corner brackets and a note on B.SilkS.
 
 **Fab spec: 1.6 mm, 2 oz outer / 1 oz inner copper** (core 0.95 mm, prepreg 0.21 mm). The board
 needs this for the 30 A path; don't order it with 1 oz outer.
 
-High-current copper:
-- VBAT_IN, VSW_OUT and VOUT are pours on F.Cu, In2.Cu and B.Cu, 9 mm tall (Y 52.4-61.4; VSW_OUT
-  8.6 mm), tied together with 0.8/0.4 mm stitching vias (29 on VBAT_IN, 11 on VSW_OUT, 22 on VOUT).
-  IPC-2221 (conservative, long-trace) gives about 26 A per 2 oz outer layer at 9 mm for a 20 °C
-  rise, so about 50 A with F.Cu and B.Cu together before counting In2.Cu.
-- VSW_MID (Q1 source to Q2 source) is F.Cu + In2.Cu only, about 5 × 5 mm: the GATE_FET track crosses
-  it on B.Cu. It is short and sits between the two FETs' thermal pads.
-- The return current flows J1 GND → J2 GND through the solid In1.Cu plane, the B.Cu pour and the
-  F.Cu pour. J1/J2 GND pins and the D1/D5/D6 GND pads connect to the pours solidly, with no thermal
-  spokes (the 0.4 mm spokes used elsewhere would choke 30 A). The XT60 GND pins need a large iron
-  to hand-solder.
-- In1.Cu is a solid GND reference; In2.Cu also carries the VSW_CTRL and +3V3 planes.
+Pours (added by `scripts/layout_compact.py`):
+- VBAT_IN, VSW_OUT and VOUT on F.Cu, In2.Cu and B.Cu along the power row (y 46.9-55.6, about 8.5 mm
+  tall), priority 3, pads connected solidly; 85 stitching vias (0.8 / 0.4 mm, 1.27 mm grid, kept
+  0.4 mm off every pad).
+- VSW_MID (Q1 sources to Q2 sources) is F.Cu only: 1.8 mm long, ~0.1 mΩ. The gap is too narrow for a
+  via, and keeping it off B.Cu leaves room for the GATE_FET link from Q1's gate (top) to Q2's gate
+  (bottom) to cross there.
+- GND on F.Cu, In1.Cu (solid reference) and B.Cu. J1/J2 GND pins and the D1/D5/D6 GND pads connect
+  solidly (thermal spokes would choke 30 A); the XT60 GND pins need a large iron to hand-solder.
+- In2.Cu supply planes: VSW_CTRL on the left (LM5060, dividers, buck input), +3V3 in the middle and
+  right. The VSW_CTRL plane is reported as isolated copper until routing adds its vias.
 
 Net classes (Board Setup → Net Classes, assigned by net-name pattern in `DroidPowerSense.kicad_pro`):
 
@@ -135,16 +161,18 @@ Net classes (Board Setup → Net Classes, assigned by net-name pattern in `Droid
 | Default | 0.25 mm | 0.2 mm | 0.6 / 0.3 | all other signals |
 
 Stackup 0.2.0 doesn't derive net classes, so these are plain KiCad classes (no `stackup:` prefix)
-and the sync leaves them alone. Deliberate exceptions on the board: the HighCurrent nets' thin
+and the sync leaves them alone. Expected exceptions when routing: the HighCurrent nets' thin
 branches (Kelvin sense to U2, VBAT_IN sense to R3, the VSW_MID spur to the reverse clamp; all carry
-mA or less) and short neck-downs where Power tracks meet the 0.5 mm-pitch pins of U1 and U2.
+mA or less) and neck-downs where Power tracks meet the 0.5 mm-pitch pins of U1 and U2.
 0.2 mm clearance is well above what 32 V needs.
 
-`scripts/layout_pcb.py` regenerates placement, pours, routing and silkscreen from scratch (it
-re-syncs from the KDL first). It is the starting layout: once the board is hand-edited in KiCad, the
-board file becomes the source of truth and the script should not be re-run.
+`scripts/layout_compact.py` is the starting point for this layout (sync from Stackup first). Once
+the board is hand-routed, the board file is the source of truth: don't re-run it.
+`scripts/layout_pcb.py` generated the earlier 90 × 66 mm layout and is kept for its helpers.
 
-Status: DRC 0 violations, 0 unconnected; `stackup check` 74 parts / 44 nets, 0/0/0; PCB sync clean.
+Status: placed and poured, **not routed** (108 unrouted connections). DRC otherwise clean except the
+expected XT60 silk-to-edge warnings and the not-yet-connected In2 VSW_CTRL plane. `stackup check`
+76 parts / 44 nets, 0/0/0; PCB sync clean.
 
 ## Verification
 
@@ -175,6 +203,18 @@ Status: DRC 0 violations, 0 unconnected; `stackup check` 74 parts / 44 nets, 0/0
 - **J_SW miswiring:** shorting SW (battery, when on) to LED- while Q_LED is on overloads Q_LED (it
   fails; the board otherwise survives). Shorting LED+ to anything grounded trips the buck's
   current limit and resets the MCU until removed.
+- **FET heat at 30 A continuous in still air.** Each CSD18532Q5B dissipates ~2.3 W typical (2.5 mΩ
+  at 25 °C) to ~3.4 W hot, plus ~0.9 W in the shunt: about 5.4-7.7 W on a 70 × 50 mm board. Without a
+  heatsink that is roughly 65-90 °C above ambient by a still-air rule of thumb (not simulated). The
+  back-side heatsink area is the mitigation; measure FET and shunt temperatures at 30 A on the first
+  board with and without a heatsink (bench step 6).
+- **XT60 bodies overhang the board edge ~5 mm** (pins and pegs on board). Plug forces go into the
+  pins and pegs, which is what they are rated for; the front of the plastic body is unsupported.
+- **The module stands ~11 mm tall on 18 socket contacts.** In a vibrating droid, add a dab of hot
+  glue or a cable tie at the antenna end.
+- **ESP32-C5-Zero-M distributor numbers and socket height unconfirmed.** The -M is Waveshare SKU
+  34598; no distributor number is recorded. The 8.5 mm socket height (and so the ~11 mm module
+  height) is from the Sullins series naming, not yet checked against its datasheet.
 - **Reference designators shifted** when Q_LED/R_LED_PU were added (Stackup assigns them in KDL
   order): the UART FETs are now Q6/Q7 and the former R25-R29 are R26-R30.
 
