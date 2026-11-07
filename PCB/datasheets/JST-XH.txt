@@ -1,0 +1,678 @@
+                 XH CONNECTOR
+                 2.5 mm pitch/Wire-to-Board connectors/Crimp style and Mating style
+
+
+
+                                                   ■ Specifications
+                                                   • Current rating: 3 A AC/DC（AWG #22）
+                                                     Voltage rating: 250 V AC/DC
+                                                     Temperature range: ‑25℃ to +85℃
+                           1
+                                                                           (including temperature rise in
+                                                                            applying electrical current)
+                                                     Contact resistance:
+                                                                Initial value/ 10 mΩ max.
+                                                                After environmental tests/ 20 mΩ max.
+                                                     Insulation resistance: 1,000 MΩ min.
+                                                     Withstanding voltage:
+                                                       There shall be no breakdown or flashover while
+                                                       applying 1,000 VAC for one minute.
+                                                     Applicable wire range:
+                                                                Conductor size/ AWG #30 to AWG #22
+Highly reliable, versatile 2.5 mm pitch wire-to-                Insulation O.D./ φ 0.9 mm to φ 1.9 mm
+                                                     Applicable PC board thickness: 1.6 mm
+board connector with an assembled board
+height of 9.8 mm for low profile applications.     * Please refer to the "Handling Precautions for Terminals
+                                                     and Connectors" on our website (listed in the “Technical
+ Original double-leaf contact design
+                                                     Documents” column on the Product Information page)
+ Box-shaped shrouded header                          before use.
+ Header is also available with boss                * RoHS2 compliance
+ The 4 pin version conforms to JEMA's              * Dimensional unit: mm
+ Home Automation (HA terminal) standards.          * Contact JST for details.
+
+
+                                                   ■ Standards
+                                                   For information on overseas standard registrations,
+                                                   please refer to the "List of Registered Overseas
+                                                   Standards" on our website (listed in the “Technical
+                                                   Documents” column on the Product Information page).
+                                                   * Specifications registered to overseas standards may
+                                                     differ from the general specifications listed above.
+
+
+
+
+                                               ‑1‑
+                                                                                                                                                                  XH CONNECTOR
+
+   PC board layout and Assembly layout
+
+   Top entry type
+   <Single circuit>                                                                                           <2 circuits or more>
+                        Boss                                   5.75                                               2 circuits: φ1
+                                                                                                                                      ±0.05
+                                                                                                                                                         ±0.05                                     5.75
+                                     ＋0.1                                                                                             ＋0.1         2.5            1.6±0.05
+                      φ1.7 0                                                                                  3 circuits or more: φ0.9
+
+                                                                                                                                                                         2 ±0.05
+
+
+                                                                                (9.8)                                                                                                                             (9.8)
+                                                                         (7)                                                                                                                               (7)
+
+                        4.35±0.05
+       ＋0.1                                                                                                                                                                         Boss
+  φ0.9 0
+                                                                                                                                                                                        ＋0.2
+                                                                                                                                                                                    φ1.1
+                                                                                                                                                                                   No. 1 circuit
+
+
+
+  Side entry type
+                                                                 Side edge of
+                                                                 header on PCB                                             (14.3)
+                                                                                                                    4.5           7
+                                                        (C)
+
+                                                                                                      (6.1)
+           ＋0.1
+    φ0.9 0                                             No. 1 circuit
+                        2.5 ±0.05
+
+
+Note: 1. The PC board layout figure shown is viewed from the connector mounting surface.
+      2. Tolerance for the PCB hole pitch shall be ± 0.05 and shall not accumulate.
+      3. Dimension C: See “Header/ Side entry type” section on page 4.
+      4. Hole dimensions differ depending on the type of PCB and PCB drilling method.
+         When using PCB made of hard material composed of fiberglass cloth, please consider a larger hole diameter.
+         The above dimensions are reference values. Please contact JST for details.
+
+
+
+
+   PC board layout and Assembly layout/ PA 66（Glass-filled）type, Radial tape type
+  Top entry type
+    <2 circuits>                                                                                                                               <3 to 8 circuits>
+                                                                                                       5.75                                                                                         5.75
+                                                              ±0.05                                                                                              ±0.05
+                                                       2.5                                                                                                2.5
+
+
+                                                                               No. 1
+                                                                                                                                                                                        No. 1
+                                                                                                                                                                                                                     (9.8)
+                                                                               circuit
+                                                                                                                          (9.8)                                                         circuit
+                                                                                                                                                                                                            (7)
+   PA 66（Glass-ﬁlled）type: φ1
+                                            ±0.05
+                                                                                                                   (7)                            ＋0.1 注3)
+                                                                                                                                              φ0.9 0
+     Radial tape type: φ0.9 0
+                                        ＋0.1 Note 3）            (Lock side)
+                                                                                                                                                                    (Lock side)
+
+
+    <9 circuits or more>
+                                                                       5.75
+
+                         ±0.05
+                  2.5
+
+
+
+                                                                                              (9.8)
+                                                  No. 1
+                                                  circuit                               (7)
+               ＋0.1
+           φ0.9 0
+                                    (Lock side)
+
+
+Note: 1. The PC board layout figure shown is viewed from the connector mounting surface.
+      2. Tolerance for the PCB hole pitch shall be ± 0.05 and shall not accumulate.
+      3. Radial tape style packaging conforms to PCB hole diameter specifications on the automatic insertion machine.
+      4. Hole dimensions differ depending on the type of PCB and PCB drilling method.
+         When using PCB made of hard material composed of fiberglass cloth with glass-filled PA 66,
+         please consider a larger hole diameter.
+         The above dimensions are reference values. Please contact JST for details.
+
+
+
+
+                                                                                                                  ‑2‑
+                                                                                                                           XH CONNECTOR
+
+  PC board layout and Assembly layout/ SMT type
+  Side entry type
+
+
+                                     1.8             2.3          Side edge of
+                                                                  header on PCB
+                                  (0.2)                                                           （12.8）
+                                                                                            （3）      7
+                           3.9
+                                                                     6.5
+                                                                            11
+                                                                                   （6）
+
+                                             1.3                  No. 1 circuit
+                                          2.5±0.05
+
+
+
+Note: 1. The PC board layout figure shown is viewed from the connector mounting surface.
+      2. Tolerance for the PCB pattern pitch shall be ± 0.05 and shall not accumulate.
+      3. The above dimensions are reference values. Please contact JST for details.
+
+
+
+
+  Contact
+
+                                                                                                                               Applicable wire range
+                                                                                         Shape                                                                      Q'ty/
+     Shape A                                                                                         Model No.            Conductor size          Insulation O.D.   reel
+                             5.6                                                                                                                      （mm）
+                                                                                                                           AWG (mm2)
+                                            1.6                       1.9                         SXH-001T-P0.6N #26 to #22 (0.13 to 0.33)
+                                                                                           A                                                        1.3 to 1.9      5,000
+                                                                                                  SXH-002T-P0.6      #30 to #26 (0.05 to 0.13)      0.9 to 1.3
+                                                                                           B                                                                        8,000
+                                                           2.35                                   SXH-001T-P0.6      #28 to #22 (0.08 to 0.33)      0.9 to 1.9
+
+                                                                                                                 Material and Surface ﬁnish, etc.
+
+                                                                                                                   Phosphor bronze, tin-plated
+
+     Shape B                                                                             Note: 1. Contact JST for gold-plated products.
+                                 6.1                                                           2. Contact JST also if you require shielded wires, thin wires or
+                                               2                     1.95                         other special wires.
+                                                                                               3. SXH-001T-P0.6N is low-insertion force type contact, for easier
+                                                                                                  insertion/withdrawal, which would be less resistant to
+                                                           2.4
+                                                                                                  the vibration.
+
+
+                                                                                         Crimping machine
+                                                                                                 Contact      Crimping machine Applicator Crimp applicator with dies
+                                                                                          SXH-001T-P0.6N                                         APLMK SXH001-06N
+                                                                                          SXH-002T-P0.6             AP-K2N         MKS-L         APLMK SXH002-06
+                                                                                          SXH-001T-P0.6                                          APLMK SXH001-06
+                                                                                         Note: Contact JST for fully automatic crimping applicator.
+
+
+
+
+                                                                                  ‑3‑
+                                                                                                               XH CONNECTOR
+
+Housing
+
+                                                                                    No. of                               Dimensions (mm)
+                                                                                                  Model No.                                     Q'ty/bag
+ <Single circuit>                                                                   circuits                              A              B
+                                                                                         1      XHP-1                     -              4.8      1,000
+                                                                                         2      XHP-2                     2.5            7.3      1,000
+                                7.5                                             Note 1）2        XHP-2(10.0)-U            10.0           14.8      1,000
+                                                                                         3      XHP-3                     5.0            9.8      1,000
+                                0.25         5.7                                         4      XHP-4                     7.5           12.3      1,000
+                                                                                         5      XHP-5                    10.0           14.8      1,000
+                                                                                         6      XHP-6                    12.5           17.3      1,000
+                                                                                Note 2）6        XHP-6(5.0)-U             25.0           29.8      1,000
+                     B                                                                   7      XHP-7                    15.0           19.8      1,000
+                                                                                         8      XHP-8                    17.5           22.3      1,000
+                                                                                         9      XHP-9                    20.0           24.8      1,000
+ <2 to 16, 20 circuits>                                                                 10      XHP-10                   22.5           27.3      1,000
+                                                                                        11      XHP-11                   25.0           29.8      1,000
+                                                                                        12      XHP-12                   27.5           32.3      1,000
+                                                  7.5
+                                                                                        13      XHP-13                   30.0           34.8      1,000
+                                                                                        14      XHP-14                   32.5           37.3      1,000
+                                                  0.25            5.7                   15      XHP-15                   35.0           39.8      1,000
+                                       No. 1                                            16      XHP-16                   37.5           42.3      1,000
+                                       circuit
+                                                                                        20      XHP-20                   47.5           52.3       500
+
+                                                                                                     Material and Surface ﬁnish, etc.
+                          2.5
+                                                                                                          PA 6, natural (white)
+                     A
+                     B                                                          Note: 1. XHP-2(10.0)-U means the 2-circuits housing with 10.0 mm pitch,
+                                                                                         and 3-circuits of 5-circuits are filled with the resin.
+                                                                                      2. XHP-6(5.0)-U means the 6-circuits housing with 5.0 mm pitch
+                                                                                         and each even number circuit is filled with the resin.
+                                                                                      3. For flame retardant grade of resin material used, please refer to
+ Plugged up hole                                                                         the "List of Registered Overseas Standards" on our website
+                                                                                         (listed in the “Technical Documents” column on the Product
+ <2 circuits, 10 mm pitch>
+                                                                                         Information page).
+
+
+                                             7.5
+
+
+
+                                             0.25           5.7
+                                   No. 1
+                                   circuit
+
+
+
+
+                     A
+                     B
+
+
+
+
+ <6 circuits, 5 mm pitch>
+
+
+                                                           7.5
+
+
+
+                                                           0.25         5.7
+                                                 No. 1
+                                                 circuit
+
+
+
+
+                 A
+                 B
+
+
+
+
+                                                                              ‑4‑
+                                                                                                                                                                       XH CONNECTOR
+
+Header
+
+                                                                                                                              Top entry type
+ Top entry type                      B
+                                                                                                                                                        Model No.                 Dimensions (mm)              Q'ty/box
+  <Single circuit>                         □0.64                                          1.5                                 No. of
+                                                                                                                              circuits                                                                   Without     With
+                                                                                                                                            Without boss             With boss       A            B
+                                                                                                                                                                                                          boss       boss
+                                             7                                                                                     1           -                    B1B-XH-AM        -            4.9        -       1,000
+                                                                                                                                   2     B2B-XH-A                   B2B-XH-AM        2.5          7.4    1,000       1,000
+                                             (3.4)                                                                                 2     B2 (10.0)B-XH-A-U Note2）       -           10.0        14.9     1,000        -
+                                                           (2.35)              4.35                                                3     B3B-XH-A                   B3B-XH-AM        5.0          9.9    1,000       1,000
+                                                                              5.75                                                 4     B4B-XH-A                   B4B-XH-AM        7.5        12.4         500       500
+                                                                                                                                   5     B5B-XH-A                   B5B-XH-AM       10.0        14.9         500       500
+  <2 circuits>                       B
+                                                                                                                                   6     B6B-XH-A                   B6B-XH-AM       12.5        17.4         500       500
+                                     A
+                                            □0.64                              5.75                                                7     B7B-XH-A                   B7B-XH-AM       15.0        19.9         500       500
+                                                                                                                                   8     B8B-XH-A                   B8B-XH-AM       17.5        22.4         250       250
+                                                                                                                                   9     B9B-XH-A                   B9B-XH-AM       20.0        24.9         250       250
+                                                 7
+                                                                                                                                  10     B10B-XH-A                  B10B-XH-AM      22.5        27.4         250       250
+                                                                                                                                  11     B11B-XH-A                      -                                              -
+                                                 (3.4)
+                                                                                                                                                                                    25.0        29.9         250
+                                                                                       φ1                                         12     B12B-XH-A                  B12B-XH-AM                                         250
+                                                                                                                                                                                    27.5        32.4         250
+                   No. 1 circuit             1.6                 (2.35)          2
+                                                                                                                                  13     B13B-XH-A                      -           30.0        34.9         250       -
+                                                                                                                                  14     B14B-XH-A                      -           32.5        37.4         250       -
+ <3 circuits or more>
+                                                                                                                                  15     B15B-XH-A                      -           35.0        39.9         250       -
+               B
+                                                                                                                                  16     B16B-XH-A                      -           37.5        42.4         200       -
+               A
+       □0.64           2.5                                       5.75                           5.75
+                                                                                                                                  20     B20B-XH-A                      -           47.5        52.4         100       -
+
+                                                                                                                                                           Material and Surface ﬁnish, etc.
+                                   7
+                                                                                                                                                   Post: Brass, copper-undercoated, tin-plated
+                                                                                                                                                   Wafer: PA 66, natural (white)
+                                   (3.4)
+                                                                                                                  φ1
+                                                                                                                              Note: 1. This product displays（LF）  （SN）on a label.
+      No. 1 circuit            1.6          (2.35)                              (2.35)                     2                        2. B2(10.0)B-XH-A-U means the 2-circuits housing with 10.0 mm
+                                                                                                                                       pitch, and 3-circuits of 5-circuits are filled with the resin.
+ Top entry type, plugged up hole                                                                                                    3. For flame retardant grade of resin material used, please refer to
+                                                                                                                                       the "List of Registered Overseas Standards" on our website
+ <2 circuits, 10 mm pitch>                                                                                                             (listed in the “Technical Documents” column on the Product
+                               B                                                                                                       Information page).
+                               A
+                              □0.64                                             5.75
+                                                                                                                              Side entry type
+                                                                                                                              No. of                        Model No.                    Dimensions (mm)
+                                                                                                                                                                                                                   Q'ty/box
+                                                         7                                                                    circuits       C: 9.2 (mm)              C: 7.6 (mm)           A            B
+                                                                                                                                   2          S2B-XH-A               S2B-XH-A-1             2.5          7.4        1,000
+                                                         (3.4)
+                                                                                                                                   3          S3B-XH-A               S3B-XH-A-1             5.0          9.9        1,000
+                      No. 1 circuit                                                  (2.35)                                        4          S4B-XH-A               S4B-XH-A-1             7.5                       500
+                                                                                                                                                                                                        12.4
+                                                                                                                                   5          S5B-XH-A               S5B-XH-A-1            10.0         14.9          500
+ Side entry type                                                                                                                   6          S6B-XH-A               S6B-XH-A-1            12.5         17.4          500
+ <2 circuits>                  B                                                                                                   7          S7B-XH-A               S7B-XH-A-1            15.0         19.9          250
+                               A
+                                                                                                                                   8          S8B-XH-A               S8B-XH-A-1            17.5         22.4          250
+                                           □0.64
+                                                                                                                                   9          S9B-XH-A               S9B-XH-A-1            20.0         24.9          250
+                                                                                                                                  10          S10B-XH-A              S10B-XH-A-1           22.5         27.4          250
+
+                                                                                              C: 9.2/7.6
+                                                             7
+                                                                                                                                  11          S11B-XH-A              S11B-XH-A-1           25.0         29.9          250
+                                                                                                                                  12          S12B-XH-A              S12B-XH-A-1           27.5         32.4          200
+                                                             4.5                                                                  13          S13B-XH-A              S13B-XH-A-1           30.0         34.9          200
+               No. 1 circuit                                              (6.1) (3.4)                                             14          S14B-XH-A              S14B-XH-A-1           32.5         37.4          200
+                                                                                                                                  15          S15B-XH-A              S15B-XH-A-1           35.0         39.9          100
+ <3 circuits or more>                                                                                                             16          S16B-XH-A                     -              37.5         42.4          100
+                               B
+                                                                                                                                                           Material and Surface ﬁnish, etc.
+                               A
+                        □0.64              2.5                                                                                                     Post: Brass, copper-undercoated, tin-plated
+                                                                                                                                                   Wafer: PA 66, natural (white)
+
+
+                                                                                                               C: 9.2/7.6
+                                                                        7                                                     Note: 1. This product displays（LF）  （SN）on a label.
+                                                                                                                                    2. For flame retardant grade of resin material used, please refer to
+                                                                                                                                       the "List of Registered Overseas Standards" on our website
+                                                                        4.5                                                            (listed in the “Technical Documents” column on the Product
+                        No. 1 circuit                                                                                                  Information page).
+                                                                                     (6.1) (3.4)
+
+
+
+
+                                                                                                                            ‑5‑
+                                                                                                                                 XH CONNECTOR
+
+Header/ PA 66 (Glass-filled) type
+
+                                                                                                  No. of                                  Dimensions (mm)
+ Top entry type                                                                                                   Model No.                                          Q'ty/box
+                                                                                                  circuits                                 A                  B
+ <2 circuits>                                                                                          2          B2B-XH-2                 2.5                7.4      1,000
+
+                            B                                                                          3          B3B-XH-2                 5.0                9.9      1,000
+
+                            A                             6.75                                         4          B4B-XH-2                 7.5            12.4          500
+
+                                □0.64                     5.75                                         5          B5B-XH-2                10.0            14.9          500
+                                                                                                       6          B6B-XH-2                12.5            17.4          500
+                                                                                                       7          B7B-XH-2                15.0            19.9          500
+                                      7
+                                                                                                       8          B8B-XH-2                17.5            22.4          250
+                                                                                                       9          B9B-XH-2                20.0            24.9          250
+                                      (3.4)
+                                                                                                      10          B10B-XH-2               22.5            27.4          250
+                                  No. 1                         (2.35)                                11          B11B-XH-2               25.0            29.9          250
+                                  circuit
+                                                                                                      12          B12B-XH-2               27.5            32.4          250
+                                                                                                      13          B13B-XH-2               30.0            34.9          250
+ <3 to 8 circuits>                                                                                    14          B14B-XH-2               32.5            37.4          250
+                            B                                                                         15          B15B-XH-2               35.0            39.9          250
+                            A                                            6.75
+                                                                                                                       Material and Surface ﬁnish, etc.
+                    □0.64         2.5                                    5.75
+                                                                                                                 Post: Brass, copper-undercoated, tin-plated
+                                                                                                                 Wafer: PA 66 (Glass-ﬁlled), natural (ivory)
+                                                 7
+                                                                                                  Note: 1. This product displays（LF）  （SN）on a label.
+                                                                                                        2. For flame retardant grade of resin material used, please refer to
+                                                 (3.4)                                                     the "List of Registered Overseas Standards" on our website
+                                              No. 1                                                        (listed in the “Technical Documents” column on the Product
+                                                                            (2.35)
+                                              circuit                                                      Information page).
+
+
+ <9 circuits or more>
+                        B
+                        A
+       □0.64                                        2.5                              5.75
+
+
+
+                                                                 7
+
+
+                                                                 (3.4)
+
+                                                            No. 1
+                                                                                       (2.35)
+                                                            circuit
+
+
+
+
+Header/ SMT type
+
+                                                                                                  No. of                                 Dimensions (mm)
+                                                                                                                   Model No.                                        Q'ty/reel
+                                                                                                  circuits                                 A              B
+                            B                                                                         3        S3B-XH-SM4-TB               5.0         12.5           800
+                            A                                                                         4        S4B-XH-SM4-TB               7.5         15.0           800
+                                2.5                                             6                     6        S6B-XH-SM4-TB              12.5         20.0           800
+
+                                                                                                                       Material and Surface ﬁnish, etc.
+      5.5                                                 7                                                   Post: Copper alloy, copper-undercoated, tin-plated
+                                                                                                              Wafer: Modiﬁed PA 6T, natural (ivory)
+                                                                                                              Solder tab: Brass, copper-undercoated, tin-plated
+                                                          (3)
+                                              No. 1                                               Note: 1. This product displays（LF）  （SN）on a label.
+            □0.64                             circuit                                                   2. This product is supplied on embossed tape and reel packaging.
+                                                                                                        3. For flame retardant grade of resin material used, please refer to
+                                                                                                           the "List of Registered Overseas Standards" on our website
+                                                                                                           (listed in the “Technical Documents” column on the Product
+                                                                                                           Information page).
+
+
+
+
+                                                                                                ‑6‑
+                                                                                                                                  XH CONNECTOR
+
+   Header/ Radial tape type
+
+
+       PA 66 type                                            PA 66 (Glass-filled) type
+       <3, 4 circuits>                                       <2 circuits>                                          <3 to 8 circuits>
+                     B                                                                                                                  B
+                     A                 6.75                               7.4               6.75                                        A         6.75
+           2.45      2.5                                        2.45            2.5                                     2.45      2.5
+
+
+                               7                                                 7                                                          7
+
+                                               (φ0.7)                                               (φ0.7)                                                (φ0.7)
+           □0.64                              □0.64                                                □0.64                                                 □0.64
+                               2.8                                                                                        □0.64             2.8
+
+
+
+
+No. of                               Model No.                                   Dimensions (mm)
+                                                                                                             Q'ty/box
+circuits            PA 66 type                 PA 66 (Glass-ﬁlled) type               A            B
+   2                       -                        B2B-XH-2-TV4                      -        -              1,000
+   3               B3B-XH-TV4                       B3B-XH-2-TV4                      5.0          9.9        1,000
+   4               B4B-XH-TV4                       B4B-XH-2-TV4                      7.5     12.4              500
+   5                       -                        B5B-XH-2-TV4                  10.0        14.9              500
+   6                       -                        B6B-XH-2-TV4                  12.5        17.4              500
+   7                       -                        B7B-XH-2-TV4                  15.0        19.9              500
+   8                       -                        B8B-XH-2-TV4                  17.5        22.4              500
+
+                                      Material and Surface ﬁnish, etc.
+                   Post: Brass, copper-undercoated, tin-plated
+                   Wafer: PA 66 type/ PA 66, natural (white)
+                          PA 66 (Glass-ﬁlled) type/ PA 66 (Glass-ﬁlled), natural (ivory)
+
+Note: 1. This product displays（LF）（SN）on a label.
+      2. For flame retardant grade of resin material used, please refer to the "List of Registered
+         Overseas Standards" on our website (listed in the “Technical Documents” column on
+         the Product Information page).
+
+
+
+
+                                                                                      ‑7‑
+                                                                                                                              XH CONNECTOR
+
+  Taping specifications                                                           Packaging specifications
+
+
+                                                                                                                  D
+
+
+
+
+                                                                                                                  TERMINA
+                                  2, 3 circuits: 12.7                                                     Ｈ
+                                                                                                                         LS & CO
+                                                                                                                                NNEC
+                                                                                                                                       TORS
+                                 4 to 8 circuits: 25.4              6.75
+
+                                                                                                                                   R
+
+
+
+
+                                                                                                                      W
+
+
+                                                                                 Distance between the end of the tape and
+         20
+                                                                                 the first connector's center line (either end)
+                                                          6
+              9
+                                                                                                      Tail tape                               Leader tape
+                                                              18
+
+
+
+
+  2 circuits: 5.1                2 circuits: 2.5                   φ4
+  3 to 8 circuits: 3.85          3 to 8 circuits: 5
+                          12.7
+
+
+
+
+                                                                             Packaging style                                                       Flat pack (zigzag folded)
+                                                                             Distance between folds                                           24 index holes per fold (304.8 mm)
+                                                                             Box size                                                            316(W)×45(D)×330(H) mm
+Note: Conforms to IEC 60286-2 (JIC C 0806-2) "Tape packaging of
+                                                                             Distance between the end of the tape and
+      components with unidirectional leads on continuous tapes".                                                                                            19.05 mm
+                                                                             the ﬁrst connectorʼs center line (either end)
+                                                                                    Quantity               2, 3 circuits                               1,000 pcs./box
+                                                                                   per package           4 to 8 circuits                                    500 pcs./box
+
+                                                                             Note: Products of different packaging specifications are also available.
+                                                                                   Contact JST for details.
+
+
+
+
+  Model number allocation
+
+Contact                                                                      Housing
+
+                                           S XH - 001 T - P 0.6                                                                                              XH P - 5 -
+
+
+                                                                                    Series name
+    Supply form: Strip form
+                                                                                    Type: Plug
+    Series name
+                                                                                    No. of circuits
+    Applicable wire range:
+       Normal type                                                                  Color: No indication…Natural (White), BK…Black, R…Red,
+           002…AWG # 30 to AWG # 26                                                        E…Blue, Y…Yellow, L…Lemon yellow, M…Green,
+           001…AWG # 28 to AWG # 22                                                        N…Brown, FY…Fluorescent yellow
+       Low insertion force type
+           001…AWG # 26 to AWG # 22
+    Surface ﬁnish: Tin-plated
+    Material: Phosphor bronze
+    Applicable post size
+    Type: No indication…Normal type, N…Low insertion force type
+
+
+
+
+                                                                           ‑8‑
+                                                                                                  XH CONNECTOR
+
+ Model number allocation
+
+Housing/ Plugged up hole                                         Header
+
+                                        XH P - 2 (10.0) - U                                               B 5 B - XH - A             -
+
+                                                                       Header type: B…Top entry type
+  Series name                                                                       S…Side entry type
+  Type: Plug                                                           No. of circuits
+  No. of circuits                                                      Assembly product
+  Pitch                                                                Series name
+  Sub model number                                                     Clinched (Kinked)/ Not clinched: Clinched
+                                                                       Presence of boss: No indication…Without boss
+                                                                                         M…With boss
+                                                                       Color: No indication……Natural (White), BK…Black, R…Red,
+                                                                              E…Blue, Y…Yellow, L…Lemon yellow, M…Green,
+                                                                              N…Brown, FY…Fluorescent yellow, D…Orange
+
+
+
+
+Header/ Plugged up hole                                          Header/ PA 66 (Glass-filled) type
+
+                            B 2 (10.0) B - XH - A - U -                                                         B 5 B - XH - 2 -
+
+
+  Header type: Top entry type                                          Header type: Top entry type
+  No. of circuits                                                      No. of circuits
+  Pitch                                                                Assembly product
+  Assembly product                                                     Series name
+  Series name                                                          Housing material: PA 66 (Glass-ﬁlled)
+  Clinched (Kinked)/ Not clinched: Clinched                            Color: No indication…Natural (Ivory), C…Black, R…Red,
+                                                                              E…Blue, Y…Yellow, M…Green
+  Sub model number
+  Color: No indication…Natural (White), R…Red, E…Blue
+
+
+
+
+Header/ SMT type                                                     Header/ Radial tape type
+
+                                 S 3 B - XH - SM 4 -    - TB                                           B 3 B - XH - 2 - T V4 -
+
+
+  Header type: Side entry type                                         Header type: Top entry type
+  No. of circuits                                                      No. of circuits
+  Assembly product                                                     Assembly product
+  Series name                                                          Series name
+  Termination style: SMT                                               Housing material: No indication…PA 66
+  Product version number                                                                 2…PA 66 (Glass-ﬁlled)
+
+  Color: No indication…Natural (Ivory), M…Green                        Packaging style: Radial tape
+
+  Packaging style: Embossed taping                                     Radial tape lead style: Partially rounded rectangular leads
+                                                                       Color: PA 66 type
+                                                                               No indication…Natural (White), BK…Black,
+                                                                                R…Red, E…Blue, Y…Yellow, M…Green
+                                                                              PA 66 (Glass-ﬁlled) type
+                                                                               No indication…Natural (Ivory), C…Black,
+                                                                                R…Red, E…Blue, Y…Yellow, M…Green
+
+
+
+
+                                                               ‑9‑
+

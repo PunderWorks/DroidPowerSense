@@ -1,0 +1,454 @@
+     *R                     AUTOMOTIVE
+                                                          Features                                       Applications
+AE **H oHS                        G R A DE
+  C- AL C
+    Q2 OG OM                                              n EB welded metal strip                        n Current sensing
+      00 EN P
+        CO FR LIA                                         n Very high power                              n Voltage division
+           M EE NT
+            PL & ,
+              IA NT
+                                                          n Excellent long term stability                n Battery management systems
+                         2 . 31                           n Low resistance, low TCR                      n Power modules
+                         173
+                                                          n Low thermal EMF                              n Frequency converters
+                                                          n RoHS compliant* and halogen free**           n Industrial
+                                                          n AEC-Q200 compliant
+
+                                                          CSS2H-2512 Series Current Sense Resistor
+
+  Electrical Characteristics                                                                                Additional Information
+                                                                                                         Click these links for more information:
+ Characteristic                                              Model CSS2H-2512 Series
+                                             CSS2H-2512C-000 3         < 0.1 mW / 100 A
+                                             CSS2H-2512R-L300x           0.3 mW / 6 W
+                                             CSS2H-2512R-L500x           0.5 mW / 6 W                     PRODUCT       TECHNICAL       INVENTORY       SAMPLES
+                                             CSS2H-2512R-1L00x           1.0 mW / 5 W                                    LIBRARY
+
+                                             CSS2H-2512K-1L80x           1.8 mW / 5 W
+ Resistance Range /
+                                             CSS2H-2512K-2L00x           2.0 mW / 5 W
+ Power Rating @70 °C 1 /
+                                             CSS2H-2512K-2L30x           2.3 mW / 5 W                      FOLLOW        SHUNT           CONTACT
+                                             CSS2H-2512K-3L00x           3.0 mW / 4 W                                     PULSE
+                                                                                                                       CALCULATOR
+                                             CSS2H-2512K-3L50x           3.5 mW / 4 W
+                                             CSS2H-2512K-4L00x 4         4.0 mW / 3 W                       How to Order
+                                             CSS2H-2512K-5L00x 4        5.0 mW / 2.5 W
+                                                                                                                    CSS 2H - 2512 R - L500 J __
+ Operating Temperature Range                               -55 to +170 °C                                Model
+ TCR - Resistive Alloy 2                               ±50 PPM/°C (20~60 °C)                             No. of Terminals
+                                             CSS2H-2512R-L300x           ±150 PPM/°C                     & Style
+                                             CSS2H-2512R-L500x           ±100 PPM/°C                     Size
+                                             CSS2H-2512R-1L00x            ±75 PPM/°C                     Material Type
+                                             CSS2H-2512K-1L80x            ±75 PPM/°C                        (See Part Number Table)
+ Temperature Coefficient                     CSS2H-2512K-2L00x            ±75 PPM/°C                     Resistance Code (milliohms)
+ including                                                                                                  “L” represents decimal point
+ Copper Terminals                            CSS2H-2512K-2L30x            ±75 PPM/°C
+                                                                                                            		(examples: L500 = .500 milliohms;
+                                             CSS2H-2512K-3L00x            ±75 PPM/°C
+                                                                                                               1L00 = 1.00 milliohms)
+                                             CSS2H-2512K-3L50x            ±75 PPM/°C
+                                                                                                         Resistance Tolerance
+                                             CSS2H-2512K-4L00x 4          ±75 PPM/°C                        F = ±1 %
+                                             CSS2H-2512K-5L00x 4          ±75 PPM/°C                        J = ±5 %
+                                                              Material type R: < 2 nH                    Packaging size
+ Inductance
+                                                              Material type K: < 5 nH                       Blank = Standard 13 ˝ reel
+ Resistance Tolerance                                               ±1 %, ±5 %                              E = Mini 7 ˝ reel
+1 Terminal temperature 2 For full TCR range, refer to TCR curve
+3 Tinned copper 4 CSS2H-2512K-4L00F and -5L00F are available upon request - contact factory                 Typical Part Marking
+
+                                                                                                            MANUFACTURER’S                  RESISTANCE VALUE
+                                                                                                                TRADEMARK                   IN MILLIOHMS
+  Environmental Characteristics
+
+ Characteristic                                     Test Condition                            DR Max.
+                                                                                                                            1.0
+                                                                                                                          1930
+ Thermal Shock                               -55 to +150 °C / 2000 Cycles                     0.50 %
+                                                 5 Times Rated Power
+ Short Time Overload                                                                          0.50 %                    DATE CODE:
+                                                 for 5 Second Duration                                                      YYWW
+ Resistance to Soldering Heat                    +260 °C / 10 Seconds                         0.50 %
+ High Temperature Exposure                       +170 °C / 2000 Hours                         1.00 %
+ Low Temperature Storage                           -65 °C / 24 Hours                          0.10 %             CALIFORNIA WARNING: Can expose you
+ Biased Humidity Test                        +85 °C, 85 %R.H., 1000 Hours                     0.50 %              to lead, a carcinogen and reproductive
+                                                                                                                    toxicant.See www.P65Warnings.ca.gov
+ Moisture Resistance                    10 Days with Cold Shock, No Load                      0.20 %
+                                                                                                         * RoHS Directive 2015/863, Mar 31, 2015 and Annex.
+ Mechanical Shock                                100 g, 6 ms half sine                        0.20 %
+                                                                                                         ** Bourns considers a product to be “halogen free” if
+ Vibration, High Frequency                         20 g, 10-2000 Hz                           0.20 %        (a) the Bromine (Br) content is 900 ppm or less; (b)
+                                                                                                            the Chlorine (Cl) content is 900 ppm or less; and (c)
+                                               2000 Hours, Max. Load,
+ Load Life                                                                                    1.00 %        the total Bromine (Br) and Chlorine (Cl) content is
+                                             Terminal Temperature 130 °C
+                                                                                                            1500 ppm or less.
+ Solderability                                        J-STD-002                     95 % Coverage Min.   Specifications are subject to change without notice.
+                                                                                                         Users should verify actual device performance in their
+ ESD                                            AEC-Q200-002, 25 kV                           0.25 %     specific applications. The products described herein and
+ Board Flex                                    60 Sec. Min. Holding Time                      0.25 %     this document are subject to specific legal disclaimers as
+                                                                                                         set forth on the last page of this document, and at
+ Moisture Sensitivity Level                                                                   Level 1    www.bourns.com/docs/legal/disclaimer.pdf.
+                                                                                                                            3.00 +0.20/-0.30
+                                                                                                                         (0.118 +0.007/-0.011)
+                                                                                                                                                                                                 RESISTIVE MATERIAL
+                                                                                                               1.14 +0.20/-0.50
+                                                                                                            (0.045 +0.007/-0.019)                                                              BASE MATERIAL
+                                                                                                                                                                                               COPPER ALLOY C10200
+
+
+
+
+                                                                                                                                    Y                                          0.35 ± 0.20
+                                                                                                                                           0.10
+                                                                                                                                    H±                                       (0.014 ± 0.007)
+                                                                                                                                         (0.004)
+                                                                                                                                                                                  OPTIONAL TRIMMING AREA
+                                                                                                                                                                                  2 PLCS.
+
+
+
+
+                                                                                                                   3.05 ± 0.20
+         CSS2H-2512 Series Current Sense Resistor
+                                                                                                                 3.00 +0.20/-0.30
+                                                                                                                 (0.120 ± 0.007)
+                                                                                                              (0.118 +0.007/-0.011)
+                                                                                                                                                                                                     RESISTIVE MATERIAL
+                                                                                                 1.14 +0.20/-0.50
+                                                                                              (0.045 +0.007/-0.019)                                                                                  BASE MATERIAL
+    Product Dimensions                                                                                                                                                                               COPPER ALLOY C10200
+                                                                                                                                                         6.35 ± 0.15
+                                                                                                                                                       (0.250 ± 0.005)
+                                3.00
+                                      REF.
+                              (0.118)                                                                                                                        Dimension             Dimension
+                                                                                       RESISTIVE MATERIAL                           Part Number                                                            Alloy
+     0.60 ± 0.15 2 PLCS.                                                                                                                                       H max.                Y max.
+   (0.024 ± 0.005)                                                                     BASE MATERIAL                      Y                                                0.35 ± 0.20
+                3.00 +0.20/-0.30                                                       COPPER                                 0.10                                  0.78 (0.014 ±0.43
+                                                                                                                         CSS2H-2512C-000
+                                                                                                                         H±                                                       0.007)                  Cu/Tin
+             (0.118 +0.007/-0.011)                                                                                          (0.004)                                (0.031)           (0.017)
+                                                                                                                                                                                 SENSE TERMINALS
+                                                                              RESISTIVE MATERIAL
+   1.14 +0.20/-0.50
+                                                                                                                                                                    1.65               1.20
+                                                                                                                                                                                     OPTIONAL TRIMMING AREA
+(0.045 +0.007/-0.019)                                                         BASE MATERIAL                              CSS2H-2512R-L300x                                           2(0.047)
+                                                                                                                                                                                       PLCS.    Cu-Mn
+                              Y                                               COPPER ALLOY C10200                                                                  (0.065)
+                                     0.22                                                                                                                                                          1.80
+                              H±                                                                                   SOLDER PADS                                      1.21               0.86 (0.07)
+                                   (0.009)                                                                               CSS2H-2512R-L500x                                                        Cu-Mn
+                                                                                                                                                                   (0.048)            (0.034)
+                                                                            OPTIONAL TRIMMING AREA
+                        Y                                       0.35 ± 0.20 2 PLCS.                                                                                 0.78               0.43
+                             0.10
+                                                              (0.014 ± 0.007)                                            CSS2H-2512R-1L00x                                                                Cu-Mn
+                        H±
+                           (0.004)                                                                       3.05 ± 0.20                                               (0.031)            (0.017)
+                                                                                                                           3.40
+                                                                      OPTIONAL TRIMMING AREA           (0.120 ± 0.007)                     IA                       1.21           I B 0.73
+                                                                                                                          (0.13)
+                                                                      2 PLCS.                                            CSS2H-2512K-1L80x                                                                Fe-Cr
+                                                                                                                                                                   (0.048)            (0.029)
+              3.05 ± 0.20
+            (0.120 ± 0.007)                                                                                              CSS2H-2512K-2L00x                          1.09               0.73
+                                                                                                                                                                                                          Fe-Cr
+                                                                                                                         CSS2H-2512K-2L30x                         (0.043)            (0.029)
+        3.05 ± 0.20                                                                                                                            3.40
+                                                                                                                         CSS2H-2512K-3L00x
+                                                                                                                                        6.35 ±  0.150.81                               0.45
+      (0.120 ± 0.007)                                                                                                                        (0.134)                                                      Fe-Cr
+                                                                                                                         CSS2H-2512K-3L50x        (0.032)
+                                                                                                                                      (0.250 ± 0.005)                                 (0.018)
+                                                     6.35 ± 0.15
+                                                   (0.250 ± 0.005)                                                                                                  0.73               0.43
+                                                                                                                         CSS2H-2512K-4L00x                                                                Fe-Cr
+                                                           MM                                                                                                      (0.029)            (0.017)
+                                        DIMENSIONS:
+                                            6.35 ± 0.15 (INCHES)
+                                                                                                                                                            R1
+                                                                                                                                                                    0.65                  0.43
+                                          (0.250 ± 0.005)                                                                CSS2H-2512K-5L00x
+                                                                                                                                   I2                                             I1 (0.017)              Fe-Cr
+                                                                                                                                                                   (0.026)
+                                                                                                                                                                                   SENSE TERMINALS
+    Recommended Pad Layout                                                                                    Recommended Measurements
+                                                                     SENSE TERMINALS                                                                       5.36                                            1.80
+                                                                                                        SOLDER PADS                                      (0.211)
+                                                                                                                                                                                                          (0.07)
+                                                                                 1.80                                                                                                       PROBES
+       SOLDER PADS                                                              (0.07)
+
+                                                                                                                         1.53
+                                                                                                                3.40 (0.060)
+                                                                                                               (0.13)
+                                                                                                                                    IA                                               IB              0.76
+               3.40                                                                                                                                                                                (0.030)
+              (0.13)
+                              IA                                      IB
+
+                                                                                                                                                                       2.68
+                                                                                                                                                                     (0.106)
+
+
+                                                                                                                                                DIMENSIONS:3.40
+                                                3.40                                                                                                             MM
+                                               (0.134)                                                                                                        (INCHES)
+                                                                                                                                                         (0.134)
+
+                                                          MM
+                                     DIMENSIONS:
+                                                       (INCHES)                                               Electrical Schematic
+                                                R1
+                                   I2                                 I1                                                                                  R1
+                                                                                                                                         I2                                          I1
+
+                                              5.36
+                                             (0.211)
+
+                                                                             PROBES
+                                                                                                                                                         5.36
+                                                                                                                                                       (0.211)
+             1.53
+           (0.060)                                                                                                                                                                                 PROBES
+                                                                                  0.76
+                                                                                 (0.030)
+ Specifications are subject to change without notice.
+ Users should verify actual device performance in their specific applications.                           1.53
+                                                   2.68subject to specific legal disclaimers as set forth on the last page of this document, and at www.bourns.com/docs/legal/disclaimer.pdf.
+ The products described herein and this document are                                                   (0.060)
+                                                         (0.106)                                                                                                                                            0.76
+                                                                                                                                                                                                          (0.030)
+                   CSS2H-2512 Series Current Sense Resistor
+
+      TCR Curves
+
+                                          K-Type Resistive Material                                                                                                        R-Type Resistive Material
+                 2.0                                                                                                                                 1.0
+                                                                                                                                                     0.8
+                 1.5
+                                                                                                                                                     0.6
+                 1.0
+                                                                                                                                                     0.4
+                 0.5
+
+
+dR/R25 (%)                                                                                                                             dR/R25 (%)
+                                                                                                                                                     0.2
+                  0                                                                                                                                    0
+
+             -0.5                                                                                                                                    -0.2
+                                                                                                                                                     -0.4
+             -1.0                                       Material Chart                                                                                                               Material Chart
+                                                        ±100 PPM TCR                                                                                 -0.6                            ±50 PPM TCR
+             -1.5                                                                                                                                    -0.8
+             -2.0                                                                                                                                    -1.0
+                           -55    -30    -5      20        45                  70       95        120    145          170                                   -55    -30    -5    20      45        70   95   120   145   170
+                                                  Temperature (°C)                                                                                                              Temperature (°C)
+
+
+                                              K-Type Resistive Material                                                                                                    R-Type Resistive Material
+                  1.0                                                                                                                                 2.0
+                  0.8
+                                                                                                                                                      1.5
+                  0.6
+                                                                                                                                                      1.0
+                  0.4
+                                                                                                                                                      0.5
+
+
+    dR/R25 (%)                                                                                                                          dR/R25 (%)
+                  0.2
+                       0                                                                                                                                0
+                 -0.2
+                                                                                                                                                     -0.5
+                 -0.4
+                                                         Material Chart                                                                              -1.0                            Material Chart
+                 -0.6                                    ±50 PPM TCR                                                                                                                 ±100 PPM TCR
+                 -0.8                                                                                                                                -1.5
+
+                 -1.0                                                                                                                                -2.0
+                            -55    -30    -5       20        45                 70       95        120    145          170                                  -55    -30    -5    20       45       70   95   120   145   170
+                                                   Temperature (°C)                                                                                                             Temperature (°C)
+
+
+
+      Terminal Temperature Derating Curve
+
+                                                                              120
+                                                                                                                    70 °C
+                                                                              100
+
+
+
+
+                                                            Power Ratio (%)
+                                                                               80
+
+                                                                               60
+                                                                                                                                                        130 °C
+                                                                               40
+
+                                                                               20
+
+                                                                                0
+                                                                                    0        20     40         60           80   100                 120     140    160   180
+
+                                                                                                         Terminal Temperature (°C)
+
+
+
+
+Specifications are subject to change without notice.
+Users should verify actual device performance in their specific applications.
+The products described herein and this document are subject to specific legal disclaimers as set forth on the last page of this document, and at www.bourns.com/docs/legal/disclaimer.pdf.
+                   CSS2H-2512 Series Current Sense Resistor
+
+            Maximum Pulse Power                                                                                      Maximum Pulse Energy
+
+         10000                                                                                                       1000
+
+
+                                                      Power (W)    Power (W)    Power (W)                             100         Energy (J)         Energy (J)         Energy (J)
+                1000                                  0.3 mΩ       1 mΩ         2 mΩ                                              0.3 mΩ             1 mΩ               2 mΩ
+
+
+
+
+Power (Watts)                                                                                      Energy (Joules)
+                                                                                                                       10
+                 100
+                                                                                                                        1
+
+                  10
+                                                                                                                      0.1
+
+
+                   1                                                                                                 0.01
+                  0.00001   0.0001   0.001     0.01          0.1      1        10            100                        0.00001   0.0001         0.001         0.01         0.1         1       10             100
+                                         Pulse Width (Seconds)                                                                                           Pulse Width (Seconds)
+
+
+
+            Packaging Specifications
+
+Components packaged per EIA-481.                                                                                                                 0.15
+                                                                                                                                               (0.006)
+Standard Reel Size: 13 inches
+Tape Width:         12 mm
+Quantity:           3,000 pcs. per reel                                                                                                                                                              COMPONENT
+                                                                                                                                                                                                     ORIENTATION
+
+Mini-Reel Size:                      7 inches
+Tape Width:                          12 mm                                                                                          1.0
+                                                                                                                                  1530
+                                                                                                                                                                1.0
+                                                                                                                                                              1530
+                                                                                                                                                                                       1.0
+                                                                                                                                                                                     1530
+Quantity:                            1000 pcs. per reel
+
+
+                                                                                                                                                                                                       0.13
+                                                                                                                            TOP COVER TAPE                                                           (0.005)
+
+
+                                                                                                                            EMBOSSED                                                    MM
+                                                                                    MATTE                                                                             DIMENSIONS:
+                                                                                                                            CARRIER                                                  (INCHES)
+                                                                                    FINISH
+
+
+
+
+Americas: Tel: +1 951-781-5500 • Email: americus@bourns.com
+Mexico: Tel: +52-614-478-0400 • Email: mexicus@bourns.com
+Asia: Tel: +886-2-2562-4117 • Email: asiacus@bourns.com
+EMEA: Tel: +36 88 885 877 • Email: eurocus@bourns.com
+www.bourns.com
+
+
+REV. 01/26
+Specifications are subject to change without notice.
+Users should verify actual device performance in their specific applications.
+The products described herein and this document are subject to specific legal disclaimers as set forth on the last page of this document, and at www.bourns.com/docs/legal/disclaimer.pdf.
+        Legal Disclaimer Notice
+
+This legal disclaimer applies to purchasers and users of Bourns® products manufactured by or on behalf of Bourns, Inc. and its affiliates (collectively,
+“Bourns”).
+
+Unless otherwise expressly indicated in writing, Bourns® products and data sheets relating thereto are subject to change without notice. Users should check
+for and obtain the latest relevant information and verify that such information is current and complete before placing orders for Bourns® products.
+
+The characteristics and parameters of a Bourns® product set forth in its data sheet are based on laboratory conditions, and statements regarding the
+suitability of products for certain “typical” applications are based on Bourns’ knowledge of typical requirements in generic applications. Bourns assumes
+that “typical” applications include failsafe/backup features to address critical risks to users and are designed to allow rework of Bourns® product to
+avoid scrap of a device solely due to malfunctioning Bourns® product. The characteristics and parameters of a Bourns® product in a user application
+may vary from the data sheet characteristics and parameters due to (i) the combination of the Bourns® product with other components in the user’s
+application, or (ii) the environment of the user application itself. The characteristics and parameters of a Bourns® product also can and do vary in
+different applications and actual performance may vary over time. Thus, users should always verify the actual performance of the Bourns® product in
+their specific devices and applications and make their own independent judgments regarding the suitability of Bourns® product and the amount of
+additional test margin to design into their device or application to compensate for differences between laboratory and real-world conditions.
+
+Unless Bourns has explicitly designated an individual Bourns® product as meeting the requirements of a particular industry standard (e.g., IATF
+16949) or a particular qualification (e.g., UL listed or recognized), Bourns is not responsible for any failure of an individual Bourns® product to meet
+the requirements of such industry standard or particular qualification even if such industry standard or qualification is a “state of art”. Users of Bourns®
+products are responsible for ensuring compliance with safety-related requirements and standards applicable to their devices or applications.
+
+Bourns® products are not recommended, authorized or intended for use in applications where failure or malfunction may result in personal injury,
+death, or severe property or environmental damage, such as without limitation nuclear, life-critical medical and certain automotive and aviation
+applications. Except as set forth in the bullet points below or unless expressly and specifically approved in writing on a case-by-case basis by an
+authorized Bourns’ representative, use of any Bourns® products in such unauthorized high-risk applications is at the user’s sole risk.
+
+     • Bourns considers implantable/invasive devices and devices/procedures designed as life-supporting or life-sustaining by the U.S. Food and Drug
+       Administration or equivalent organizations outside of the United States as “life-critical” medical applications. Bourns expressly identifies those
+       Bourns® standard products that are suitable for use in typical medical applications that are not life-critical in its publication entitled “Bourns
+       Medical Grade Component Guide.”
+
+     • Bourns expressly identifies those Bourns® standard products that are suitable for use in typical automotive applications associated with any
+       Automate Safety Integrity Level (ASIL) in its publication entitled “Bourns Automotive Grade Component Guide.” Bourns’ designation of Bourns®
+       product as compliant with the AEC-Q standard does not by itself mean that Bourns has approved such product for use in an automotive
+       application.
+
+     • Bourns expressly identifies Bourns® standard products that are suitable for use in the typical aviation applications/systems requiring System
+       Design Assurance Level (RTCA DO-254 DAL) of C, D or E in its publication entitled “Bourns Civilian Aerospace/Aviation Grade Component Guide.”
+       Bourns does not test its products for compliance with United States Federal Aviation Administration standards or any other generally equivalent
+       governmental organization standard applicable to products designed or manufactured for use in aviation applications. Use of Bourns® standard
+       components in aviation applications associated with RTCA DO-254 DAL A or B without proper approval noted above shall be at the user’s sole
+       risk.
+
+     • Bourns will review and authorize on a case-by-case basis the use of Bourns® standard products which are at least AEC-Q compliant in space-
+       related civil applications (rockets, satellites) with a negotiated cross-waiver and indemnity agreement.
+
+The use and level of testing applicable to Bourns® custom products shall be negotiated on a case-by-case basis by Bourns and the user for which such
+Bourns® custom products are specially designed. Absent a written agreement between Bourns and the user regarding the use and level of such testing,
+the above provisions applicable to Bourns® standard products shall also apply to such Bourns® custom products.
+
+Use of Bourns® products or Bourns’ technology in military/defense applications must be reviewed with Bourns for compliance with applicable export
+control laws and embargoes. Users shall not sell, transfer, export or re-export (which includes transfers within a country) any Bourns® products or
+technology or technical data for use in activities which involve the design, development, production, use or stockpiling of nuclear, chemical or
+biological weapons or missiles, nor shall they use Bourns® products or technology or technical data in any facility which engages in activities relating
+to such devices. Further, Bourns® products and Bourns’ technology and technical data may not under any circumstance be exported or re-exported to
+countries subject to international sanctions or embargoes. Bourns® products and technology may not, without prior authorization from Bourns and/or
+the Government of a country where such product/technology is designed and/or manufactured, be resold, transferred, or re-exported (including within
+the same country) to any party not eligible to receive commodities, software, and technical data originating in such country.
+
+To the maximum extent permitted by applicable law, Bourns disclaims (i) any and all liability for special, punitive, consequential, incidental or indirect
+damages or lost revenues or lost profits, and (ii) any and all implied warranties (those not based on parameters specified in Bourns’ data sheets and/or
+specifications), including implied warranties of fitness for particular purpose, non-infringement and merchantability.
+
+For your convenience, copies of this Legal Disclaimer Notice with German, Spanish, Japanese, Traditional Chinese and Simplified Chinese bilingual versions are
+available at:
+                                         Web Page: https://www.bourns.com/legal/disclaimers-terms-and-policies
+                                                PDF: https://www.bourns.com/docs/Legal/disclaimer.pdf
+
+
+
+
+                                                                                                                                                    K2540 05/26R
+

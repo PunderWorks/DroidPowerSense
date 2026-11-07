@@ -1,0 +1,115 @@
+Product Specification
+
+Version：2022V1
+
+Electric Characteristic
+Current Rating
+
+3 5 A MAX（△＜85℃）
+
+Voltage
+
+600V DC
+
+Insulation Resistance
+
+≥2000MΩ
+
+Contact Resistance
+
+≤1.0mΩ
+
+Mechanical Characteristic
+Plug Life
+
+100 Times
+
+Salt Spray
+
+48h
+
+Working Environment
+
+XT60PW series products
+This series of products is PCB welding
+
+Protection Level
+
+IP40
+
+Work Temperature
+
+-20℃ to 120℃
+
+Flame Level
+
+type injection molding type 2PIN connector.
+Can be applied to wire to PCB,PCB to PCB
+application scenarios of lithium battery and
+controllers.
+
+UL94 V-0
+
+Material
+Plastic Housing
+
+PA, Color: Yellow,Black
+
+Terminal
+
+Copper Alloy,Plating: Gold
+plating
+
+XT60PW-F
+
+Weld leg height:3MM
+
+XT60PW-M
+
+Weld leg height:3MM
+
+
+
+
+During connector using, do not
+exceed the rated current and voltage
+
+
+
+
+Do not use when external force is
+applied to the connector
+
+
+
+
+Current and voltage overloads can cause faults and
+accidents.
+Plug connector in live state, will lead to faults and accident.
+Therefore, please plug the connector when no current load
+on the circuit.
+Do not power on connectors and wires under stress. If too
+much external force, will lead to damage, Faults and
+accidents occur, so do not use in this situation.
+The connector is designed as the connecting part of the
+circuit, so do not use the connector as the junction of the
+shell, to construct part of an object.
+
+Do not use in high temperature and humidity environment.
+Failure may occur if not used in the environment specified
+in the specification，So please don't do it here
+
+Please confirm the environment
+
+
+
+Use carefully
+
+Connectors are precision parts. Please be careful when
+using them.
+Be careful when you open the package, even the part
+protected by tape packing and tubular packing, the
+terminal also will be deformation, bending, propping and
+other phenomena.
+
+

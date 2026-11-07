@@ -1,0 +1,2330 @@
+                               Product           Order       Technical             Tools &             Support &         Reference
+                               Folder            Now         Documents             Software            Community         Design
+
+
+
+                                                                                                                                     LM5060
+                                                                                      SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+               LM5060 High-Side Protection Controller With Low Quiescent Current
+1 Features                                                            2 Applications
+•
+1   Available in Automotive Grade / AEC Q-100                         •     Automotive body electronics
+•   Wide operating input voltage range:                               •     Industrial power distribution and control
+    5.5 V to 65 V
+•   Functional safety capable                                         3 Description
+    – Documentation available to aid functional                       The LM5060 high-side protection controller provides
+       safety system design                                           intelligent control of a high-side N-channel MOSFET
+                                                                      during normal on/off transitions and fault conditions.
+•   Less than 15-µA quiescent current in disabled                     In-rush current is controlled by the nearly constant
+    mode                                                              rise time of the output voltage. A POWER GOOD
+•   Controlled output rise time for safe connection of                output indicates when the output voltage reaches the
+    capacitive loads                                                  input voltage and the MOSFET is fully on. Input
+                                                                      UVLO (with hysteresis) is provided as well as
+•   Charge pump gate driver for external N-Channel
+                                                                      programmable input OVP. An enable input provides
+    MOSFET                                                            remote on or off control. The programmable UVLO
+•   Adjustable Undervoltage Lockout (UVLO) with                       input can be used as second enable input for safety
+    hysteresis                                                        redundancy. A single capacitor programs the initial
+•   UVLO Serves as second enable input for systems                    start-up VGS fault detection delay time, the transition
+    requiring safety redundancy                                       VDS fault detection delay time, and the continuous
+                                                                      over-current VDS fault detection delay time. When a
+•   Programmable fault detection delay time                           detected fault condition persists longer than the
+•   MOSFET latched off after load fault is detected                   allowed fault delay time, the MOSFET is latched off
+•   Active low open drain POWER GOOD (nPGD)                           until either the enable input or the UVLO input is
+    output                                                            toggled low and then high.
+•   Adjustable input Overvoltage Protection (OVP)                                              Device Information(1)
+•   Immediate restart after overvoltage shutdown                           PART NUMBER                 PACKAGE          BODY SIZE (NOM)
+•   10-Lead VSSOP                                                        LM5060                     VSSOP (10)          3.00 mm × 3.00 mm
+                                                                         (1) For all available packages, see the orderable addendum at
+                                                                             the end of the data sheet.
+
+                                                     Typical Application Circuit
+
+                         VIN                                                                                     VOUT
+
+
+
+
+                                                                          SENSE    GATE       OUT
+
+
+                                                                          VIN
+
+                                                                                  LM5060
+                                                                          UVLO
+
+
+                                                                          OVP
+                                                                                           TIMER
+
+                                    High = Fault, Low= OK
+                     STATUS                                               nPGD
+                                                                                              GND
+                                    High = On, Low= Off
+                         EN                                               EN
+
+
+                        GND                                                                                      GND
+
+
+
+
+1
+
+
+
+
+      An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+      intellectual property matters and other important disclaimers. PRODUCTION DATA.
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                                                                      www.ti.com
+
+
+                                                                          Table of Contents
+    1   Features .................................................................. 1              7.4 Device Functional Modes........................................ 12
+    2   Applications ........................................................... 1           8    Application and Implementation ........................ 14
+    3   Description ............................................................. 1                8.1 Application Information............................................ 14
+    4   Revision History..................................................... 2                    8.2 Typical Applications ................................................ 18
+    5   Pin Configuration and Functions ......................... 3                          9 Power Supply Recommendations...................... 30
+    6   Specifications......................................................... 4            10 Layout................................................................... 31
+        6.1    Absolute Maximum Ratings ...................................... 4                   10.1 Layout Guidelines ................................................. 31
+        6.2    ESD Ratings.............................................................. 4         10.2 Layout Example .................................................... 31
+        6.3    Recommended Operating Conditions....................... 4                           10.3 Thermal Considerations ........................................ 32
+        6.4    Thermal Information .................................................. 5      11 Device and Documentation Support ................. 33
+        6.5    Electrical Characteristics........................................... 5             11.1    Documentation Support ........................................ 33
+        6.6    Typical Characteristics .............................................. 7            11.2    Community Resources.......................................... 33
+    7   Detailed Description ............................................ 11                       11.3    Trademarks ........................................................... 33
+        7.1 Overview ................................................................. 11          11.4    Electrostatic Discharge Caution ............................ 33
+        7.2 Functional Block Diagram ....................................... 11                    11.5    Glossary ................................................................ 33
+        7.3 Feature Description................................................. 12          12 Mechanical, Packaging, and Orderable
+                                                                                                Information ........................................................... 33
+
+
+
+4 Revision History
+NOTE: Page numbers for previous revisions may differ from page numbers in the current version.
+
+Changes from Revision G (January 2016) to Revision H                                                                                                                          Page
+
+•   Added Functional safety capable link to the Features section ............................................................................................... 1
+•   Changed the GATE to GND Absolute Maximum from 75 V to 79 V ..................................................................................... 4
+•   Added GATE to GND to the Recommended Operating Conditions table .............................................................................. 4
+
+
+Changes from Revision F (April 2013) to Revision G                                                                                                                            Page
+
+•   Added ESD Ratings table, Feature Description section, Device Functional Modes, Application and Implementation
+    section, Power Supply Recommendations section, Layout section, Device and Documentation Support section, and
+    Mechanical, Packaging, and Orderable Information section .................................................................................................. 1
+
+
+Changes from Revision E (April 2013) to Revision F                                                                                                                            Page
+
+•   Changed layout of National Data Sheet to TI format ........................................................................................................... 27
+
+
+
+
+2       Submit Documentation Feedback                                                                         Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                                         Product Folder Links: LM5060
+                                                                                                                                         LM5060
+www.ti.com                                                                                   SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+5 Pin Configuration and Functions
+
+                                                                    DGS Package
+                                                                    10-Pin VSSOP
+                                                                      Top View
+
+                                                 SENSE 1                                     10 GATE
+
+
+
+
+                                                                           LM5060Q1MM
+                                                      VIN 2                                  9 OUT
+                                                   OVP 3                                     8 nPGD
+                                                  UVLO 4                                     7 TIMER
+
+                                                      EN 5                                   6 GND
+
+
+
+
+                                                                   Pin Functions
+        PIN
+                       TYPE (1)                                                         DESCRIPTION
+NO.       NAME
+                                     Input voltage sense: a constant current sink (16 μA typical) at the SENSE pin flows through an external
+1        SENSE             I
+                                     resistor to set the threshold for fault detection.
+                                     Supply voltage input: the operating voltage range is 5.5 V to 65 V. The internal power-on-reset (POR)
+2          VIN             P         circuit typically switches to the active state when the VIN pin is greater than 5.1 V. A small ceramic
+                                     bypass capacitor close to this pin is recommended to suppress noise.
+                                     Over-voltage protection comparator input: an external resistor divider from the system input voltage sets
+                                     the Over-Voltage turn-off threshold. The GATE pin is pulled low when OVP exceeds the typical 2.0-V
+3          OVP             I
+                                     threshold, but the controller is not latched off. Normal operation resumes when the OVP pin falls below
+                                     typically 1.76 V.
+                                     Under-voltage lock-out comparator input: the UVLO pin is used as an input under-voltage lock-out by
+                                     connecting this pin to a resistor divider between input supply voltage and ground. The UVLO comparator
+4         UVLO             I         is activated when EN is high. A voltage greater than typically 1.6 V at the UVLO pin will release the pull
+                                     down devices on the GATE pin and allow the output to gradually rise. A constant current sink (5.5 µA
+                                     typical) is provided to ensure the UVLO pin is low in an open circuit condition.
+                                     Enable input: a voltage less than 0.8 V on the EN pin switches the LM5060 to a low current shutdown
+                                     state. A voltage greater than 2.0 V on the EN pin enables the internal bias circuitry and the UVLO
+5             EN           I
+                                     comparator. The GATE pin pull-up bias is enabled when both EN and UVLO are in the high state. A
+                                     constant current sink (6 µA typical) is provided to ensure the EN pin is low in an open circuit condition.
+6          GND             –         Circuit ground
+                                     Timing capacitor: an external capacitor connected to this pin sets the VDS fault detection delay time. If the
+7         TIMER           I/O        TIMER pin exceeds the 2.0-V threshold condition, the LM5060 will latch off the MOSFET and remain off
+                                     until either the EN, UVLO or VIN (POR) input is toggled low and then high.
+                                     Fault status: an open drain output. When the external MOSFET VDS decreases such that the OUT pin
+8         nPGD            O
+                                     voltage exceeds the SENSE pin voltage, the nPGD indicator is active (low = no fault).
+                                     Output voltage sense: connect to the output rail (external MOSFET source). Internally used to detect VDS
+9          OUT             I
+                                     and VGS conditions.
+                                     Gate drive output: connect to the external MOSFET’s gate. A charge-pump driven constant current
+                                     source (24 µA typical) charges the GATE pin. An internal zener clamps the GATE pin at typically 16.8 V
+10        GATE            O
+                                     above the OUT pin. The ΔV/Δt of the output voltage can be reduced by connecting a capacitor from the
+                                     GATE pin to ground.
+
+(1)   I = Input, O = Output, P = Power
+
+
+
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                                   Submit Documentation Feedback                3
+                                                              Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                                       www.ti.com
+
+
+6 Specifications
+6.1 Absolute Maximum Ratings
+over operating free-air temperature range (unless otherwise noted) (1) (2)
+                                                                                                                MIN          MAX          UNIT
+VIN to GND (3) (4)                                                                                              –0.3          75            V
+                        (5)
+SENSE, OUT to GND                                                                                               –0.3          75            V
+GATE to GND (3) (5)                                                                                             –0.3          79            V
+EN, UVLO to GND (4)                                                                                             –0.3          75            V
+nPGD, OVP to GND                                                                                                –0.3          75            V
+TIMER to GND                                                                                                    –0.3           7            V
+Peak reflow temperature                                                                                                       260          °C
+Operating junction temperature                                                                                                150          °C
+Storage temperature, Tstg                                                                                       –65           150          °C
+
+(1)   Stresses beyond those listed under Absolute Maximum Ratings may cause permanent damage to the device. These are stress ratings
+      only, which do not imply functional operation of the device at these or any other conditions beyond those indicated under Recommended
+      Operating Conditions. Exposure to absolute-maximum-rated conditions for extended periods may affect device reliability.
+(2)   If Military/Aerospace specified devices are required, please contact the TI Sales Office/ Distributors for availability and specifications.
+(3)   The Absolute Maximum Rating for VIN (75 V) applies only when the LM5060 is disabled.
+(4)   The minimum voltage of –1 V is allowed if the current is limited to below –25 mA. Also it is assumed that the negative voltage on the
+      pins only occur during reverse battery condition when a positive supply voltage (Vin) is not applied.
+(5)   The minimum voltage of –25 V is allowed if the current is limited to below –25 mA. Also it is assumed that the negative voltage on the
+      pins only occur during reverse battery condition when a positive supply voltage (VIN) is not applied.
+
+6.2 ESD Ratings
+                                                                                                                           VALUE          UNIT
+                                      Human-body model (HBM), per ANSI/ESDA/JEDEC JS-001 (1)                                ±2000
+V(ESD)     Electrostatic discharge                                                                                                          V
+                                      Charged-device model (CDM), per JEDEC specification JESD22-C101 (2)                   ±500
+
+(1)   JEDEC document JEP155 states that 500-V HBM allows safe manufacturing with a standard ESD control process.
+(2)   JEDEC document JEP157 states that 250-V CDM allows safe manufacturing with a standard ESD control process.
+
+6.3 Recommended Operating Conditions
+over operating free-air temperature range (unless otherwise noted)
+                                                                                                              MIN      NOM          MAX    UNIT
+VIN          Supply voltage                                                                                    5.5                   65     V
+EN           Enable voltage                                                                                      0                   65     V
+GATE to
+                                                                                                                 0                   79     V
+GND
+UVLO         Undervoltage lock-out voltage                                                                       0                   65     V
+             POWER GOOD off voltage                                                                              0                   65     V
+nPGD
+             POWER GOOD sink current                                                                             0                    5     mA
+TJ           Operating junction temperature                                                                   –40                   125     °C
+
+
+
+
+4        Submit Documentation Feedback                                                        Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                         Product Folder Links: LM5060
+                                                                                                                                       LM5060
+www.ti.com                                                                                 SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+6.4 Thermal Information
+                                                                                                                 LM5060
+                                           THERMAL METRIC (1)                                                DGS (VSSOP)               UNIT
+                                                                                                                 10 PINS
+RθJA              Junction-to-ambient thermal resistance                                                          162.1                °C/W
+RθJC(top)         Junction-to-case (top) thermal resistance                                                       57.3                 °C/W
+RθJB              Junction-to-board thermal resistance                                                            81.9                 °C/W
+ψJT               Junction-to-top characterization parameter                                                       5.8                 °C/W
+ψJB               Junction-to-board characterization parameter                                                    80.6                 °C/W
+RθJC(bot)         Junction-to-case (bottom) thermal resistance                                                    N/A                  °C/W
+
+(1)   For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+      report (SPRA953).
+
+6.5 Electrical Characteristics
+Unless otherwise stated the following conditions apply: VIN = 14 V, EN = 2.00 V, UVLO = 2.00 V, OVP = 1.50 V, and TJ =
+25°C. Limits in standard type are for TJ = 25°C except where noted. Minimum and Maximum limits are ensured through test,
+design, or statistical correlation. Typical values represent the most likely parametric norm at TJ = 25°C, and are provided for
+reference purposes only.
+                   PARAMETER                                              TEST CONDITIONS                            MIN       TYP MAX UNIT
+VIN PIN
+                                                                                           TJ = 25°C                            1.4
+IIN-EN             Input current, enabled mode                                                                                                mA
+                                                                                           TJ = –40°C to 125°C                         1.7
+                                                                                           TJ = 25°C                             9
+IIN-DIS            Input current, disabled mode         EN = 0.50 V                                                                           µA
+                                                                                           TJ = –40°C to 125°C                         15
+                                                                                           TJ = 25°C                           0.56
+IIN-STB            Input current, standby mode          UVLO = 0.00 V                                                                         mA
+                                                                                           TJ = –40°C to 125°C                        0.80
+                   Power on reset threshold at                                             TJ = 25°C                            5.1
+POREN                                                   VIN rising                                                                            V
+                   VIN                                                                     TJ = –40°C to 125°C                        5.46
+POREN-HYS          POREN hysteresis                     VIN falling                                                            500            mV
+OUT PIN
+                                                                                           TJ = 25°C                             8
+IOUT-EN            OUT pin bias current, enabled        OUT = VIN, normal operation                                                           µA
+                                                                                           TJ = –40°C to 125°C           5.0          11.0
+                   OUT pin leakage current,
+IOUT-DIS                                                Disabled, OUT = 0 V, SENSE = VIN                                         0            μA
+                   disabled (1)
+SENSE PIN
+                   Threshold programming                                                   TJ = 25°C                            16
+ISENSE                                                  SENSE pin bias current                                                                µA
+                   current                                                                 TJ = –40°C to 125°C      13.6              18.0
+                                                        SENSE - OUT voltage for            TJ = 25°C                             0
+VOFFSET            VDS comparator offset voltage                                                                                              mV
+                                                        fault detection                    TJ = –40°C to 125°C      –7.0               7.0
+                                                                                           TJ = 25°C                            2.0
+IRATIO             ISENSE and IOUT-EN current ratio ISENSE / IOUT-EN
+                                                                                           TJ = –40°C to 125°C      1.70              2.30
+
+(1)   The GATE pin voltage is typically 12 V above the VIN pin when the LM5060 is enabled. Therefore, the Absolute Maximum Rating for
+      VIN (75 V) applies only when the LM5060 is disabled, or for a momentary surge to that voltage since the Absolute Maximum Rating for
+      the GATE pin is also 75 V.
+
+
+
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                                  Submit Documentation Feedback               5
+                                                            Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                                www.ti.com
+
+
+Electrical Characteristics (continued)
+Unless otherwise stated the following conditions apply: VIN = 14 V, EN = 2.00 V, UVLO = 2.00 V, OVP = 1.50 V, and TJ =
+25°C. Limits in standard type are for TJ = 25°C except where noted. Minimum and Maximum limits are ensured through test,
+design, or statistical correlation. Typical values represent the most likely parametric norm at TJ = 25°C, and are provided for
+reference purposes only.
+                 PARAMETER                                            TEST CONDITIONS                          MIN     TYP MAX UNIT
+OVP INPUT
+                                                                                     TJ = 25°C                          2.0
+OVPTH            OVP threshold                   OVP pin threshold voltage rising                                                      V
+                                                                                     TJ = –40°C to 125°C       1.88           2.12
+OVPHYS           OVP hysteresis                                                                                        240            mV
+OVPDEL           OVP delay time                  Delay from OVP pin > OVPTH to GATE low                                 9.6           µs
+                                                                                     TJ = 25°C                            0
+OVPBIAS          OVP pin bias current            OVP = 1.9 V                                                                          µA
+                                                                                     TJ = –40°C to 125°C                      0.50
+UVLO INPUT
+                                                                                     TJ = 25°C                          1.6
+UVLOTH           UVLO threshold                  UVLO pin threshold voltage rising                                                     V
+                                                                                     TJ = –40°C to 125°C       1.45           1.75
+                                                                                     TJ = 25°C                         180
+UVLOHYS          UVLO hysteresis                                                                                                      mV
+                                                                                     TJ = –40°C to 125°C        120            230
+                                                                                     TJ = 25°C                          5.5
+UVLOBIAS         UVLO pin pull-down current                                                                                           µA
+                                                                                     TJ = –40°C to 125°C        3.8             7.2
+EN INPUT
+ENTHH            High-level input voltage                                            TJ = –40°C to 125°C       2.00                    V
+ENTHL            Low-level input voltage                                             TJ = –40°C to 125°C                      0.80     V
+ENHYS            EN threshold hysteresis                                                                               200            mV
+                                                                                     TJ = 25°C                            6
+ENBIAS           EN pin pull-down current                                                                                             µA
+                                                                                     TJ = –40°C to 125°C                        8.0
+GATE CONTROL (GATE PIN)
+                 Gate charge (sourcing) current,                                     TJ = 25°C                           24
+IGATE                                            On-state                                                                             µA
+                 on state                                                            TJ = –40°C to 125°C         17             31
+                 Gate discharge (sinking)
+IGATE-OFF                                        UVLO = 0.00 V                                                          2.2           mA
+                 current, off state
+                 Gate discharge (sinking)
+IGATE-FLT                                        OUT < SENSE                                                             80           mA
+                 current, fault state
+                 Gate output voltage in normal   GATE - VIN voltage                  TJ = 25°C                           12
+VGATE                                                                                                                                  V
+                 operation                       GATE pin open                       TJ = –40°C to 125°C         10             14
+                                                 GATE - OUT threshold voltage for    TJ = 25°C                            5
+                 VGS status comparator
+VGATE-TH                                         TIMER voltage reset and                                                               V
+                 threshold voltage                                                   TJ = –40°C to 125°C       3.50           6.50
+                                                 TIMER current change
+                 Zener clamp between GATE
+VGATE-CLAMP                                      IGATE-CLAMP = 0.1 mA                                                  16.8            V
+                 pin and OUT pin
+
+
+
+
+6        Submit Documentation Feedback                                                 Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                     Product Folder Links: LM5060
+                                                                                                                                   LM5060
+www.ti.com                                                                                 SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+Electrical Characteristics (continued)
+Unless otherwise stated the following conditions apply: VIN = 14 V, EN = 2.00 V, UVLO = 2.00 V, OVP = 1.50 V, and TJ =
+25°C. Limits in standard type are for TJ = 25°C except where noted. Minimum and Maximum limits are ensured through test,
+design, or statistical correlation. Typical values represent the most likely parametric norm at TJ = 25°C, and are provided for
+reference purposes only.
+                   PARAMETER                                                TEST CONDITIONS                         MIN    TYP MAX UNIT
+TIMER (TIMER PIN)
+VTMRH              Timer fault threshold                TIMER pin voltage rising                                            2.0          V
+VTMRL              Timer re-enable threshold            TIMER pin voltage falling                                          0.30          V
+                                                        TIMER charge current               TJ = 25°C                        11
+                   Timer charge current for VDS
+ITIMERH                                                 after start-up                                                                   µA
+                   fault                                                                   TJ = –40°C to 125°C       8.5          13.0
+                                                        VGS = 6.5 V
+                                                        TIMER charge current               TJ = 25°C                         6
+ITIMERL            Timer start-up charge current        during start-up                                                                  µA
+                                                        VGS = 3.5 V                        TJ = –40°C to 125°C       4.0           7.0
+                                                                                           TJ = 25°C                         6
+ITIMERR            Timer reset discharge current        TIMER pin = 1.5 V                                                                mA
+                                                                                           TJ = –40°C to 125°C       4.4           8.2
+                                                        TIMER pin > 2.0 V
+tFAULT             Fault to GATE low delay                                                                                   5           µs
+                                                        No load on GATE pin
+POWER GOOD (nPGD PIN)
+                                                                                           TJ = 25°C                        80
+PGDVOL             Output low voltage                   ISINK = 2 mA                                                                     mV
+                                                                                           TJ = –40°C to 125°C                    205
+                                                                                           TJ = 25°C                       0.02
+PGDIOH             Off leakage current                  VnPGD = 10 V                                                                     µA
+                                                                                           TJ = –40°C to 125°C                    1.00
+
+
+6.6 Typical Characteristics
+
+
+
+
+               Figure 1. VIN Pin Current vs VIN Pin Voltage                            Figure 2. VGATE, VIN Voltage vs Input Voltage
+
+
+
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                                  Submit Documentation Feedback          7
+                                                            Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                            www.ti.com
+
+
+Typical Characteristics (continued)
+
+
+
+
+          Figure 3. OUT Pin Current (IOUT-EN) vs VIN Voltage                 Figure 4. GATE Current (IGATE) vs VIN Voltage
+
+
+
+
+           Figure 5. SENSE Current (ISENSE) vs VIN Voltage               Figure 6. nPGD Low Voltage (PGDVOL vs Sink Current)
+
+
+
+
+          Figure 7. GATE Pull-Down Current Off (IGATE-OFF)               Figure 8. EN Threshold Voltage (ENTH) vs Temperature
+                         vs GATE Voltage
+
+
+
+
+8      Submit Documentation Feedback                                               Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                   Product Folder Links: LM5060
+                                                                                                                              LM5060
+www.ti.com                                                                             SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+Typical Characteristics (continued)
+
+
+
+
+               Figure 9. UVLO Threshold Voltage (UVLOTH)                        Figure 10. GATE Pull-Down Current Fault (IGATE-FLT)
+                            vs Temperature                                                      vs GATE Voltage
+
+
+
+
+               Figure 11. UVLO, EN Current vs Temperature                    Figure 12. OVP Threshold (OVPTH), Hysteresis (OVPHYS)
+                                                                                                vs Temperature
+
+
+
+
+        Figure 13. VGS Comparator Threshold Voltage (VGATE-TH)                  Figure 14. VDS Comparator Offset Voltage (VOFFSET)
+                           vs Temperature                                                        vs Temperature
+
+
+
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                            Submit Documentation Feedback        9
+                                                        Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                             www.ti.com
+
+
+Typical Characteristics (continued)
+
+
+
+
+           Figure 15. GATE Current (IGATE) vs Temperature                Figure 16. GATE Output Voltage (VGATE) vs Temperature
+
+
+
+
+         Figure 17. Gate Pull-Down Current - Fault (IGATE-FLT)                Figure 18. VIN Pin Current (IEN) vs EN Voltage
+                           vs Temperature
+
+
+
+
+                                        Figure 19. nPGD Low Voltage (PGDVOL) vs Temperature
+
+
+
+
+10     Submit Documentation Feedback                                                Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                    Product Folder Links: LM5060
+                                                                                                                                                                  LM5060
+www.ti.com                                                                                                        SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+7 Detailed Description
+
+7.1 Overview
+The LM5060 high-side protection controller features programmable current limit, turn on voltage, fault timer, and
+overvoltage protection. It also has an enable input and POWER GOOD output.
+
+7.2 Functional Block Diagram
+
+
+                                                                                  GATE                                                       OUT
+
+
+                                                                                                  LM5060
+                                              IGATE
+                                              24 PA                                                                               16.8V
+                              Charge
+             VIN              Pump
+                                                      1 k:
+
+
+                         IOUT-EN                                          VGS Status              VGATE-TH
+                                                                          Comparator                                Normal
+                            8 PA                                                                    5V                OFF
+
+                                                              VDS Fault                  OUT+5V
+                                                             Comparator
+                         500:                                                                                                IGATE-OFF
+         SENSE                                                                                                               2.2 mA        Fault
+                                                                                                                                           OFF
+                          ISENSE
+                            16 PA
+                                                                                                                                                     IGATE-FLT
+                                                                                                                                                     80 mA
+           nPGD
+                                           PGOOD
+                                                                                                                                 6 PA: Start-Up Fault Timer
+                                                                                                                                 11 PA: O-C (VDS) Fault Timer
+                                                                           One
+                                                                           shot
+                                                                                                                                          5 PA         6 PA
+             OVP                                          OV
+                                    OVPTH
+                                      2.0V
+                       UVLOTH
+                                                                                                                                                                 TIMER
+                          1.6V
+          UVLO                                                                                                                                   ITIMERR
+                           UVLOBIAS                                                                                                              6 mA
+                           5.5 PA
+                                                               nEN
+                                                                                                             S       Q
+                                                                                                             Reset Latch
+                           1.5V
+                                                                                                             R
+             EN
+                           ENBIAS
+                           6 PA                                                                                                   VTMRL
+                                                   Enable                                                                         0.3V
+
+                                           Bias Circuit
+                                                                                          Fault
+            GND                                                                                      Q        S                   VTMRH
+                                                                                                                                  2.0V
+                                                                                                    Fault Latch
+
+                                                                                                              R
+                                      VIN
+
+                                                          POR                       nEN + POR
+                                  POREN
+                                    5.1V
+
+
+
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                                                         Submit Documentation Feedback              11
+                                                                      Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                                    www.ti.com
+
+
+7.3 Feature Description
+The LM5060 is designed to drive an external high-side N-channel MOSFET. Over-Current protection is
+implemented by sensing the voltage drop across the MOSFET. When an adjustable voltage drop threshold is
+exceeded, and an adjustable time period has elapsed, the MOSFET is disabled. OVP and UVLO monitoring of
+the input line is also provided. A low state on the enable pin will turn off the N-channel MOSFET and switch the
+LM5060 into a very low quiescent current off state. An active low POWER GOOD output pin is provided to report
+the status of the N-channel MOSFET. The waiting time before the MOSFET is turned off after a fault condition is
+detected can be adjusted with an external timer capacitor. Since the LM5060 uses a constant current source to
+charge the gate of the external N-channel MOSFET, the output voltage rise time can be adjusted by adding
+external gate capacitance. This is useful when starting up into large capacitive loads.
+
+7.4 Device Functional Modes
+7.4.1 Power-Up Sequence
+The basic application circuit is shown in Figure 20 and a normal start-up sequence is shown in Figure 21. Start-
+up of the LM5060 is initiated when the EN pin is above the (ENTHH) threshold (2.0 V). At start-up, the timer
+capacitor is charged with a 6-µA (typical) current source while the gate of the external N-channel MOSFET is
+charged through the GATE pin by a 24-µA (typical) current source.
+When the gate-to-source voltage (VGS) reaches the VGATE-TH threshold (typically 5 V) the VGS sequence ends, the
+timer capacitor is quickly discharged to 0.3 V, and the 5-µA current source is enabled.
+The timer capacitor will charge until either the VDS Comparator indicates that the drain-to-source voltage (VDS)
+has been reduced to a nominal value (i.e. no fault) or the voltage on the timer capacitor has reached the VTMRH
+threshold (i.e. fault). The VDS Comparator monitors the voltage difference between the SENSE pin and the OUT
+pin. The SENSE pin voltage is user programmed to be lower than the input supply voltage by selecting a suitable
+sense resistor value. When the OUT pin voltage exceeds the voltage at the SENSE pin, the nPGD pin is
+asserted low (i.e. no fault) and the timer capacitor is discharged.
+                                                                                    Q1
+                   VIN                                                                                          VOUT
+
+                                                                   RS
+
+
+
+                                                                    SENSE    GATE        OUT
+
+
+                                                                    VIN
+                              R4
+                                                           R10
+                                                                            LM5060
+                                                     R8             UVLO
+                                                           R11
+
+                                                                    OVP
+                                                     R9                              TIMER
+                                                                                                       C1
+                             High = Fault, Low= OK
+               STATUS                                               nPGD
+                                                                                         GND
+                             High = On, Low= Off
+                   EN                                               EN
+
+
+                  GND                                                                                           GND
+
+
+
+                                            Figure 20. Basic Application Circuit
+
+7.4.2 Status Conditions
+Output responses of the LM5060 to various input conditions is shown in Table 1. The input parameters include
+Enable (EN), UVLO, OVP, input voltage (VIN), Start-Up Fault (VGS) and Run Fault (VDS) conditions. The output
+responses are the VIN pin current consumption, the GATE charge current, the TIMER capacitor charge (or
+discharge) current, the GATE discharge current if the timer capacitor voltage has reached the VTMRH threshold
+(typically 2 V), as well as the status of nPGD.
+
+
+
+
+12     Submit Documentation Feedback                                                       Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                      Product Folder Links: LM5060
+                                                                                                                                            LM5060
+www.ti.com                                                                                           SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+Device Functional Modes (continued)
+
+                                            VTMRH
+
+                              VTIMER                               6 PA
+
+                                            VTMRL
+
+
+                                          VGATE-TH
+                                    VGS                        transition region
+
+
+                                   nPGD                                                         OK
+
+
+                           VGS Status                                     VGS < 5 V      VGS > 5 V
+
+
+                                    EN        OFF    ON
+
+
+                                     Figure 21. Voltages During Normal Start Up Sequence
+
+
+                                                  Table 1. Overview of Operating Conditions
+                          INPUTS                                                                     OUTPUTS
+                                                                       VIN                                                                  STATUS
+                 OVP        VIN                         GATE                       GATE Current                       GATE after
+ EN    UVLO                           SENSE-OUT                      Current                             TIMER                      nPGD
+                 (typ)     (typ)                        -OUT                          (typ)                           TIMER > 2 V
+                                                                      (typ)
+  L       L        –     >5.10 V              –            –        0.009 mA          2.2 mA sink          Low             –           –    Disabled
+  L       H        –     >5.10 V              –            –        0.009 mA          2.2 mA sink          Low             –           –    Disabled
+                                      SENSE>OUT                                                                                       H
+  H       L      <2 V    >5.10 V                           –         0.56 mA          2.2 mA sink          Low             –                Standby
+                                      SENSE<OUT                                                                                        L
+                                      SENSE>OUT                                                                                       H
+  H       L      >2 V    >5.10 V                           –         0.56 mA           80 mA sink          Low             –                Standby
+                                      SENSE<OUT                                                                                        L
+                                      SENSE>OUT                                                        6-µA source     80 mA sink     H
+  H       H      <2 V    >5.10 V                          <5 V       1.4 mA           24-µA source                                          Enabled
+                                      SENSE<OUT                                                            Low             –           L
+                                                                                                          11-µA
+                                      SENSE>OUT                                                                        80 mA sink     H
+  H       H      <2 V    >5.10 V                          >5 V       1.4 mA           24-µA source        source                            Enabled
+                                      SENSE<OUT                                                            Low             –           L
+                                      SENSE>OUT                                                                                       H       Over-
+  H       H      >2 V    >5.10 V                           –         1.4 mA            80 mA sink          Low             –
+                                      SENSE<OUT                                                                                        L     voltage
+                                                                                      2.2 mA sink                                           Power on
+  H       H      <2 V    <5.10 V              –            –         1.4 mA                                Low             –          H
+                                                                                        (see (1))                                             reset
+
+(1)   The 2.2 mA sink current is valid for with the VIN pin ≥ 5.1 V. When the VIN pin < 5.1 V the sink current is lower. See ‘GATE Pin Off
+      Current vs. VIN’ plot in Typical Characteristics.
+
+
+
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                                            Submit Documentation Feedback     13
+                                                               Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                          www.ti.com
+
+
+8 Application and Implementation
+
+                                                        NOTE
+            Information in the following applications sections is not part of the TI component
+            specification, and TI does not warrant its accuracy or completeness. TI’s customers are
+            responsible for determining suitability of components for their purposes. Customers should
+            validate and test their design implementation to confirm system functionality.
+
+
+8.1 Application Information
+8.1.1 Gate Control
+A charge pump provides bias voltage above the input and output voltage to enhance the N-channel MOSFET
+gate. When the system voltage is initially applied and both EN and UVLO are above their respective thresholds,
+the GATE pin is charged by the 24-µA (typical) current source. During normal operating conditions, the GATE pin
+voltage is clamped to approximately 16.8 V above the OUT pin (i.e. VGS) by an internal zener.
+When either the UVLO input or the EN input is low, or when VIN is below the Power-On Reset voltage of 5.10 V
+(typical), the GATE pin is discharged with a 2.2 mA (typical) current sink.
+When the timer capacitor is charged up to the VTMRH threshold (typically 2 V) a fault condition is indicated and
+the gate of the external N-Channel MOSFET is discharged at a 80 mA (typical) rate. Additionally, when the OVP
+pin voltage is higher than the OVPTH threshold (typically 2 V) a fault is indicated and the gate of the external N-
+Channel MOSFET is discharged at the same 80 mA (typical) rate.
+
+8.1.2 Fault Timer
+An external capacitor connected from the TIMER pin to the GND pin sets the fault detection delay time. If the
+voltage on the TIMER capacitor reaches the VTMRH threshold (2 V typical) a fault condition is indicated. The
+LM5060 will latch off the MOSFET by discharging the GATE pin at a 80 mA (typical) rate, and will remain latched
+off until either the EN pin, the UVLO pin, or the VIN pin is toggled low and then high.
+There are three relevant components to the TIMER pin’s function:
+1. A constant 6-µA (typical) current source driving the TIMER pin. This current source is active when EN,
+   UVLO, and VIN are all high.
+2. A second current source (5 µA typical) is activated, for a total charge current of 11 µA (typical), only when
+   the VGS sequence has completed successfully.
+3. A pull-down current sink for the TIMER pin which resets the timer by discharging the timer capacitor. If EN,
+   UVLO or VIN is low, or when OVP is high, the timer capacitor is discharged.
+    a. When the VDS Fault Comparator detects a fault, (SENSE pin voltage higher than OUT pin voltage) the
+       timer capacitor pull down is disabled and the timer capacitor is allowed to charge at the 11-µA (typical)
+       rate.
+During Start-Up, the timer behaves as follows:
+After applying sufficient system voltage and enabling the LM5060 by pulling the EN and UVLO pins high, the
+timer capacitor will be charged with a 6-µA (typical) current source. The timer capacitor is discharged when the
+voltage difference between the GATE pin and the OUT pin (i.e. VGS of the external N-Channel MOSFET)
+reaches the VGATE-TH threshold (typically 5 V). After discharging, the timer capacitor is charged with 11 µA until
+either the VTMRH threshold (typically 2 V) is reached, or the sensed VDS voltage falls below the threshold of the
+VDS Fault Comparator, indicating the output voltage has reached the desired steady state level. The timer
+capacitor voltage waveforms are illustrated in Figure 21, Figure 22, and Figure 23.
+A timer capacitor is always necessary to allow some finite amount of time for the gate to charge and the output
+voltage to rise during startup. If an adequate timer capacitor value is not used, then the 6 µA of charge current
+would cause the TIMER pin voltage to reach the VTMRH fault threshold (typically 2 V) prematurely and the
+LM5060 will latch off since a fault condition would have been indicated.
+
+
+
+
+14     Submit Documentation Feedback                                             Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                  Product Folder Links: LM5060
+                                                                                                                             LM5060
+www.ti.com                                                                             SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+Application Information (continued)
+Although not recommended, the timer function can be disabled by connecting the TIMER pin directly to GND.
+With this condition the TIMER pin voltage will never reach the VTMRH fault threshold (2 V typical). The end result
+is that the fault latch-off protection is completely disabled, while the nPGD pin will continue to reflect the VDS
+Fault Comparator output.
+
+8.1.3 VGS Considerations
+The VGS Status Comparator accomplishes two purposes:
+1. As the gate of the external MOSFET is charged, the VGS voltage transitions from cut-off, through an active
+   region, and into the ohmic region. The LM5060 provides two fault timer modes to monitor these transitions.
+   The TIMER pin capacitor is initially charged with a constant 6 µA (typical) until either the MOSFET VGS
+   reaches the VGATE–TH threshold (typically 5 V) indicating that the MOSFET channel is at least somewhat
+   enhanced, or the voltage on the TIMER pin reaches the VTMRH threshold (typically 2 V) indicating a fault
+   condition. If the MOSFET VGS reaches 5-V threshold before the TIMER pin reaches the typical 2 V timer fault
+   threshold, the timer capacitor is then discharged to 300 mV, and then begins charging with 11-µA current
+   source while the MOSFET transitions through the active region. The lower timer capacitor charge current
+   during the initial start-up sequence allows more time before a fault is indicated. The turn-on time of the
+   MOSFET will vary with input voltage, load capacitance, load resistance, as well as the MOSFET
+   characteristics.
+2. Figure 22 shows a start-up waveform with excessive gate leakage. The initial charge current on the timer
+   capacitor is 6 µA (typical), while the simultaneous charge current to the gate is 24 µA (typical). Due to
+   excessive gate leakage, the 24 µA is not able to charge the gate to the required typical 5 V VGS threshold
+   and the VDS Fault Comparator will indicate a fault when the timer capacitor is charged to the VTMRH fault
+   threshold. When the timer capacitor voltage reaches theVTMRH fault threshold (typically 2 V) the MOSFET
+   gate is discharged at an 80 mA (typical) rate.
+
+                                 VTRMRH
+
+                        VTIMER                                                                   Fault Latch
+                                                        6 PA
+
+                                 VTRMRL
+
+                                                                                                  GATE pin will be
+                                                                                                  discharged to GND
+                               VGATE-TH                                                           at 80 mA rate
+                           VGS
+
+
+
+                         nPGD                                                                 Fault
+
+
+
+                    VGS Status             VGS < 5V
+
+
+
+                            EN     OFF       ON
+
+
+
+                         Figure 22. Voltages During Startup With VGS Gate Leakage Condition
+
+8.1.4 VDS Fault Condition
+The LM5060 includes a VDS Fault Comparator that senses the voltage difference between the SENSE pin and
+the OUT pin. If the voltage at the OUT pin falls lower than the voltage at the SENSE pin, the VDS Fault
+Comparator will trip and switch the nPGD pin to a high impedance state. It will also initiate charging of the
+capacitor on the TIMER pin with a 6-µA (typical) current source if VGS is less than than 5-V, or a 11-µA (typical)
+current source if VGS is higher than 5 V. If the voltage on the TIMER pin reaches the typical 2 V fault threshold,
+the gate of the N-Channel MOSFET is pulled low with a 80 mA (typical) sink current. Figure 23 illustrates a VDS
+fault condition during start-up. The nPGD pin never switches low because the VDS fault comparator detects
+excessive VDS voltage throughout the entire sequence.
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                            Submit Documentation Feedback     15
+                                                        Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                                  www.ti.com
+
+
+Application Information (continued)
+8.1.5 Overcurrent Fault
+The VDS Fault Comparator can be used to implement an Over-Current shutdown function. The VDS Fault
+Comparator monitors the voltage difference between the SENSE pin and the OUT pin. This is, essentially, the
+same voltage that is across the N-Channel MOSFET RDS(ON) less the threshold voltage that is set by the series
+resistor on the SENSE pin. The value of capacitor on the TIMER pin, the capacitor charge current (ITIMERH, 11 μA
+typical), along with the TIMER pin fault threshold (VTMRH) will determine the how long the N-Channel MOSFET
+will be allowed to conduct excessive current before the MOSFET is turned-off. When this delay time expires, the
+gate is discharged at a 80 mA rate.
+The LM5060 is intended for applications where precise current sensing is not required, but some level of fault
+protection is needed. Examples are applications where inductance or impedance in the power path limits the
+current rise in a short circuit condition.
+The Safe Operating Area (SOA) of the external N-Channel MOSFET should be carefully considered to ensure
+the peak drain-to-source current and the duration of the fault delay time is within the SOA rating of the MOSFET.
+Also note that the RDS(ON) variations of the external N-Channel MOSFET will affect the accuracy of the Over-
+Current detection.
+
+8.1.6 Restart After Overcurrent Fault Event
+When a VDS fault condition has occurred and the TIMER pin voltage has reached 2 V, the LM5060 latches off the
+external MOSFET. In order to initiate a restart, either the EN pin, the VINpin, or the UVLO pin must be toggled
+low and then high.
+
+
+                             VTMRH
+                                                                       11 PA
+                                                  6 PA                                 Fault Latch
+                   VTIMER
+                              VTMRL
+
+                                                                                       GATE pin will be
+                                                         VGS = 5V                      discharged to GND
+                            VGATE-TH                                                   at 80 mA rate
+                      VGS
+                                             transition region
+
+
+                    nPGD                                                       Fault
+
+
+
+                VGS Status                                  VGS < 5V   VGS > 5V
+
+
+
+                       EN      OFF     ON
+
+
+
+                             Figure 23. Voltages During Startup with VDS Fault Condition
+
+8.1.7 Enable
+The LM5060 Enable pin (EN) allows for remote On/Off control. The Enable pin on/off thresholds are CMOS
+compatible. The external N-Channel MOSFET can be remotely switched Off by forcing the EN pin below the
+lower input threshold, ENTHL (800 mV). The external N-Channel MOSFET can be remotely switched On by
+forcing the EN pin above the upper input threshold, ENTHH (2.00 V). Figure 24 shows the threshold levels of the
+Enable pin.
+When the EN pin is less than 0.5 V (typical) the LM5060 enters a low current (disabled) state. The current
+consumption of the VIN pin in this condition is 9 µA (typical).
+
+
+
+
+16     Submit Documentation Feedback                                                     Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                   Product Folder Links: LM5060
+                                                                                                                                    LM5060
+www.ti.com                                                                                    SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+Application Information (continued)
+
+                                                                        up to 65V
+
+
+                                                                           ON
+
+
+
+                                             2.0V (ENTHH)
+
+                                              1.5V (typical)
+                                                                    200 mV (hysterisis)
+
+
+                                             0.8V (ENTHL)
+                                            0.5V (disabled)
+                                                                     OFF        disabled
+
+
+
+
+                                          Figure 24. Enable Function Threshold Levels
+
+8.1.8 UVLO
+The UVLO function will turn off the external N-Channel MOSFET with a 2.2 mA (typical) current sink at the GATE
+pin. Figure 25 shows the threshold levels of the UVLO input. A resistor divider as shown in Figure 20 with R10
+and R11 sets the voltage at which the UVLO function engages. The UVLO pin may also be used as a second
+enable pin for applications requiring a redundant, or secondary, shut-down control. Unlike the EN pin function,
+the UVLO function does not switch the LM5060 to the low current (disabled) state.
+If the UVLO function is not needed, the UVLO pin should be connected to the VIN pin. The UVLO pin should not
+be left floating as the internal pull-down will keep the UVLO active.
+In addition to the programmable UVLO function, an internal Power-On-Reset (POR) monitors the voltage at the
+VIN pin and turns the MOSFET Off when VIN falls below typically 5.10 V.
+                                                                        up to 65V
+
+
+
+
+                                                                           OK
+
+
+                                              1.6V (UVLOTH)
+                                                                    180 mV (hysterisis)
+
+
+
+                                                                           UVLO
+
+
+
+
+                                                   Figure 25. UVLO Threshold Levels
+
+8.1.9 OVP
+The OVP function will turn off the external N-Channel MOSFET if the OVP pin voltage is higher than the OVPTH
+threshold (typically 2 V). A resistor divider made up with R8 and R9, shown in Figure 20, sets the OVP threshold.
+An internal 9.6-µs timer filters the output of the over-voltage comparator to prevent noise from triggering an OVP
+event. An OVP event lasting longer than typically 9.6 µs will cause the GATE pin to be discharged with an 80 mA
+current sink and will cause the capacitor on the TIMER pin to be discharged.
+If the OVP function is not needed, the OVP pin should be connected to GND. The OVP pin should not be left
+floating.
+
+
+
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                                   Submit Documentation Feedback     17
+                                                               Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                                     www.ti.com
+
+
+Application Information (continued)
+8.1.10 Restart After OVP Event
+After the OVP function has been activated and the gate of the external N-Channel MOSFET has been pulled low,
+the OUT pin is likely to be low as well. However, an OVP condition will not cause the VDS Fault Comparator to
+latch off of the LM5060 because the capacitor on the TIMER pin is also discharged during an OVP event. After
+the OVP pin falls below the lower threshold (typically 1.76 V), the LM5060 will re-start as described in the normal
+start-up sequence and shown in Figure 21. The EN, VIN, or UVLO pins do not need to be toggled low to high to
+re-enable the MOSFET after an OVP event.
+
+8.1.11 nPGD Pin
+The nPGD pin is an open drain connection that indicates when a VDS fault condition has occurred. If the SENSE
+pin voltage is higher than the OUT pin voltage the state of the nPGD pin will be high impedance. In the typical
+application, as shown in Figure 20, the voltage at the nPGD pin will be high during any VDS fault condition. The
+nPGD state is independent of the fault timer function. The resistance R4 should be selected large enough to
+safely limit the current into the nPGD pin. Limiting the nPGD low state current below 5 mA is recommended.
+
+8.2 Typical Applications
+Three application examples are provided. Example Number 1: LM5060EVAL Design illustrates the process for
+the LM5060EVAL in Related Documentation. Example Number 2: Reverse Polarity Protection With Diodes and
+Example Number 3: Reverse Polarity Protection With Resistor illustrate two other applications that provide
+additional protection features.
+
+8.2.1 Example Number 1: LM5060EVAL Design
+Figure 26 shows the schematic for the LM5060EVAL in Related Documentation. Design example number 1
+illustrates the basic design procedure used for the evaluation module.
+
+                                                                                              Q1
+         INPUT                                                                                                                OUTPUT
+
+                                                                                                       R5
+                                                                                                       0.0
+                                                                              R4               C3
+                                                                              9.09 k
+
+                                                                         1              10           9
+                                                                       SENSE           GATE         OUT
+
+                                          +                            2 VIN                                    + C5
+                                                   R1         C2                                                  22 µF
+                         R6       D1       C4      200 k      0.1 µF
+                         100 k    51V      22 µF                                  LM5060
+                                                   R2                  4 UVLO
+                                                   38.3 k
+
+
+                                                   R3                  3 OVP
+                                                   14.0 k                                      TIMER 7
+                                                                                                                     C1
+                                                                                                                     0.1 µF
+                         High = Fault, Low= OK
+       STATUS                                                          8 nPGD
+                                                                                                   GND 6
+                         High = On, Low= Off
+            EN                                                         5 EN
+
+
+           GND                                                                                                                GND
+
+
+                                        Figure 26. SNVA413 Schematic Diagram
+
+8.2.1.1 Design Requirements
+Example number 1 design requirements are shown in Table 2.
+
+
+
+
+18     Submit Documentation Feedback                                                      Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                   Product Folder Links: LM5060
+                                                                                                                                    LM5060
+www.ti.com                                                                                    SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+                                       Table 2. Example Number 1 Circuit Specifications
+                                           DESIGN PARAMETER                         EXAMPLE VALUE
+                                       Maximum input voltage (OVP)                           37 V
+                                       Minimum input voltage (UVLO)                           9V
+                                            Output current range                          0 A to 5.0 A
+                                        Ambient temperature range                         0°C to 50°C
+
+8.2.1.2 Detailed Design Procedure
+
+8.2.1.2.1 VDS Fault Detection and Selecting Sense Pin Resistor RS
+The LM5060 monitors the VDS voltage of the external N-Channel MOSFET. The drain to source voltage threshold
+(VDSTH), which is set with the resistor RS, is shown in Figure 27;
+       VDSTH = (RS x ISENSE) - VOFFSET                                                                                                    (1)
+The MOSFET drain to source current threshold is:
+                 VDSTH
+       IDSTH =
+                 RDS(ON)
+
+       where
+             •     RDS(ON) is the resistive drop of the pass element Q1 in Figure 27
+             •     VOFFSET is the offset voltage of the VDS comparator
+             •     ISENSE (16 µA typical) is the threshold programming current                                                            (2)
+
+                                               VIN                                               VOUT
+                                                                               Q1
+
+
+
+
+                                                                  RS
+
+
+                                                            SENSE       GATE        OUT
+
+
+
+                                                            VIN
+
+                                                                       LM5060
+
+
+
+                                                 Figure 27. Setting the VDS Threshold
+
+8.2.1.2.2 Turn-On Time
+To slow down the output rise time a capacitor from the GATE pin to GND may be added. The turn on time
+depends on the threshold level of the N-Channel MOSFET, the gate capacitance of the MOSFET as well as the
+optional capacitance from the GATE pin to GND. Figure 28 shows the slow down capacitor C1. Reducing the
+turn-on time allows the MOSFET (Q1), to slowly charge a large load capacitance. Special care must be taken to
+keep the MOSFET within its safe operating area. If the MOSFET turns on too slow, the peak power losses may
+damage the device.
+
+
+
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                                    Submit Documentation Feedback    19
+                                                         Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                                 www.ti.com
+
+
+
+                                         VIN                                            VOUT
+                                                                            Q1
+
+                                                                             C1
+
+                                                               RS
+
+
+                                                         SENSE       GATE         OUT
+
+
+
+                                                         VIN
+
+                                                                    LM5060
+
+
+
+                                               Figure 28. Turn-On Time Extension
+
+8.2.1.2.3 Fault Detection Delay Time
+To allow the gate of the MOSFET adequate time to change, and to allow the MOSFET to conduct currents
+beyond the protection threshold for a brief period of time, a fault delay timer function is provided. This feature is
+important when drive loads which require a surge of current in excess of the normal ON current upon start up, or
+at any point in time, such as lamps and motors. A single low leakage capacitor (CTIMER) connected from the
+TIMER (pin 7), to ground sets the delay time interval for both the VGS status detection at start-up and for the
+subsequent VDS Over-Current fault detection.
+When the LM5060 is enabled under normal operating conditions the timer capacitor will begin charging at a 6 μA
+(typical) rate while simultaneously charging the gate of the external MOSFET at a 24 μA (typical) rate. The gate-
+to-source voltage (VGS) of the external MOSFET is expected to reach the 5-V (typical) threshold before the timer
+capacitor has charged to the VTMRH threshold (2 V typical) in order to avoid being shutdown.
+While VGS is less than the typical 5-V threshold (VGATE-TH), the VDS start-up fault delay time is calculated from:
+                            VTIMERH x CTIMER
+        VDS Fault Delay =
+                                 ITIMERL
+
+     where
+           •   ITMRL is typically 6 μA and VTMRH is typically 2 V                                                                        (3)
+If the CTIMER value is 68 nF (0.068μF) the VGS start-up fault delay time would typically be:
+     VDS Fault Delay = ((2 V x 0.068 μF) / 6 μA) = 23 ms                                                                                 (4)
+When the LM5060 has successfully completed the start-up sequence by reaching a VGS of 5 V within the fault
+delay time set by the timer capacitor (CTIMER), the capacitor is quickly discharged to 300 mV (typical) and the
+charge current is increased to 11 μA (typical) while the gate of the external MOSFET is continued to be charge at
+a 24 μA (typical) rate. The external MOSFET may not be fully enhanced at this point in time and some additional
+time may be needed to allow the gate-to-source voltage (VGS) to charge to a higher value. The drain-to-source
+voltage (VDS) of the external MOSFET must fall below the VDSTH threshold set by RS and ISENSE before the timer
+capacitor has charged to the VTMRH threshold (2 V typical) to avoid a fault.
+When VGS is greater than the typical 5-V threshold (VGATE-TH), the VDS transition fault delay time is calculated
+from:
+                         (VTIMERH - VTMRL) x CTIMER
+     VDS Fault Delay =
+                                   ITIMERH
+
+     where
+           •   ITMRH is typically 11 μA
+           •   VTMRH is typically 2 V
+           •   VTMRL is typically 300 mV                                                                                                 (5)
+If the CTIMER value is 68 nF(0.068 μF) the VDS transition fault delay time would typically be:
+     VDS Fault Delay = (((2 V–0.3 V) x 0.068 μF) / 11 μA) = 10 ms                                                                        (6)
+
+
+
+20     Submit Documentation Feedback                                                    Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                      Product Folder Links: LM5060
+                                                                                                                             LM5060
+www.ti.com                                                                             SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+Should a subsequent load current surge trip the VDS Fault Comparator, the timer capacitor discharge transistor
+turns OFF and the 11 μA (typical) current source begins linearly charging the timer capacitor. If the surge current,
+with the detected excessive VDS voltage, lasts long enough for the timer capacitor to charge to the timing
+comparator threshold (VTMRH) of typically 2 V, the LM5060 will immediately discharge the MOSFET gate and
+latch the MOSFET off. The VDS fault delay time during an Over-Current event is calculated from:
+                             VTIMERH x CTIMER
+        VDS Fault Delay =
+                                   ITIMERH
+
+       where
+             •   ITMRH is typically 11 μA
+             •   VTMRH is typically 2 V                                                                                            (7)
+If the CTIMER value is 68 nF(0.068 μF) the VDS Over-Current fault delay time would typically be:
+       VDS Fault Delay = ((2 V x 0.068 μF) / 11 μA) = 12 ms                                                                        (8)
+Since a single capacitor is used to set the delay time for multiple fault conditions, it is likely that some
+compromise will need to be made between a desired delay time and a practical delay time.
+
+8.2.1.2.4 MOSFET Selection
+The external MOSFET (Q1) selection should be based on the following criteria:
+• The BVDSS rating must be greater than the maximum system voltage (VIN), plus ringing and transients which
+   can occur at VIN when the circuit is powered on or off.
+• The maximum transient current rating should be based on the maximum worst case VDS fault current level.
+• MOSFETs with low threshold voltages offer the advantage that during turn on they are more likely to remain
+   within their safe operating area (SOA) because the MOSFET reaches the ohmic region sooner for a given
+   gate capacitance.
+• The safe operating area (SOA) of the MOSFET device and the thermal properties should be considered
+   relative to the maximum power dissipation possible during startup or shutdown.
+• RDS(ON) should be sufficiently low that the power dissipation at maximum load current ((IL(MAX))2 x RDS(ON))
+   does not increase the junction temperature above the manufacturer’s recommendation.
+• If the device chosen for Q1 has a maximum VGS rating less than 16 V, an external zener diode must be
+   added from gate to source to limit the applied gate voltage. The external zener diode forward current rating
+   should be at least 80 mA to conduct the full gate pull-down current during fault conditions.
+
+8.2.1.2.5 Input and Output Capacitors
+Input and output capacitors are not necessary in all applications. Any current that the external MOSFET conducts
+in the on-state will decrease very quickly as the MOSFET turns off. All trace inductances in the design including
+wires and printed circuit board traces will cause inductive voltage kicks during the fast termination of a
+conducting current. On the input side of the LM5060 circuit this inductive kick can cause large positive voltage
+spikes, while on the output side, negative voltage spikes are generated. To limit such voltage spikes, local
+capacitance or clamp circuits can be used. The necessary capacitor value depends on the steady state input
+voltage level, the level of current running through the MOSFET, the inductance of circuit board traces as well as
+the transition speed of the MOSFET.
+Since the exact amount of trace inductance is hard to predict, careful evaluation of the circuit board is the best
+method to optimize the input or output capacitance or clamp circuits.
+
+8.2.1.2.6 UVLO, OVP
+The UVLO and OVP thresholds are programmed to enable the external MOSFET (Q1) when the input supply
+voltage is within the desired operating range. If the supply voltage is low enough that the voltage at the UVLO pin
+is below the UVLO threshold, Q1 is switched off by a 2.2 mA (typical) current sink at the GATE pin, denying
+power to the load. The UVLO threshold has approximately 180 mV of hysteresis.
+If the supply voltage is high enough that the voltage at the OVP pin is above the OVP threshold, the GATE pin is
+pulled low with a 80 mA current sink. Hysteresis is provided for each threshold. The OVP threshold has
+approximately 240 mV of hysteresis.
+Option A: The configuration shown in Figure 29 requires three resistors (R1, R2, and R3) to set the thresholds.
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                            Submit Documentation Feedback     21
+                                                        Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                                 www.ti.com
+
+
+
+                                         VIN
+                                                              VIN
+                                                                               LM5060
+                                                   R1
+                                                                        UVLOTH
+                                                             UVLO          1.60V
+
+                                                                      UVLOBIAS
+                                                                      5.5 PA
+                                                   R2
+
+
+                                                             OVP
+                                                                          OVPTH
+                                                   R3                      2.00V
+
+
+
+
+                              Figure 29. UVLO and OVP Thresholds Set by R1, R2 and R3
+
+The procedure to calculate the resistor values is as follows:
+1. Select R1 based on current consumption allowed in the resistor divider, including UVLOBIAS, and
+   consideration of noise sensitivity. A value less than 100 kΩ is recommended, with lower values providing
+   improved immunity to variations in ULVOBIAS.
+2. Calculate R3 with the following formula:
+                        UVLOTH x R1
+                                                 + R1
+             VINMIN - UVLOTH - (UVLOBIAS x R1)
+      R3 =
+                      VINMAX UVLOBIAS x R1
+                            -
+                      OVPTH     OVPTH                                                                                                    (9)
+3. Calculate R2 with the following formula:
+             R3 x VINMAX             UVLOBIAS x R1 x R3
+      R2 =               - R3 - R1 -
+               OVPTH                      OVPTH
+                                                                                                                                        (10)
+VINMIN is the minimum and VINMAX is the maximum input voltage of the design specification. All other variables
+can be found in the Electrical Characteristics table of this document. To calculate the UVLO lower threshold
+including its hysteresis for falling VIN, use (UVLOTH-UVLOHYS) instead of UVLOTH in the formulas above. To
+calculate the OVP lower threshold including hysteresis for falling VIN, use (OVPTH-OVPHYS) instead of OVPTH.
+With three given resistors R1, R2, and R3, the thresholds can be calculated with the formulas below:
+                       OVPTH                       OVPTH
+      VINMAX = R1 x            + UVLOBIAS + R2 x              + OVPTH
+                         R3                             R3
+
+
+
+                 UVLOTH
+      VINMIN =              + UVLOBIAS x R1 + UVLOTH
+                  R2 + R3                                                                                                               (11)
+Also in these two formulas, the respective lower threshold value including the hysteresis is calculated by using
+(UVLOTH-UVLOHYS) instead of UVLOTH, and (OVPTH-OVPHYS) instead of OVPTH. The worst case thresholds,
+over the operating temperature range, can be calculated using the respective min and max values in bold font in
+the Electrical Characteristics.
+Option B: UVLO and OVP can be independently adjusted using two resistor dividers as shown in Figure 30.
+
+
+
+
+22     Submit Documentation Feedback                                                    Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                        Product Folder Links: LM5060
+                                                                                                                                  LM5060
+www.ti.com                                                                                  SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+
+                                                VIN
+                                                                     VIN
+                                                                                   LM5060
+                                                               R10
+                                                                             UVLOTH
+                                                                 UVLO          1.60V
+
+                                                                           UVLOBIAS
+                                                                           5.5 PA
+                                                        R8     R11
+
+
+                                                                     OVP
+                                                                               OVPTH
+                                                        R9                      2.00V
+
+
+
+
+                              Figure 30. Programming the Thresholds with Resistors R8-R11
+
+Choose the upper UVLO thresholds to ensure operation down to the lowest required operating input voltage
+(VINMIN). Select R11 based on resistive divider current consumption and noise sensitivity. A value less than 100
+kΩ is recommended, with lower values providing improved immunity to variations in ULVOBIAS.
+                 VINMIN - UVLOTH
+      R10 =
+                             UVLOTH
+               UVLOBIAS +
+                              R11                                                                                                      (12)
+To calculate the UVLO low threshold including its hysteresis, use (UVLOTH-UVLOHYS) instead of UVLOTH in the
+formula above. Choose the lower OVP threshold to ensure operation up to the highest VIN voltage required
+(VINMAX). Select R9 based on resistive divider current consumption A value less than 100 kΩ is recommended.
+                     VINMAX - OVPTH
+       R8 = R9 x
+                          OVPTH
+                                                                                                                                       (13)
+To calculate the OVP low threshold including hysteresis, use (OVPTH-OVPHYS) instead of OVPTH. Where the R9-
+R11 resistor values are known, the threshold voltages are calculated from the following:
+                            R8 x OVPTH
+       VINMAX = OVPTH +
+                                R9
+
+                                                      UVLOTH
+       VINMIN = UVLOTH + R10 x UVLOBIAS +
+                                                       R11
+                                                                                                                                       (14)
+Also in these two formulas, the respective low value including the threshold hysteresis is calculated by using
+(UVLOTH-UVLOHYS) instead of UVLOTH and (OVPTH-OVPHYS) instead of OVPTH. The worst case thresholds, over
+the operating temperature range, can be calculated using the respective minimum and maximum values in bold
+font in the Electrical Characteristics.
+Option C: The OVP function can be disabled by grounding the OVP pin. The UVLO thresholds are set as
+described in Figure 30.
+
+8.2.1.2.7 POWER GOOD Indicator
+A resistor between a supply voltage and the nPGD pin limits the current into the nPGD pin in a logic low
+condition. A nPGD pin sink current in the range of 1 mA to 5 mA is recommended. The example in Figure 31
+connects the nPGD pull-up resistor R4 to the VIN pin. Any positive supply voltage less than 65 V may be used
+instead of VIN.
+
+
+
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                                 Submit Documentation Feedback     23
+                                                             Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                                                 www.ti.com
+
+
+                                                                                       VIN
+
+                                                  LM5060
+
+                                                                                             R4
+
+                                                                          nPGD
+                                                                                             Status
+                                                       VDS fault signal
+
+
+                                                                    GND
+
+
+
+
+                                          Figure 31. Circuitry at the nPGD Pin
+
+8.2.1.2.8 Input Bypass Capacitor
+Some input capacitance from the VIN pin to the GND pin may be necessary to filter noise and voltage spikes
+from the VIN rail. If the current through Q1 in Figure 20 is very large a sudden shutdown of Q1 will cause an
+inductive kick across the line input and pc board trace inductance which could damage the LM5060. In order to
+protect the VIN pin as well as SENSE, OVP, UVLO, and nPGD pins from harm, a larger bulk capacitor from VIN
+to GND may be needed to reduce the amplitude of the voltage spikes. Protection diodes or surge suppressors
+may also be used to limit the exposure of the LM5060 pins to voltages below their maximum operating ratings.
+
+8.2.1.2.9 Large Load Capacitance
+Figure 32 shows an application with a large load capacitance CL. Assume a worst case turn off scenario where
+Vin remains at the same voltage as CL and RL is a high impedance. The body diode of Q1 will not conduct any
+current and all the charge on CL is dissipated through the LM5060 internal circuitry. The dotted line in Figure 32
+shows the path of this current flow. Initially the power dissipated by the LM5060 is calculated with the formula:
+     P = IGATE-FLT x VOUT
+     where
+           •   IGATE-FLT is the sink current of the LM5060 gate control                                                                                 (15)
+In applications with a high input voltage and very large output capacitance, the discharge current can be limited
+by an additional discharge resistor RO in series with the OUT pin as shown in Figure 33. This resistor will
+influence the current limit threshold, so the value of RS will need to be readjusted.
+
+                                    VIN                                                               VOUT
+                                                                          Q1
+
+
+                                                                                                             CL   RL
+
+                                                  RS
+
+                                                                     GATE
+                                                       SENSE
+
+
+
+                                                                                 OUT
+                                                            Fault
+                                                            OFF
+
+
+                                                        IGATE-FLT
+                                                           80 mA                 GND
+                                                       LM5060
+
+
+                               Figure 32. Discharge Path of Possible Load Capacitor
+
+In applications exposed to reverse polarity on the input and a large load capacitance on the output, a current
+limiting resistor in series with the OUT pin is required to protect the LM5060 OUT pin from reverse currents
+exceeding 25 mA. Figure 33 shows the resistor RO in the trace to the OUT pin.
+
+
+24     Submit Documentation Feedback                                                                    Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                   Product Folder Links: LM5060
+                                                                                                                                     LM5060
+www.ti.com                                                                                   SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+
+
+                                          VIN                                                 VOUT
+                                                                           Q1
+
+
+                                                                                                     CL   RL
+
+                                                        RS                             RO
+
+                                                                          GATE
+                                                             SENSE
+
+
+
+                                                                                 OUT
+                                                                 Fault
+                                                                 OFF
+
+
+                                                              IGATE-FLT
+                                                                 80 mA           GND
+                                                             LM5060
+
+
+                                 Figure 33. Current Limiting Resistor RO for Special Cases
+
+If a RO resistor in the OUT path is used, the current sensing will become less accurate since RO has some
+variability as well as the current into the OUT pin. The OUT pin current is specified in the Electrical
+Characteristics section as IOUT-EN. A RO resistor design compromise for protection of the OUT pin and a
+maintaining VDS sensing accuracy can be achieved. See the Reverse Polarity Protection With a Resistor section
+for more details on how to calculate a reasonable RO value.
+
+8.2.1.3 Application Curves
+
+
+
+
+                       Figure 34. Start-Up Waveform                                               Figure 35. Start-Up Waveform
+
+
+
+
+                          Figure 36. OVP Behavior                                           Figure 37. RS vs IDSTH for RDS(ON) = 25 mΩ
+
+
+
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                                     Submit Documentation Feedback   25
+                                                         Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                                             www.ti.com
+
+
+
+
+                                                           Figure 38. Fault Behavior
+
+
+8.2.2 Example Number 2: Reverse Polarity Protection With Diodes
+
+              Status                                                           D7              Q1                Q2
+                                                                                             75A, 40V          75A, 40V
+                VIN                                                                                                                VOUT
+                                                                        R4
+                                                                        10 k:                               Q3
+                                                       R3
+                                                                                                         0.6A, 40V
+                                                    12 k:                              D4
+                                  R5       D1
+                        D3   49.9 k:                                                     R1       D6
+                                                       SENSE         nPGD
+                       36V                                                              2 k:
+                                                     VIN               GATE
+                                                     UVLO LM5060                        D5
+                                   R6
+                       D2     5.62 k:                OVP                OUT
+                                                      EN       GND     TIMER
+
+                                   R7      C2                                                                  R2
+                              5.11 k:      100 nF                              C1                              10 k:
+             Enable                                                            68 nF
+
+              GND                                                                                                                  GND
+
+
+        Figure 39. Application with Reverse Polarity Protection with Diodes for OUT Pin Protection
+
+Figure 39 shows the LM5060 in an automotive application with reverse polarity protection. The second N-channel
+MOSFET Q2 is used to prevent the body diode of Q1 from conducting in a reverse VIN polarity situation. The
+zener diode D3 is used to limit VIN voltage transients which will occur when Q1 and Q2 are shut off quickly. In
+some applications the inductive kick is handled by input capacitors and D3 can be omitted. In reverse polarity
+protected applications, the input capacitors will see the reverse voltage. To avoid stressing input capacitors with
+reverse polarity, a transorb circuit implemented with D3 and D2 may be used. Diode D1 in Figure 39 protects the
+VIN pin in the event of reverse polarity. The resistor R1 protects the GATE pin from reverse currents exceeding
+25 mA in the reverse polarity situation. This GATE resistor would slow down the shutdown of Q1 and Q2
+dramatically. To prevent a slow turn off in fault conditions, D5 is added to bypass the current limiting resistor R1.
+When Q1 and Q2 are turned on, R1 does not cause any delay because the GATE pin is driven with a 24-µA
+current source. D6, Q3 and R2 protect Q2 from VGS damage in the event of reverse input polarity. Diodes D5
+and D7 are only necessary if the output load is highly capacitive. Such a capacitive load in combination with a
+high reverse polarity input voltage condition can exceed the power rating of the internal zener diode between
+OUT pin and GATE pin as well as the internal diode between the OUT pin and SENSE pin. External diodes D5
+and D7 should be used in reverse polarity protected applications with large capacitive loads.
+
+
+
+
+26     Submit Documentation Feedback                                                                Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                    Product Folder Links: LM5060
+                                                                                                                                               LM5060
+www.ti.com                                                                                              SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+8.2.2.1 Design Requirements
+Example number 2 design requirements are shown in Table 3.
+
+                                        Table 3. Example Number 2 Circuit Specifications
+                                           DESIGN PARAMETER                                EXAMPLE VALUE
+                                           Operating voltage range                               9 V to 24 V
+                                                 Current max                                            30 A
+                                                 OVP setting                                     27 V typical
+                                                UVLO setting                                      9 V typical
+
+8.2.2.2 Application Curve
+
+
+
+
+                                               Figure 40. Reverse Input Voltage Polarity
+
+8.2.3 Example Number 3: Reverse Polarity Protection With Resistor
+
+                                                                                                     Q1                 Q2
+                                                                                                   75A, 40V           75A, 40V
+                    VIN                                                                                                              VOUT
+                                                                                                  D        S          S       D
+                                                                    R3            R4
+                                                                 12 k:            10 k:                            Q3
+                                                                                                                0.6A, 40V
+                  Status                                                                    D4
+                                          R5
+                                                        D1
+                                     49.9 k:                                                              D5
+                            D3                                      SENSE      nPGD              R1
+                           36V                                                                  2 k:
+                                                                 VIN             GATE
+                                          R6                     UVLO LM5060
+                             D2      5.62 k:                     OVP              OUT
+                                                                  EN     GND     TIMER           R8
+                                                                                                10 k:
+                                          R7            C2                                                            R2
+                                     5.11 k:            100 nF                          C1                            10 k:
+                  Enable                                                                68 nF
+
+                    GND                                                                                                              GND
+
+
+       Figure 41. Application with Reverse Polarity Protection with a Resistor for OUT Pin Protection
+
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                                               Submit Documentation Feedback   27
+                                                             Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                                         www.ti.com
+
+
+Figure 41 shows an example circuit which is protected against reverse polarity using resistor R8 instead of the
+diodes D5 and D7 of Figure 39.
+
+8.2.3.1 Design Requirements
+Example number 3 design requirements are shown in Table 4.
+
+                                       Table 4. Example Number 3 Circuit Specifications
+                                            DESIGN PARAMETER                       EXAMPLE VALUE
+                                            Operating voltage range                  9 V to 24 V
+                                                 Current max                             30 A
+                                                 OVP setting                         27 V typical
+                                                 UVLO setting                        9 V typical
+
+8.2.3.2 Detailed Design Procedure
+
+8.2.3.2.1 Reverse Polarity Protection With a Resistor
+An alternative to using external diodes to protect the LM5060 OUT pin in the reverse polarity input condition is a
+resistor in series with the OUT pin. Adding an OUT pin resistor may require modification of the resistor in series
+with the SENSE pin. A resistor in series with the OUT pin will limit the current through the internal zener diode
+between OUT and GATE as well as through the diode between OUT and SENSE. The value of these resistors
+should be calculated to limit the current through the diode across the input terminals of the VDS fault comparator
+to be no more than 4 mA. Figure 42 shows the internal circuitry relevant for calculating the values of the resistor
+RO in the OUT path to limit the current into the OUT pin to 4 mA.
+
+                         VIN                                                                                        VOUT
+
+
+
+
+                               RS                                     LM5060                                       RO
+
+                                    25 mA                                                                   4 mA
+                                     max                                                                    max
+
+                               SENSE                   500:                            1 k:               OUT
+                                                       ISENSE                       IOUT-EN
+                                                         16 PA                      8 PA
+
+
+                                                                       VDS Fault
+                                                                      Comparator
+
+
+
+
+                         Figure 42. Current Limiting Resistor for Negative SENSE Condition
+
+When calculating the minimum RO resistor required to limit the current into the OUT pin, the internal current
+sources of 8 µA and 16 µA may be neglected. The following formulas can be used to calculate the resistor value
+RO(MIN) which is necessary to keep the IO current to less than 4 mA.
+Case A is for situations where VOUT > VIN and reverse polarity situation is present (see Figure 42). VIN is
+negative, but the voltage at the SENSE pin can roughly be assumed to be 0.0 V due to the internal diode from
+the SENSE pin to GND.
+                 VOUT - (4 mA x 1.5 k:)
+     RO(MIN) =
+                          4 mA
+                                                                                                                                                (16)
+In this case, VIN also has to be limited to a negative voltage so that reverse current through the SENSE pin does
+not exceed 25 mA.
+                       VIN
+          RS(MIN) =
+                      25 mA
+                                                                                                                                                (17)
+
+
+28     Submit Documentation Feedback                                                            Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                          Product Folder Links: LM5060
+                                                                                                                                 LM5060
+www.ti.com                                                                                 SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+
+                            VIN                                                                                    VOUT
+
+
+
+
+                                                                   LM5060                                         RO
+                                  RS
+                                                                                                           4 mA
+                                                                                                           max
+
+                                  SENSE                 500:                            1 k:            OUT
+                                                        ISENSE                     IOUT-EN
+                                                         16 PA                     8 PA
+
+
+                                                                    VDS Fault
+                                                                   Comparator
+
+
+
+                   Figure 43. Current Limiting Resistor in the OUT Path for OUT > SENSE Condition
+
+Case B is for situations where VOUT > VIN and there is no reverse polarity situation present (see Figure 43). VIN is
+positive and VOUT is also positive, but VOUT is higher than VIN:
+                   (VOUT - VIN)
+       RO(MIN) =                - (RS + 1.5 k:
+                      4 mA                                                                                                            (18)
+In this case the voltage on the SENSE pin should not exceed 65 V.
+Case C is for situations where VOUT < VIN and both VIN and VOUT are positive as well. In such cases there is no
+risk of excessive OUT pin current. No current limiting resistors are necessary. Both the SENSE and OUT
+voltages should be limited to less than 65 V.
+                                       VIN                                                                 VOUT
+
+
+
+
+                                                                    LM5060                                RO
+                                             RS
+                                                                                                  25 mA
+                                                                                                   max
+
+                                             SENSE        500:                      1 k:          OUT
+                                                          ISENSE                 IOUT-EN
+                                                           16 PA                 8 PA
+
+
+                                                                     VDS Fault
+                                                                    Comparator
+
+
+
+                            Figure 44. Current Limiting Resistor for Negative OUT Conditions
+
+Case D for situations where VOUT < VIN, while VOUT is negative and VIN is positive (see Figure 44). RO needs to
+be selected to protect the OUT pin from currents exceeding 25 mA.
+                    VOUT
+       RO(MIN) =
+                   25 mA                                                                                                              (19)
+
+8.2.3.2.2 Fault Detection With RS and RO
+Figure 41 shows an example circuit where the OUT pin is protected against a reverse battery situation with a
+current limiting resistor RO. When using resistor RO in the OUT pin path, the resistor RS has to be selected taking
+the RO resistor into account. The LM5060 monitors the VDS voltage of an external N-Channel MOSFET. The VDS
+fault detection voltage is the drain to source voltage threshold (VDSTH). The formula below calculates a proper RS
+resistor value for a desired VDSTH taking into account the voltage drop across the RO resistor.
+               VDSTH RO x IOUT-EN VOFFSET
+        RS =          +          -
+               ISENSE   ISENSE     ISENSE
+                                                                                                                                      (20)
+Copyright © 2009–2019, Texas Instruments Incorporated                                                Submit Documentation Feedback     29
+                                                           Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                                  www.ti.com
+
+
+VOFFSET is the offset voltage between the SENSE pin and the OUT pin, ISENSE is the threshold programming
+current, and IOUT-EN is the OUT pin bias current. When RS and RO have been selected, the following formula can
+be used for VDSTH min and max calculations:
+                                 RO
+       VDSTH = ISENSE x RS -          + VOFFSET
+                               IRATIO
+                                                                                                                                         (21)
+The MOSFET drain-to-source current threshold is:
+                VDSTH
+      IDSTH =
+                RDS(ON)
+
+     where
+           •     RDS(ON) is the on resistance of the pass element Q1 in Figure 20                                                        (22)
+
+8.2.3.3 Application Curves
+
+
+
+
+                      Figure 45. Startup at No Load                                            Figure 46. Shutdown
+
+
+
+
+          Figure 47. Overcurrent Shutdown with Gate Diode                            Figure 48. Reverse Input Voltage Polarity
+
+
+
+9 Power Supply Recommendations
+The recommended input power supple operating voltage range is 5.5 V to 65 V. The VIN source current rating of
+the power supply should be adequate to keep the LM5060 in the normal operating range during all load and line
+transients. Place a 10 nF or 100 nF ceramic capacitor close to the VIN pin.
+
+
+
+
+30     Submit Documentation Feedback                                                     Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                      Product Folder Links: LM5060
+                                                                                                                             LM5060
+www.ti.com                                                                             SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+10 Layout
+
+10.1 Layout Guidelines
+The component placement and layout should generally follow the example provided in Figure 49. Power from
+input source to load should flow in a manner similar to that shown in Figure 49 and heavy conductors for traces
+bearing the load current should be used. Place the VIN bypass capacitor close to pin 2. Place the TIMER
+capacitor close to pin 7.
+
+10.2 Layout Example
+                           POWER FLOW
+
+
+
+
+                                                                                  LM5060
+
+                                                          SENSE 1                10 GATE
+
+                                                             VIN 2               9 OUT
+
+                                                            OVP 3                8 nPGD
+
+                                                           UVLO 4                7 TIMER
+
+                                                              EN 5               6 GND
+
+
+
+
+                                   Top Trace/Plane
+
+                                   Bottom Plane
+
+                                   VIA
+
+
+                                             Figure 49. LM5060 Recommended Layout
+
+
+
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                            Submit Documentation Feedback     31
+                                                        Product Folder Links: LM5060
+LM5060
+SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019                                                                          www.ti.com
+
+
+10.3 Thermal Considerations
+In normal operation the LM5060 dissipates very little power so that thermal design may not be very critical. The
+power dissipation is typically the 2 mA input current times the input voltage. If the application is driving a large
+capacitive load application, upon shutdown of the LM5060, the load capacitor may partially, or fully, discharge
+back through the LM5060 circuitry if no other loads consume the energy of the pre-charged load capacitor. One
+application example where energy is dissipated by the LM5060 is a motor drive application with a large capacitor
+load. When the LM5060 is turned off, the motor might also turn off such that total residual energy in the load
+capacitor is conducted through the OUT pin to ground. The power dissipated within the LM5060 is determined by
+the discharge current of 80 mA and the voltage on the load capacitor.
+
+
+
+
+32     Submit Documentation Feedback                                             Copyright © 2009–2019, Texas Instruments Incorporated
+
+                                                  Product Folder Links: LM5060
+                                                                                                                                LM5060
+www.ti.com                                                                             SNVS628H – OCTOBER 2009 – REVISED DECEMBER 2019
+
+
+11 Device and Documentation Support
+
+11.1 Documentation Support
+11.1.1 Related Documentation
+For related documentation see the following:
+• LM5060EVAL User Guide, SNVA413
+
+11.2 Community Resources
+TI E2E™ support forums are an engineer's go-to source for fast, verified answers and design help — straight
+from the experts. Search existing answers or ask your own question to get the quick design help you need.
+Linked content is provided "AS IS" by the respective contributors. They do not constitute TI specifications and do
+not necessarily reflect TI's views; see TI's Terms of Use.
+
+11.3 Trademarks
+E2E is a trademark of Texas Instruments.
+All other trademarks are the property of their respective owners.
+11.4 Electrostatic Discharge Caution
+          These devices have limited built-in ESD protection. The leads should be shorted together or the device placed in conductive foam
+          during storage or handling to prevent electrostatic damage to the MOS gates.
+
+
+11.5 Glossary
+SLYZ022 — TI Glossary.
+   This glossary lists and explains terms, acronyms, and definitions.
+
+12 Mechanical, Packaging, and Orderable Information
+The following pages include mechanical, packaging, and orderable information. This information is the most
+current data available for the designated devices. This data is subject to change without notice and revision of
+this document. For browser-based versions of this data sheet, refer to the left-hand navigation.
+
+
+
+
+Copyright © 2009–2019, Texas Instruments Incorporated                                            Submit Documentation Feedback         33
+                                                        Product Folder Links: LM5060
+                                                                                                                                                                     PACKAGE OPTION ADDENDUM
+
+       www.ti.com                                                                                                                                                                                                   10-Nov-2025
+
+
+
+
+PACKAGING INFORMATION
+
+       Orderable part number          Status     Material type      Package | Pins      Package qty | Carrier       RoHS             Lead finish/               MSL rating/          Op temp (°C)               Part marking
+                                        (1)            (2)                                                            (3)            Ball material              Peak reflow                                           (6)
+                                                                                                                                          (4)                       (5)
+
+         LM5060MM/NOPB                Active      Production      VSSOP (DGS) | 10       1000 | SMALL T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                   SXAB
+        LM5060MM/NOPB.A               Active      Production      VSSOP (DGS) | 10       1000 | SMALL T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                   SXAB
+        LM5060MM/NOPB.B               Active      Production      VSSOP (DGS) | 10       1000 | SMALL T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                   SXAB
+         LM5060MMX/NOPB               Active      Production      VSSOP (DGS) | 10       3500 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                   SXAB
+        LM5060MMX/NOPB.A              Active      Production      VSSOP (DGS) | 10       3500 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                   SXAB
+        LM5060MMX/NOPB.B              Active      Production      VSSOP (DGS) | 10       3500 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                   SXAB
+        LM5060Q1MM/NOPB               Active      Production      VSSOP (DGS) | 10       1000 | SMALL T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                   SZAB
+       LM5060Q1MM/NOPB.A              Active      Production      VSSOP (DGS) | 10       1000 | SMALL T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                   SZAB
+       LM5060Q1MM/NOPB.B              Active      Production      VSSOP (DGS) | 10       1000 | SMALL T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                   SZAB
+       LM5060Q1MMX/NOPB               Active      Production      VSSOP (DGS) | 10       3500 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                   SZAB
+      LM5060Q1MMX/NOPB.A              Active      Production      VSSOP (DGS) | 10       3500 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                   SZAB
+      LM5060Q1MMX/NOPB.B              Active      Production      VSSOP (DGS) | 10       3500 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                   SZAB
+         LM5060QDGSRQ1                Active      Production      VSSOP (DGS) | 10       3500 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                   1EQX
+        LM5060QDGSRQ1.A               Active      Production      VSSOP (DGS) | 10       3500 | LARGE T&R            Yes                  SN             Level-1-260C-UNLIM            -40 to 125                   1EQX
+
+(1)
+      Status: For more details on status, see our product life cycle.
+
+(2)
+   Material type: When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+
+(3)
+      RoHS values: Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+
+(4)
+   Lead finish/Ball material: Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+
+(5)
+  MSL rating/Peak reflow: The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+
+(6)
+      Part marking: There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+
+
+
+
+                                                                                                          Addendum-Page 1
+                                                                                                                                                                      PACKAGE OPTION ADDENDUM
+
+    www.ti.com                                                                                                                                                                                                   10-Nov-2025
+
+
+
+
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information provided by third parties, and
+makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and continues to take reasonable steps to provide representative
+and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers
+and other limited information may not be available for release.
+
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+
+
+OTHER QUALIFIED VERSIONS OF LM5060, LM5060-Q1 :
+
+• Catalog : LM5060
+• Automotive : LM5060-Q1
+
+NOTE: Qualified Version Definitions:
+
+        • Catalog - TI's standard catalog product
+        • Automotive - Q100 devices qualified for high-reliability automotive applications targeting zero defects
+
+
+
+
+                                                                                                          Addendum-Page 2
+                                                                               PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                                                       31-Jul-2025
+
+
+
+TAPE AND REEL INFORMATION
+
+       REEL DIMENSIONS                                                                      TAPE DIMENSIONS
+                                                                                       K0       P1
+
+
+
+                                                                                                                      B0 W
+                                        Reel
+                                      Diameter
+                                                                                    Cavity           A0
+                                                                A0   Dimension designed to accommodate the component width
+                                                                B0   Dimension designed to accommodate the component length
+                                                                K0   Dimension designed to accommodate the component thickness
+                                                                W    Overall width of the carrier tape
+                                                                P1   Pitch between successive cavity centers
+
+
+                                       Reel Width (W1)
+                              QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+
+                                                                                                     Sprocket Holes
+
+
+                                                 Q1        Q2          Q1    Q2
+
+                                                 Q3        Q4          Q3    Q4                  User Direction of Feed
+
+
+
+                                                            Pocket Quadrants
+
+
+*All dimensions are nominal
+             Device           Package Package Pins              SPQ       Reel   Reel   A0                  B0         K0     P1     W     Pin1
+                               Type Drawing                             Diameter Width (mm)                (mm)       (mm)   (mm)   (mm) Quadrant
+                                                                          (mm) W1 (mm)
+    LM5060MM/NOPB             VSSOP     DGS           10        1000        177.8        12.4        5.3    3.4       1.4    8.0    12.0    Q1
+   LM5060MMX/NOPB             VSSOP     DGS           10        3500        330.0        12.4        5.3    3.4       1.4    8.0    12.0    Q1
+  LM5060Q1MM/NOPB             VSSOP     DGS           10        1000        177.8        12.4        5.3    3.4       1.4    8.0    12.0    Q1
+  LM5060Q1MMX/NOPB            VSSOP     DGS           10        3500        330.0        12.4        5.3    3.4       1.4    8.0    12.0    Q1
+    LM5060QDGSRQ1             VSSOP     DGS           10        3500        330.0        12.4        5.3    3.4       1.4    8.0    12.0    Q1
+
+
+
+
+                                                                      Pack Materials-Page 1
+                                                                PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                              31-Jul-2025
+
+
+
+ TAPE AND REEL BOX DIMENSIONS
+
+
+
+
+                                                               Width (mm)
+                                                                              H
+
+
+
+
+                      W                                   L
+
+
+
+
+*All dimensions are nominal
+             Device           Package Type   Package Drawing   Pins         SPQ    Length (mm)   Width (mm)   Height (mm)
+    LM5060MM/NOPB               VSSOP             DGS           10          1000      208.0        191.0         35.0
+    LM5060MMX/NOPB              VSSOP             DGS           10          3500      367.0        367.0         35.0
+   LM5060Q1MM/NOPB              VSSOP             DGS           10          1000      208.0        191.0         35.0
+  LM5060Q1MMX/NOPB              VSSOP             DGS           10          3500      367.0        367.0         35.0
+    LM5060QDGSRQ1               VSSOP             DGS           10          3500      367.0        367.0         35.0
+
+
+
+
+                                                        Pack Materials-Page 2
+                                                                                                           PACKAGE OUTLINE
+DGS0010A                                                        SCALE 3.200
+                                                                                                      VSSOP - 1.1 mm max height
+                                                                                                                   SMALL OUTLINE PACKAGE
+
+
+
+
+                                                                                                                            C
+                                        5.05
+                                             TYP                                                           SEATING PLANE
+                                        4.75
+
+             A                                  PIN 1 ID                                                                0.1 C
+                                                AREA
+
+                                                                                         8X 0.5
+                                                                                  10
+                    1
+
+           3.1
+           2.9                                                                           2X
+          NOTE 3                                                                          2
+
+
+                    5
+                                                                              6
+                                                                                              0.27
+                                                                                       10X
+                                                                                              0.17
+                                          3.1                                                  0.1   C A   B              1.1 MAX
+                        B
+                                          2.9
+                                        NOTE 4
+
+
+
+
+                                                                                       0.23
+                                                                                            TYP
+                                        SEE DETAIL A                                   0.13
+
+
+
+
+                                                                                         0.25
+                                                                                  GAGE PLANE
+
+
+
+
+                                                                                                                  0.7                    0.15
+                                                                                       0 -8                                              0.05
+                                                                                                                  0.4
+
+                                                                                                                 DETAIL A
+                                                                                                                  TYPICAL
+
+
+                                                                                                                                4221984/A 05/2015
+
+NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+   per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. This dimension does not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+   exceed 0.15 mm per side.
+4. This dimension does not include interlead flash. Interlead flash shall not exceed 0.25 mm per side.
+5. Reference JEDEC registration MO-187, variation BA.
+
+
+
+
+                                                                              www.ti.com
+                                                                                EXAMPLE BOARD LAYOUT
+DGS0010A                                                                                VSSOP - 1.1 mm max height
+                                                                                                          SMALL OUTLINE PACKAGE
+
+
+
+
+                                                10X (1.45)
+                             10X (0.3)                           SYMM                           (R0.05)
+                                            1                                                   TYP
+                                                                                          10
+
+                                                                                               SYMM
+
+
+
+                           8X (0.5)         5                                             6
+
+
+                                                                  (4.4)
+
+
+                                                     LAND PATTERN EXAMPLE
+                                                              SCALE:10X
+
+
+
+
+                SOLDER MASK                                               METAL UNDER                     SOLDER MASK
+                                                 METAL                                                    OPENING
+                OPENING                                                   SOLDER MASK
+
+
+
+
+                                      0.05 MAX                                                0.05 MIN
+                                      ALL AROUND                                              ALL AROUND
+
+                             NON SOLDER MASK                                            SOLDER MASK
+                                 DEFINED                                                  DEFINED
+
+                                                      SOLDER MASK DETAILS
+                                                             NOT TO SCALE
+
+
+
+
+                                                                                                                4221984/A 05/2015
+NOTES: (continued)
+
+6. Publication IPC-7351 may have alternate designs.
+7. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+
+
+
+                                                                www.ti.com
+                                                                               EXAMPLE STENCIL DESIGN
+DGS0010A                                                                                VSSOP - 1.1 mm max height
+                                                                                                         SMALL OUTLINE PACKAGE
+
+
+
+
+                                                10X (1.45)
+                                                                 SYMM                           (R0.05) TYP
+                              10X (0.3)
+                                            1
+                                                                                           10
+
+                                                                                                SYMM
+                                 8X (0.5)
+
+                                            5                                              6
+
+                                                                  (4.4)
+
+
+
+                                                     SOLDER PASTE EXAMPLE
+                                                   BASED ON 0.125 mm THICK STENCIL
+                                                              SCALE:10X
+
+
+
+
+                                                                                                                  4221984/A 05/2015
+NOTES: (continued)
+
+8. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+   design recommendations.
+9. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+                                                                 www.ti.com
+                                         IMPORTANT NOTICE AND DISCLAIMER
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATASHEETS), DESIGN RESOURCES (INCLUDING REFERENCE
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS”
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable
+standards, and any other safety, security, regulatory or other requirements.
+These resources are subject to change without notice. TI grants you permission to use these resources only for development of an
+application that uses the TI products described in the resource. Other reproduction and display of these resources is prohibited. No license
+is granted to any other TI intellectual property right or to any third party intellectual property right. TI disclaims responsibility for, and you fully
+indemnify TI and its representatives against any claims, damages, costs, losses, and liabilities arising out of your use of these resources.
+TI’s products are provided subject to TI’s Terms of Sale, TI’s General Quality Guidelines, or other applicable terms available either on
+ti.com or provided in conjunction with such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable
+warranties or warranty disclaimers for TI products. Unless TI explicitly designates a product as custom or customer-specified, TI products
+are standard, catalog, general purpose devices.
+TI objects to and rejects any additional or different terms you may propose.
+IMPORTANT NOTICE
+
+                                                Copyright © 2025, Texas Instruments Incorporated
+                                                                Last updated 10/2025
+

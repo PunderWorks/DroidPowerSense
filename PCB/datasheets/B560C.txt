@@ -1,0 +1,380 @@
+                                                                                 Green
+                                                                                                                                              B520C - B560C
+                                                                                 5.0A SURFACE-MOUNT SCHOTTKY BARRIER RECTIFIER
+
+
+Product Summary                                                                          Features and Benefits
+B520C/B530C/B540C                                                                        •    Guard Ring Die Construction for Transient Protection
+                                                                                         •    Ideally Suited for Automated Assembly
+    VRRM (V)               IO (A)            VF Max (V)           IR Max (mA)            •    Low Power Loss, High Efficiency
+    20/30/40                5.0                 0.55                  0.5                •    For Use in Low-Voltage, High-Frequency Inverters, Free
+                                                                                              Wheeling, and Polarity Protection Applications
+                                                                                         •    Lead-Free Finish; RoHS Compliant (Notes 1 & 2)
+B550C/B560C                                                                              •    Halogen and Antimony Free. “Green” Device (Notes 3)
+                                                                                         •    This part is qualified to JEDEC standards (as references in
+    VRRM (V)               IO (A)            VF Max (V)           IR Max (mA)
+                                                                                              AEC-Q) for High Reliability.
+         50/60              5.0                 0.70                  0.5                     https://www.diodes.com/quality/product-definitions/
+                                                                                         •    An automotive-compliant part is available under a separate
+                                                                                              datasheet (B520CQ-B560CQ).
+
+
+Description and Applications                                                             Mechanical Data
+This Schottky barrier rectifier is designed to meet the general                          •    Package: SMC
+requirements of commercial applications. It is ideally suited for use as:                •    Package Material: Molded Plastic. UL Flammability Classification
+                                                                                              Rating 94V-0
+•     Polarity protection diodes                                                         •    Moisture Sensitivity: Level 1 per J-STD-020
+•     Re-circulating diodes                                                              •    Terminals: Lead Free Plating (Matte Tin Finish). Solderable per
+•     Switching diodes                                                                        MIL-STD-202, Method 208
+                                                                                         •    Polarity: Cathode Band or Cathode Notch
+                                                                                         •    Weight: 0.21 grams (Approximate)
+
+                                                                              SMC
+
+
+
+
+                                                       Top View                                 Bottom View
+
+
+Ordering Information (Note 4)
+                                                                                                                                           Packing
+                 Orderable Part Number*                                         Package
+                                                                                                                               Qty.                         Carrier
+                      B5xxC-13-F                                                   SMC                                        3,000                      Tape & Reel
+                      B530C-13-F-N                                                 SMC                                        3,000                      Tape & Reel
+                      B540C-13-F-N                                                 SMC                                        3,000                      Tape & Reel
+* xx = Device type, e.g., B520C-13-F (SMC package).
+
+Notes:      1. EU Directive 2002/95/EC (RoHS), 2011/65/EU (RoHS 2) & 2015/863/EU (RoHS 3) compliant. All applicable RoHS exemptions applied.
+            2. See https://www.diodes.com/quality/lead-free/ for more information about Diodes Incorporated’s definitions of Halogen- and Antimony-free, "Green" and
+               Lead-free.
+            3. Halogen- and Antimony-free "Green” products are defined as those which contain <900ppm bromine, <900ppm chlorine (<1500ppm total Br + Cl) and
+               <1000ppm antimony compounds.
+            4. For packaging details, go to our website at https://www.diodes.com/design/support/packaging/diodes-packaging/.
+            * If products manufactured in a specific region are required, select part numbers with the -N, -V, or -W suffix. These suffixes identify the wafer fabrication
+              and assembly/test locations as defined in our Supply Resiliency information.
+
+
+
+Marking Information
+
+                                                                                B5x0C = Product Type Marking Code, ex: B540C (SMC Package)
+                                                                                    = Manufacturer’s Code Marking
+                                                                                YWW = Date Code Marking
+                                                                                Y = Last Digit of Year (ex: 3 for 2023)
+                                                                                WW = Week Code (01 to 53)
+                                                                                x = 2, 3, 4, 5 or 6, e.g., x = 4 for B540C
+                                                                                A bar or underline around the date code or product type marking code
+                                                                                denotes assembly site if marked.
+
+B520C - B560C                                                                   1 of 5                                                                         October 2026
+Document number: DS13012 Rev. 19 - 2                                        www.diodes.com                             © 2026 Copyright Diodes Incorporated. All Rights Reserved.
+                                                                                                                                                                                                                B520C - B560C
+
+
+Maximum Ratings (@TA = +25°C, unless otherwise specified.)
+Single phase, half wave, 60Hz, resistive or inductive load.
+For capacitive load, derate current by 20%.
+                                                              Characteristic                               Symbol                        B520C                                  B530C      B540C           B550C        B560C             Unit
+ Peak Repetitive Reverse Voltage                                                                            VRRM
+ Working Peak Reverse Voltage                                                                               VRWM                                                   20               30          40           50            60              V
+ DC Blocking Voltage                                                                                         VR
+ RMS Reverse Voltage                                                                                       VR(RMS)                                                 14               21          28           35            42              V
+ Average Rectified Output Current                                                                             IO                                                                               5.0                                         A
+ Non-Repetitive Peak Forward Surge Current, 8.3ms
+                                                                                                            IFSM                                                                             100                                           A
+ Single Half Sine Wave Superimposed on Rated Load
+
+
+
+
+Thermal Characteristics
+                                                                             Characteristic                                                                        Symbol                            Value                          Unit
+ Thermal Resistance, Junction to Terminal                                                                                                                               RθJT                          10                           °C/W
+ Thermal Resistance, Junction to Ambient (Note 5)                                                                                                                      RθJA                           50                           °C/W
+ Operating Temperature Range                                                                                                                                             TJ                      -55 to +150                         °C
+ Storage Temperature Range                                                                                                                                             TSTG                      -55 to +150                         °C
+
+
+
+
+Electrical Characteristics (@TA = +25°C, unless otherwise specified.)
+                                                              Characteristic                              Symbol                          Min                                  Typ       Max          Unit            Test Condition
+                                                                                 B520C, B530C, B540C                                                  —                        0.475     0.55
+ Forward Voltage Drop                                                                                        VF                                                                                        V        IF = 5.0A, TA = +25°C
+                                                                                        B550C, B560C                                                  —                        0.575     0.70
+                                                                                                                                                      —                          —       0.5                    @ Rated VR, TA = +25°C
+ Leakage Current (Note 6)                                                                                    IR                                                                                       mA
+                                                                                                                                                      —                          —        20                    @ Rated VR, TA = +100°C
+ Total Capacitance                                                                                           CT                                       —                         —        300          pF        VR = 4V, f = 1MHz
+                                                                                                                                                                   2
+Notes:                                         5. Thermal Resistance: Junction to ambient, unit mounted on PC board with 8.0 mm (0.033mm thick) copper pads as heatsink.
+                                               6. Short duration pulse test used to minimize self-heating effect.
+
+
+
+
+                                               100                                                                                                                     100
+
+
+
+
+      I F, INSTANTANEOUS FORWARD CURRENT (A)                                                                              IR, INSTANTANEOUS REVERSE CURRENT (mA)
+                                                               T A = 150°C
+                                                                                                                                                                                                                  T A = 150°C
+
+                                                                                                                                                                        10
+                                                      TA = 125°C                                                                                                                                                   TA = 125°C
+                                                10
+                                                                                                                                                                                                                   TA = 100°C
+
+                                                                                                                                                                         1                                        TA = 85°C
+
+
+                                                 1                                  T A = 100°C
+                                                                                                                                                                        0.1
+                                                                                  T A = 85°C
+
+                                                0.1                                                                                                                    0.01                                        T A = 25°C
+                                                                               TA = 25°C
+
+
+
+                                                                                TA = -55°C
+                                                                                                                                                                   0.001
+                                               0.01
+                                                   0.2          0.4        0.6           0.8         1.0                                                                20              40          60            80         100
+                                                     VF , INSTANTANEOUS FORWARD VOLTAGE (V)                                                                                  VR , INSTANTANEOUS REVERSE VOLTAGE (V)
+                                               Figure 1 Typical Forward Characteristics (B520C - B540C)                                                                 Figure 2 Typical Reverse Characteristics (B520C - B540C)
+
+
+
+B520C - B560C                                                                                                2 of 5                                                                                                              October 2026
+Document number: DS13012 Rev. 19 - 2                                                                     www.diodes.com                                                                  © 2026 Copyright Diodes Incorporated. All Rights Reserved.
+                                                                                                                                                                                                                                         B520C - B560C
+
+                                              1,000                                                                                                                                    100
+
+
+
+
+                                                                                                                                               IF, INSTANTANEOUS FORWARD CURRENT (A)
+                                                                                                    f = 1MHz
+
+
+                                                  800                                                                                                                                                       TA = 150°C
+
+
+
+
+        CT , TOTAL CAPACITANCE (pF)
+                                                                                                                                                                                           10      T A = 125°C
+
+
+                                                  600
+
+                                                                                                                                                                                               1
+                                                  400
+                                                                                                                                                                                                                     T A = 100°C
+
+
+                                                                                                                                                                                           0.1                      T A = 75°C
+                                                  200
+                                                                                                                                                                                                                 TA = 25°C
+
+
+                                                       0
+                                                           0            1                10                    100                                                                     0.01
+                                                                 VR , DC REVERSE VOLTAGE (V)                                                                                               0.2          0.4         0.6           0.8       1.0
+                                                                  Figure 3 Total Capacitance vs.                                                                                             VF , INSTANTANEOUS FORWARD VOLTAGE (V)
+                                                                 Reverse Voltage (B520C - B540C)                                                                                        Figure 4 Typical Forward Characteristics (B550C-B560C)
+
+                                                   100                                                                                             1000
+
+
+
+
+        IR , INSTANTANEOUS REVERSE CURRENT (mA)
+                                                                T A = 150°C
+                                                                                                                                                                                                                                                f = 1MHz
+
+                                                                 TA = 125°C                                                                                      800
+
+
+
+
+                                                                                                                           CT , TOTAL CAPACITANCE (pF)
+                                                    10
+
+                                                                 T A = 100°C
+                                                                                                                                                                     600
+                                                       1
+                                                                 TA = 75°C
+
+
+                                                                                                                                                                 400
+                                                    0.1
+
+
+                                                                 T A = 25°C                                                                                          200
+                                                   0.01
+
+
+                                                                                                                                                                                       0
+                                                  0.001                                                                                                                                    0                    1                10                            100
+                                                        20           40          60            80       100                                                                                              VR , DC REVERSE VOLTAGE (V)
+                                                         VR, INSTANTANEOUS REVERSE VOLTAGE (V)                                                                                                            Figure 6 Total Capacitance vs.
+                                                    Figure 5 Typical Reverse Characteristics (B550C-B560C)                                                                                               Reverse Voltage (B550C-B560C)
+
+                                                   6
+
+
+                                                   5
+
+
+
+
+             IF, DC FORWARD CURRENT (A)
+                                                   4
+
+
+                                                   3
+
+
+                                                   2                      Note 7
+
+
+
+                                                   1
+
+
+                                                   0
+                                                       25       50             75     100         125          150
+                                                               TT, TERMINAL TEMPERATURE ( °C)
+                                                               Figure 7 DC Forward Current Derating
+Note:                                             7. Device mounted on FR-4 substrate, 1" x 1", 2oz, single-sided PC boards with 0.56" x 0.73" copper pad.
+
+B520C - B560C                                                                                                      3 of 5                                                                                                                                  October 2026
+Document number: DS13012 Rev. 19 - 2                                                                           www.diodes.com                                                                                     © 2026 Copyright Diodes Incorporated. All Rights Reserved.
+                                                                                                                   B520C - B560C
+
+
+Package Outline Dimensions
+Please see http://www.diodes.com/package-outlines.html for the latest version.
+
+                                                                      SMC
+
+                                            B
+
+                                                                                         SMC
+                                                                                  Dim     Min    Max
+                                                                                   A     5.59    6.22
+                          A                             C                          B     6.60    7.11
+                                                                                   C     2.75    3.18
+                                                                                   D     0.15    0.31
+                                                                                   E     7.75    8.13
+                                                                                   G     0.10    0.20
+                                                        D
+                                                                                   H     0.76    1.52
+                                                                                    J    2.00    2.50
+                          J
+                                                                                 All Dimensions in mm
+
+                                 H              G
+                                            E
+
+
+
+
+Suggested Pad Layout
+Please see http://www.diodes.com/package-outlines.html for the latest version.
+
+                                                                     SMC
+
+
+                                       X1
+                     X
+                                                                                                      Value
+                                                                                   Dimensions
+                                                                                                     (in mm)
+                                                                                       C               6.90
+           Y
+                                                                                       G               4.40
+                                                                                       X               2.50
+                                                                                       X1              9.40
+                                       G                                               Y               3.30
+                                       C
+
+
+
+
+B520C - B560C                                                      4 of 5                                                           October 2026
+Document number: DS13012 Rev. 19 - 2                           www.diodes.com               © 2026 Copyright Diodes Incorporated. All Rights Reserved.
+                                                                                                                                 B520C - B560C
+
+
+                                                                 IMPORTANT NOTICE
+
+1.      DIODES INCORPORATED (Diodes) AND ITS SUBSIDIARIES MAKE NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, WITH
+REGARDS TO ANY INFORMATION CONTAINED IN THIS DOCUMENT, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+RIGHTS (AND THEIR EQUIVALENTS UNDER THE LAWS OF ANY JURISDICTION).
+
+2.         The Information contained herein is for informational purpose only and is provided only to illustrate the operation of Diodes’ products
+described herein and application examples. Diodes does not assume any liability arising out of the application or use of this document or any product
+described herein. This document is intended for skilled and technically trained engineering customers and users who design with Diodes’ products.
+Diodes’ products may be used to facilitate safety-related applications; however, in all instances customers and users are responsible for (a) selecting
+the appropriate Diodes products for their applications, (b) evaluating the suitability of Diodes’ products for their intended applications, (c) ensuring
+their applications, which incorporate Diodes’ products, comply the applicable legal and regulatory requirements as well as safety and functional-
+safety related standards, and (d) ensuring they design with appropriate safeguards (including testing, validation, quality control techniques,
+redundancy, malfunction prevention, and appropriate treatment for aging degradation) to minimize the risks associated with their applications.
+
+3.         Diodes assumes no liability for any application-related information, support, assistance or feedback that may be provided by Diodes from
+time to time. Any customer or user of this document or products described herein will assume all risks and liabilities associated with such use, and
+will hold Diodes and all companies whose products are represented herein or on Diodes’ websites, harmless against all damages and liabilities.
+
+4.        Products described herein may be covered by one or more United States, international or foreign patents and pending patent applications.
+Product names and markings noted herein may also be covered by one or more United States, international or foreign trademarks and trademark
+applications. Diodes does not convey any license under any of its intellectual property rights or the rights of any third parties (including third parties
+whose products and services may be described in this document or on Diodes’ website) under this document.
+
+5.         Diodes’    products      are     provided     subject    to    Diodes’     Standard      Terms       and     Conditions      of     Sale
+(https://www.diodes.com/about/company/terms-and-conditions/terms-and-conditions-of-sales/) or other applicable terms. This document does not
+alter or expand the applicable warranties provided by Diodes. Diodes does not warrant or accept any liability whatsoever in respect of any products
+purchased through unauthorized sales channel.
+
+6.        Diodes’ products and technology may not be used for or incorporated into any products or systems whose manufacture, use or sale is
+prohibited under any applicable laws and regulations. Should customers or users use Diodes’ products in contravention of any applicable laws or
+regulations, or for any unintended or unauthorized application, customers and users will (a) be solely responsible for any damages, losses or
+penalties arising in connection therewith or as a result thereof, and (b) indemnify and hold Diodes and its representatives and agents harmless
+against any and all claims, damages, expenses, and attorney fees arising out of, directly or indirectly, any claim relating to any noncompliance with
+the applicable laws and regulations, as well as any unintended or unauthorized application.
+
+7.         While efforts have been made to ensure the information contained in this document is accurate, complete and current, it may contain
+technical inaccuracies, omissions and typographical errors. Diodes does not warrant that information contained in this document is error-free and
+Diodes is under no obligation to update or otherwise correct this information. Notwithstanding the foregoing, Diodes reserves the right to make
+modifications, enhancements, improvements, corrections or other changes without further notice to this document and any product described herein.
+This document is written in English but may be translated into multiple languages for reference. Only the English version of this document is the final
+and determinative format released by Diodes.
+
+8.        Any unauthorized copying, modification, distribution, transmission, display or other use of this document (or any portion hereof) is
+prohibited. Diodes assumes no responsibility for any losses incurred by the customers or users or any third parties arising from any such unauthorized
+use.
+
+9.        This Notice may be periodically updated with the most recent version available at https://www.diodes.com/about/company/terms-and-
+conditions/important-notice
+
+
+The Diodes logo is a registered trademark of Diodes Incorporated in the United States and other countries.
+All other trademarks are the property of their respective owners.
+© 2026 Diodes Incorporated. All Rights Reserved.
+
+www.diodes.com
+
+
+
+
+B520C - B560C                                                          5 of 5                                                                     October 2026
+Document number: DS13012 Rev. 19 - 2                               www.diodes.com                         © 2026 Copyright Diodes Incorporated. All Rights Reserved.
+

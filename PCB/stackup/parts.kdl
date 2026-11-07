@@ -1,0 +1,417 @@
+// Custom parts for DroidPowerSense not in the pinned @stackup library.
+// Each pad map is verified against its manufacturer datasheet in ../datasheets/.
+
+use "@stackup/passives"
+
+// Waveshare ESP32-C5-Zero castellated stamp module (28.00 x 18.00 mm, 18 castellated edge pins
+// at 2.54 mm pitch, 15.24 mm row spacing, 1.59 mm from USB-C edge to row 1).
+// Sources:
+// - ../datasheets/ESP32-C5-Zero-Schematic.pdf (header H1 pinout, MP1605GTF-Z 2A 3.3V buck,
+//   WS2812B-1010 RGB LED on GPIO27, BOOT button on GPIO28, RF switch on GPIO26)
+// - ../datasheets/ESP32-C5-Zero-Size.pdf & esp32-c5-zero-2D.dxf (mechanical outline & pad coordinates)
+// - ../datasheets/ESP32-C5.pdf (Espressif ESP32-C5 Datasheet v1.5, Table 2-2 & Table 3-3)
+// All chip boot-mode strapping pins (GPIO26, GPIO27, GPIO28) are internal to the module and not
+// brought out to H1.
+part esp32-c5-zero {
+    symbol "Connector_Generic:Conn_02x09_Counter_Clockwise"
+    reference U
+    value "ESP32-C5-Zero"
+    datasheet "https://docs.waveshare.com/ESP32-C5-Zero"
+    description "Waveshare ESP32-C5-Zero RISC-V Wi-Fi 6 / BLE 5 / Zigbee / Thread / CAN FD stamp module, 18-pin castellated, 18x28mm"
+    manufacturer "Waveshare"
+    order mpn="ESP32-C5-Zero" digikey="2689-ESP32-C5-ZERO-ND"
+
+    pin "5V" power_in
+    pin GND power_in
+    pin "3V3" power_out
+
+    port v5v type=power {
+        require net.voltage min="4.5V" max="5.5V"
+        add net.draw "250mA"
+        line rail pin="5V"
+        line gnd pin=GND
+    }
+
+    port v3v3 type=power {
+        line rail pin="3V3"
+        line gnd pin=GND
+    }
+
+    pin IO0 bidirectional once
+    pin IO1 bidirectional once
+    pin IO2 bidirectional once
+    pin IO3 bidirectional once
+    pin IO4 bidirectional once
+    pin IO5 bidirectional once
+    pin IO6 bidirectional once
+    pin IO7 bidirectional once
+    pin IO8 bidirectional once
+    pin IO9 bidirectional once
+    pin IO10 bidirectional once
+    pin IO14 bidirectional once
+    pin IO13 bidirectional once
+    pin IO12 bidirectional once
+    pin IO11 bidirectional once
+
+    package castellated footprint="DroidPowerSense:Waveshare_ESP32-C5-Zero_Castellated" {
+        pad "5V" 1
+        pad GND 2
+        pad "3V3" 3
+        pad IO0 4
+        pad IO1 5
+        pad IO2 6
+        pad IO3 7
+        pad IO4 8
+        pad IO5 9
+        pad IO6 10
+        pad IO7 11
+        pad IO8 12
+        pad IO9 13
+        pad IO10 14
+        pad IO14 15
+        pad IO13 16
+        pad IO12 17
+        pad IO11 18
+    }
+}
+
+// Changzhou Amass XT60PW-M: horizontal right-angle PCB-mount male power connector (mates with
+// battery XT60-F plug). Rated 30 A continuous / 45 A RC / 60 A peak, 500 V DC, 0.50 mOhm contact.
+// Source: ../datasheets/XT60PW-M.pdf (V1.2) and ../datasheets/XT60PW-F.pdf (p. 2).
+// KiCad footprint Connector_AMASS:AMASS_XT60PW-M_1x02_P7.20mm_Horizontal:
+// Pad 1 (0, 0, chamfered side) is negative (-), Pad 2 (7.2, 0, flat side) is positive (+).
+part xt60pw-m {
+    symbol "Connector_Generic:Conn_01x02"
+    reference J
+    value "XT60PW-M"
+    description "Amass XT60PW-M horizontal PCB-mount male power connector, 7.20 mm pitch, 30-60 A"
+    datasheet "https://www.electrokit.com/upload/quick/7d/e6/5773_41023548-tds.pdf"
+    manufacturer "Amass"
+    order mpn="XT60PW-M" digikey="4786-XT60PW-M-ND" lcsc=C98732
+
+    pin GND passive
+    pin POS passive
+
+    package horizontal footprint="DroidPowerSense:AMASS_XT60PW-M_1x02_P7.20mm_Horizontal" {
+        pad GND 1
+        pad POS 2
+    }
+}
+
+// Changzhou Amass XT60PW-F: horizontal right-angle PCB-mount female power connector (mates with
+// downstream droid harness XT60-M plug). Rated 35 A continuous / 60 A peak, 600 V DC.
+// Source: ../datasheets/XT60PW-F.pdf (p. 1).
+// KiCad footprint Connector_AMASS:AMASS_XT60PW-F_1x02_P7.20mm_Horizontal:
+// Pad 1 (0, 0, chamfered side) is negative (-), Pad 2 (-7.2, 0, flat side) is positive (+).
+part xt60pw-f {
+    symbol "Connector_Generic:Conn_01x02"
+    reference J
+    value "XT60PW-F"
+    description "Amass XT60PW-F horizontal PCB-mount female power connector, 7.20 mm pitch, 30-60 A"
+    datasheet "https://akizukidenshi.com/goodsaffix/XT60PW.pdf"
+    manufacturer "Amass"
+    order mpn="XT60PW-F" digikey="4786-XT60PW-F-ND" lcsc=C428722
+
+    pin GND passive
+    pin POS passive
+
+    package horizontal footprint="DroidPowerSense:AMASS_XT60PW-F_1x02_P7.20mm_Horizontal" {
+        pad GND 1
+        pad POS 2
+    }
+}
+
+// JST XH 2.50 mm, 2-position, top-entry through-hole header.
+// Source: ../datasheets/JST-XH.pdf.
+part jst-xh-2 {
+    symbol "Connector_Generic:Conn_01x02"
+    reference J
+    value "JST XH 2-pin"
+    description "JST XH 2.50 mm two-position polarized, top-entry through-hole header"
+    datasheet "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf"
+    manufacturer "JST"
+    order mpn="B2B-XH-A(LF)(SN)" digikey="455-2247-ND" lcsc=C158012
+
+    pin 1 passive
+    pin 2 passive
+
+    package vertical footprint="Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical" {
+        pad 1 1
+        pad 2 2
+    }
+}
+
+// JST XH 2.50 mm, 4-position, top-entry through-hole header (remote switch with lit-switch LED pins).
+// Source: ../datasheets/JST-XH.pdf (B4B-XH-A: 4 circuits, A = 7.5 mm, B = 12.4 mm; 3 A, 250 V).
+// DigiKey number not yet confirmed (DigiKey refuses automated lookups); LCSC C144395 checked 2026-11-07.
+part jst-xh-4 {
+    symbol "Connector_Generic:Conn_01x04"
+    reference J
+    value "JST XH 4-pin"
+    description "JST XH 2.50 mm four-position polarized, top-entry through-hole header"
+    datasheet "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf"
+    manufacturer "JST"
+    order mpn="B4B-XH-A(LF)(SN)" lcsc=C144395
+
+    pin 1 passive
+    pin 2 passive
+    pin 3 passive
+    pin 4 passive
+
+    package vertical footprint="Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical" {
+        pad 1 1
+        pad 2 2
+        pad 3 3
+        pad 4 4
+    }
+}
+
+// Texas Instruments LM5060MM/NOPB high-side protection controller with charge-pump N-FET gate
+// driver, programmable UVLO, OVP, and VDS fault timer in VSSOP-10 (DGS, 3.0 x 3.0 mm, 0.5 mm pitch).
+// Source: ../datasheets/LM5060.pdf (SNVS628H, Section 5 Pin Configuration p. 3, Section 6.5 p. 5).
+part lm5060 {
+    symbol "Power_Management:LM5060"
+    reference U
+    value "LM5060MM/NOPB"
+    description "High-side protection controller, 5.5V to 65V, charge-pump N-FET driver, UVLO/OVP/VDS fault latch, VSSOP-10"
+    datasheet "https://www.ti.com/lit/ds/symlink/lm5060.pdf"
+    manufacturer "Texas Instruments"
+    order mpn="LM5060MM/NOPB" mouser="926-LM5060MM/NOPB" digikey="LM5060MM/NOPBCT-ND" lcsc=C74456
+
+    pin SENSE input
+    pin VIN power_in
+    pin OVP input
+    pin UVLO input
+    pin EN input
+    pin GND power_in
+    pin TIMER bidirectional
+    pin nPGD open_collector
+    pin OUT input
+    pin GATE output
+
+    port vin type=power {
+        require net.voltage min="5.5V" max="65V"
+        add net.draw "1.7mA"
+        line rail pin=VIN
+        line gnd pin=GND
+    }
+
+    package vssop10 footprint="Package_SO:TSSOP-10_3x3mm_P0.5mm" {
+        pad SENSE 1
+        pad VIN 2
+        pad OVP 3
+        pad UVLO 4
+        pad EN 5
+        pad GND 6
+        pad TIMER 7
+        pad nPGD 8
+        pad OUT 9
+        pad GATE 10
+    }
+}
+
+// Texas Instruments CSD18532Q5B: 60 V, 100 A (package) / 172 A (silicon), 2.5 mOhm typ (3.2 mOhm max
+// at VGS=10V) N-channel NexFET power MOSFET in SON 5x6 mm (DNK0008A / TDSON-8).
+// Second sources on the same footprint: onsemi NTMFS5C612NLT1G (60 V, 1.2 mOhm), Infineon BSC016N06NSATMA1 (60 V, 1.35 mOhm).
+// Source: ../datasheets/CSD18532Q5B.pdf (SLPS322E, Section 3 p. 1 & Section 7 pp. 12-14).
+part csd18532q5b {
+    symbol "Transistor_FET:CSD18532Q5B"
+    reference Q
+    value "CSD18532Q5B"
+    description "60 V, 100 A, 2.5 mOhm N-channel NexFET power MOSFET, SON 5x6 mm"
+    datasheet "https://www.ti.com/lit/ds/symlink/csd18532q5b.pdf"
+    manufacturer "Texas Instruments"
+    order mpn="CSD18532Q5B" mouser="595-CSD18532Q5B" digikey="296-42322-1-ND" lcsc=C882766
+
+    pin SOURCE passive
+    pin GATE input
+    pin DRAIN passive
+
+    port source pin=SOURCE
+    port gate pin=GATE
+    port drain pin=DRAIN
+
+    package son5x6 footprint="Package_TO_SOT_SMD:TDSON-8-1" {
+        pad SOURCE 1
+        pad SOURCE 2
+        pad SOURCE 3
+        pad GATE 4
+        pad DRAIN 5
+    }
+}
+
+// Texas Instruments LMR14030SDDAR: 4.0 V to 40 V, 3.5 A step-down converter with 40 uA IQ in
+// 8-pin HSOIC with PowerPAD (DDA).
+// Source: ../datasheets/LMR14030.pdf (SNVSAG3B, Section 4 Pin Configuration p. 3, Section 5 p. 4).
+part lmr14030 {
+    symbol "Regulator_Switching:LMR14030SDDA"
+    reference U
+    value "LMR14030SDDAR"
+    description "40 V, 3.5 A step-down converter with 40 uA IQ, HSOIC-8 PowerPAD"
+    datasheet "https://www.ti.com/lit/ds/symlink/lmr14030-q1.pdf"
+    manufacturer "Texas Instruments"
+    order mpn="LMR14030SDDAR" mouser="595-LMR14030SDDAR" digikey="296-42492-1-ND" lcsc=C182078
+
+    pin BOOT passive
+    pin VIN power_in
+    pin EN input
+    pin RT passive
+    pin FB input
+    pin SS passive
+    pin GND power_in
+    pin SW output
+
+    port vin type=power {
+        require net.voltage min="4.0V" max="40V"
+        add net.draw "50mA"
+        line rail pin=VIN
+        line gnd pin=GND
+    }
+
+    package hsoic8 footprint="Package_SO:TI_SO-PowerPAD-8_ThermalVias" {
+        pad BOOT 1
+        pad VIN 2
+        pad EN 3
+        pad RT 4
+        pad FB 5
+        pad SS 6
+        pad GND 7
+        pad SW 8
+        pad GND 9
+    }
+}
+
+// Diodes Inc B160-13-F: 60 V, 1 A Schottky barrier rectifier in SMA (DO-214AC).
+// Pad 1 is cathode (K), Pad 2 is anode (A).
+// Source: ../datasheets/B360A.pdf / B160.
+part b160 {
+    symbol "Device:D_Schottky"
+    reference D
+    value "B160-13-F"
+    description "Schottky rectifier, 60 V, 1 A, SMA"
+    datasheet "https://www.diodes.com/assets/Datasheets/ds13004.pdf"
+    manufacturer "Diodes Incorporated"
+    order mpn="B160-13-F" mouser="621-B160-F" digikey="B160-FDICT-ND" lcsc=C24784
+
+    pin K passive
+    pin A passive
+    port a pin=A
+    port b pin=K
+
+    package sma footprint="Diode_SMD:D_SMA" {
+        pad K 1
+        pad A 2
+    }
+}
+
+// Diodes Inc B360A-13-F: 60 V, 3 A Schottky barrier rectifier in SMA (DO-214AC).
+// Source: ../datasheets/B360A.pdf (ds13004 Rev 12).
+part b360a {
+    symbol "Device:D_Schottky"
+    reference D
+    value "B360A-13-F"
+    description "Schottky rectifier, 60 V, 3 A, SMA"
+    datasheet "https://www.diodes.com/assets/Datasheets/ds13004.pdf"
+    manufacturer "Diodes Incorporated"
+    order mpn="B360A-13-F" mouser="621-B360A-F" digikey="B360A-FDICT-ND" lcsc=C94193
+
+    pin K passive
+    pin A passive
+    port a pin=A
+    port b pin=K
+
+    package sma footprint="Diode_SMD:D_SMA" {
+        pad K 1
+        pad A 2
+    }
+}
+
+// Diodes Inc B560C-13-F: 60 V, 5 A continuous (100 A IFSM surge) Schottky barrier rectifier in
+// SMC (DO-214AB) for inductive flyback clamping across VOUT.
+// Source: ../datasheets/B560C.pdf (ds13012 Rev 12).
+part b560c {
+    symbol "Device:D_Schottky"
+    reference D
+    value "B560C-13-F"
+    description "Schottky barrier rectifier, 60 V, 5 A (100 A surge), SMC"
+    datasheet "https://www.diodes.com/assets/Datasheets/ds13012.pdf"
+    manufacturer "Diodes Incorporated"
+    order mpn="B560C-13-F" mouser="621-B560C-F" digikey="B560C-FDICT-ND" lcsc=C85100
+
+    pin K passive
+    pin A passive
+    port a pin=A
+    port b pin=K
+
+    package smc footprint="Diode_SMD:D_SMC" {
+        pad K 1
+        pad A 2
+    }
+}
+
+// Diodes Inc SMCJ33CA-13-F: 33 V VRWM (36.7-40.6 V VBR, 53.3 V VC @ 28.2 A), 1500 W bidirectional
+// TVS diode in SMC (DO-214AB). Bidirectional so reverse battery polarity up to -33 V does not
+// forward-conduct through the input surge suppressor.
+// Source: ../datasheets/SMBJ.pdf.
+part smcj33ca {
+    symbol "Device:D_TVS"
+    reference D
+    value "SMCJ33CA-13-F"
+    description "Bidirectional TVS diode, 33 V VRWM, 1500 W, SMC"
+    datasheet "https://www.diodes.com/assets/Datasheets/ds19002.pdf"
+    manufacturer "Diodes Incorporated"
+    order mpn="SMCJ33CA-13-F" mouser="621-SMCJ33CA-F" digikey="SMCJ33CA-FDICT-ND" lcsc=C135163
+
+    pin A1 passive
+    pin A2 passive
+    port a pin=A1
+    port b pin=A2
+
+    package smc footprint="Diode_SMD:D_SMC" {
+        pad A1 1
+        pad A2 2
+    }
+}
+
+// Diodes Inc SMBJ33CA-13-F: 33 V VRWM, 600 W bidirectional TVS diode in SMB (DO-214AA).
+// Source: ../datasheets/SMBJ.pdf (ds19002 Rev 20).
+part smbj33ca {
+    symbol "Device:D_TVS"
+    reference D
+    value "SMBJ33CA-13-F"
+    description "Bidirectional TVS diode, 33 V VRWM, 600 W, SMB"
+    datasheet "https://www.diodes.com/assets/Datasheets/ds19002.pdf"
+    manufacturer "Diodes Incorporated"
+    order mpn="SMBJ33CA-13-F" mouser="621-SMBJ33CA-F" digikey="SMBJ33CA-FDICT-ND" lcsc=C135068
+
+    pin A1 passive
+    pin A2 passive
+    port a pin=A1
+    port b pin=A2
+
+    package smb footprint="Diode_SMD:D_SMB" {
+        pad A1 1
+        pad A2 2
+    }
+}
+
+// Lite-On LTST-C190KGKT: green 571 nm SMD LED in 0603 (1608 metric).
+// KiCad LED_SMD:LED_0603_1608Metric has Pad 1 = cathode (K), Pad 2 = anode (A).
+part led-0603 {
+    symbol "Device:LED"
+    reference D
+    value "LTST-C190KGKT"
+    description "Green LED, 571 nm, 0603 (1608 metric)"
+    manufacturer "Lite-On"
+    order mpn="LTST-C190KGKT" mouser="859-LTST-C190KGKT" digikey="160-1435-1-ND" lcsc=C125094
+
+    pin K passive
+    pin A passive
+    port a pin=A
+    port b pin=K
+
+    package smd0603 footprint="LED_SMD:LED_0603_1608Metric" {
+        pad K 1
+        pad A 2
+    }
+}

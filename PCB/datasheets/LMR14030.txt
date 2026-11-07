@@ -1,0 +1,2009 @@
+                                                                                                                                                                 LMR14030-Q1
+                                                                                     SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024
+
+      LMR14030-Q1 SIMPLE SWITCHER® Power Converter, 40V, 3.5A, Automotive,
+                       Step-Down Converter With 40µA IQ
+1 Features                                                                3 Description
+•   Qualified for automotive applications                                 The LMR14030-Q1 is a 40V, 3.5A step down regulator
+•   AEC-Q100 qualified with the following results:                        with an integrated high-side MOSFET. With a wide
+    – Device temperature grade 1: –40°C to 125°C                          input range from 4V to 40V, the device is designed
+        ambient operating temperature range                               for various applications from industrial to automotive
+    – Device HBM ESD classification level H1C                             for power conditioning from unregulated sources. An
+    – Device CDM ESD classification level C4A                             extended family is available in 2A and 5A options in
+•   4V to 40V input range                                                 pin-to-pin compatible packages, including LMR14020-
+•   3.5A continuous output current                                        Q1 and LMR14050-Q1. The regulator quiescent
+•   Ultra-low 40µA operating quiescent current                            current is 40µA in sleep mode, which is designed for
+•   90mΩ high-side MOSFET                                                 battery powered systems. An ultra-low 1μA current
+•   75ns minimum switch-on time                                           in shutdown mode can further prolong battery life.
+•   Current mode control                                                  A wide adjustable switching frequency range allows
+•   Adjustable switching frequency from 200kHz to                         either efficiency or external component size to be
+    2.5MHz                                                                optimized. Internal loop compensation means that
+•   Frequency synchronization to external clock                           the user is free from the tedious task of loop
+•   Spread spectrum option for reduced EMI                                compensation design. This feature also minimizes the
+•   Internal compensation for ease of use                                 external components of the device. A precision enable
+•   High duty cycle operation supported                                   input allows simplification of regulator control and
+•   Precision enable input                                                system power sequencing. The device also has built-
+•   1µA shutdown current                                                  in protection features such as cycle-by-cycle current
+•   External soft start                                                   limit, thermal sensing and shutdown due to excessive
+•   Thermal, overvoltage, and short protection                            power dissipation, and output overvoltage protection.
+•   8-pin HSOIC with PowerPAD™ package                                    The LMR14030-Q1 is available in an 8-pin HSOIC
+2 Applications                                                            or 10-pin WSON package with exposed pad for low
+                                                                          thermal resistance.
+•   Automotive battery regulation
+•   Industrial power supplies                                                                                    Device Information
+•   Telecom and datacom systems                                                 PART NUMBER                                  PACKAGE(1)              PACKAGE SIZE(2)
+•   General purpose wide Vin regulation                                    LMR14030SQDDARQ1
+                                                                                                                             DDA (HSOIC,
+                                                                          LMR14030SSQDDARQ1                                                              4.9mm × 6mm
+                                                                                                                                  8)
+                                                                            (Spread Spectrum)
+                                                                            LMR14030QDPRRQ1
+                                                                                                                             DPR (WSON,
+                                                                           LMR14030SQDPRRQ1                                                               4mm × 4mm
+                                                                                                                                 10)
+                                                                             (Spread Spectrum)
+
+                                                                          (1)   For more information, see Section 10.
+                                                                          (2)   The package size (length × width) is a nominal value and
+                                                                                includes pins, where applicable.
+      VIN up to 40 V                                                                                  100
+                                                                                                       90
+           CIN                                                                                         80
+                                 VIN
+                       EN              BOOT                                                            70
+                                              CBOOT
+
+
+
+                                                                                     Efficiency (%)
+                                                                                                       60
+                                                      L
+                                                                   VOUT
+                                                                                                       50
+                       RT/SYNC          SW
+                  RT                                                                                   40
+                                               D
+                                                          RFBT
+                                                                                                       30
+                                                                 COUT                                  20
+                       SS                FB               RFBB                                                                                    VOUT = 5 V
+                                                                                                       10   VIN = 12 V, gSW = 500 kHz
+                 CSS                                                                                                                              VOUT = 3.3 V
+                                 GND                                                                   0
+                                                                                                       0.001          0.01           0.1      1              10
+                                                                                                                                   IOUT (A)                      D001
+
+
+
+
+                        Simplified Schematic                                                          Efficiency vs Output Current
+
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+     intellectual property matters and other important disclaimers. PRODUCTION DATA.
+LMR14030-Q1
+SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024                                                                                                                 www.ti.com
+
+
+                                                                        Table of Contents
+1 Features............................................................................1   7 Application and Implementation.................................. 17
+2 Applications..................................................................... 1       7.1 Application Information............................................. 17
+3 Description.......................................................................1       7.2 Typical Application.................................................... 17
+4 Pin Configuration and Functions...................................3                       7.3 Power Supply Recommendations.............................22
+5 Specifications.................................................................. 4        7.4 Layout....................................................................... 22
+  5.1 Absolute Maximum Ratings........................................ 4                  8 Device and Documentation Support............................24
+  5.2 ESD Ratings............................................................... 4          8.1 Device Support......................................................... 24
+  5.3 Recommended Operating Conditions.........................4                            8.2 Documentation Support............................................ 24
+  5.4 Thermal Information....................................................5              8.3 Receiving Notification of Documentation Updates....24
+  5.5 Electrical Characteristics.............................................5              8.4 Support Resources................................................... 24
+  5.6 Switching Characteristics............................................6                8.5 Trademarks............................................................... 24
+  5.7 Typical Characteristics................................................ 7             8.6 Electrostatic Discharge Caution................................24
+6 Detailed Description........................................................9             8.7 Glossary....................................................................24
+  6.1 Overview..................................................................... 9     9 Revision History............................................................ 25
+  6.2 Functional Block Diagram........................................... 9               10 Mechanical, Packaging, and Orderable
+  6.3 Feature Description...................................................10              Information.................................................................... 25
+  6.4 Device Functional Modes..........................................16
+
+
+
+
+2       Submit Document Feedback                                                                                         Copyright © 2024 Texas Instruments Incorporated
+
+                                                                  Product Folder Links: LMR14030-Q1
+                                                                                                                                           LMR14030-Q1
+www.ti.com                                                                                 SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024
+
+
+4 Pin Configuration and Functions
+
+                                                                                            BOOT    1                          10     SW
+        BOOT               1                          8            SW
+                                                                                              VIN   2                           9     GND
+          VIN              2                          7            GND
+                                  Thermal Pad                                                 VIN   3
+                                                                                                              Thermal Pad
+                                                                                                                                8     PGOOD
+          EN               3          (9)             6            SS                                            (11)
+
+
+                                                                                              EN    4                           7     FB
+      RT/SYNC              4                          5            FB
+                                                                                          RT/SYNC   5                           6     SS
+
+
+   Figure 4-1. DDA Package 8-Pin (HSOIC) Top View
+                                                                             Figure 4-2. DPR Package 10-Pin (WSON) Top View
+
+                                                            Table 4-1. Pin Functions
+                           NO.
+       NAME                                   TYPE (1)                                              DESCRIPTION
+                    SO-8       WSON-10
+                                                             Bootstrap capacitor connection for high-side MOSFET driver. Connect a high
+ BOOT                 1           1               P
+                                                             quality 0.1 μF capacitor from BOOT to SW.
+                                                             Connect to power supply and bypass capacitors CIN. Path from VIN pin to high
+ VIN                  2          2, 3             P
+                                                             frequency bypass CIN and GND must be as short as possible.
+                                                             Enable pin, with internal pull-up current source. Pull below 1.2V to disable. Float or
+ EN                   3           4               A          connect to VIN to enable. Adjust the input under voltage lockout with two resistors.
+                                                             See the Enable and Adjusting Under voltage lockout section.
+                                                             Resistor Timing or External Clock input. An internal amplifier holds this pin at
+                                                             a fixed voltage when using an external resistor to ground to set the switching
+                                                             frequency. If the pin is pulled above the PLL upper threshold, a mode change
+ RT/SYNC              4           5               A          occurs and the pin becomes a synchronization input. The internal amplifier is
+                                                             disabled and the pin is a high impedance clock input to the internal PLL. If clocking
+                                                             edges stop, the internal amplifier is re-enabled and the operating mode returns to
+                                                             frequency programming by resistor.
+                                                             Feedback input pin, connect to the feedback divider to set VOUT. Do not short this
+ FB                   5           7               A
+                                                             pin to ground during operation.
+ SS                   6           6               A          Soft-start control pin. Connect to a capacitor to set soft-start time.
+                                                             Open drain output for power-good flag. Use a 10kΩ to 100kΩ pull-up resistor to
+ PGOOD               N/A          8               A
+                                                             logic rail or other DC voltage no higher than 7V.
+ GND                  7           9               G          System ground pin.
+                                                             Switching output of the regulator. Internally connected to high-side power MOSFET.
+ SW                   8           10              P
+                                                             Connect to power inductor.
+ Thermal Pad          9           11              G          Major heat dissipation path of the die. Must be connected to ground plane on PCB.
+
+(1)     A = Analog, P = Power, G = Ground
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                                    Submit Document Feedback           3
+                                                          Product Folder Links: LMR14030-Q1
+LMR14030-Q1
+SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024                                                                                             www.ti.com
+
+5 Specifications
+5.1 Absolute Maximum Ratings
+Over the recommended operating junction temperature range of -40°C to 125°C (unless otherwise noted) (1)
+    PARAMETER                                                                                                 MIN                     MAX UNIT
+                                            VIN, EN to GND                                                    –0.3                     44
+                                            BOOT to GND                                                       –0.3                     49
+                                            SS to GND                                                         –0.3                      5
+    Input Voltages                          FB to GND (DPR package)                                           –0.3                      7          V
+                                            FB to GND (DDA package)                                           –0.3                     5.5
+                                            RT/SYNC to GND                                                    –0.3                     3.6
+                                            PGOOD to GND                                                      –0.3                      7
+                                            BOOT to SW (DPR package)                                                                   6.5
+    Output Voltages                         BOOT to SW (DDA package)                                                                   5.5         V
+                                            SW to GND                                                           –3                     44
+    TJ                                      Junction temperature                                              –40                     150          °C
+    Tstg                                    Storage temperature                                               –65                     150          °C
+
+(1)        Stresses beyond those listed under Absolute Maximum Ratings may cause permanent damage to the device. These are stress
+           ratings only, which do not imply functional operation of the device at these or any other conditions beyond those indicated under
+           Recommended Operating Conditions. Exposure to absolute-maximum-rated conditions for extended periods may affect device
+           reliability.
+5.2 ESD Ratings
+                                                                                                                       VALUE                 UNIT
+                                                         Human-body model (HBM), per AEC Q100-002 (1)                   ±2000
+    V(ESD)        Electrostatic discharge                                                                                                      V
+                                                         Charged-device model (CDM), per AEC Q100-011                    ±750
+
+(1)        AEC Q100-002 indicates that HBM stressing must be in accordance with the ANSI/ESDA/JEDEC JS-001 specification.
+5.3 Recommended Operating Conditions
+Over the recommended operating junction temperature range of -40°C to 125°C (unless otherwise noted) (1)
+                                                                                                  MIN                         MAX UNIT
+                                 VIN                                                                 4                           40
+                                 VOUT                                                              0.8                           28
+    Buck Regulator               BOOT                                                                                            45           V
+                                 SW                                                                 –1                           40
+                                 FB                                                                  0                            5
+                                 EN                                                                  0                           40
+                                 RT/SYNC                                                             0                          3.3
+    Control                                                                                                                                   V
+                                 SS                                                                  0                            3
+                                 PGOOD to GND                                                        0                            5
+                                 Switching frequency range at RT mode                              200                        2500
+    Frequency                                                                                                                                kHz
+                                 Switching frequency range at SYNC mode                            250                        2300
+    Temperature                  Operating junction temperature, TJ                                –40                          125           °C
+
+(1)        Operating Ratings indicate conditions for which the device is intended to be functional, but do not guarantee specific performance
+           limits. For specified specifications, see Section 5.5.
+
+
+
+
+4          Submit Document Feedback                                                                      Copyright © 2024 Texas Instruments Incorporated
+
+                                                         Product Folder Links: LMR14030-Q1
+                                                                                                                                      LMR14030-Q1
+www.ti.com                                                                              SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024
+
+
+5.4 Thermal Information
+                                                                                                               LMR14030-Q1
+                                   THERMAL METRIC (1) (2)                                        DDA (HSOIC)          DPR (WSON)              UNIT
+                                                                                                    8 PINS                10 PINS
+ RθJA               Junction-to-ambient thermal resistance                                               43.2                36.5             °C/W
+ ψJT                Junction-to-top characterization parameter                                           5.2                 0.3              °C/W
+ ψJB                Junction-to-board characterization parameter                                         16.4                13.8             °C/W
+ RθJC(top)          Junction-to-case (top) thermal resistance                                            52.1                35.2             °C/W
+ RθJC(bot)          Junction-to-case (bottom) thermal resistance                                         7.8                 3.1              °C/W
+ RθJB               Junction-to-board thermal resistance                                                 16.4                13.6             °C/W
+
+(1)     For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+        note.
+(2)     Power rating at a specific ambient temperature TA must be determined with a maximum junction temperature (TJ) of 125°C, which is
+        illustrated in Recommended Operating Conditions section.
+
+5.5 Electrical Characteristics
+Limits apply over the recommended operating junction temperature (TJ) range of -40°C to +125°C, unless otherwise stated.
+Minimum and Maximum limits are specified through test, design or statistical correlation. Typical values represent the most
+likely parametric norm at TJ = 25°C, and are provided for reference purposes only. Unless otherwise specified, the following
+conditions apply: VIN = 4.0V to 40V
+                           PARAMETER                                            TEST CONDITIONS                      MIN       TYP     MAX      UNIT
+ POWER SUPPLY (VIN PIN)
+ VIN                  Operation input voltage                                                                         4                40        V
+ UVLO                 Undervoltage lockout thresholds              Rising threshold                                   3.5      3.7     3.9       V
+                                                                   Hysteresis                                                  285               mV
+ ISHDN                Shutdown supply current                      VEN = 0 V, TJ = 25°C, 4.0 V ≤ VIN ≤ 40 V                    1.0     3.0       μA
+ IQ                   Operating quiescent current (non-            VFB = 1.0 V, TJ = 25°C                                      40                μA
+                      switching)
+ ENABLE (EN PIN)
+ VEN_TH               EN threshold voltage                                                                           1.05      1.20    1.38      V
+ IEN_PIN              EN PIN current                               Enable threshold +50 mV                                     -4.6
+                                                                                                                                                 μA
+                                                                   Enable threshold –50 mV                                     -1.0
+ IEN_HYS              EN hysteresis current                                                                                    -3.6              μA
+ EXTERNAL SOFT-START
+ ISS                  SS pin current                               TJ = 25°C                                                    -3               μA
+ POWER GOOD (PGOOD PIN)
+ VPG_UV               Power-good flag under voltage tripping       POWER GOOD (% of FB voltage)                               94%
+                      threshold
+                                                                   POWER BAD (% of FB voltage)                                92%
+ VPG_OV               Power-good flag over voltage tripping        POWER BAD (% of FB voltage)                                109%
+                      threshold
+                                                                   POWER GOOD (% of FB voltage)                               107%
+ VPG_HYS              Power-good flag recovery hysteresis          % of FB voltage                                             2%
+ IPG                  PGOOD leakage current at high level          VPull-Up = 5 V                                              10      200       nA
+                      output
+ VPG_LOW              PGOOD low level output voltage               IPull-Up = 1 mA                                             0.1               V
+ VIN_PG_MIN           Minimum VIN for valid PGOOD output           VPull-Up < 5 V at IPull-Up = 100 μA                         1.6     1.95      V
+ VOLTAGE REFERENCE (FB PIN)
+ VFB                  Feedback voltage                             TJ = 25°C                                         0.744    0.750   0.756      V
+                                                                   TJ = –40°C to 125 °C                              0.735    0.750   0.765      V
+ HIGH-SIDE MOSFET
+
+Copyright © 2024 Texas Instruments Incorporated                                                                   Submit Document Feedback             5
+                                                     Product Folder Links: LMR14030-Q1
+LMR14030-Q1
+SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024                                                                                   www.ti.com
+
+5.5 Electrical Characteristics (continued)
+Limits apply over the recommended operating junction temperature (TJ) range of -40°C to +125°C, unless otherwise stated.
+Minimum and Maximum limits are specified through test, design or statistical correlation. Typical values represent the most
+likely parametric norm at TJ = 25°C, and are provided for reference purposes only. Unless otherwise specified, the following
+conditions apply: VIN = 4.0V to 40V
+                            PARAMETER                                           TEST CONDITIONS                MIN     TYP      MAX      UNIT
+    RDS_ON             On-resistance                               VIN = 12 V                                           90       180      mΩ
+    HIGH-SIDE MOSFET CURRENT LIMIT
+    ILIMT              Current limit                               VIN = 12 V, TJ = –40°C to 125°C, Open       4.1      5.5      7.7       A
+                                                                   Loop
+    THERMAL PERFORMANCE
+    TSHDN              Thermal shutdown threshold                                                                       170
+                                                                                                                                          °C
+    THYS               Hysteresis                                                                                       12
+
+
+5.6 Switching Characteristics
+Over the recommended operating junction temperature range of -40°C to 125°C (unless otherwise noted)
+                            PARAMETER                                           TEST CONDITIONS                MIN      TYP     MAX      UNIT
+                       Switching frequency                         RT = 11.5kΩ                                1758     1912     2066
+    fSW                                                                                                                                  kHz
+                       Switching frequency range at SYNC mode                                                  250              2300
+    FDITHER            Switching frequency dithering               Spread spectrum option, frequency                   ±6%
+                                                                   dithering over center frequency
+    VSYNC_HI           SYNC clock high level threshold                                                         1.7
+                                                                                                                                           V
+    VSYNC_LO           SYNC clock low level threshold                                                                            0.5
+    TSYNC_MIN          Minimum SYNC input pulse width              Measured at 500kHz, VSYNC_HI > 3V,                    30               ns
+                                                                   VSYNC_LO < 0.3V
+    TLOCK_IN           PLL lock in time                            Measured at 500kHz                                   100               µs
+    TON_MIN            Minimum controllable on time                VIN = 12V, ILoad = 1A                                 75               ns
+    DMAX               Maximum duty cycle                          fSW = 200kHz                                        97%
+
+
+
+
+6           Submit Document Feedback                                                              Copyright © 2024 Texas Instruments Incorporated
+
+                                                        Product Folder Links: LMR14030-Q1
+                                                                                                                                                                                               LMR14030-Q1
+www.ti.com                                                                                                                                SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024
+
+
+5.7 Typical Characteristics
+Unless otherwise specified the following conditions apply: VIN = 12V, fSW = 500kHz, L = 5.6µH, COUT = 47µF x 2, TA = 25°C.
+
+                              100                                                                                                   100
+                                90                                                                                                   90
+                                80                                                                                                   80
+                                70                                                                                                   70
+
+
+
+
+             Efficiency (%)                                                                       Efficiency (%)
+                                60                                                                                                   60
+                                50                                                                                                   50
+                                40                                                                                                   40
+                                30                                                                                                   30
+                                20                                         VIN = 36 V                                                20                                                    VIN = 36 V
+                                10                                         VIN = 24 V                                                10                                                    VIN = 24 V
+                                                                           VIN = 12 V                                                                                                      VIN = 12 V
+                                0                                                                                                    0
+                                0.001          0.01       0.1          1            10                                               0.001            0.01            0.1            1                10
+                                                        IOUT (A)                        D002
+                                                                                                                                                                    IOUT (A)                            D003
+
+                                       VOUT = 5V        fSW = 500kHz                                                                          VOUT = 5V               fSW = 1MHz
+                                      Figure 5-1. Efficiency vs. Load Current                                                             Figure 5-2. Efficiency vs. Load Current
+                              100                                                                                                   100
+                                90                                                                                                   90
+                                80                                                                                                   80
+                                70                                                                                                   70
+
+
+
+
+             Efficiency (%)                                                                       Efficiency (%)
+                                60                                                                                                   60
+                                50                                                                                                   50
+                                40                                                                                                   40
+                                30                                                                                                   30
+                                20                                         VIN = 24 V                                                20                                                    VIN = 20 V
+                                10                                         VIN = 12 V                                                10                                                    VIN = 12 V
+                                                                           VIN = 5 V                                                                                                       VIN = 5 V
+                                0                                                                                                    0
+                                0.001          0.01       0.1          1            10                                               0.001            0.01            0.1            1                10
+                                                        IOUT (A)                        D009
+                                                                                                                                                                    IOUT (A)                            D010
+
+                                      VOUT = 3.3V         fSW = 1MHz                                                                      VOUT = 3.3V               fSW = 2.2MHz
+                                      Figure 5-3. Efficiency vs. Load Current                                                             Figure 5-4. Efficiency vs. Load Current
+                                0.2                                                                                                 125
+                                                                           VIN = 36 V                                                           VFB Falling
+                                                                           VIN = 24 V                                                           VFB Rising
+
+
+
+
+                                                                                                  Nominal Switching Frequency (%)
+                              0.15                                         VIN = 12 V                                               100
+
+
+
+
+        VOUT Deviation (%)
+                                0.1                                                                                                  75
+
+
+                              0.05                                                                                                   50
+
+
+                                 0                                                                                                   25
+
+
+                              -0.05                                                                                                   0
+                                  0.001        0.01        0.1         1                10                                                0     0.1    0.2    0.3      0.4     0.5       0.6    0.7
+                                                         IOUT (A)                       D004
+                                                                                                                                                                    VFB (V)                             D005
+
+                                       VOUT = 5V        fSW = 500kHz                                                                             Figure 5-6. Frequency vs VFB
+
+                                           Figure 5-5. Load Regulation
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                                                                                      Submit Document Feedback                  7
+                                                                           Product Folder Links: LMR14030-Q1
+LMR14030-Q1
+SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024                                                                                                                                                             www.ti.com
+
+5.7 Typical Characteristics (continued)
+Unless otherwise specified the following conditions apply: VIN = 12V, fSW = 500kHz, L = 5.6µH, COUT = 47µF x 2, TA = 25°C.
+
+                                    6                                                                                                 6
+                                   5.5
+                                                                                                                                     5.5
+                                    5
+                                                                                                                                      5
+                                   4.5
+
+                        VOUT (V)
+                                                                                                                                     4.5
+
+                                                                                                                          VOUT (V)
+                                    4
+                                                                                                                                      4
+                                   3.5
+
+                                    3                                                                                                3.5
+                                                                                          IOUT = 3.5 A
+                                   2.5                                                    IOUT = 1.75 A                               3
+                                                                                          IOUT = 0.35 A
+                                    2
+                                                                                                                                                                                                  IOUT = 3.5 A
+                                         4         4.5        5              5.5              6           6.5
+                                                                                                                                     2.5                                                          IOUT = 1.75 A
+                                                                   VIN (V)                                                                                                                        IOUT = 0.35 A
+                                                                                                            D011
+                                                                                                                                      2
+                                             VOUT = 5V             fSW = 500kHz                                                            4           4.5            5             5.5               6         6.5
+                                                                                                                                                                          VIN (V)
+                                                  Figure 5-7. Dropout Curve                                                                                                                                       D012
+
+                                                                                                                                                VOUT = 5V                  fSW = 1MHz
+                                                                                                                                                        Figure 5-8. Dropout Curve
+                        6                                                                                                            3.5
+
+                      5.5                                                                                                            3.3
+
+                        5
+                                                                                                                                     3.1
+                      4.5
+
+    VOUT (V)                                                                                                              VOUT (V)
+                                                                                                                                     2.9
+                        4
+                                                                                                                                     2.7
+                      3.5
+                                                                                                                                     2.5
+                        3
+                                                                                                  IOUT = 3.5 A                                                                                    IOUT = 3.5 A
+                      2.5                                                                         IOUT = 1.75 A                      2.3                                                          IOUT = 1.75 A
+                                                                                                  IOUT = 0.35 A                                                                                   IOUT = 0.35 A
+                        2                                                                                                            2.1
+                               4                 4.5          5               5.5                  6               6.5                  3.5      3.75            4         4.25           4.5         4.75        5
+                                                                   VIN (V)                                         D013
+                                                                                                                                                                          VIN (V)                                 D014
+
+                                             VOUT = 5V             fSW = 2.2MHz                                                                VOUT = 3.3V                fSW = 2.2MHz
+                                                  Figure 5-9. Dropout Curve                                                                            Figure 5-10. Dropout Curve
+                       45                                                                                                            3.75
+
+                       40
+                                                                                                                                      3.7
+                                                                                         IQ                                                                                                     UVLO_H
+                       35
+                                                                                                                                     3.65
+
+
+
+
+    IQ & ISHDN (µA)
+                       30
+
+
+                                                                                                                          UVLO (V)
+                                                                                                                                      3.6
+                       25
+
+                       20                                                                                                            3.55
+
+                       15
+                                                                                                                                      3.5
+                                                                                                                                                                                                UVLO_L
+                       10
+                                                                                         ISHDN                                       3.45
+                        5
+
+                        0                                                                                                             3.4
+                             0               5    10     15       20     25         30        35       40          45                   -50      -25         0       25    50      75           100       125   150
+                                                                   VIN (V)                                                                                           Temperature (°C)                             D007
+                                                                                                                   D006
+                      Figure 5-11. Shut-down Current and Quiescent Current                                                                       IOUT = 0A
+                                                                                                                                                       Figure 5-12. UVLO Threshold
+
+
+
+
+8                     Submit Document Feedback                                                                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                                                                  Product Folder Links: LMR14030-Q1
+                                                                                                                                           LMR14030-Q1
+www.ti.com                                                                                    SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024
+
+
+6 Detailed Description
+6.1 Overview
+The LMR14030-Q1 SIMPLE SWITCHER® power converter regulator is an easy to use step-down DC-DC
+converter that operates from a 4.0 V to 40 V supply voltage. It integrates a 90 mΩ (typical) high-side MOSFET,
+and is capable of delivering up to 3.5 A DC load current with exceptional efficiency and thermal performance in
+a very small solution size. The operating current is typically 40 μA under no load condition (not switching). When
+the device is disabled, the supply current is typically 1 μA. An extended family is available in 2 A and 5 A load
+options in pin to pin compatible packages.
+The LMR14030-Q1 implements constant frequency peak current mode control with Sleep-mode at light load to
+achieve high efficiency. The device is internally compensated, which reduces design time, and requires fewer
+external components. The switching frequency is programmable from 200 kHz to 2.5 MHz by an external resistor
+RT. The LMR14030-Q1 is also capable of synchronization to an external clock within the 250 kHz to 2.3 MHz
+frequency range, which allows the device to be optimized to fit small board space at higher frequency, or high
+efficient power conversion at lower frequency.
+Other features are included for more comprehensive system requirements, including precision enable,
+adjustable soft-start time, and approximate 97% duty cycle by BOOT capacitor recharge circuit. These features
+provide a flexible and easy to use platform for a wide range of applications. Protection features include over
+temperature shutdown, VOUT over voltage protection (OVP), VIN under-voltage lockout (UVLO), cycle-by-cycle
+current limit, and short-circuit protection with frequency fold-back.
+6.2 Functional Block Diagram
+                                                         EN                                                                              VIN
+
+
+
+                                                                                                   Thermal
+                                                                                                                           UVLO
+                                                                                                  Shutdown
+                                                                                Enable
+                                                                              Comparator
+                                                                                             Shutdown
+                                                                                                        Shutdown
+                      Voltage
+                                                                                                          Logic
+                     Reference
+                                                                Enable
+                                                               Threshold
+                                                                                                                                 Boot
+                                                                                                                                Charge
+                                 OV
+                                                                                                                 Boot
+                                                                                                                 UVLO
+
+                                    ERROR
+                                   AMPLIFIER                            PWM
+   FB                                                                 Comparator                                                                BOOT
+
+                                                                                           PWM
+                                                                                          Control
+                                                    Comp
+                                                  Components
+                                                                                           Logic
+                                       Shutdown
+
+                                                                         Slope
+                                                               6      Compensation
+                                                                                                                                                SW
+
+                                                                                     Frequency               Bootstrap
+                                                                                                                          VIN
+                                                                                        Shift                 Control
+
+
+
+
+   SS                                                                                Oscillator
+                                                                                     with PLL
+
+
+
+
+                                 GND                                                 RT/SYNC
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                                          Submit Document Feedback      9
+                                                           Product Folder Links: LMR14030-Q1
+LMR14030-Q1
+SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024                                                                                                   www.ti.com
+
+6.3 Feature Description
+6.3.1 Fixed Frequency Peak Current Mode Control
+The following operating description of the LMR14030-Q1 refer to the Section 6.2 and to the waveforms in Figure
+6-1. LMR14030-Q1 output voltage is regulated by turning on the high-side N-MOSFET with controlled ON time.
+During high-side switch ON time, the SW pin voltage swings up to approximately VIN, and the inductor current
+iL increase with linear slope (VIN – VOUT) / L. When high-side switch is off, inductor current discharges through
+freewheel diode with a slope of –VOUT / L. The control parameter of Buck converter is defined as Duty Cycle D =
+tON / TSW, where tON is the high-side switch ON time and TSW is the switching period. The regulator control loop
+maintains a constant output voltage by adjusting the duty cycle D. In an ideal Buck converter, where losses are
+ignored, D is proportional to the output voltage and inversely proportional to the input voltage: D = VOUT / VIN.
+                                                             VSW
+                                                                                   D = tON/ TSW
+                                                        VIN
+
+
+                                     SW Voltage
+                                                                           tON         tOFF
+                                                                                                              t
+                                                         0
+                                                        -VD
+                                                                             TSW
+                                                               iL
+
+                                                        ILPK
+
+
+
+
+                                     Inductor Current
+                                                        IOUT
+                                                                                                        ûiL
+
+
+                                                                                                              t
+                                                         0
+
+       Figure 6-1. SW Node and Inductor Current Waveforms in Continuous Conduction Mode (CCM)
+
+The LMR14030-Q1 employs fixed frequency peak current mode control. A voltage feedback loop is used to
+get accurate DC voltage regulation by adjusting the peak current command based on voltage offset. The peak
+inductor current is sensed from the high-side switch and compared to the peak current to control the ON time
+of the high-side switch. The voltage feedback loop is internally compensated, which allows for fewer external
+components, makes it easy to design, and provides stable operation with almost any combination of output
+capacitors. The regulator operates with fixed switching frequency at normal load condition. At very light load, the
+LMR14030-Q1 will operate in Sleep-mode to maintain high efficiency and the switching frequency will decrease
+with reduced load current.
+6.3.2 Slope Compensation
+The LMR14030-Q1 adds a compensating ramp to the MOSFET switch current sense signal. This slope
+compensation prevents sub-harmonic oscillations at duty cycles greater than 50%. The peak current limit of
+the high-side switch is not affected by the slope compensation and remains constant over the full duty cycle
+range.
+6.3.3 Sleep-mode
+The LMR14030-Q1 operates in Sleep-mode at light load currents to improve efficiency by reducing switching
+and gate drive losses. If the output voltage is within regulation and the peak switch current at the end of any
+switching cycle is below the current threshold of 300 mA, the device enters Sleep-mode. The Sleep-mode
+current threshold is the peak switch current level corresponding to a nominal internal COMP voltage of 400 mV.
+When in Sleep-mode, the internal COMP voltage is clamped at 400mV and the high-side MOSFET is inhibited,
+and the device draws only 40 μA (typical) input quiescent current. Because the device is not switching, the
+output voltage begins to decay. The voltage control loop responds to the falling output voltage by increasing the
+internal COMP voltage. The high-side MOSFET is enabled and switching resumes when the error amplifier lifts
+
+
+
+10    Submit Document Feedback                                                                                    Copyright © 2024 Texas Instruments Incorporated
+
+                                                                    Product Folder Links: LMR14030-Q1
+                                                                                                                     LMR14030-Q1
+www.ti.com                                                                          SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024
+
+
+internal COMP voltage above 400 mV. The output voltage recovers to the regulated value, and internal COMP
+voltage eventually falls below the Sleep-mode threshold at which time the device again enters Sleep-mode.
+6.3.4 Low Dropout Operation and Bootstrap Voltage (BOOT)
+The LMR14030-Q1 provides an integrated bootstrap voltage regulator. A small capacitor between the BOOT
+and SW pins provides the gate drive voltage for the high-side MOSFET. The BOOT capacitor is refreshed when
+the high-side MOSFET is off and the external low side diode conducts. The recommended value of the BOOT
+capacitor is 0.1 μF. TI recommends a ceramic capacitor with an X7R or X5R grade dielectric with a voltage rating
+of 16 V or greater for stable performance over temperature and voltage.
+When operating with a low voltage difference from input to output, the high-side MOSFET of the LMR14030-Q1
+operates at approximate 97% duty cycle. When the high-side MOSFET is continuously on for 5 or 6 switching
+cycles (5 or 6 switching cycles for frequency lower than 1 MHz, and 10 or 11 switching cycles for frequency
+higher than 1 MHz) and the voltage from BOOT to SW drops below 3.2 V, the high-side MOSFET is turned off
+and an integrated low side MOSFET pulls SW low to recharge the BOOT capacitor.
+Because the gate drive current sourced from the BOOT capacitor is small, the high-side MOSFET can remain on
+for many switching cycles before the MOSFET is turned off to refresh the capacitor. Thus the effective duty cycle
+of the switching regulator can be high, approaching 97%. The effective duty cycle of the converter during dropout
+is mainly influenced by the voltage drops across the power MOSFET, the inductor resistance, the low side diode
+voltage and the printed circuit board resistance.
+6.3.5 Adjustable Output Voltage
+The internal voltage reference produces a precise 0.75 V (typical) voltage reference over the operating
+temperature range. The output voltage is set by a resistor divider from output voltage to the FB pin. It is
+recommended to use 1% tolerance or better and temperature coefficient of 100 ppm or less divider resistors.
+Select the low side resistor RFBB for the desired divider current and use Equation 1 to calculate high-side RFBT.
+Larger value divider resistors are good for efficiency at light load. However, if the values are too high, the
+regulator will be more susceptible to noise and voltage errors from the FB input current can become noticeable.
+RFBB in the range from 10 kΩ to 100 kΩ is recommended for most applications.
+                                                                              VOUT
+
+                                                                             RFBT
+
+                                                                    FB
+
+                                                                             RFBB
+
+
+
+
+                                                  Figure 6-2. Output Voltage Setting
+
+                VOUT 0.75
+      RFBT                u RFBB
+                   0.75                                                                                                     (1)
+6.3.6 Enable and Adjustable Undervoltage Lockout
+The LMR14030-Q1 is enabled when the VIN pin voltage rises above 3.7 V (typical) and the EN pin voltage
+exceeds the enable threshold of 1.2 V (typical) for at least 25μs. The LMR14030-Q1 is disabled when the VIN
+pin voltage falls below 3.42 V (typical) or when the EN pin voltage is below 1.2 V for at least 25μs. The EN pin
+has an internal pull-up current source (typically IEN = 1 μA) that enables operation of the LMR14030-Q1 when
+the EN pin is floating.
+Many applications benefit from the employment of an enable divider RENT and RENB in Figure 6-3 to establish a
+precision system UVLO level for the stage. System UVLO can be used for supplies operating from utility power
+as well as battery power. System UVLO can be used for sequencing, making sure of reliable operation, or supply
+protection, such as a battery. An external logic signal can also be used to drive EN input for system sequencing
+and protection.
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback     11
+                                                     Product Folder Links: LMR14030-Q1
+LMR14030-Q1
+SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024                                                                           www.ti.com
+
+
+When EN terminal voltage exceeds 1.2 V, an additional hysteresis current (typically IHYS = 3.6 μA) is sourced
+out of EN terminal. When the EN terminal is pulled below 1.2 V, IHYS current is removed. This additional current
+facilitates adjustable input voltage UVLO hysteresis. Use Equation 2 and Equation 3 to calculate RENT and RENB
+for desired UVLO hysteresis voltage.
+
+
+                                                      IEN_HYS   IEN
+                                                                           VIN
+                                                                                    VIN
+
+
+                                                                                   RENT
+
+
+
+                                                                           EN
+                                                          VEN                      RENB
+
+
+
+
+                                     Figure 6-3. System UVLO By Enable Dividers
+
+                VSTART VSTOP
+     RENT
+                     IHYS                                                                                                     (2)
+
+                      VEN
+     RENB
+                VSTART VEN
+                               IEN
+                   RENT                                                                                                       (3)
+
+where VSTART is the desired voltage threshold to enable LMR14030-Q1, VSTOP is the desired voltage threshold
+to disable device.
+6.3.7 External Soft-start
+The LMR14030-Q1 has soft-start pin for programmable output ramp up time. The soft-start feature is used to
+prevent inrush current impacting the LMR14030-Q1 and the load when power is first applied. The soft-start time
+can be programed by connecting an external capacitor CSS from SS pin to GND. An internal current source
+(typically I SS = 3 μA) charges CSS and generates a ramp from 0 V to VREF. The soft-start time can be calculated
+by Equation 4:
+
+                 CSS (nF) u VREF (V)
+     tSS (ms)
+                      ISS (PA)                                                                                                (4)
+
+For LMR14030-Q1 in WSON package, the maximum value of CSS is 4.7 nF.
+The soft-start resets while device is disabled or in thermal shutdown.
+6.3.8 Switching Frequency and Synchronization (RT/SYNC)
+The switching frequency of the LMR14030-Q1 can be programmed by the resistor RT from the RT/SYNC pin and
+GND pin. The RT/SYNC pin can’t be left floating or shorted to ground. To determine the timing resistance for
+a given switching frequency, use Equation 5 or the curve in Figure 6-4. Table 6-1 gives typical RT values for a
+given fSW.
+
+                                       1.088
+     RT (k:)     42904 u ¦SW N+]                                                                                              (5)
+
+
+
+
+12    Submit Document Feedback                                                            Copyright © 2024 Texas Instruments Incorporated
+
+                                               Product Folder Links: LMR14030-Q1
+                                                                                                                                        LMR14030-Q1
+www.ti.com                                                                                      SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024
+
+                                                     140
+
+                                                     120
+
+                                                     100
+
+
+
+                                           RT (k:)
+                                                      80
+
+                                                      60
+
+                                                      40
+
+                                                      20
+
+                                                       0
+                                                           0        500      1000       1500     2000     2500
+                                                                             Frequency (kHz)                  D008
+
+
+                                                               Figure 6-4. RT vs Frequency Curve
+
+                                          Table 6-1. Typical Frequency Setting RT Resistance
+ fSW (kHz)                                                                         RT (kΩ)
+                                    200                                                                              133
+                                    350                                                                              73.2
+                                    500                                                                              49.9
+                                    750                                                                              32.4
+                                    1000                                                                             23.2
+                                    1500                                                                             15.0
+                                    1912                                                                             11.5
+                                    2200                                                                             9.76
+
+
+The LMR14030-Q1 switching action can also be synchronized to an external clock from 250 kHz to 2.3 MHz.
+Connect a square wave to the RT/SYNC pin through either circuit network shown in Figure 6-5. Internal oscillator
+is synchronized by the falling edge of external clock. The recommendations for the external clock include: high
+level no lower than 1.7 V, low level no higher than 0.5 V and have a pulse width greater than 30 ns. When using
+a low impedance signal source, the frequency setting resistor RT is connected in parallel with an AC coupling
+capacitor CCOUP to a termination resistor RTERM (that is, 50 Ω). The two resistors in series provide the default
+frequency setting resistance when the signal source is turned off. A 10 pF ceramic capacitor can be used for
+CCOUP. Figure 6-6, Figure 6-7 and Figure 6-8 show the device synchronized to an external system clock.
+                                CCOUP
+
+
+
+                                                                  PLL                                                             PLL
+                                     RT
+           Lo-Z                                        RT/SYNC                          Hi-Z                                RT/SYNC
+           Clock                                                                        Clock
+          Source              RTERM                                                    Source            RT
+
+
+
+
+                                             Figure 6-5. Synchronizing to an External Clock
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                                        Submit Document Feedback   13
+                                                                  Product Folder Links: LMR14030-Q1
+LMR14030-Q1
+SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024                                                                                        www.ti.com
+
+
+
+            SYNC (2 V/DIV)                                                           SYNC (2 V/DIV)
+
+
+
+
+            SW (5 V/DIV)                                                             SW (5 V/DIV)
+
+                                                                                     iL (500 mA/DIV)
+            iL (1 A/DIV)
+
+
+
+                             Time (2 µs/DIV)                                                                Time (2 µs/DIV)
+
+
+
+           Figure 6-6. Synchronizing in CCM                                         Figure 6-7. Synchronizing in DCM
+
+
+                                               SYNC (2 V/DIV)
+
+
+
+
+                                               SW (5 V/DIV)
+
+                                               iL (500 mA/DIV)
+
+
+
+
+                                                                 Time (10 µs/DIV)
+
+
+
+                                    Figure 6-8. Synchronizing in Sleep-mode Mode
+
+
+For spread spectrum option, the internal frequency dithering is diabled if the device is synchronized to an
+external clock.
+Equation 6 calculates the maximum switching frequency limitation set by the minimum controllable on time and
+the input to output step down ratio. Setting the switching frequency above this value causes the regulator to skip
+switching pulses to achieve the low duty cycle required at maximum input voltage.
+
+                     1 § IOUT u RIND VOUT VD ·
+     ¦SW(max)        u¨                            ¸
+                  tON ¨© VIN_MAX IOUT u RDS_ON VD ¸¹
+                                                                                                                                           (6)
+
+where
+•    IOUT = Output current
+•    RIND = Inductor series resistance
+•    VIN_MAX = Maximum input voltage
+•    VOUT = Output voltage
+•    VD = Diode voltage drop
+•    RDS_ON = High-side MOSFET switch on resistance
+•    tON = Minimum on time
+6.3.9 Power Good (PGOOD)
+The LMR14020-Q1 in WSON-10 package has a built in power-good flag shown on PGOOD pin to indicate
+whether the output voltage is within the regulation level. The PGOOD signal can be used for start-up sequencing
+of multiple rails or fault protection. The PGOOD pin is an open-drain output that requires a pullup resistor to an
+appropriate DC voltage. Voltage seen by the PGOOD pin must never exceed 7 V. A resistor divider pair can be
+
+14    Submit Document Feedback                                                                         Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: LMR14030-Q1
+                                                                                                                        LMR14030-Q1
+www.ti.com                                                                             SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024
+
+
+used to divide the voltage down from a higher potential. A typical range of pullup resistor value is 10 kΩ to 100
+kΩ.
+Refer to Figure 6-9. When the FB voltage is within the power-good band, +7% above and -6% below the internal
+reference VREF typically, the PGOOD switch is turned off and the PGOOD voltage is pulled up to the voltage
+level defined by the pullup resistor or divider. When the FB voltage is outside of the tolerance band, +9% above
+or -8% below VREF typically, the PGOOD switch is turned on and the PGOOD pin voltage is pulled low to indicate
+power bad.
+
+                                                   VREF
+                                                  109%
+                                                  107%
+
+                                                  94%
+                                                  92%
+
+
+                                             PGOOD
+
+                                                  High
+
+                                                  Low
+
+
+                                                          Figure 6-9. Power-Good Flag
+
+6.3.10 Over Current and Short Circuit Protection
+The LMR14030-Q1 is protected from over current condition by cycle-by-cycle current limiting on the peak current
+of the high-side MOSFET. High-side MOSFET over-current protection is implemented by the nature of the Peak
+Current Mode control. The high-side switch current is compared to the output of the Error Amplifier (EA) minus
+slope compensation every switching cycle. Please refer to Functional Block Diagram for more details. The peak
+current of high-side switch is limited by a clamped maximum peak current threshold which is constant. So the
+peak current limit of the high-side switch is not affected by the slope compensation and remains constant over
+the full duty cycle range.
+The LMR14030-Q1 also implements a frequency fold-back to protect the converter in severe over-current or
+short conditions. The oscillator frequency is divided by 2, 4, and 8 as the FB pin voltage decrease to 75%, 50%,
+25% of VREF. The frequency fold-back increases the off time by increasing the period of the switching cycle, so
+that it provides more time for the inductor current to ramp down and leads to a lower average inductor current.
+Lower frequency also means lower switching loss. Frequency fold-back reduces power dissipation and prevents
+overheating and potential damage to the device.
+6.3.11 Overvoltage Protection
+The LMR14030-Q1 employs an output overvoltage protection (OVP) circuit to minimize voltage overshoot when
+recovering from output fault conditions or strong unload transients in designs with low output capacitance. The
+OVP feature minimizes output overshoot by turning off high-side switch immediately when FB voltage reaches to
+the rising OVP threshold which is nominally 109% of the internal voltage reference VREF. When the FB voltage
+drops below the falling OVP threshold which is nominally 107% of VREF, the high-side MOSFET resumes normal
+operation.
+6.3.12 Thermal Shutdown
+The LMR14030-Q1 provides an internal thermal shutdown to protect the device when the junction temperature
+exceeds 170 °C (typical). The high-side MOSFET stops switching when thermal shundown activates. After the
+die temperature falls below 158 °C (typical), the device reinitiates the power up sequence controlled by the
+internal soft-start circuitry.
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                         Submit Document Feedback    15
+                                                          Product Folder Links: LMR14030-Q1
+LMR14030-Q1
+SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+6.4 Device Functional Modes
+6.4.1 Shutdown Mode
+The EN pin provides electrical ON and OFF control for the LMR14030-Q1. When VEN is below 1.0V, the device
+is in shutdown mode. The switching regulator is turned off and the quiescent current drops to 1.0µA typically.
+The LMR14030-Q1 also employs undervoltage lockout protection. If VIN voltage is below the UVLO level, the
+regulator is turned off.
+6.4.2 Active Mode
+The LMR14030-Q1 is in active mode when VEN is above the precision enable threshold and VIN is above the
+UVLO level. The simplest way to enable the LMR14030-Q1 is to connect the EN pin to VIN pin. This action
+allows self startup when the input voltage is in the operation range: 4.0V to 40V. Please refer to Section 6.3.6 for
+details on setting these operating levels.
+In active mode, depending on the load current, the LMR14030 is in one of three modes:
+1. Continuous conduction mode (CCM) with fixed switching frequency when load current is above half of the
+   peak-to-peak inductor current ripple.
+2. Discontinuous conduction mode (DCM) with fixed switching frequency when load current is lower than half of
+   the peak-to-peak inductor current ripple in CCM operation.
+3. Sleep-mode when internal COMP voltage drop to 400mV at very light load.
+6.4.3 CCM Mode
+CCM operation is employed in the LMR14030-Q1 when the load current is higher than half of the peak-to-peak
+inductor current. In CCM operation, the frequency of operation is fixed, output voltage ripple is at a minimum in
+this mode and the maximum output current of 3.5A can be supplied by the LMR14030-Q1.
+6.4.4 Light Load Operation
+When the load current is lower than half of the peak-to-peak inductor current in CCM, the LMR14030-Q1
+operates in DCM. At even lighter current loads, Sleep-mode is activated to maintain high efficiency operation by
+reducing switching and gate drive losses.
+
+
+
+
+16    Submit Document Feedback                                                  Copyright © 2024 Texas Instruments Incorporated
+
+                                            Product Folder Links: LMR14030-Q1
+                                                                                                                             LMR14030-Q1
+www.ti.com                                                                             SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024
+
+
+7 Application and Implementation
+                                                                     Note
+       Information in the following applications sections is not part of the TI component specification,
+       and TI does not warrant its accuracy or completeness. TI’s customers are responsible for
+       determining suitability of components for their purposes, as well as validating and testing their design
+       implementation to confirm system functionality.
+
+7.1 Application Information
+The LMR14030-Q1 is a step down DC-to-DC regulator. It is typically used to convert a higher DC voltage to a
+lower DC voltage with a maximum output current of 3.5 A. The following design procedure can be used to select
+components for the LMR14030-Q1. This section presents a simplified discussion of the design process.
+7.2 Typical Application
+The LMR14030-Q1 only requires a few external components to convert from wide voltage range supply to a
+fixed output voltage. A schematic of 5 V / 3.5 A application circuit based on LMR14030-Q1 in SO-8 package is
+shown in Figure 7-1. The external components have to fulfill the needs of the application, but also the stability
+criteria of the device’s control loop.
+                                         7 V to 36 V
+
+
+                                                          VIN                  CBOOT
+                                         CIN                        BOOT
+
+                                                                                       L      5 V / 3.5 A
+                                                          EN           SW
+                                                                                       COUT
+                                                                               D
+                                                                                                 RFBT
+                                                          RT/SYNC
+                                                                       FB
+
+                                                                                                 RFBB
+                                         RT               SS         GND
+
+                                                  CSS
+
+
+
+
+                                                 Figure 7-1. Application Circuit, 5V Output
+
+7.2.1 Design Requirements
+This example details the design of a high frequency switching regulator using ceramic output capacitors. A few
+parameters must be known to start the design process. These parameters are typically determined at the system
+level:
+                                                        Table 7-1. Design Parameters
+                             Input Voltage, VIN                                               7 V to 36 V, Typical 12 V
+                           Output Voltage, VOUT                                                             5.0 V
+                     Maximum Output Current IO_MAX                                                          3.5 A
+                   Transient Response 0.35 A to 3.5 A                                                       5%
+                          Output Voltage Ripple                                                         50 mV
+                           Input Voltage Ripple                                                         400 mV
+                         Switching Frequency fSW                                                        500 kHz
+                               Soft-start time                                                              5 ms
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                               Submit Document Feedback   17
+                                                        Product Folder Links: LMR14030-Q1
+LMR14030-Q1
+SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024                                                                   www.ti.com
+
+7.2.2 Detailed Design Procedure
+7.2.2.1 Output Voltage Set-Point
+The output voltage of LMR14030-Q1 is externally adjustable using a resistor divider network. The divider
+network is comprised of top feedback resistor RFBT and bottom feedback resistor RFBB. Equation 7 is used to
+determine the output voltage:
+
+               VOUT 0.75
+     RFBT                u RFBB
+                  0.75                                                                                                (7)
+
+Choose the value of RFBT to be 100 kΩ. With the desired output voltage set to 5 V and the VFB = 0.75 V, the
+RFBB value can then be calculated using Equation 7. The formula yields to a value 17.65 kΩ. Choose the closest
+available value of 17.8 kΩ for RFBB.
+7.2.2.2 Switching Frequency
+For desired frequency, use Equation 8 to calculate the required value for RT.
+
+                                      1.088
+     RT (k:)    42904 u ¦SW N+]                                                                                       (8)
+
+For 500 kHz, the calculated RT is 49.66 kΩ and standard value 49.9 kΩ can be used to set the switching
+frequency at 500 kHz.
+7.2.2.3 Output Inductor Selection
+The most critical parameters for the inductor are the inductance, saturation current and the RMS current. The
+inductance is based on the desired peak-to-peak ripple current ΔiL. Because the ripple current increases with
+the input voltage, the maximum input voltage is always used to calculate the minimum inductance LMIN. Use
+Equation 10 to calculate the minimum value of the output inductor. KIND is a coefficient that represents the
+amount of inductor ripple current relative to the maximum output current. A reasonable value of KIND must be
+20%-40%. During an instantaneous short or over current operation event, the RMS and peak inductor current
+can be high. The inductor current rating must be higher than current limit.
+
+            VOUT u (VIN_MAX    VOUT )
+     'iL
+               VIN _ MAX u L u ¦SW                                                                                    (9)
+
+             VIN_MAX    VOUT           VOUT
+     LMIN                      u
+                IOUT u KIND        VIN_MAX u ¦SW                                                                     (10)
+
+In general, it is preferable to choose lower inductance in switching power supplies, because it usually
+corresponds to faster transient response, smaller DCR, and reduced size for more compact designs. But too
+low of an inductance can generate too large of an inductor current ripple such that over current protection at
+the full load can be falsely triggered. It also generates more conduction loss because the RMS current is slightly
+higher. Larger inductor current ripple also implies larger output voltage ripple with same output capacitors. With
+peak current mode control, it is not recommended to have too small of an inductor current ripple. A larger peak
+current ripple improves the comparator signal to noise ratio.
+For this design example, choose KIND = 0.4, the minimum inductor value is calculated to be 6.15 µH, and a
+nearest standard value is chosen: 6.5 µH. A standard 6.5 μH ferrite inductor with a capability of 4 A RMS current
+and 6.5 A saturation current can be used.
+7.2.2.4 Output Capacitor Selection
+The output capacitor(s), COUT, must be chosen with care because it directly affects the steady state output
+voltage ripple, loop stability and the voltage over/undershoot during load current transients.
+
+
+
+
+18    Submit Document Feedback                                                    Copyright © 2024 Texas Instruments Incorporated
+
+                                              Product Folder Links: LMR14030-Q1
+                                                                                                                     LMR14030-Q1
+www.ti.com                                                                          SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024
+
+
+The output ripple is essentially composed of two parts. One is caused by the inductor current ripple going
+through the Equivalent Series Resistance (ESR) of the output capacitors:
+
+      'VOUT_ESR         'iL u ESR       KIND u IOUT u ESR                                                                 (11)
+
+The other is caused by the inductor current ripple charging and discharging the output capacitors:
+
+                           'iL                 KIND u IOUT
+      'VOUT_C
+                     8 u ¦SW u COUT          8 u ¦SW u COUT                                                               (12)
+
+The two components in the voltage ripple are not in phase, so the actual peak-to-peak ripple is smaller than the
+sum of two peaks.
+Output capacitance is usually limited by transient performance specifications if the system requires tight voltage
+regulation with presence of large current steps and fast slew rate. When a fast large load increase happens,
+output capacitors provide the required charge before the inductor current can slew up to the appropriate level.
+The regulator’s control loop usually needs three or more clock cycles to respond to the output voltage droop.
+The output capacitance must be large enough to supply the current difference for three clock cycles to maintain
+the output voltage within the specified range. Equation 13
+Equation 13 shows the minimum output capacitance needed for specified output undershoot. When a sudden
+large load decrease happens, the output capacitors absorb energy stored in the inductor. The catch diode can’t
+sink current so the energy stored in the inductor results in an output voltage overshoot. Equation 14 calculates
+the minimum capacitance required to keep the voltage overshoot within a specified range.
+
+                 3 u (IOH IOL )
+      COUT !
+                  ¦SW u 9US                                                                                               (13)
+                           2   2
+                          IOH IOL
+      COUT !                                      uL
+                 (VOUT      VOS )2      2
+                                       VOUT                                                                               (14)
+
+where
+•    KIND = Ripple ratio of the inductor ripple current (ΔiL / IOUT)
+•    IOL = Low level output current during load transient
+•    IOH = High level output current during load transient
+•    VUS = Target output voltage undershoot
+•    VOS = Target output voltage overshoot
+For this design example, the target output ripple is 50 mV. Presuppose ΔVOUT_ESR = ΔVOUT_C = 50 mV, and
+chose KIND = 0.4. Equation 11 yields ESR no larger than 35.7 mΩ and Equation 12 yields COUT no smaller than
+7 μF. For the target over/undershoot range of this design, VUS = VOS = 5% × VOUT = 250 mV. The COUT can be
+calculated to be no smaller than 75.6 μF and 30.8 μF by Equation 13 and Equation 14 respectively. In summary,
+the most stringent criteria for the output capacitor is 75.6 μF. Two 47 μF, 16 V, X7R ceramic capacitors with 5 mΩ
+ESR are used in parallel.
+7.2.2.5 Schottky Diode Selection
+The breakdown voltage rating of the diode is preferred to be 25% higher than the maximum input voltage. The
+current rating for the diode must be equal to the maximum output current for best reliability in most applications.
+In cases where the input voltage is much greater than the output voltage the average diode current is lower. In
+this case it is possible to use a diode with a lower average current rating, approximately (1-D) × IOUT however
+the peak current rating must be higher than the maximum load current. A 4 A to 5 A rated diode is a good
+starting point.
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    19
+                                                       Product Folder Links: LMR14030-Q1
+LMR14030-Q1
+SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+7.2.2.6 Input Capacitor Selection
+The LMR14030-Q1 device requires high frequency input decoupling capacitor(s) and a bulk input capacitor,
+depending on the application. The typical recommended value for the high frequency decoupling capacitor is 4.7
+μF to 10 μF. A high-quality ceramic capacitor type X5R or X7R with sufficiency voltage rating is recommended.
+To compensate the derating of ceramic capacitors, a voltage rating of twice the maximum input voltage is
+recommended. Additionally, some bulk capacitance can be required, especially if the LMR14030-Q1 circuit is not
+located within approximately 5 cm from the input voltage source. This capacitor is used to provide damping to
+the voltage spike due to the lead inductance of the cable or the trace. For this design, two 2.2 μF, X7R ceramic
+capacitors rated for 100 V are used. A 0.1 μF for high-frequency filtering and place it as close as possible to the
+device pins.
+7.2.2.7 Bootstrap Capacitor Selection
+Every LMR14030-Q1 design requires a bootstrap capacitor (CBOOT). The recommended capacitor is 0.1 μF and
+rated 16 V or higher. The bootstrap capacitor is located between the SW pin and the BOOT pin. The bootstrap
+capacitor must be a high-quality ceramic type with an X7R or X5R grade dielectric for temperature stability.
+7.2.2.8 Soft-start Capacitor Selection
+Use Equation 15 to calculate the soft-start capacitor value:
+
+                 tSS (ms) u ISS (PA)
+     CSS (nF)
+                      VREF (V)                                                                                     (15)
+
+where
+•    CSS = Soft-start capacitor value
+•    ISS = Soft-start charging current (3 μA)
+•    tSS = Desired soft-start time
+For the desired soft-start time of 5 ms and soft-start charging current of 3.0 μA, Equation 15 yields a soft-start
+capacitor value of 20 nF, a standard 22 nF ceramic capacitor is used.
+For design with LMR14030-Q1 in WSON package, the maximum value of CSS is 4.7 nF.
+
+
+
+
+20    Submit Document Feedback                                                  Copyright © 2024 Texas Instruments Incorporated
+
+                                            Product Folder Links: LMR14030-Q1
+                                                                                                                                 LMR14030-Q1
+www.ti.com                                                                            SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024
+
+
+7.2.3 Application Curves
+Unless otherwise specified the following conditions apply: VIN = 12 V, fSW = 500 kHz, L = 5.6 µH, COUT = 47 µF ×
+2, TA = 25 °C.
+
+
+                VIN (5 V/DIV)
+
+
+
+                                                                                      VIN (5 V/DIV)
+
+
+                EN (1 V/DIV)
+                                                                                      VOUT (1 V/DIV)
+
+
+
+                VOUT (1 V/DIV)                                                        iL (2 A/DIV)
+
+
+
+                                       Time (2 ms/DIV)                                                        Time (2 ms/DIV)
+
+
+
+                  VIN = 12 V               VOUT = 5 V          IOUT = 2 A               VIN = 12 V                VOUT = 5 V        IOUT = 2 A
+
+                    Figure 7-2. Start-up By EN                                            Figure 7-3. Start-up By VIN
+
+
+                SW (5 V/DIV)                                                          SW (5 V/DIV)
+
+
+
+
+                                                                                      iL (200 mA/DIV)
+
+
+                iL (200 mA/DIV)
+
+
+                                                                                      VOUT(ac) (10 mV/DIV)
+                VOUT(ac) (10 mV/DIV)
+
+
+                                       Time (2 ms/DIV)                                                        Time (2 µs/DIV)
+
+
+
+                  VIN = 12 V               VOUT = 5 V          IOUT = 0 A               VIN = 12 V                VOUT = 5 V     IOUT = 100 mA
+
+                      Figure 7-4. Sleep-mode                                                  Figure 7-5. DCM Mode
+
+
+                SW (5 V/DIV)
+
+                                                                                      VOUT(ac) (200 mV/DIV)
+
+
+
+
+                iL (500 mA/DIV)
+
+
+
+
+                                                                                      IOUT (1 A/DIV)
+                VOUT(ac) (10 mV/DIV)
+
+
+
+
+                                       Time (2 µs/DIV)                                                       Time (100 µs/DIV)
+
+
+
+                       Figure 7-6. CCM Mode                                     IOUT: 20% → 80%              Slew rate = 100
+                                                                                         of 3.5 A                     mA/μs
+
+                                                                                          Figure 7-7. Load Transient
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                                  Submit Document Feedback    21
+                                                         Product Folder Links: LMR14030-Q1
+LMR14030-Q1
+SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024                                                                               www.ti.com
+
+
+
+
+            VOUT (1 V/DIV)
+
+
+
+
+                                                                             VOUT (1 V/DIV)
+
+
+
+
+                                                                             iL (2 A/DIV)
+            iL (2 A/DIV)
+
+
+
+                             Time (40 µs/DIV)                                                      Time (2 ms/DIV)
+
+
+
+              VIN = 12 V          VOUT = 5 V                                   VIN = 12 V              VOUT = 5 V
+
+                  Figure 7-8. Output Short                                 Figure 7-9. Output Short Recovery
+
+7.3 Power Supply Recommendations
+The LMR14030-Q1 is designed to operate from an input voltage supply range between 4 V and 40 V. This input
+supply must be able to withstand the maximum input current and maintain a stable voltage. The resistance of
+the input supply rail must be low enough that an input current transient does not cause a high enough drop at
+the LMR14030-Q1 supply voltage that can cause a false UVLO fault triggering and system reset. If the input
+supply is located more than a few inches from the LMR14030-Q1, additional bulk capacitance can be required
+in addition to the ceramic input capacitors. The amount of bulk capacitance is not critical, but a 47 μF or 100 μF
+electrolytic capacitor is a typical choice.
+7.4 Layout
+7.4.1 Layout Guidelines
+Layout is a critical portion of good power supply design. The following guidelines help users design a PCB with
+the best power conversion performance, thermal performance, and minimized generation of unwanted EMI.
+1. The feedback network, resistor RFBT and RFBB, must be kept close to the FB pin. VOUT sense path away
+   from noisy nodes and preferably through a layer on the other side of a shielding layer.
+2. The input bypass capacitor CIN must be placed as close as possible to the VIN pin and ground. Grounding
+   for both the input and output capacitors must consist of localized top side planes that connect to the GND pin
+   and PAD.
+3. The inductor L must be placed close to the SW pin to reduce magnetic and electrostatic noise.
+4. The output capacitor, COUT must be placed close to the junction of L and the diode D. The L, D, and COUT
+   trace must be as short as possible to reduce conducted and radiated noise and increase overall efficiency.
+5. The ground connection for the diode, CIN, and COUT must be as small as possible and tied to the system
+   ground plane in only one spot (preferably at the COUT ground point) to minimize conducted noise in the
+   system ground plane
+6. For more detail on switching power supply layout considerations see SNVA021 Application Note AN-1149
+
+
+
+
+22    Submit Document Feedback                                                                Copyright © 2024 Texas Instruments Incorporated
+
+                                                Product Folder Links: LMR14030-Q1
+                                                                                                                               LMR14030-Q1
+www.ti.com                                                                             SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024
+
+
+7.4.2 Layout Example
+
+
+
+
+                                                             Output Bypass
+                                                             Capacitor
+
+                                                                                                 Output
+                                                                                                 Inductor
+
+
+
+                                                                                       Rectifier Diode
+                                              BOOT
+                                              Capacitor
+                         Input Bypass
+                         Capacitor
+
+
+                                                             BOOT                      SW
+                                                                                                         Soft-Start
+                                                                                                         Capacitor
+                                                             VIN                       GND
+
+
+
+                                                             EN                         SS
+
+
+
+                          UVLO Adjust                        RT/SYNC                    FB
+                          Resistor                                                                            Output Voltage
+                                                                                                              Set Resistor
+
+
+
+                                                   Frequency                                     Thermal VIA
+                                                   Set Resistor
+                                                                                                 Signal VIA
+
+
+                                                              Figure 7-10. Layout
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                                Submit Document Feedback   23
+                                                          Product Folder Links: LMR14030-Q1
+LMR14030-Q1
+SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024                                                                              www.ti.com
+
+8 Device and Documentation Support
+8.1 Device Support
+8.1.1 Third-Party Products Disclaimer
+TI'S PUBLICATION OF INFORMATION REGARDING THIRD-PARTY PRODUCTS OR SERVICES DOES NOT
+CONSTITUTE AN ENDORSEMENT REGARDING THE SUITABILITY OF SUCH PRODUCTS OR SERVICES
+OR A WARRANTY, REPRESENTATION OR ENDORSEMENT OF SUCH PRODUCTS OR SERVICES, EITHER
+ALONE OR IN COMBINATION WITH ANY TI PRODUCT OR SERVICE.
+8.2 Documentation Support
+8.2.1 Related Documentation
+For related documentation see the following:
+Texas Instruments, AN-1149 Layout Guidelines for Switching Power Supplies application note
+8.2.2 Related Products
+         Part Number               VIN (V)         IOUT (A)                                  Comments
+                                                               Non-synchronous step-down converter, IQ = 40 µA, sleep mode, spread
+        LMR14020-Q1                4.0 - 40           2
+                                                               spectrum, SO-8 or WSON-10 package
+                                                               Non-synchronous step-down converter, IQ = 40 µA, sleep mode, spread
+        LMR14050-Q1                4.0 - 40           5
+                                                               spectrum, SO-8 or WSON-10 package
+
+
+8.3 Receiving Notification of Documentation Updates
+To receive notification of documentation updates, navigate to the device product folder on ti.com. Click on
+Notifications to register and receive a weekly digest of any product information that has changed. For change
+details, review the revision history included in any revised document.
+8.4 Support Resources
+TI E2E™ support forums are an engineer's go-to source for fast, verified answers and design help — straight
+from the experts. Search existing answers or ask your own question to get the quick design help you need.
+Linked content is provided "AS IS" by the respective contributors. They do not constitute TI specifications and do
+not necessarily reflect TI's views; see TI's Terms of Use.
+8.5 Trademarks
+PowerPAD™ and TI E2E™ are trademarks of Texas Instruments.
+SIMPLE SWITCHER® is a registered trademark of Texas Instruments.
+All trademarks are the property of their respective owners.
+8.6 Electrostatic Discharge Caution
+                This integrated circuit can be damaged by ESD. Texas Instruments recommends that all integrated circuits be handled
+                with appropriate precautions. Failure to observe proper handling and installation procedures can cause damage.
+                ESD damage can range from subtle performance degradation to complete device failure. Precision integrated circuits may
+                be more susceptible to damage because very small parametric changes could cause the device not to meet its published
+                specifications.
+
+
+8.7 Glossary
+ TI Glossary        This glossary lists and explains terms, acronyms, and definitions.
+
+
+
+
+24    Submit Document Feedback                                                               Copyright © 2024 Texas Instruments Incorporated
+
+                                                 Product Folder Links: LMR14030-Q1
+                                                                                                                                                    LMR14030-Q1
+www.ti.com                                                                                           SNVSAG3B – NOVEMBER 2015 – REVISED DECEMBER 2024
+
+
+
+9 Revision History
+Changes from Revision A (June 2016) to Revision B (December 2024)                                                                                                Page
+• Updated the numbering format for tables, figures, and cross-references throughout the document................. 1
+• Updated the document title.................................................................................................................................1
+• Added approved nouns after the SIMPLE SWITCHER trademark throughout the document............................1
+• Changed the MAX voltage rating of DDA package for BOOT to SW from 6.5V to 5.5V, and FB to GND from
+  7V to 5.5V...........................................................................................................................................................4
+• Changed thermal metrics of DDA package: RθJA from 42.5 to 43.2, ψJT from 9.9 to 5.2, ψJB 25.4 to 16.4,
+  RθJC(top) from 56.1 to 52.1, R θJC(bot) from 3.8 to 7.8, R θJB from 25.5 to 16.4......................................................5
+• Deleted the test condition of "BOOT to SW = 5.8 V" on parameter RDS_ON ..................................................... 5
+• Deleted the test condition of "BOOT to SW = 5.8 V" on parameter TON_MIN .....................................................6
+
+
+
+Changes from Revision * (November 2015) to Revision A (June 2016)                                                                                    Page
+• Added DPR package information....................................................................................................................... 1
+• Added new column for WSON package............................................................................................................. 3
+• Added new section for PGOOD..........................................................................................................................5
+• Added PGOOD section.................................................................................................................................... 14
+
+
+10 Mechanical, Packaging, and Orderable Information
+The following pages include mechanical, packaging, and orderable information. This information is the most
+current data available for the designated devices. This data is subject to change without notice and revision of
+this document. For browser-based versions of this data sheet, refer to the left-hand navigation.
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                                               Submit Document Feedback               25
+                                                              Product Folder Links: LMR14030-Q1
+                                                                                                                                                 PACKAGE OPTION ADDENDUM
+
+       www.ti.com                                                                                                                                                                8-Nov-2025
+
+
+
+
+PACKAGING INFORMATION
+
+       Orderable part number          Status     Material type      Package | Pins   Package qty | Carrier    RoHS      Lead finish/       MSL rating/        Op temp (°C)   Part marking
+                                        (1)            (2)                                                     (3)      Ball material      Peak reflow                            (6)
+                                                                                                                             (4)                (5)
+
+        LMR14030QDPRRQ1               Active      Production       WSON (DPR) | 10    3000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125       LMR
+                                                                                                                                                                               14030Q
+       LMR14030QDPRRQ1.A              Active      Production       WSON (DPR) | 10    3000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125       LMR
+                                                                                                                                                                               14030Q
+        LMR14030QDPRTQ1               Active      Production       WSON (DPR) | 10     250 | SMALL T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125       LMR
+                                                                                                                                                                               14030Q
+       LMR14030QDPRTQ1.A              Active      Production       WSON (DPR) | 10     250 | SMALL T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125       LMR
+                                                                                                                                                                               14030Q
+        LMR14030SQDDAQ1               Active      Production        SO PowerPAD           75 | TUBE            Yes      NIPDAUAG        Level-2-260C-1 YEAR    -40 to 125      14030Q
+                                                                      (DDA) | 8
+       LMR14030SQDDAQ1.A              Active      Production        SO PowerPAD           75 | TUBE            Yes      NIPDAUAG        Level-2-260C-1 YEAR    -40 to 125      14030Q
+                                                                      (DDA) | 8
+       LMR14030SQDDARQ1               Active      Production        SO PowerPAD       2500 | LARGE T&R         Yes      NIPDAUAG        Level-2-260C-1 YEAR    -40 to 125      14030Q
+                                                                      (DDA) | 8
+      LMR14030SQDDARQ1.A              Active      Production        SO PowerPAD       2500 | LARGE T&R         Yes      NIPDAUAG        Level-2-260C-1 YEAR    -40 to 125      14030Q
+                                                                      (DDA) | 8
+       LMR14030SQDPRRQ1               Active      Production       WSON (DPR) | 10    3000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125       LMR
+                                                                                                                                                                               1403SQ
+      LMR14030SQDPRRQ1.A              Active      Production       WSON (DPR) | 10    3000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125       LMR
+                                                                                                                                                                               1403SQ
+       LMR14030SQDPRTQ1               Active      Production       WSON (DPR) | 10     250 | SMALL T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125       LMR
+                                                                                                                                                                               1403SQ
+      LMR14030SQDPRTQ1.A              Active      Production       WSON (DPR) | 10     250 | SMALL T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125       LMR
+                                                                                                                                                                               1403SQ
+       LMR14030SSQDDAQ1               Active      Production        SO PowerPAD           75 | TUBE            Yes      NIPDAUAG        Level-2-260C-1 YEAR    -40 to 125      1403SQ
+                                                                      (DDA) | 8
+      LMR14030SSQDDAQ1.A              Active      Production        SO PowerPAD           75 | TUBE            Yes      NIPDAUAG        Level-2-260C-1 YEAR    -40 to 125      1403SQ
+                                                                      (DDA) | 8
+      LMR14030SSQDDARQ1               Active      Production        SO PowerPAD       2500 | LARGE T&R         Yes      NIPDAUAG        Level-2-260C-1 YEAR    -40 to 125      1403SQ
+                                                                      (DDA) | 8
+      LMR14030SSQDDARQ1.A             Active      Production        SO PowerPAD       2500 | LARGE T&R         Yes      NIPDAUAG        Level-2-260C-1 YEAR    -40 to 125      1403SQ
+                                                                      (DDA) | 8
+
+(1)
+      Status: For more details on status, see our product life cycle.
+
+
+                                                                                                      Addendum-Page 1
+                                                                                                                                                                      PACKAGE OPTION ADDENDUM
+
+       www.ti.com                                                                                                                                                                                                    8-Nov-2025
+
+
+
+
+(2)
+   Material type: When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+
+(3)
+      RoHS values: Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+
+(4)
+   Lead finish/Ball material: Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+
+(5)
+  MSL rating/Peak reflow: The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+
+(6)
+      Part marking: There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information provided by third parties, and
+makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and continues to take reasonable steps to provide representative
+and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers
+and other limited information may not be available for release.
+
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+
+OTHER QUALIFIED VERSIONS OF LMR14030-Q1 :
+
+• Catalog : LMR14030
+
+NOTE: Qualified Version Definitions:
+
+           • Catalog - TI's standard catalog product
+
+
+
+
+                                                                                                          Addendum-Page 2
+                                                                               PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                                                     10-Aug-2026
+
+
+
+TAPE AND REEL INFORMATION
+
+       REEL DIMENSIONS                                                                      TAPE DIMENSIONS
+                                                                                       K0       P1
+
+
+
+                                                                                                                       B0 W
+                                        Reel
+                                      Diameter
+                                                                                    Cavity           A0
+                                                                A0   Dimension designed to accommodate the component width
+                                                                B0   Dimension designed to accommodate the component length
+                                                                K0   Dimension designed to accommodate the component thickness
+                                                                W    Overall width of the carrier tape
+                                                                P1   Pitch between successive cavity centers
+
+
+                                         Reel Width (W1)
+                               QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+
+                                                                                                      Sprocket Holes
+
+
+                                                 Q1        Q2          Q1    Q2
+
+                                                 Q3        Q4          Q3    Q4                  User Direction of Feed
+
+
+
+                                                            Pocket Quadrants
+
+
+*All dimensions are nominal
+             Device           Package Package Pins              SPQ        Reel   Reel   A0                  B0         K0     P1     W     Pin1
+                               Type Drawing                              Diameter Width (mm)                (mm)       (mm)   (mm)   (mm) Quadrant
+                                                                           (mm) W1 (mm)
+  LMR14030QDPRRQ1              WSON       DPR         10        3000        330.0        12.4        4.25   4.25       1.15   8.0    12.0    Q2
+  LMR14030QDPRTQ1              WSON       DPR         10         250        180.0        12.4        4.25   4.25       1.15   8.0    12.0    Q2
+ LMR14030SQDDARQ1                SO       DDA         8         2500        330.0        12.8        6.4     5.2       2.1    8.0    12.0    Q1
+                              PowerPAD
+ LMR14030SQDPRRQ1              WSON       DPR         10        3000        330.0        12.4        4.25   4.25       1.15   8.0    12.0    Q2
+  LMR14030SQDPRTQ1             WSON       DPR         10         250        180.0        12.4        4.25   4.25       1.15   8.0    12.0    Q2
+ LMR14030SSQDDARQ1               SO       DDA         8         2500        330.0        12.8        6.4     5.2       2.1    8.0    12.0    Q1
+                              PowerPAD
+
+
+
+
+                                                                       Pack Materials-Page 1
+                                                                PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                              10-Aug-2026
+
+
+
+ TAPE AND REEL BOX DIMENSIONS
+
+
+
+
+                                                               Width (mm)
+                                                                              H
+
+
+
+
+                      W                                   L
+
+
+
+
+*All dimensions are nominal
+             Device           Package Type   Package Drawing   Pins         SPQ    Length (mm)   Width (mm)   Height (mm)
+   LMR14030QDPRRQ1               WSON             DPR           10          3000      346.0        346.0         33.0
+   LMR14030QDPRTQ1               WSON             DPR           10          250       210.0        185.0         35.0
+  LMR14030SQDDARQ1            SO PowerPAD         DDA           8           2500      366.0        364.0         50.0
+  LMR14030SQDPRRQ1               WSON             DPR           10          3000      346.0        346.0         33.0
+  LMR14030SQDPRTQ1               WSON             DPR           10          250       210.0        185.0         35.0
+ LMR14030SSQDDARQ1            SO PowerPAD         DDA           8           2500      366.0        364.0         50.0
+
+
+
+
+                                                        Pack Materials-Page 2
+                                                                  PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                    10-Aug-2026
+
+
+
+TUBE
+
+       T - Tube
+        height                                                      L - Tube length
+
+
+                      W - Tube
+                       width
+
+
+         B - Alignment groove width
+
+*All dimensions are nominal
+             Device           Package Name   Package Type    Pins       SPQ     L (mm)   W (mm)   T (µm)   B (mm)
+   LMR14030SQDDAQ1                DDA           HSOIC         8          75      517      7.87     635      4.25
+  LMR14030SQDDAQ1.A               DDA           HSOIC         8          75      517      7.87     635      4.25
+  LMR14030SSQDDAQ1                DDA           HSOIC         8          75      517      7.87     635      4.25
+ LMR14030SSQDDAQ1.A               DDA           HSOIC         8          75      517      7.87     635      4.25
+
+
+
+
+                                                        Pack Materials-Page 3
+                                                                                                               PACKAGE OUTLINE
+DPR0010A                                                               SCALE 3.000
+                                                                                                         WSON - 0.8 mm max height
+                                                                                                                PLASTIC SMALL OUTLINE - NO LEAD
+
+
+
+                                                      4.1                                 A
+                                   B
+                                                      3.9
+
+
+
+
+                                                                                                                                              (0.2)
+
+                                                                                          4.1
+            PIN 1 INDEX AREA                                                              3.9          FULL R
+
+
+
+
+                                                                                                                BOTTOM VIEW         SIDE VIEW
+
+                                                                                                                       ALTERNATIVE LEAD
+                                                                                                                         20.000
+
+
+
+
+                                                                                                                            DETAIL
+
+                          0.8
+                          0.7
+                                                                                                 C
+
+                                                                                                       SEATING PLANE
+                            0.05
+                            0.00                                                                      0.08 C
+
+
+
+                   EXPOSED
+                THERMAL PAD                         2.6 0.1                                                                       (0.1) TYP
+                                                                                           SEE ALTERNATIVE
+                                                                                           LEAD DETAIL
+                                       5                                             6
+
+
+
+
+                    2X
+                    3.2                                     11
+                                                                                           3 0.1
+
+
+
+                           8X 0.8
+
+                                       1
+                                                                                     10
+                                                                                                      0.35
+                                                                                                10X
+                           PIN 1 ID                              0.5                                  0.25
+                                                             10X
+                                                                 0.3                                   0.1     C A B
+                                                                                                       0.05     C
+                                                                                                                                  4218856/B 01/2021
+
+NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+   per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. The package thermal pad must be soldered to the printed circuit board for thermal and mechanical performance.
+
+
+
+
+                                                                       www.ti.com
+                                                                                    EXAMPLE BOARD LAYOUT
+DPR0010A                                                                                      WSON - 0.8 mm max height
+                                                                                                     PLASTIC SMALL OUTLINE - NO LEAD
+
+
+
+
+                                                                   (2.6)
+
+                              10X (0.6)                           SYMM
+
+
+                                          1                                                     10
+
+                          10X (0.3)
+
+                                                                                                     (1.25)
+
+                                SYMM                                  11
+                                                                                                              (3)
+
+
+
+
+                               8X (0.8)
+
+                                                                                                6
+                                              5
+                                                  ( 0.2) VIA               (1.05)
+                       (R0.05) TYP                      TYP
+
+                                                                   (3.8)
+
+
+                                                    LAND PATTERN EXAMPLE
+                                                        EXPOSED METAL SHOWN
+                                                             SCALE:15X
+
+
+
+
+                                                                                                        0.07 MIN
+                                                  0.07 MAX
+                                                                                                        ALL AROUND
+                                                  ALL AROUND
+
+                       EXPOSED                                                  EXPOSED
+                         METAL                                                    METAL
+
+
+                       SOLDER MASK                     METAL                    METAL UNDER                         SOLDER MASK
+                       OPENING                         EDGE                     SOLDER MASK                         OPENING
+
+                                      NON SOLDER MASK
+                                          DEFINED                                               SOLDER MASK
+                                        (PREFERRED)                                               DEFINED
+
+
+
+                                                            SOLDER MASK DETAILS
+
+
+                                                                                                                         4218856/B 01/2021
+
+NOTES: (continued)
+
+4. This package is designed to be soldered to a thermal pad on the board. For more information, see Texas Instruments literature
+   number SLUA271 (www.ti.com/lit/slua271).
+
+
+
+
+                                                                     www.ti.com
+                                                                                   EXAMPLE STENCIL DESIGN
+DPR0010A                                                                                 WSON - 0.8 mm max height
+                                                                                               PLASTIC SMALL OUTLINE - NO LEAD
+
+
+
+
+                                                                 SYMM
+
+                     10X (0.6)
+                                                METAL                     (0.68)
+                                                TYP
+                                  1                                                                   10
+
+
+                  10X (0.3)
+
+
+
+
+                                                                                                          (0.76)
+                                                                      11                                            SYMM
+
+
+                       8X (0.8)
+
+                                                                                                             4X
+                                                                                                           (1.31)
+
+
+
+                                  5                                                                   6
+
+                 (R0.05) TYP                                                 4X (1.15)
+
+
+                                                                  (3.8)
+
+
+                                                   SOLDER PASTE EXAMPLE
+                                                 BASED ON 0.125 mm THICK STENCIL
+
+                                                       EXPOSED PAD 11:
+                                             77% PRINTED SOLDER COVERAGE BY AREA
+                                                           SCALE:20X
+
+
+
+
+                                                                                                                    4218856/B 01/2021
+NOTES: (continued)
+
+5. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+   design recommendations.
+
+
+
+
+                                                                 www.ti.com
+                                         IMPORTANT NOTICE AND DISCLAIMER
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATASHEETS), DESIGN RESOURCES (INCLUDING REFERENCE
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS”
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable
+standards, and any other safety, security, regulatory or other requirements.
+These resources are subject to change without notice. TI grants you permission to use these resources only for development of an
+application that uses the TI products described in the resource. Other reproduction and display of these resources is prohibited. No license
+is granted to any other TI intellectual property right or to any third party intellectual property right. TI disclaims responsibility for, and you fully
+indemnify TI and its representatives against any claims, damages, costs, losses, and liabilities arising out of your use of these resources.
+TI’s products are provided subject to TI’s Terms of Sale, TI’s General Quality Guidelines, or other applicable terms available either on
+ti.com or provided in conjunction with such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable
+warranties or warranty disclaimers for TI products. Unless TI explicitly designates a product as custom or customer-specified, TI products
+are standard, catalog, general purpose devices.
+TI objects to and rejects any additional or different terms you may propose.
+IMPORTANT NOTICE
+
+                                                Copyright © 2026, Texas Instruments Incorporated
+                                                                Last updated 10/2025
+
