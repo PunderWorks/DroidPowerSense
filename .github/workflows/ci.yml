@@ -19,9 +19,9 @@ jobs:
       pcb: ${{ github.event_name != 'pull_request' || steps.filter.outputs.pcb == 'true' }}
       firmware: ${{ github.event_name != 'pull_request' || steps.filter.outputs.firmware == 'true' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: dorny/paths-filter@v3
+      - uses: dorny/paths-filter@v4
         id: filter
         with:
           filters: |
@@ -52,10 +52,10 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Checkout Stackup KiCad plugin
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: stackup-eda/stackup
           ref: v0.2.0
