@@ -329,8 +329,10 @@ design droidpowersense {
     place capacitor C_BUCK_IN2 value="10µF" footprint="Capacitor_SMD:C_1206_3216Metric" intent=bulk
     place capacitor C_BUCK_IN3 value="100nF" intent=decouple
     // R_BUCK_IN + C_BUCK_IN1/2 low-pass the buck input: VSW_CTRL follows VBAT_IN, which D_TVS_IN lets
-    // reach 37-53 V in a surge, above the LMR14030's 44 V VIN/EN absolute maximum. 3.3 Ohm x 20 uF
-    // = 66 us (~25 us after X5R DC-bias loss) absorbs hot-plug ringing and short spikes. Drop at the
+    // reach 36.7-53.3 V in a surge (SMCJ33CA: V_BR 36.7-40.6 V, V_C 53.3 V at 28.1 A, 10/1000 us;
+    // ../datasheets/SMCJ.pdf p. 3-4), above the LMR14030's 44 V VIN/EN absolute maximum.
+    // 3.3 Ohm x 20 uF = 66 us (~25 us after X5R DC-bias loss) absorbs the battery-lead inductance kick
+    // when the FETs open under load (~3 us) and hot-plug ringing; not a full 1 ms surge. Drop at the
     // worst load (~0.23 A at 9 V in) is 0.76 V, 0.17 W in a 0.25 W 1206.
     place resistor R_BUCK_IN value="3.3Ω" footprint="Resistor_SMD:R_1206_3216Metric" \
         manufacturer="YAGEO" mpn="RC1206FR-073R3L" mouser="603-RC1206FR-073R3L" digikey="311-3.30FRCT-ND" lcsc=C137283 \

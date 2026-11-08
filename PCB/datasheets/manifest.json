@@ -83,6 +83,12 @@
     "sha256": "752945fa3acaf46947c4f9ffdca98027af4ffb4845c5250713f0b608a547d97f",
     "url": "https://www.diodes.com/assets/Datasheets/ds19002.pdf"
   },
+  "SMCJ": {
+    "fetched": "2026-11-07",
+    "file": "SMCJ.pdf",
+    "sha256": "77f3c5e4466e755f152476ff6ca0c4aca83ec37e651327a9446145406676e1b8",
+    "url": "user download from Diodes Incorporated (original file DIOD-S-A0000285740-1.pdf)"
+  },
   "TCAN334": {
     "fetched": "2026-11-07",
     "file": "TCAN334.pdf",

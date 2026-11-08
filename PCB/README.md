@@ -234,10 +234,14 @@ stackup bom PCB/stackup/board.kdl --locked -o PCB/production/bom/DroidPowerSense
   overload trips after 0.65 s worst case with Q1 at 1.05x. No C_TIMER value fixes this without breaking
   start-up (one timer serves both). Firmware cutoff on INA237 ALERT and the upstream fuse are the
   protection; the simulation reports these cases as failures on purpose.
-- **Input surges and the 5 V buck.** R_BUCK_IN filters spikes and hot-plug ringing; a sustained input
-  above 44 V (not a battery condition) would still damage the LMR14030. The SMCJ33CA clamp figures
-  (V_BR 36.7 V min, V_C 53.3 V) are the 33CA family ratings; the SMCJ datasheet is not in
-  `datasheets/` yet.
+- **Input surges and the 5 V buck.** D_TVS_IN (SMCJ33CA, `datasheets/SMCJ.pdf` p. 3) has V_BR
+  36.7-40.6 V and clamps at 53.3 V max at 28.1 A, rated on the 10/1000 µs waveform (Fig. 4); its
+  dynamic resistance is ~0.45 Ω, so VBAT_IN passes the LMR14030's 44 V limit once ~7.5-16 A flows in
+  it. R_BUCK_IN (≥ 25 µs with C_BUCK_IN after DC-bias loss) covers the events a battery system
+  produces: the battery-lead inductance kick when the FETs open under load (~1 µH × 30 A = 0.45 mJ in
+  ~3 µs, ~1 V rise on BUCK_VIN) and hot-plug ringing. A full-energy 1 ms surge on the battery lead
+  would charge through it; that needs an external source on the lead (a battery can't push current
+  into a 33 V-standoff TVS, and regen with the switch off lands on VOUT, not VBAT_IN).
 - **Hot-FET overcurrent threshold margin.** At 100 °C junction temperature, R_DS(on) rises 1.55x.
   With R_SENSE = 22 kΩ and minimum I_SENSE (13.6 µA), the LM5060 will false-trip at 30 A continuous.
   Increasing R_SENSE to 33 kΩ raises the hot threshold to ~45 A, safely clearing 30 A continuous.
