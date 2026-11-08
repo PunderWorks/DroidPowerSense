@@ -111,7 +111,7 @@ The three jumper shunts (Würth 60900213421) are in the BOM.
 | Area | Status |
 |---|---|
 | Hardware design | Complete and reviewed: all design and layout checks pass, power stage verified in simulation |
-| PCB | Routed; Gerbers, drills, BOM and placement in [`PCB/production/`](PCB/production/). Final silkscreen and graphics pending before the first order. |
+| PCB | Complete: routed, silkscreen and graphics done (PunderWorks logo and a QR code to this repo on the back). Gerbers, drills, BOM and placement in [`PCB/production/`](PCB/production/). |
 | Firmware | Not started (Rust on the ESP32-C5). Requirements captured in [docs/firmware-requirements.md](docs/firmware-requirements.md). |
 | Bench testing | Not started. The first-board checklist is in [PCB/README.md](PCB/README.md#bench-checklist-first-board). |
 
