@@ -35,7 +35,7 @@ Commit the synced PCB with the KDL. CI fails if syncing would change the committ
 | MCU | ESP32-C5 (CAN FD + firmware) on a plug-in module (sockets), serviceable and programmable in place over its USB-C. Firmware in Rust. |
 | Comms | CAN FD (two JST-XH for daisy-chain, jumper termination), UART (JST-XH, 3.3 V / 5 V jumper). |
 | Circuit ID | Firmware must tell circuit 1 from circuit 2. |
-| Board | 70 × 50 mm, 4 layers for the high-current path, components on one side. Back-side area for an optional user-fitted heatsink. |
+| Board | 70 × 50 mm, 6 layers for the high-current path and dedicated power/ground planes, components on one side. Back-side area for an optional user-fitted heatsink. |
 | Sourcing | Mouser and DigiKey first; LCSC numbers recorded but JLCPCB is not the planned assembler. |
 
 ## Circuit
@@ -103,8 +103,10 @@ needs. The labels sit over the tracks that run into each pin, which prints legib
 
 ## Layout
 
-**70 × 50 mm**, 4 layers (F.Cu / In1.Cu GND / In2.Cu power / B.Cu), all parts on the top side.
+**70 × 50 mm**, 6 layers (F.Cu / In1.Cu GND / In2.Cu VSW_CTRL & routing / In3.Cu +3V3 / In4.Cu GND / B.Cu heatsink & GND), all parts on the top side.
 Placement and pours come from `scripts/layout_compact.py`; signal routing is done by hand in KiCad.
+The script also lays down a first-pass route (0 unconnected, ~42 DRC errors left); finish it with the
+interactive router and don't re-run the script afterwards, or it will overwrite the hand routing.
 
 ```
  ┌──────────────────────────────────────────────────────────────────┐
@@ -135,20 +137,23 @@ Placement and pours come from `scripts/layout_compact.py`; signal routing is don
   insulating** thermal pad or tape: bare metal would short the three power nets and bypass the switch.
   The area is marked with corner brackets and a note on B.SilkS.
 
-**Fab spec: 1.6 mm, 2 oz outer / 1 oz inner copper** (core 0.95 mm, prepreg 0.21 mm). The board
-needs this for the 30 A path; don't order it with 1 oz outer.
+**Fab spec: 1.6 mm, 6 layers, 2 oz outer / 1 oz inner copper** (0.1 mm outer prepreg, 0.45 mm cores,
+0.2 mm center prepreg). The board needs this for the 30 A path; don't order it with 1 oz outer.
 
 Pours (added by `scripts/layout_compact.py`):
-- VBAT_IN, VSW_OUT and VOUT on F.Cu, In2.Cu and B.Cu along the power row (y 46.9-55.6, about 8.5 mm
+- VBAT_IN, VSW_OUT and VOUT on F.Cu, In2.Cu, In3.Cu and B.Cu along the power row (y 46.9-55.6, about 8.5 mm
   tall), priority 3, pads connected solidly; 85 stitching vias (0.8 / 0.4 mm, 1.27 mm grid, kept
   0.4 mm off every pad).
 - VSW_MID (Q1 sources to Q2 sources) is F.Cu only: 1.8 mm long, ~0.1 mΩ. The gap is too narrow for a
   via, and keeping it off B.Cu leaves room for the GATE_FET link from Q1's gate (top) to Q2's gate
   (bottom) to cross there.
-- GND on F.Cu, In1.Cu (solid reference) and B.Cu. J1/J2 GND pins and the D1/D5/D6 GND pads connect
-  solidly (thermal spokes would choke 30 A); the XT60 GND pins need a large iron to hand-solder.
-- In2.Cu supply planes: VSW_CTRL on the left (LM5060, dividers, buck input), +3V3 in the middle and
-  right. The VSW_CTRL plane is reported as isolated copper until routing adds its vias.
+- Ground planes (priority 0) on all 6 layers: In1.Cu and In4.Cu are solid reference planes. J1/J2
+  GND pins and the D1/D5/D6 GND pads connect solidly (thermal spokes would choke 30 A); the XT60 GND
+  pins need a large iron to hand-solder.
+- In2.Cu is the internal signal layer (referenced to the In1.Cu GND plane), with a GND fill behind the
+  tracks. VSW_CTRL runs on it as 0.35-0.5 mm tracks (LM5060, dividers, buck input), not a pour.
+- In3.Cu supply plane: dedicated +3V3 logic supply plane across the middle and right (ESP32 module,
+  INA226, CAN transceiver, UART level shifters, pull-ups).
 
 Net classes (Board Setup → Net Classes, assigned by net-name pattern in `DroidPowerSense.kicad_pro`):
 
