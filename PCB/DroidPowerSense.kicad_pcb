@@ -529,6 +529,7 @@
 		(property "Reference" "J9"
 			(at 0 -2.5 0)
 			(layer "F.SilkS")
+			(hide yes)
 			(uuid "684f096b-0006-43f4-96ec-e3ae525f51a4")
 			(effects
 				(font
@@ -23591,7 +23592,7 @@
 			(justify left)
 		)
 	)
-	(gr_text "VIO"
+	(gr_text "UART"
 		(at 99.2 73.04 0)
 		(layer "F.SilkS")
 		(uuid "540cc14f-8c21-45b8-bb53-a2992070c616")
@@ -23651,7 +23652,7 @@
 			(justify left)
 		)
 	)
-	(gr_text "120R"
+	(gr_text "TERM"
 		(at 104.5 70.6 0)
 		(layer "F.SilkS")
 		(uuid "2b823ecd-ebcd-461d-9891-b1101a67e9d6")
@@ -23685,6 +23686,17 @@
 				(thickness 0.15)
 			)
 			(justify left)
+		)
+	)
+	(gr_text "UART V"
+		(at 97 68.2 0)
+		(layer "F.SilkS")
+		(uuid "540cc14f-8c21-45b8-bb53-a2992070c616")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.15)
+			)
 		)
 	)
 	(gr_text "RX"

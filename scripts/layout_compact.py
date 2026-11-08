@@ -161,7 +161,7 @@ STITCH_KEEPOFF = 0.4      # mm from any pad to a via's copper
 
 # Silkscreen references: hidden where a functional label already names the part or there is no room
 # (they stay on F.Fab), centred on the body for the ICs and the inductor.
-HIDDEN_REFS = {"J3", "J4", "J5", "J6", "J7", "J8", "D3", "D4", "D8", "Q3", "Q4", "Q6", "Q7", "U3"}
+HIDDEN_REFS = {"J3", "J4", "J5", "J6", "J7", "J8", "J9", "D3", "D4", "D8", "Q3", "Q4", "Q6", "Q7", "U3"}
 CENTERED_REFS = {"U1", "U2", "U5", "L1"}
 
 
@@ -228,7 +228,7 @@ def mark_heatsink_area(board: pcbnew.BOARD) -> None:
 def add_labels(board: pcbnew.BOARD) -> None:
     """Functional silkscreen: connector pin functions in line with each pin, CAN IN / OUT, and the
     circuit ID jumper spelled out. Pin labels may cross the tracks running into the pins."""
-    L, R = pcbnew.GR_TEXT_H_ALIGN_LEFT, pcbnew.GR_TEXT_H_ALIGN_RIGHT
+    L, C, R = pcbnew.GR_TEXT_H_ALIGN_LEFT, pcbnew.GR_TEXT_H_ALIGN_CENTER, pcbnew.GR_TEXT_H_ALIGN_RIGHT
 
     def label(text: str, x: float, y: float, align=L, size: float = 0.8) -> None:
         t = pcbnew.PCB_TEXT(board)
@@ -258,12 +258,14 @@ def add_labels(board: pcbnew.BOARD) -> None:
     for y_h, y_l in ((74.5, 77.0), (83.0, 85.5)):
         label("CANH", 112.9, y_h, R)
         label("CANL", 112.9, y_l, R)
-    label("120R", 104.5, 70.6)
+    label("TERM", 104.5, 70.6)   # J7: CAN 120R terminator jumper
     # UART: J8 on the bottom edge (pin 1 RX at x 101.5, pin 2 TX at x 104.0), J9 VIO select
     label("RX", 98.3, 92.45, R)
     label("TX", 107.3, 92.45)
     label("UART", 107.3, 94.4)
-    for text, y in (("3V3", 70.5), ("VIO", 73.04), ("5V", 75.58)):
+    # J9 UART voltage select: heading where the J9 reference was, then jumper UART to 3V3 or 5V
+    label("UART V", 97.0, 68.2, C)
+    for text, y in (("3V3", 70.5), ("UART", 73.04), ("5V", 75.58)):
         label(text, 99.2, y)
 
 

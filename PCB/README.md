@@ -57,7 +57,8 @@ Commit the synced PCB with the KDL. CI fails if syncing would change the committ
 | Circuit ID | J_CIRCUIT, R_CIRCUIT_PU | Open = circuit 1, shorted = circuit 2. |
 | Indicator | D_PWR_LED + 1 k | On when +3V3 is up (remote switch closed). |
 
-Jumpers: **J_VIO** 1-2 = 3.3 V UART, 2-3 = 5 V UART. **J_TERM** fitted = 120 Ω terminator.
+Jumpers: **J_VIO** (silkscreen "UART V") 1-2 = 3.3 V UART, 2-3 = 5 V UART. **J_TERM** (silkscreen "TERM")
+fitted = 120 Ω terminator.
 **J_CIRCUIT** no jumper = circuit 1, jumper on = circuit 2.
 
 Silkscreen convention: every JST connector has its pin functions printed in line with each pin
