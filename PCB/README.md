@@ -92,6 +92,9 @@ needs. The labels sit over the tracks that run into each pin, which prints legib
 
 ## GPIO table (Waveshare ESP32-C5-Zero)
 
+Firmware-side requirements (overcurrent cutoff, regen rule, INA237 setup, antenna select) are in
+[docs/firmware-requirements.md](../docs/firmware-requirements.md).
+
 | GPIO | Net | Function | Notes |
 |---|---|---|---|
 | IO0 | PWR_PGOOD | LM5060 nPGD (open drain) | 10 k pull-up. |
