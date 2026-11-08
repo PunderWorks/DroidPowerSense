@@ -49,6 +49,11 @@ KiCad schematics (there are none). Hardware work follows the `pcb-design` skill.
 
 Rust on the ESP32-C5. Each board reads its circuit ID (IO7 jumper) and tags all telemetry with it.
 
+**Read [docs/firmware-requirements.md](docs/firmware-requirements.md) first.** It lists what the
+hardware relies on firmware for (overcurrent cutoff via INA237 ALERT, no cutoff during regen, fault
+latch reset), the pin map, INA237 setup (address 0x40, its own register map, SHUNT_CAL), the antenna
+select on GPIO26, and the open policy decisions.
+
 **Test coverage**
 - All new logic gets unit tests that run on the host (`cargo test`) with no hardware.
 - Keep hardware-touching code (TWAI/UART/I2C/ADC wrappers) thin; put framing, scaling and
