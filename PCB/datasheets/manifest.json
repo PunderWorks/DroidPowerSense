@@ -89,6 +89,12 @@
     "sha256": "77f3c5e4466e755f152476ff6ca0c4aca83ec37e651327a9446145406676e1b8",
     "url": "user download from Diodes Incorporated (original file DIOD-S-A0000285740-1.pdf)"
   },
+  "Sullins-FemaleHeader": {
+    "fetched": "2026-11-07",
+    "file": "Sullins-FemaleHeader.pdf",
+    "sha256": "5287d24f4972e3483f552973fe32550c7b64a3897004f32e0c9bf15963dacadf",
+    "url": "https://www.sullinscorp.com/catalogs/101_PAGE114-115_.100_FEMALE_HDR.pdf"
+  },
   "TCAN334": {
     "fetched": "2026-11-07",
     "file": "TCAN334.pdf",

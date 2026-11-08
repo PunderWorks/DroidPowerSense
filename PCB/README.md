@@ -289,8 +289,11 @@ stackup bom PCB/stackup/board.kdl --locked -o PCB/production/bom/DroidPowerSense
 - **The module stands ~11 mm tall on 18 socket contacts.** In a vibrating droid, add a dab of hot
   glue or a cable tie at the antenna end.
 - **ESP32-C5-Zero-M is bought from Waveshare** (SKU 34598); Mouser, DigiKey and LCSC don't list it
-  (checked 2026-11-08). The 8.5 mm socket height (and so the ~11 mm module
-  height) is from the Sullins series naming, not yet checked against its datasheet.
+  (checked 2026-11-08). The socket height is confirmed: PPPC091LFBN-RC
+  (PP polyester / phosphor bronze, P gold flash, C 0.100", 09 positions, 1 row, LFB straight, N no
+  mounting) has a .335" [8.50 mm] insulator and 6.0 mm insertion depth, with a Ø1.02 mm recommended
+  hole (`datasheets/Sullins-FemaleHeader.pdf`, catalog p. 114-115; the footprint drills 1.0 mm). The
+  ~11 mm module height adds the -M module's own header plastic, which Waveshare doesn't dimension.
 - **Reference designators shifted** when Q_LED/R_LED_PU were added (Stackup assigns them in KDL
   order): the UART FETs are now Q6/Q7 and the former R25-R29 are R26-R30.
 
