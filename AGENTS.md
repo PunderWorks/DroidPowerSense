@@ -12,10 +12,11 @@ before changing the hardware, and add to it rather than re-deciding something al
 - `PCB/` — hardware. `PCB/stackup/` holds the Stackup design, `PCB/datasheets/` the manufacturer
   datasheets (fetched with the `pcb-design` skill's `datasheet.py`), and the KiCad project
   (`DroidPowerSense.*`) lives beside them. `PCB/libraries/` holds the custom footprints
-  (ESP32-C5-Zero castellated carrier, XT60PW-M/F).
+  (ESP32-C5-Zero-M socketed module, socket outline, XT60PW-M/F).
 - `ci/` — the Cargo-locked Stackup CLI (`ci/stackup/`) and the PCB sync check (`check_pcb_sync.py`).
-- `scripts/spice/` — ngspice verification of the power switch; `scripts/layout_pcb.py` — the
-  generator for the starting layout (do not re-run once the board is hand-edited).
+- `scripts/spice/` — ngspice verification of the power switch; `scripts/layout_compact.py` — placement
+  and pours for the 70 × 50 mm board (do not re-run once the board is hand-routed);
+  `scripts/layout_pcb.py` — the earlier 90 × 66 mm generator, kept for its helpers.
 - `src/` — firmware (Rust, ESP32-C5). Not started yet.
 
 ## Git workflow
@@ -39,7 +40,7 @@ KiCad schematics (there are none). Hardware work follows the `pcb-design` skill.
   `board.kdl` line, so even reordering lines needs a resync.
 - Mounting holes and logos are KiCad `board_only` footprints; the sync leaves them alone.
 - Source parts from Mouser and DigiKey first (LCSC numbers are recorded but JLCPCB is not the
-  planned assembler). Connectors, headers and the ESP32-C5-Zero module are hand-soldered.
+  planned assembler). Connectors, headers and the ESP32 module sockets are hand-soldered.
 - CI (`.github/workflows/ci.yml`) runs the Stackup check, BOM check and PCB sync check on PCB
   changes only; firmware jobs (ESP32 build + unit tests) run only on firmware changes. The
   only required check on `main` should be `CI Result`; add any new job to its `needs` list.

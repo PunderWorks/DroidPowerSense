@@ -3,8 +3,10 @@
 
 use "@stackup/passives"
 
-// Waveshare ESP32-C5-Zero castellated stamp module (28.00 x 18.00 mm, 18 castellated edge pins
-// at 2.54 mm pitch, 15.24 mm row spacing, 1.59 mm from USB-C edge to row 1).
+// Waveshare ESP32-C5-Zero-M: the ESP32-C5-Zero (28.00 x 18.00 mm, 18 edge pins at 2.54 mm pitch,
+// 15.24 mm row spacing, 1.59 mm from USB-C edge to row 1) with 2.54 mm headers pre-soldered.
+// It plugs into two 1x9 female sockets (mcu-socket-1x9), which lift it ~11 mm: the USB-C plug clears
+// the board, low parts fit under the module, and the module can be swapped without desoldering.
 // Sources:
 // - ../datasheets/ESP32-C5-Zero-Schematic.pdf (header H1 pinout, MP1605GTF-Z 2A 3.3V buck,
 //   WS2812B-1010 RGB LED on GPIO27, BOOT button on GPIO28, RF switch on GPIO26)
@@ -15,11 +17,12 @@ use "@stackup/passives"
 part esp32-c5-zero {
     symbol "Connector_Generic:Conn_02x09_Counter_Clockwise"
     reference U
-    value "ESP32-C5-Zero"
+    value "ESP32-C5-Zero-M"
     datasheet "https://docs.waveshare.com/ESP32-C5-Zero"
-    description "Waveshare ESP32-C5-Zero RISC-V Wi-Fi 6 / BLE 5 / Zigbee / Thread / CAN FD stamp module, 18-pin castellated, 18x28mm"
+    description "Waveshare ESP32-C5-Zero-M RISC-V Wi-Fi 6 / BLE 5 / Zigbee / Thread / CAN FD module with pre-soldered 2.54mm headers, 18x28mm, plugs into 2x 1x9 sockets"
     manufacturer "Waveshare"
-    order mpn="ESP32-C5-Zero" digikey="2689-ESP32-C5-ZERO-ND"
+    // Waveshare SKU 34598. Distributor numbers not yet confirmed for the -M (header) version.
+    order mpn="ESP32-C5-Zero-M"
 
     pin "5V" power_in
     pin GND power_in
@@ -53,7 +56,7 @@ part esp32-c5-zero {
     pin IO12 bidirectional once
     pin IO11 bidirectional once
 
-    package castellated footprint="DroidPowerSense:Waveshare_ESP32-C5-Zero_Castellated" {
+    package socketed footprint="DroidPowerSense:Waveshare_ESP32-C5-Zero-M_Socketed" {
         pad "5V" 1
         pad GND 2
         pad "3V3" 3
@@ -72,6 +75,22 @@ part esp32-c5-zero {
         pad IO13 16
         pad IO12 17
         pad IO11 18
+    }
+}
+
+// Sullins PPPC091LFBN-RC: 1x9 2.54 mm female socket, 8.5 mm, gold flash. Two of them hold the
+// ESP32-C5-Zero-M. Their pins share the module footprint's holes, so this part has no pins and an
+// outline-only footprint: it exists to put the sockets in the BOM.
+// DigiKey S7042-ND (18,085 in stock, 2026-11-07). Tin-plated alternative: PPTC091LFBN-RC (S7007-ND).
+part mcu-socket-1x9 {
+    symbol "Connector_Generic:Conn_01x09"
+    reference J
+    value "1x9 socket"
+    description "1x9 2.54mm female socket header, 8.5mm, gold flash, for the ESP32-C5-Zero-M"
+    manufacturer "Sullins Connector Solutions"
+    order mpn="PPPC091LFBN-RC" digikey="S7042-ND" lcsc=C5362844
+
+    package vertical footprint="DroidPowerSense:PinSocket_1x09_P2.54mm_Vertical_NoPads" {
     }
 }
 

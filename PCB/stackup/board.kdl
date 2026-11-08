@@ -317,10 +317,10 @@ design droidpowersense {
     set L_BUCK.B net.voltage min="4.8V" max="5.15V"
     circuit R_FB_TOP.B R_FB_BOT.A U_BUCK.FB name="BUCK_FB"
 
-    // ── MCU (Waveshare ESP32-C5-Zero on Castellated Carrier Pads) ────────────────────────
+    // ── MCU (Waveshare ESP32-C5-Zero-M on two 1x9 sockets) ─────────────────────────────────
     // The module's onboard MP1605GTF-Z 2A synchronous buck regulates +5V to +3.3V and exports +3.3V
     // on pin 3 (3V3) to power the carrier's 3.3V peripherals.
-    place esp32-c5-zero U_MCU hand=#true note="Waveshare ESP32-C5-Zero hand-soldered on castellated pads"
+    place esp32-c5-zero U_MCU hand=#true note="Waveshare ESP32-C5-Zero-M, plugs into J_MCU_L / J_MCU_R"
     place capacitor C_3V3_1 value="100nF" intent=decouple
     circuit U_MCU.3V3 C_3V3_1.A name="+3V3"
     set U_MCU.3V3 net.voltage "3.3V"
@@ -418,6 +418,11 @@ design droidpowersense {
         U_BUCK.GND C_BUCK_IN1.B C_BUCK_IN2.B C_BUCK_IN3.B R_BUCK_RT.B C_BUCK_SS.B \
         D_BUCK.A R_FB_BOT.B C_BUCK_OUT1.B C_BUCK_OUT2.B C_BUCK_OUT3.B \
         C_3V3_1.B J_CIRCUIT.B D_PWR_LED.K Q_LED.SOURCE name="GND"
+
+    // ── ESP32-C5-Zero-M sockets (BOM only: their pins use U_MCU's holes) ─────────────────────
+    // Placed last so adding them does not renumber the other connectors.
+    place mcu-socket-1x9 J_MCU_L hand=#true note="Module pins 1-9"
+    place mcu-socket-1x9 J_MCU_R hand=#true note="Module pins 10-18"
 
     // ── Unconnected Daughterboard Pins ───────────────────────────────────────────────────
     nc U_MCU.IO11 note="U0TXD: left free for the ROM boot log (J_UART uses UART1 on IO5/IO10)"
