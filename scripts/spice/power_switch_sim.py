@@ -22,13 +22,13 @@ VALUES = dict(
     R_EN1=100e3, R_EN2=47e3, R_CUTOFF_PD=100e3,
     R_UVLO1=33e3, R_UVLO2=10e3,
     R_OVP1=180e3, R_OVP2=10e3,
-    R_SENSE=22e3, R_OUT=10e3,
+    R_SENSE=33e3, R_OUT=10e3,
     R_GATE=2.2e3, R_REV=47e3,
-    C_TIMER=100e-9, C_PROT_VIN=100e-9,
+    C_TIMER=2.2e-6, C_PROT_VIN=100e-9,
     C_BUCK_IN=20e-6,            # C_BUCK_IN1 + C_BUCK_IN2 (2 x 10 uF)
     R_VBAT=110e3,               # R_VBAT_TOP + R_VBAT_BOT
     R_SHUNT=1e-3,
-    C_GATE=0.0, R_GATE_C=1e3,   # gate dV/dt capacitor (0 = not fitted) and its series resistor
+    C_GATE=220e-9, R_GATE_C=1e3, # gate dV/dt capacitor (220 nF) and its damping resistor
 )
 
 # ── Datasheet limits ────────────────────────────────────────────────────────────────────────────
