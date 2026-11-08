@@ -1,0 +1,2444 @@
+                                                                                                                                          INA237
+                                                                                                    SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+                 INA237 85-V, 16-Bit, Precision Power Monitor With I2C Interface
+
+1 Features                                                                3 Description
+•   High-resolution, 16-bit delta-sigma ADC                               The INA237 is an ultra-precise digital power monitor
+•   Current monitoring accuracy:                                          with a 16-bit delta-sigma ADC specifically designed
+    – Offset voltage: ±50 µV (maximum)                                    for current-sensing applications. The device can
+    – Offset drift: ±0.02 µV/°C (maximum)                                 measure a full-scale differential input of ±163.84 mV
+    – Gain error: ±0.3% (maximum)                                         or ±40.96 mV across a resistive shunt sense element
+    – Gain error drift: ±50 ppm/°C (maximum)                              with common-mode voltage support from –0.3 V to
+    – Common mode rejection: 120 dB (minimum)                             +85 V.
+•   Power monitoring accuracy:                                            The INA237 reports current, bus voltage, temperature,
+    – 1.6% full scale, –40°C to +125°C (maximum)                          and power, all while performing the needed
+•   Fast alert response: 75 μs                                            calculations in the background. The integrated
+•   Wide common-mode range: –0.3 V to +85 V                               temperature sensor is ±1°C accurate for die
+•   Bus voltage sense input: 0 V to 85 V                                  temperature measurement and is useful in monitoring
+•   Shunt full-scale differential range:                                  the system ambient temperature.
+    ±163.84 mV / ±40.96 mV
+•   Input bias current: 2.5 nA (maximum)                                  The low offset and gain drift design of the INA237
+•   Temperature sensor: ±1°C (maximum at 25°C)                            allows the device to be used in precise systems
+•   Programmable conversion time and averaging                            that do not undergo multi-temperature calibration
+•   2.94-MHz high-speed I2C interface with 16 pin-                        during manufacturing. Further, the very low offset
+    selectable addresses                                                  voltage and noise allow for use in A to kA sensing
+•   Operates from a 2.7-V to 5.5-V supply:                                applications and provide a wide dynamic range
+    – Operational current: 640 µA (typical)                               without significant power dissipation losses on the
+    – Shutdown current: 5 µA (maximum)                                    sensing shunt element. The low input bias current
+                                                                          of the device permits the use of larger current-
+2 Applications                                                            sense resistors, thus providing accurate current
+•   DC/DC converters and power inverters                                  measurements in the micro-amp range.
+•   Industrial battery packs                                              The device allows for selectable ADC conversion
+•   Power-over-ethernet (PoE)                                             times from 50 µs to 4.12 ms as well as sample
+•   Telecom equipment                                                     averaging from 1x to 1024x, which further helps
+•   Enterprise servers                                                    reduce the noise of the measured data.
+                                                                                                    Device Information(1)
+                                                                                PART NUMBER                  PACKAGE         BODY SIZE (NOM)
+                                                                           INA237                        VSSOP (10)         3.00 mm × 3.00 mm
+
+                                                                          (1)        For all available packages, see the package option
+                                                                                     addendum at the end of the data sheet.
+                                                                                VS
+
+
+                                                       Reference           Power
+                                 IN+
+                                                                                                             SCL
+                                 IN-
+                                                        16 Bit       Voltage     Current            2
+                                                                                                             SDA
+                                           MUX                                                      IC
+                                                        ADC          Power           Temp                    A0
+                               VBUS
+                                                                                                             A1
+
+
+                                                      Oscillator                                +
+                                                                         Out-of-range                        ALERT
+                                                                          Threshold             ±
+
+                                                                   GND
+
+                                                   Simplified Block Diagram
+
+
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+     intellectual property matters and other important disclaimers. PRODUCTION DATA.
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                                                                      www.ti.com
+
+
+                                                                        Table of Contents
+1 Features............................................................................1     7.4 Device Functional Modes..........................................17
+2 Applications..................................................................... 1       7.5 Programming............................................................ 18
+3 Description.......................................................................1       7.6 Register Maps...........................................................20
+4 Revision History.............................................................. 2        8 Application and Implementation.................................. 28
+5 Pin Configuration and Functions...................................3                       8.1 Application Information............................................. 28
+6 Specifications.................................................................. 3        8.2 Typical Application.................................................... 32
+  6.1 Absolute Maximum Ratings........................................ 3                  9 Power Supply Recommendations................................36
+  6.2 ESD Ratings............................................................... 4        10 Layout...........................................................................36
+  6.3 Recommended Operating Conditions.........................4                            10.1 Layout Guidelines................................................... 36
+  6.4 Thermal Information....................................................4              10.2 Layout Example...................................................... 36
+  6.5 Electrical Characteristics.............................................5            11 Device and Documentation Support..........................37
+  6.6 Timing Requirements (I2C)......................................... 7                  11.1 Receiving Notification of Documentation Updates.. 37
+  6.7 Timing Diagram ..........................................................7            11.2 Support Resources................................................. 37
+  6.8 Typical Characteristics................................................ 8             11.3 Trademarks............................................................. 37
+7 Detailed Description......................................................12              11.4 Electrostatic Discharge Caution.............................. 37
+  7.1 Overview................................................................... 12        11.5 Glossary.................................................................. 37
+  7.2 Functional Block Diagram......................................... 12                12 Mechanical, Packaging, and Orderable
+  7.3 Feature Description...................................................12              Information.................................................................... 37
+
+
+
+4 Revision History
+NOTE: Page numbers for previous revisions may differ from page numbers in the current version.
+
+Changes from Revision * (February 2021) to Revision A (May 2022)                                                                                       Page
+• Updated the numbering format for tables, figures, and cross-references throughout the document..................1
+• Updated the figures and equations throughput the document to align with the commercial data sheet.............1
+• Changed Power-supply rejection ratio parameter name to Shunt offset voltage vs power supply in the
+  Electrical Characteristics table............................................................................................................................5
+• Added VBUS offset voltage vs power supply typical values to the Electrical Characteristics table......................5
+• Added register field settings for the typical ADC conversion times. .................................................................. 5
+• Changed the Shunt Calibration (SHUNT_CAL) register 14-0 bit name from CURRLSB to SHUNT_CAL....... 20
+• Changed the TOL 15-4 bit reset value from 7FF0h to 7FFh ............................................................................20
+
+
+
+
+2       Submit Document Feedback                                                                                           Copyright © 2022 Texas Instruments Incorporated
+
+                                                                       Product Folder Links: INA237
+                                                                                                                                                                  INA237
+www.ti.com                                                                                                        SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+
+5 Pin Configuration and Functions
+
+                                                             A1           1                       10           IN+
+
+                                                             A0           2                        9           IN–
+
+                                                        ALERT             3                        8           VBUS
+
+                                                            SDA           4                        7           GND
+
+                                                            SCL           5                        6           VS
+
+
+
+                                                                       Not to scale
+
+                                             Figure 5-1. DGS Package 10-Pin VSSOP Top View
+
+                                                                   Table 5-1. Pin Functions
+                  PIN
+                                                 TYPE                                                         DESCRIPTION
+ NO.                    NAME
+ 1                       A1                 Digital input         I2C address pin. Connect to GND, SCL, SDA, or VS.
+ 2                       A0                 Digital input         I2C address pin. Connect to GND, SCL, SDA, or VS.
+ 3                      ALERT              Digital output         Open-drain alert output, default state is active low.
+ 4                      SDA              Digital input/output     Open-drain bidirectional I2C data.
+ 5                      SCL                 Digital input         I2C clock input.
+ 6                       VS                Power supply           Power supply, 2.7 V to 5.5 V.
+ 7                      GND                   Ground              Ground.
+ 8                      VBUS                Analog input          Bus voltage input.
+                                                                  Negative input to the device. For high-side applications, connect to load side of sense resistor. For
+ 9                       IN–                Analog input
+                                                                  low-side applications, connect to ground side of sense resistor.
+                                                                  Positive input to the device. For high-side applications, connect to power supply side of sense
+ 10                      IN+                Analog input
+                                                                  resistor. For low-side applications, connect to load side of sense resistor.
+
+
+
+6 Specifications
+6.1 Absolute Maximum Ratings
+over operating free-air temperature range (unless otherwise noted)(1)
+                                                                                                                          MIN                 MAX           UNIT
+ VS                     Supply voltage                                                                                                            6           V
+                        Differential (VIN+) – (VIN–)                                                                       –40                   40           V
+ VIN+, VIN– (2)
+                        Common-mode                                                                                       –0.3                   85           V
+ VVBUS                                                                                                                    –0.3                   85           V
+ VALERT                 ALERT                                                                                             –0.3            VS + 0.3            V
+ VIO                    SDA, SCL                                                                                          –0.3                    6           V
+ IIN                    Input current into any pin                                                                                                5          mA
+ IOUT                   Digital output current                                                                                                   10          mA
+ TJ                     Junction temperature                                                                                                   150           °C
+ Tstg                   Storage temperature                                                                                –65                 150           °C
+
+(1)     Stresses beyond those listed under Absolute Maximum Rating may cause permanent damage to the device. These are stress
+        ratings only, which do not imply functional operation of the device at these or any other conditions beyond those indicated
+        under Recommended Operating Condition. Exposure to absolute-maximum-rated conditions for extended periods may affect device
+        reliability.
+(2)     VIN+ and VIN– are the voltages at the IN+ and IN– pins, respectively.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                                   Submit Document Feedback                 3
+                                                                     Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                                          www.ti.com
+
+6.2 ESD Ratings
+                                                                                                                        VALUE          UNIT
+                                                  Human body model (HBM), per ANSI/ESDA/JEDEC JS-001, all
+                                                                                                                        ±2000
+                                                  pins(1)
+    V(ESD)        Electrostatic discharge                                                                                                V
+                                                  Charged device model (CDM), per JEDEC specification JESD22-
+                                                                                                                        ±1000
+                                                  C101, all pins(2)
+
+(1)        JEDEC document JEP155 states that 500-V HBM allows safe manufacturing with a standard ESD control process.
+(2)        JEDEC document JEP157 states that 250-V CDM allows safe manufacturing with a standard ESD control process.
+
+
+6.3 Recommended Operating Conditions
+over operating free-air temperature range (unless otherwise noted)
+                                                                                                   MIN            NOM        MAX       UNIT
+    VCM           Common-mode input range                                                          –0.3                         85       V
+    VS            Operating supply range                                                            2.7                        5.5       V
+    TA            Ambient temperature                                                               –40                       125        °C
+
+
+
+6.4 Thermal Information
+                                                                                                       INA237
+                                     THERMAL METRIC(1)                                              DGS (VSSOP)                      UNIT
+                                                                                                       10 PINS
+    RθJA              Junction-to-ambient thermal resistance                                              177.6                      °C/W
+    RθJC(top)         Junction-to-case (top) thermal resistance                                           66.4                       °C/W
+    RθJB              Junction-to-board thermal resistance                                                99.5                       °C/W
+    ΨJT               Junction-to-top characterization parameter                                           9.7                       °C/W
+    YJB               Junction-to-board characterization parameter                                        97.6                       °C/W
+    RθJC(bot)         Junction-to-case (bottom) thermal resistance                                        N/A                        °C/W
+
+(1)        For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+           report.
+
+
+
+
+4          Submit Document Feedback                                                                  Copyright © 2022 Texas Instruments Incorporated
+
+                                                             Product Folder Links: INA237
+                                                                                                                              INA237
+www.ti.com                                                                                 SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+
+6.5 Electrical Characteristics
+at TA = 25 °C, VS = 3.3 V, VSENSE = VIN+ – VIN– = 0 V, VCM = VIN– = 48 V (unless otherwise noted)
+                    PARAMETER                                     TEST CONDITIONS                   MIN       TYP     MAX     UNIT
+ INPUT
+ VCM        Common-mode input range                 TA = –40°C to +125°C                            –0.3                 85    V
+ VVBUS      Bus voltage input range                                                                    0                 85    V
+ CMRR       Common-mode rejection                   –0.3 V < VCM < 85 V, TA = –40°C to +125°C        120      140              dB
+                                                    TA = –40°C to +125°C, ADCRANGE = 0           –163.84             163.84    mV
+ VDIFF      Shunt voltage input range
+                                                    TA = –40°C to +125°C, ADCRANGE = 1            –40.96              40.96    mV
+ Vos        Shunt offset voltage                    VCM = 0 V                                                 ±15       ±50    µV
+ dVos/dT    Shunt offset voltage drift              TA = –40°C to +125°C                                       ±2       ±20   nV/°C
+ PSRR       Shunt offset voltage vs power supply    VS = 2.7 V to 5.5 V, TA = –40°C to +125°C                 ±0.1       ±1   µV/V
+ Vos_bus    VBUS offset voltage                     VBUS = 20 mV                                               ±1        ±5    mV
+ dVos/dT    VBUS offset voltage drift               TA = –40°C to +125°C                                      ±20     ±100    µV/°C
+ PSRR       VBUS offset voltage vs power supply     VS = 2.7 V to 5.5 V                                       ±1.1            mV/V
+ IB         Input bias current                      Either input, IN+ or IN–, VCM = 85 V                       0.1      2.5    nA
+ ZVBUS      VBUS pin input impedance                Active mode                                      0.8        1       1.2    MΩ
+ IVBUS      VBUS pin leakage current                Shutdown mode, VBUS = 85 V                                 10              nA
+ RDIFF      Input differential impedance            Active mode, VIN+ – VIN– < 164 mV                          92              kΩ
+ DC ACCURACY
+ GSERR      Shunt voltage gain error                                                                          ±0.1     ±0.3    %
+ GS_DRFT    Shunt voltage gain error drift                                                                              ±50 ppm/°C
+ GBERR      VBUS voltage gain error                                                                           ±0.1     ±0.3    %
+ GB_DRFT    VBUS voltage gain error drift                                                                               ±50 ppm/°C
+ PTME       Power total measurement error (TME)     TA = –40°C to +125°C, at full scale                                ±1.6    %
+            ADC resolution                                                                                     16             Bits
+                                                    Shunt voltage, ADCRANGE = 0                                 5              µV
+                                                    Shunt voltage, ADCRANGE = 1                               1.25             µV
+            1 LSB step size
+                                                    Bus voltage                                              3.125             mV
+                                                    Temperature                                               125             m°C
+                                                    Conversion time field = 0h                                 50
+                                                    Conversion time field = 1h                                 84
+                                                    Conversion time field = 2h                                150
+                                                    Conversion time field = 3h                                280
+ TCT        ADC conversion-time(1)                                                                                             µs
+                                                    Conversion time field = 4h                                540
+                                                    Conversion time field = 5h                               1052
+                                                    Conversion time field = 6h                               2074
+                                                    Conversion time field = 7h                               4120
+ INL        Integral Non-Linearity                                                                             ±2             m%
+ DNL        Differential Non-Linearity                                                                         0.2            LSB
+ CLOCK SOURCE
+ FOSC       Internal oscillator frequency                                                                       1             MHz
+                                                    TA = 25°C                                                          ±0.5    %
+ FOSC_TOL Internal oscillator frequency tolerance
+                                                    TA = –40°C to +125°C                                                 ±1    %
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                         Submit Document Feedback         5
+                                                       Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                               www.ti.com
+
+6.5 Electrical Characteristics (continued)
+at TA = 25 °C, VS = 3.3 V, VSENSE = VIN+ – VIN– = 0 V, VCM = VIN– = 48 V (unless otherwise noted)
+                        PARAMETER                                    TEST CONDITIONS           MIN        TYP        MAX      UNIT
+    TEMPERATURE SENSOR
+                Measurement range                                                               –40                  +125       °C
+                                                      TA = 25°C                                          ±0.15          ±1      °C
+                Temperature accuracy
+                                                      TA = –40°C to +125°C                                ±0.2          ±2      °C
+    POWER SUPPLY
+    VS          Supply voltage                                                                  2.7                    5.5      V
+                                                      VSENSE = 0 V                                         640         750      µA
+    IQ          Quiescent current
+                                                      VSENSE = 0 V, TA = –40°C to +125°C                               1.1     mA
+    IQSD        Quiescent current, shutdown           Shutdown mode                                         2.8          5      µA
+                                                      Power-up (NPOR)                                      300
+    TPOR        Device start-up time                                                                                            µs
+                                                      From shutdown mode                                    60
+    DIGITAL INPUT / OUTPUT
+    VIH         Logic input level, high               SDA, SCL                                  1.2                    5.5      V
+    VIL         Logic input level, low                                                        GND                      0.4      V
+    VOL         Logic output level, low               IOL = 3 mA                              GND                      0.4      V
+    IIO_LEAK    Digital leakage input current         0 ≤ VIN ≤ VS                               –1                      1      µA
+
+(1)        Subject to oscillator accuracy and drift
+
+
+
+
+6          Submit Document Feedback                                                        Copyright © 2022 Texas Instruments Incorporated
+
+                                                         Product Folder Links: INA237
+                                                                                                                                            INA237
+www.ti.com                                                                                       SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+
+6.6 Timing Requirements (I2C)
+                                                                                                           MIN    NOM        MAX          UNIT
+ I2C BUS (FAST MODE)
+ F(SCL)          I2C clock frequency                                                                         1                  400        kHz
+ t(BUF)          Bus free time between STOP and START conditions                                           600                              ns
+                 Hold time after a repeated START condition. After this period, the first
+ t(HDSTA)                                                                                                  100                              ns
+                 clock is generated.
+ t(SUSTA)        Repeated START condition setup time                                                       100                              ns
+ t(SUSTO)        STOP condition setup time                                                                 100                              ns
+ t(HDDAT)        Data hold time                                                                             10                  900         ns
+ t(SUDAT)        Data setup time                                                                           100                              ns
+ t(LOW)          SCL clock low period                                                                  1300                                 ns
+ t(HIGH)         SCL clock high period                                                                     600                              ns
+ tF              Data fall time                                                                                                 300         ns
+ tF              Clock fall time                                                                                                300         ns
+ tR              Clock rise time                                                                                                300         ns
+ I2C BUS (HIGH-SPEED MODE)
+ F(SCL)          I2C clock frequency                                                                        10               2940          kHz
+ t(BUF)          Bus free time between STOP and START conditions                                           160                              ns
+                 Hold time after a repeated START condition. After this period, the first
+ t(HDSTA)                                                                                                  100                              ns
+                 clock is generated.
+ t(SUSTA)        Repeated START condition setup time                                                       100                              ns
+ t(SUSTO)        STOP condition setup time                                                                 100                              ns
+ t(HDDAT)        Data hold time                                                                             10                  125         ns
+ t(SUDAT)        Data setup time                                                                            20                              ns
+ t(LOW)          SCL clock low period                                                                      200                              ns
+ t(HIGH)         SCL clock high period                                                                      60                              ns
+ tF              Data fall time                                                                                                 80          ns
+ tF              Clock fall time                                                                                                40          ns
+ tR              Clock rise time                                                                                                40          ns
+
+
+
+6.7 Timing Diagram
+                                    t(LOW)
+                                                  tR                 tF                         t(HDSTA)
+
+
+           SCL
+
+                                     t(HDSTA)                       t(HIGH)   t(SUSTA)                                                t(SUSTO)
+                                                         t(HDDAT)                t(SUDAT)
+
+           SDA
+                      t(BUF)
+
+                  P            S                                                            S                               P
+
+
+                                                       Figure 6-1. I2C Timing Diagram
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                  Submit Document Feedback            7
+                                                           Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                                                                             www.ti.com
+
+6.8 Typical Characteristics
+at TA = 25 °C, VVS = 3.3 V, VCM = 48 V, VSENSE = 0, and VVBUS = 48 V (unless otherwise noted)
+
+
+
+
+        Population                                                                          Population
+
+
+
+
+                     -50   -40   -30   -20   -10   0   10    20    30   40   50                          -50    -40    -30   -20    -10   0    10      20    30    40    50
+                                       Shunt Offset Voltage (PV)                                                             Shunt Offset Voltage (PV)
+                                              VCM = 48 V                                                                              VCM = 0 V
+    Figure 6-2. Shunt Input Offset Voltage Production Distribution                     Figure 6-3. Shunt Input Offset Voltage Production Distribution
+
+
+
+
+                                                                                            Population
+
+
+
+
+                                                                                                          -1    -0.8 -0.6 -0.4 -0.2       0    0.2    0.4   0.6   0.8    1
+                                                                                                                        Common-Mode Rejection Ratio (PV)
+       Figure 6-4. Shunt Input Offset Voltage vs. Temperature                              Figure 6-5. Common-Mode Rejection Ratio Production
+                                                                                                              Distribution
+
+
+
+
+                                                                                            Population
+
+
+
+
+                                                                                                         -300         -200    -100        0          100     200        300
+                                                                                                                              Shunt Gain Error (m%)
+                                                   .                                                                                 VCM = 24 V
+     Figure 6-6. Shunt Input Common-Mode Rejection Ratio vs.                             Figure 6-7. Shunt Input Gain Error Production Distribution
+                            Temperature
+
+
+
+
+8       Submit Document Feedback                                                                                                   Copyright © 2022 Texas Instruments Incorporated
+
+                                                                        Product Folder Links: INA237
+                                                                                                                                                              INA237
+www.ti.com                                                                                                            SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+
+6.8 Typical Characteristics (continued)
+at TA = 25 °C, VVS = 3.3 V, VCM = 48 V, VSENSE = 0, and VVBUS = 48 V (unless otherwise noted)
+
+
+
+
+                                                        VCM = 24 V                                                                  .
+
+                    Figure 6-8. Shunt Input Gain Error vs. Temperature                              Figure 6-9. Shunt Input Gain Error vs. Common-Mode Voltage
+
+
+
+
+               Population
+
+
+
+
+                             -5     -4   -3     -2     -1   0       1    2    3         4   5
+                                                Bus Voltage Offset (mV)
+                                                      VVBUS = 20 mV                                                          VVBUS = 20 mV
+
+   Figure 6-10. Bus Input Offset Voltage Production Distribution                                        Figure 6-11. Bus Input Offset Voltage vs. Temperature
+
+                       140
+
+                       120
+
+                       100
+
+
+
+
+       Population
+                            80
+
+                            60
+
+                            40
+
+                            20
+
+                             0
+                                 -300    -200        -100       0       100       200       300
+                                                Bus Voltage Gain Error (m%)
+     Figure 6-12. Bus Input Gain Error Production Distribution                                            Figure 6-13. Bus Input Gain Error vs. Temperature
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                                     Submit Document Feedback           9
+                                                                                    Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                                     www.ti.com
+
+6.8 Typical Characteristics (continued)
+at TA = 25 °C, VVS = 3.3 V, VCM = 48 V, VSENSE = 0, and VVBUS = 48 V (unless otherwise noted)
+
+
+
+
+     Figure 6-14. Input Bias Current vs. Differential Input Voltage     Figure 6-15. Input Bias Current (IB+ or IB–) vs. Common-Mode
+                                                                                                    Voltage
+
+
+
+
+           Figure 6-16. Input Bias Current vs. Temperature                Figure 6-17. Input Bias Current vs. Temperature, Shutdown
+
+
+
+
+                Figure 6-18. Active IQ vs. Temperature                             Figure 6-19. Active IQ vs. Supply Voltage
+
+
+
+
+10      Submit Document Feedback                                                                 Copyright © 2022 Texas Instruments Incorporated
+
+                                                         Product Folder Links: INA237
+                                                                                                                                                                                             INA237
+www.ti.com                                                                                                                                             SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+
+6.8 Typical Characteristics (continued)
+at TA = 25 °C, VVS = 3.3 V, VCM = 48 V, VSENSE = 0, and VVBUS = 48 V (unless otherwise noted)
+
+
+
+
+                                     Figure 6-20. Shutdown IQ vs. Supply Voltage                                                               Figure 6-21. Shutdown IQ vs. Temperature
+                           680                                                                                                     150
+
+                                                 Continuous I2C Write Commands
+
+
+
+
+                                                                                               Quiescent Current - Shutdown (PA)
+                                                                                                                                   120
+                           660
+
+
+
+
+  Quiescent Current (PA)
+                                                      Idle SDA, Clocking SCL
+                                                                                                                                    90
+                           640
+                                                                                                                                    60
+
+                           620
+                                                                                                                                    30
+
+
+                           600                                                                                                       0
+                                 1               10             100              1000   3000                                             1               10             100           1000    3000
+                                                      Frequency (kHz)                                                                                         Frequency (kHz)
+                                     Figure 6-22. Active IQ vs. Clock Frequency                                                              Figure 6-23. Shutdown IQ vs. Clock Frequency
+
+
+
+
+                           Figure 6-24. Internal Clock Frequency vs. Power Supply                                                   Figure 6-25. Internal Clock Frequency vs. Temperature
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                                                                     Submit Document Feedback         11
+                                                                               Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                                                       www.ti.com
+
+
+7 Detailed Description
+7.1 Overview
+The INA237 device is a digital current sense amplifier with an I2C digital interface. It measures shunt voltage,
+bus voltage and internal temperature while calculating current, power necessary for accurate decision making in
+precisely controlled systems. Programmable registers allow flexible configuration for measurement precision as
+well as continuous or triggered operation. Detailed register information is found in Section 7.6.
+7.2 Functional Block Diagram
+                                                                              VS
+
+
+                                                    Reference                Power
+                           IN+
+                                                                                                                          SCL
+                           IN-
+                                                         16 Bit     Voltage         Current                               SDA
+                                     MUX                                                                    I2 C
+                                                         ADC        Power           Temp                                  A0
+                        VBUS
+                                                                                                                          A1
+
+
+                                                    Oscillator                                          +
+                                                                         Out-of-range                                     ALERT
+                                                                          Threshold                     ±
+
+                                                                  GND
+
+7.3 Feature Description
+7.3.1 Versatile High Voltage Measurement Capability
+The INA237 operates off a 2.7 V to 5.5 V supply but can measure voltage and current on rails as high as 85
+V. The current is measured by sensing the voltage drop across a external shunt resistor at the IN+ and IN–
+pins. The input stage of the INA237 is designed such that the input common-mode voltage can be higher than
+the device supply voltage, VS. The supported common-mode voltage range at the input pins is –0.3 V to +85
+V, which makes the device well suited for both high-side and low-side current measurements. There are no
+special considerations for power-supply sequencing because the common-mode input range and device supply
+voltage are independent of each other; therefore, the bus voltage can be present with the supply voltage off, and
+vice-versa without damaging the device.
+The device also measures the bus supply voltage through the VBUS pin and temperature through the integrated
+temperature sensor. The differential shunt voltage is measured between the IN+ and IN– pins, while the bus
+voltage is measured with respect to device ground. Monitored bus voltages can range from 0 V to 85 V, while
+monitored temperatures can range from -40 ºC to +125 ºC.
+Shunt voltage, bus voltage, and temperature measurements are multiplexed internally to a single ADC as shown
+in Figure 7-1.
+
+                                                                        ADCp ADCn
+
+                                                                                              Bus Voltage
+                                     VBUS
+                                                                                              Shunt Voltage
+
+                                                                                              Internal Temp.
+
+
+                                      IN+
+                                                                                              ADC_IN+
+                                                                                     To ADC Input
+                                      IN-
+                                            Vs                                                ADC_IN-
+
+
+
+                                            PTAT Temp.
+                                              Sensor
+                                                                                             MUX digital
+                                                                                              Control
+
+
+                                      Figure 7-1. High-Voltage Input Multiplexer
+
+12    Submit Document Feedback                                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                     Product Folder Links: INA237
+                                                                                                                                                       INA237
+www.ti.com                                                                                                  SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+
+7.3.2 Power Calculation
+The current and power are calculated after a shunt voltage and bus voltage measurement as shown in Figure
+7-2. Power is calculated based on the previous current calculation and the latest bus voltage measurement. If
+the value loaded into the SHUNT_CAL register is zero, the power value reported is also zero. The current and
+power values are considered intermediate results (unless the averaging is set to 1) and are stored in an internal
+accumulation register. Following every measured sample, the newly-calculated values for current and power are
+appended to this accumulation register until all of the samples have been measured and averaged. After all
+of the samples have been measured and the corresponding current and power calculations have been made,
+the accumulated average for each of these parameters is then loaded to the corresponding output registers
+where they can then be read. These calculations are performed in the background and do not add to the overall
+conversion time.
+                 Current Limit Detect Following                                   Bus and Power Limit Detect
+                Every Shunt Voltage Conversion                              Following Every Bus Voltage Conversion
+
+
+
+
+       I   V    I   V   I   V    I   V    I   V    I   V   I     V     I    V     I   V   I     V   I   V    I   V   I   V     I   V   I   V   I   V
+
+
+               P        P        P       P        P        P           P          P       P         P       P        P        P        P       P       P
+
+
+                                                                                Power Average
+
+
+                                                                           Bus Voltage Average
+
+
+                                                                     Shunt Voltage Average
+
+
+                                                  Figure 7-2. Power Calculation Scheme
+
+7.3.3 Low Bias Current
+The INA237 features very low input bias current which provides several benefits. The low input bias current of
+the INA237 reduces the current consumed by the device in both active and shutdown state. Another benefit
+of low bias current is that it allows the use of input filters to reject high-frequency noise before the signal is
+converted to digital data. In traditional digital current-sense amplifiers, the addition of input filters comes at
+the cost of reduced accuracy. However, as a result of the low bias current, the reduction in accuracy due to
+input filters is minimized. An additional benefit of low bias current is the ability to use a larger shunt resistor to
+accurately sense smaller currents. Use of a larger value for the shunt resistor allows the device to accurately
+monitor currents in the sub-mA range.
+The bias current in the INA237 is the smallest when the sensed current is zero. As the current starts to increase,
+the differential voltage drop across the shunt resistor increases which results in an increase in the bias current
+as shown in Figure 6-14.
+7.3.4 High-Precision Delta-Sigma ADC
+The integrated ADC is a high-performance, low-offset, low-drift, delta-sigma ADC designed to support
+bidirectional current flow at the shunt voltage measurement channel. The measured inputs are selected through
+the high-voltage input multiplexer to the ADC inputs as shown in Figure 7-1. The ADC architecture enables
+lower drift measurement across temperature and consistent offset measurements across the common-mode
+voltage, temperature, and power supply variations. A low-offset ADC is preferred in current sensing applications
+to provide a near 0-V offset voltage that maximizes the useful dynamic range of the system.
+The INA237 can measure the shunt voltage, bus voltage, and die temperature, or a combination of any based
+on the selected MODE bits setting in the ADC_CONFIG register. This permits selecting modes to convert
+only the shunt voltage or bus voltage to further allow the user to configure the monitoring function to fit the
+specific application requirements. When no averaging is selected, once an ADC conversion is completed, the
+converted values are independently updated in their corresponding registers where they can be read through
+the digital interface at the time of conversion end. The conversion time for shunt voltage, bus voltage, and
+
+Copyright © 2022 Texas Instruments Incorporated                                                                              Submit Document Feedback       13
+                                                               Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                     www.ti.com
+
+temperature inputs are set independently from 50 µs to 4.12ms depending on the values programmed in the
+ADC_CONFIG register. Enabled measurement inputs are converted sequentially so the total time to convert
+all inputs depends on the conversion time for each input and the number of inputs enabled. When averaging
+is used, the intermediate values are subsequently stored in an averaging accumulator, and the conversion
+sequence repeats until the number of averages is reached. After all of the averaging has been completed, the
+final values are updated in the corresponding registers that can then be read. These values remain in the data
+output registers until they are replaced by the next fully completed conversion results. In this case, reading the
+data output registers does not affect a conversion in progress.
+The ADC has two conversion modes—continuous and triggered—set by the MODE bits in ADC_CONFIG
+register. In continuous-conversion mode, the ADC will continuously convert the input measurements and update
+the output registers as described above in an indefinite loop. In triggered-conversion mode, the ADC will convert
+the input measurements as described above, after which the ADC will go into shutdown mode until another
+single-shot trigger is generated by writing to the MODE bits. Writing the MODE bits will interrupt and restart
+triggered or continuous conversions that are in progress. Although the device can be read at any time, and
+the data from the last conversion remains available, the Conversion Ready flag (CNVRF bit in DIAG_ALRT
+register) is provided to help coordinate triggered conversions. This bit is set after all conversions and averaging
+is completed.
+The Conversion Ready flag (CNVRF) clears under these conditions:
+•    Writing to the ADC_CONFIG register (except for selecting shutdown mode); or
+•    Reading the DIAG_ALRT Register
+While the INA237 device is used in either one of the conversion modes, a dedicated digital engine is calculating
+the current and power values in the background as described in Section 7.3.2. All of the calculations are
+performed in the background and do not contribute to conversion time.
+For applications that must synchronize with other components in the system, the INA237 conversion can be
+delayed by programming the CONVDLY bits in CONFIG register in the range between 0 (no delay) and 510
+ms. The resolution in programming the conversion delay is 2 ms. The conversion delay is set to 0 by default.
+Conversion delay can assist in measurement synchronization when multiple external devices are used for
+voltage or current monitoring purposes. In applications where an time aligned voltage and current measurements
+are needed, two devices can be used with the current measurement delayed such that the external voltage and
+current measurements will occur at approximately the same time. Keep in mind that even though the internal
+time base for the ADC is precise, synchronization will be lost over time due to internal and external time base
+mismatch.
+7.3.4.1 Low Latency Digital Filter
+The device integrates a low-pass digital filter that performs both decimation and filtering on the ADC output
+data, which helps with noise reduction. The digital filter is automatically adjusted for the different output data
+rates and always settles within one conversion cycle. The user has the flexibility to choose different output
+conversion time periods TCT from 50 µs to 4.12 ms. With this configuration the first amplitude notch appears
+at the Nyquist frequency of the output signal which is determined by the selected conversion time period and
+defined as fNOTCH= 1 / (2 x TCT). This means that the filter cut-off frequency will scale proportionally with the
+data output rate as described. Figure 7-3 shows the filter response when the 1.052 ms conversion time period is
+selected.
+
+
+
+
+14    Submit Document Feedback                                                   Copyright © 2022 Texas Instruments Incorporated
+
+                                              Product Folder Links: INA237
+                                                                                                                                                INA237
+www.ti.com                                                                                                   SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+                                                                0
+
+
+                                                              −10
+
+                                                              −20
+
+
+                                                  Gain (dB)
+                                                              −30
+
+                                                              −40
+
+
+                                                              −50
+
+                                                              −60
+                                                                    1      10      100        1k    10k      100k
+                                                                                   Frequency (Hz)             G001
+
+
+
+                                                                        Conversion time = 1.052 ms, single
+                                                                                 conversion only
+
+
+                                                          Figure 7-3. ADC Frequency Response
+
+7.3.4.2 Flexible Conversion Times and Averaging
+ADC conversion times for shunt voltage, bus voltage and temperature can be set independently from 50 μs to
+4.12 ms. The flexibility in conversion time allows for robust operation in a variety of noisy environments. The
+device also allows for programmable averaging times from a single conversion all the way to an average of
+1024 conversions. The amount of averaging selected applies uniformly to all active measurement inputs. The
+ADC_CONFIG register shown in Table 7-6 provides additional details on the supported conversion times and
+averaging modes. The INA237 effective resolution of the ADC can be increased by increasing the conversion
+time and increasing the number of averages. Figure 7-4 and Figure 7-5 shown below illustrate the effect of
+conversion time and averaging on a constant input signal.
+
+
+
+
+                                     Figure 7-4. Noise vs. Conversion Time (Averaging = 1)
+
+
+
+
+                                    Figure 7-5. Noise vs. Conversion Time (Averaging = 128)
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                           Submit Document Feedback     15
+                                                                        Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                        www.ti.com
+
+Settings for the conversion time and number of conversions averaged impact the effective measurement
+resolution. For more detailed information on how averaging reduces noise and increases the effective number of
+bits (ENOB) see Section 8.1.3.
+7.3.5 Integrated Precision Oscillator
+The internal timebase of the device is provided by an internal oscillator that is trimmed to less than 0.5%
+tolerance at room temperature. The precision oscillator is the timing source for ADC conversions. The digital
+filter response varies with conversion time; therefore, the precise clock ensures filter response and notch
+frequency consistency across temperature. On power up, the internal oscillator and ADC take roughly 300 µs
+to reach <1% error stability. Once the clock stabilizes, the ADC data output will be accurate to the electrical
+specifications provided in Section 6.
+7.3.6 Multi-Alert Monitoring and Fault Detection
+The INA237 includes a multipurpose, open-drain ALERT output pin that can be used to report multiple
+diagnostics or as an indicator that the ADC conversion is complete when the device is operating in both
+triggered and continuous conversion mode. The diagnostics listed in Table 7-1 are constantly monitored and can
+be reported through the ALERT pin whenever the monitored output value crosses its associated out-of-range
+threshold.
+                                      Table 7-1. ALERT Diagnostics Description
+                                                                               OUT-OF-RANGE
+                                         STATUS BIT IN DIAG_ALRT REGISTER                            REGISTER DEFAULT
+          INA237 DIAGNOSTIC                                                     THRESHOLD
+                                                        (RO)                                              VALUE
+                                                                               REGISTER (R/W)
+                                                                                                           0x8000 h
+ Shunt Under Voltage Limit                            SHNTUL                       SUVL
+                                                                                                      (two's complement)
+                                                                                                           0x7FFF h
+ Shunt Over Voltage Limit                             SHNTOL                       SOVL
+                                                                                                      (two's complement)
+                                                                                                            0x7FFF h
+ Bus Voltage Over-Limit                               BUSOL                        BOVL               (two's complement,
+                                                                                                      positive values only)
+                                                                                                            0x0000 h
+ Bus Voltage Under-Limit                              BUSUL                        BUVL               (two's complement,
+                                                                                                      positive values only)
+                                                                                                            0xFFFF h
+ Temperature Over-Limit                               TMPOL                     TEMP_LIMIT            (two's complement,
+                                                                                                      positive values only)
+                                                                                                           0x7FFF h
+ Power Over-Limit                                       POL                      PWR_LIMIT
+                                                                                                      (two's complement)
+
+
+A read of the DIAG_ALRT register is used to determine which diagnostic has triggered the ALERT pin. This
+register, shown in Table 7-13, is also used to monitor other associated diagnostics as well as configure some
+ALERT pin functions.
+•    Alert latch enable — In case the ALERT pin is triggered, this function will hold the value of the pin even after
+     all diagnostic conditions have cleared. A read of the DIAG_ALRT register will reset the status of the ALERT
+     pin. This function is enabled by setting the ALATCH bit.
+•    Conversion ready enable — Enables the ALERT pin to assert when an ADC conversion has completed and
+     output values are ready to be read through the digital interface. This function is enabled by setting the CNVR
+     bit. The conversion completed events can also be read through the CNVRF bit regardless of the CNVR bit
+     setting.
+•    Alert comparison on averaged output — Allows the out-of-range threshold value to be compared to the
+     averaged data values produced by the ADC. This helps to additionally remove noise from the output data
+     when compared to the out-of-range threshold to avoid false alerts due to noise. However, the diagnostic will
+     be delayed due to the time needed for averaging. This function is enabled by setting the SLOWALERT bit.
+•    Alert polarity — Allows the device to invert the active state of the ALERT pin. Note that the ALERT pin is an
+     open-drain output that must be pulled-up by a resistor. The ALERT pin is active-low by default and can be
+     configured for active high function using the APOL control bit.
+
+16    Submit Document Feedback                                                      Copyright © 2022 Texas Instruments Incorporated
+
+                                                Product Folder Links: INA237
+                                                                                                                                           INA237
+www.ti.com                                                                                              SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+Other diagnostic functions that are not reported by the ALERT pin but are available by reading the DIAG_ALRT
+register:
+• Math overflow — Indicated by the MATHOF bit, reports when an arithmetic operation has caused an internal
+   register overflow.
+• Memory status — Indicated by the MEMSTAT bit, monitors the health of the device non-volatile trim memory.
+   This bit should always read '1' when the device is operating properly.
+When the ALERT pin is configured to report the ADC conversion complete event, the ALERT pin becomes a
+multipurpose reporting output. Figure 7-6 shows an example where the device reports ADC conversion complete
+events while the INA237 device is subject to shunt over voltage (over current) event, bus under voltage event,
+over temperature event and over power-limit event.
+
+
+ Shunt Voltage                                                  Shunt Over Voltage Threshold
+
+
+
+
+    Bus Voltage
+                                                            Bus Under Voltage Threshold
+
+
+
+                                                                 Over Temp Threshold
+   Temperature
+
+
+         Power
+                                                            Power Over Limit Threshold
+
+
+
+
+       ALERT
+     (ALATCH = 0)
+      (APOL = 0)
+      (CNVR = 1)                             BUV     BUV  SOV                             SOV    SOV                 BUV      BUV
+                                             SET    CLEAR SET                              &    CLEAR                 &        &
+                        - No diag. error -                                                BUV                        OT       OT
+                      Conversion Complete                                                 SET                        SET       &
+                            Reported                                                                                          OP
+                                                                                                                              SET
+
+                                                   Figure 7-6. Multi-Alert Configuration
+
+7.4 Device Functional Modes
+7.4.1 Shutdown Mode
+In addition to the two conversion modes (continuous and triggered), the device also has a shutdown mode
+(selected by the MODE bits in ADC_CONFIG register) that reduces the quiescent current to less than 5 µA and
+turns off current into the device inputs, reducing the impact of supply drain when the device is not being used.
+The registers of the device can be written to and read from while the device is in shutdown mode. The device
+remains in shutdown mode until another triggered conversion command or continuous conversion command is
+received.
+The device can be triggered to perform conversions while in shutdown mode. When a conversion is triggered,
+the ADC will start conversion; once conversion completes the device will return to the shutdown state.
+Note that the shutdown current is specified with an inactive communications bus. Active clock and data activity
+will increase the current consumption as a function of the bus frequency as shown in Figure 6-23.
+7.4.2 Power-On Reset
+Power-on reset (POR) is asserted when VS drops below 1.26V (typical) at which all of the registers are reset to
+their default values. A manual device reset can be initiated by setting the RST bit in the CONFIG register. The
+default power-up register values are shown in the reset column for each register description. Links to the register
+descriptions are shown in Section 7.6.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                      Submit Document Feedback     17
+                                                          Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                         www.ti.com
+
+7.5 Programming
+7.5.1 I2C Serial Interface
+The INA237 operates only as a secondary device on both the SMBus and I2C interfaces. Connections to the
+bus are made through the open-drain SDA and SCL lines. The SDA and SCL pins feature integrated spike
+suppression filters and Schmitt triggers to minimize the effects of input spikes and bus noise. Although the
+device integrates spike suppression into the digital I/O lines, proper layout techniques help minimize the amount
+of coupling into the communication lines. This noise introduction could occur from capacitive coupling signal
+edges between the two communication lines themselves or from other switching noise sources present in the
+system. Routing traces in parallel with ground in between layers on a printed-circuit board (PCB) typically
+reduces the effects of coupling between the communication lines. Shielded communication lines reduce the
+possibility of unintended noise coupling into the digital I/O lines that could be incorrectly interpreted as start or
+stop commands.
+The INA237 supports the transmission protocol for fast mode (1 kHz to 400 kHz) and high-speed mode (1 kHz to
+2.94 MHz). All data bytes are transmitted most significant byte first and follow the SMBus 3.0 transfer protocol.
+To communicate with the INA237, the main device must first address secondary devices through a secondary
+device address byte. The secondary device address byte consists of seven address bits and a direction bit that
+indicates whether the action is to be a read or write operation.
+The device has two address pins, A0 and A1. Table 7-2 lists the pin logic levels for each of the 16 possible
+addresses. The device samples the state of pins A0 and A1 on every bus communication. Establish the pin
+states before any activity on the interface occurs. When connecting the SDA pin to either A0 or A1 to set the
+device address, additional hold time of 100 ns is needed on the MSB of the I2C address to insure correct device
+addressing.
+                            Table 7-2. Address Pins and Secondary Device Addresses
+                          A1                  A0                       Secondary Device Address
+                         GND                  GND                              1000000
+                         GND                  VS                               1000001
+                         GND                  SDA                              1000010
+                         GND                  SCL                              1000011
+                          VS                  GND                              1000100
+                          VS                  VS                               1000101
+                          VS                  SDA                              1000110
+                          VS                  SCL                              1000111
+                         SDA                  GND                              1001000
+                         SDA                  VS                               1001001
+                         SDA                  SDA                              1001010
+                         SDA                  SCL                              1001011
+                         SCL                  GND                              1001100
+                         SCL                  VS                               1001101
+                         SCL                  SDA                              1001110
+                         SCL                  SCL                              1001111
+
+
+7.5.1.1 Writing to and Reading Through the I2C Serial Interface
+Accessing a specific register on the INA237 is accomplished by writing the appropriate value to the register
+pointer. Refer to Section 7.6 for a complete list of registers and corresponding addresses. The value for the
+register pointer (as shown in Figure 7-9) is the first byte transferred after the secondary device address byte with
+the R/W bit low. Every write operation to the device requires a value for the register pointer.
+Writing to a register begins with the first byte transmitted by the main device. This byte is the secondary
+device address, with the R/W bit low. The device then acknowledges receipt of a valid address. The next
+
+18    Submit Document Feedback                                                       Copyright © 2022 Texas Instruments Incorporated
+
+                                              Product Folder Links: INA237
+                                                                                                                                                                                                                                               INA237
+  www.ti.com                                                                                                                                                         SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+      byte transmitted by the main device is the address of the register to be accessed. This register address value
+      updates the register pointer to the desired internal device register. The next two bytes are written to the register
+      addressed by the register pointer. The device acknowledges receipt of each data byte. The main device may
+      terminate data transfer by generating a start or stop condition.
+      When reading from the device, the last value stored in the register pointer by a write operation determines which
+      register is read during a read operation. To change the register pointer for a read operation, a new value must
+      be written to the register pointer. This write is accomplished by issuing a secondary device address byte with
+      the R/ W bit low, followed by the register pointer byte. No additional data are required. The main device then
+      generates a start condition and sends the address byte for the secondary device with the R/W bit high to initiate
+      the read command. The next byte is transmitted by the secondary device and is the most significant byte of the
+      register indicated by the register pointer. This byte is followed by an Acknowledge from the main device; then
+      the secondary device transmits the least significant byte. The main device may or may not acknowledge receipt
+      of the second data byte. The main device may terminate data transfer by generating a Not-Acknowledge after
+      receiving any data byte, or generating a start or stop condition. If repeated reads from the same register are
+      desired, it is not necessary to continually send the register pointer bytes; the device retains the register pointer
+      value until it is changed by the next write operation.
+      Figure 7-7 shows the write operation timing diagram. Figure 7-8 shows the read operation timing diagram. These
+      diagrams are shown for reading/writing to 16 bit registers.
+      Register bytes are sent most-significant byte first, followed by the least significant byte.
+               1                                                     9    1                                                 9   1                                                  9   1                                                   9
+
+SCL
+
+
+
+
+SDA            1    0       0       A3   A2   A1   A0     R/W            P7   P6    P5       P4    P3   P2   P1      P0         D15 D14 D13 D12 D11 D10             D9       D8        D7   D6    D5    D4      D3   D2         D1    D0
+
+   Start By                                                     ACK By                                                ACK By                                                  ACK By                                                   ACK By            Stop By
+  Controller                                                    Target                                                Target                                                  Target                                                   Target           Controller
+                                                          (1)
+                   Frame 1 Two-Wire Target Address Byte                              Frame 2 Register Pointer Byte                                    Frame 3 Data MSByte                                    Frame 4 Data LSByte
+
+
+      A.   The value of the Secondary Device Address byte is determined by the settings of the A0 and A1 pins. Refer to Table 7-2.
+      B.   The device does not support packet error checking (PEC) or perform clock stretching.
+
+                                                                         Figure 7-7. Timing Diagram for Write Word Format
+                        1                                                                9        1                                                             9        1                                                                 9
+
+  SCL
+
+
+
+
+ SDA                 1          0        0    A3    A2          A1       A0   R/W                 D15 D14 D13             D12   D11 D10    D9           D8               D7       D6   D5    D4        D3     D2      D1         D0
+
+                                                                                                                                                                                                                                                  (3)
+        Start By                                                                    ACK By                                             From                   ACK By                               From                              No ACK By           Stop
+       Controller                                                                   Target                                            Target                 Controller                           Target                             Controller
+                                                                              (1)                                                               (2)                                                                       (2)
+                            Frame 1 Two-Wire Target Address Byte                                                          Frame 2 Data MSByte                                                Frame 3 Data LSByte
+
+
+      A.   The value of the Secondary Device Address byte is determined by the settings of the A0 and A1 pins. Refer to Table 7-2.
+      B.   Read data is from the last register pointer location. If a new register is desired, the register pointer must be updated. See Figure 7-9.
+      C.   ACK by the main device can also be sent.
+      D.   The device does not support packet error checking (PEC) or perform clock stretching.
+
+                                                                         Figure 7-8. Timing Diagram for Read Word Format
+
+
+
+
+  Copyright © 2022 Texas Instruments Incorporated                                                                                                                                            Submit Document Feedback                                        19
+                                                                                                        Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                                                   www.ti.com
+
+                         1                                                  9      1                                                   9
+
+          SCL
+
+
+
+
+          SDA            1     0     0    A3    A2    A1    A0      R/W            P7   P6   P5    P4     P3     P2    P1      P0            Stop
+
+             Start By                                                     ACK By                                                    ACK By
+            Controller                                                    Target                                                    Target
+                                                                    (1)
+                             Frame 1 Two-Wire Target Address Byte                              Frame 2 Register Pointer Byte
+
+A.   The value of the Secondary Device Address Byte is determined by the settings of the A0 and A1 pins. Refer to Table 7-2.
+
+                                                Figure 7-9. Typical Register Pointer Set
+
+7.5.1.2 High-Speed I2C Mode
+When the bus is idle, both the SDA and SCL lines are pulled high by the pullup resistors. The main device
+generates a start condition followed by a valid serial byte containing high-speed (HS) main device code
+00001XXX. This transmission is made in fast (400 kHz) or standard (100 kHz) (F/S) mode at no more than
+400 kHz. The device does not acknowledge the HS main device code, but does recognize it and switches its
+internal filters to support 2.94-MHz operation.
+The main device then generates a repeated start condition (a repeated start condition has the same timing
+as the start condition). After this repeated start condition, the protocol is the same as F/S mode, except that
+transmission speeds up to 2.94 MHz are allowed. Instead of using a stop condition, use repeated start conditions
+to maintain the bus in HS-mode. A stop condition ends the HS-mode and switches all the internal filters of the
+device to support the F/S mode.
+7.5.1.3 SMBus Alert Response
+The INA237 is designed to respond to the SMBus Alert Response address. The SMBus Alert Response provides
+a quick fault identification for simple secondary devices. When an Alert occurs, the main device can broadcast
+the Alert Response secondary device address (0001 100) with the Read/Write bit set high. Following this Alert
+Response, any secondary device that generates an alert identifies itself by acknowledging the Alert Response
+and sending its address on the bus.
+The Alert Response can activate several different slave devices simultaneously, similar to the I2C General Call.
+If more than one slave attempts to respond, bus arbitration rules apply. The losing device does not generate an
+Acknowledge and continues to hold the Alert line low until that device wins arbitration.
+7.6 Register Maps
+7.6.1 INA237 Registers
+Table 7-3 lists the INA237 registers. All register locations not listed in Table 7-3 should be considered as
+reserved locations and the register contents should not be modified.
+                                                        Table 7-3. INA237 Registers
+ Address Acronym                                 Register Name                          Register Size (bits)                                 Section
+
+     0h     CONFIG                               Configuration                          16                                                      Go
+     1h     ADC_CONFIG                           ADC Configuration                      16                                                      Go
+     2h     SHUNT_CAL                            Shunt Calibration                      16                                                      Go
+     4h     VSHUNT                               Shunt Voltage Measurement              16                                                      Go
+     5h     VBUS                                 Bus Voltage Measurement                16                                                      Go
+     6h     DIETEMP                              Temperature Measurement                16                                                      Go
+     7h     CURRENT                              Current Result                         16                                                      Go
+     8h     POWER                                Power Result                           24                                                      Go
+     Bh     DIAG_ALRT                            Diagnostic Flags and Alert             16                                                      Go
+     Ch     SOVL                                 Shunt Overvoltage Threshold            16                                                      Go
+
+
+20    Submit Document Feedback                                                                                 Copyright © 2022 Texas Instruments Incorporated
+
+                                                            Product Folder Links: INA237
+                                                                                                                                              INA237
+www.ti.com                                                                                         SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+                                                  Table 7-3. INA237 Registers (continued)
+  Address Acronym                                  Register Name                    Register Size (bits)                                 Section
+
+     Dh      SUVL                                  Shunt Undervoltage Threshold     16                                                      Go
+     Eh      BOVL                                  Bus Overvoltage Threshold        16                                                      Go
+     Fh      BUVL                                  Bus Undervoltage Threshold       16                                                      Go
+    10h      TEMP_LIMIT                            Temperature Over-Limit           16                                                      Go
+                                                   Threshold
+    11h      PWR_LIMIT                             Power Over-Limit Threshold       16                                                      Go
+    3Eh      MANUFACTURER_ID                       Manufacturer ID                  16                                                      Go
+
+
+Complex bit access types are encoded to fit into small table cells. Table 7-4 shows the codes that are used for
+access types in this section.
+                                                  Table 7-4. INA237 Access Type Codes
+                                       Access Type        Code              Description
+                                       Read Type
+                                       R                  R                 Read
+                                       Write Type
+                                       W                  W                 Write
+                                       Reset or Default Value
+                                       -n                                   Value after reset or the default
+                                                                            value
+
+
+
+7.6.1.1 Configuration (CONFIG) Register (Address = 0h) [reset = 0h]
+The CONFIG register is shown in Table 7-5.
+Return to the Summary Table.
+                                            Table 7-5. CONFIG Register Field Descriptions
+      Bit       Field                         Type             Reset        Description
+       15       RST                           R/W              0h           Reset Bit. Setting this bit to '1' generates a system reset that is the
+                                                                            same as power-on reset.
+                                                                            Resets all registers to default values.
+                                                                            0h = Normal Operation
+                                                                            1h = System Reset sets registers to default values
+                                                                            This bit self-clears.
+       14       RESERVED                      R/W              0h           Reserved. Always reads 0.
+     13-6       CONVDLY                       R/W              0h           Sets the Delay for initial ADC conversion in steps of 2 ms.
+                                                                            0h = 0 s
+                                                                            1h = 2 ms
+                                                                            FFh = 510 ms
+       5        RESERVED                      R/W              0h           Reserved. Always reads 0.
+       4        ADCRANGE                      R/W              0h           Shunt full scale range selection across IN+ and IN–.
+                                                                            0h = ±163.84 mV
+                                                                            1h = ± 40.96 mV
+      3-0       RESERVED                      R                0h           Reserved. Always reads 0.
+
+
+
+7.6.1.2 ADC Configuration (ADC_CONFIG) Register (Address = 1h) [reset = FB68h]
+The ADC_CONFIG register is shown in Table 7-6.
+Return to the Summary Table.
+
+Copyright © 2022 Texas Instruments Incorporated                                                                    Submit Document Feedback           21
+                                                              Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                            www.ti.com
+
+                                 Table 7-6. ADC_CONFIG Register Field Descriptions
+      Bit    Field                    Type      Reset        Description
+     15-12   MODE                     R/W       Fh           The user can set the MODE bits for continuous or triggered mode on
+                                                             bus voltage, shunt voltage or temperature measurement.
+                                                             0h = Shutdown
+                                                             1h = Triggered bus voltage, single shot
+                                                             2h = Triggered shunt voltage, single shot
+                                                             3h = Triggered shunt voltage and bus voltage, single shot
+                                                             4h = Triggered temperature, single shot
+                                                             5h = Triggered temperature and bus voltage, single shot
+                                                             6h = Triggered temperature and shunt voltage, single shot
+                                                             7h = Triggered bus voltage, shunt voltage and temperature, single
+                                                             shot
+                                                             8h = Shutdown
+                                                             9h = Continuous bus voltage only
+                                                             Ah = Continuous shunt voltage only
+                                                             Bh = Continuous shunt and bus voltage
+                                                             Ch = Continuous temperature only
+                                                             Dh = Continuous bus voltage and temperature
+                                                             Eh = Continuous temperature and shunt voltage
+                                                             Fh = Continuous bus voltage, shunt voltage and temperature
+     11-9    VBUSCT                   R/W       5h           Sets the conversion time of the bus voltage measurement:
+                                                             0h = 50 µs
+                                                             1h = 84 µs
+                                                             2h = 150 µs
+                                                             3h = 280 µs
+                                                             4h = 540 µs
+                                                             5h = 1052 µs
+                                                             6h = 2074 µs
+                                                             7h = 4120 µs
+      8-6    VSHCT                    R/W       5h           Sets the conversion time of the shunt voltage measurement:
+                                                             0h = 50 µs
+                                                             1h = 84 µs
+                                                             2h = 150 µs
+                                                             3h = 280 µs
+                                                             4h = 540 µs
+                                                             5h = 1052 µs
+                                                             6h = 2074 µs
+                                                             7h = 4120 µs
+      5-3    VTCT                     R/W       5h           Sets the conversion time of the temperature measurement:
+                                                             0h = 50 µs
+                                                             1h = 84 µs
+                                                             2h = 150 µs
+                                                             3h = 280 µs
+                                                             4h = 540 µs
+                                                             5h = 1052 µs
+                                                             6h = 2074 µs
+                                                             7h = 4120 µs
+
+
+
+
+22    Submit Document Feedback                                                          Copyright © 2022 Texas Instruments Incorporated
+
+                                               Product Folder Links: INA237
+                                                                                                                                   INA237
+www.ti.com                                                                                SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+                              Table 7-6. ADC_CONFIG Register Field Descriptions (continued)
+      Bit       Field                         Type     Reset        Description
+      2-0       AVG                           R/W      0h           Selects ADC sample averaging count. The averaging setting applies
+                                                                    to all active inputs.
+                                                                    When >0h, the output registers are updated after the averaging has
+                                                                    completed.
+                                                                    0h = 1
+                                                                    1h = 4
+                                                                    2h = 16
+                                                                    3h = 64
+                                                                    4h = 128
+                                                                    5h = 256
+                                                                    6h = 512
+                                                                    7h = 1024
+
+
+
+7.6.1.3 Shunt Calibration (SHUNT_CAL) Register (Address = 2h) [reset = 1000h]
+The SHUNT_CAL register is shown in Table 7-7.
+Return to the Summary Table.
+                                       Table 7-7. SHUNT_CAL Register Field Descriptions
+      Bit       Field                         Type     Reset        Description
+       15       RESERVED                      R        0h           Reserved. Always reads 0.
+     14-0       SHUNT_CAL                     R/W      1000h        The register provides the device with a conversion constant value
+                                                                    that represents shunt resistance used to calculate current value in
+                                                                    Amperes.
+                                                                    This also sets the resolution for the CURRENT register.
+                                                                    Value calculation under Section 8.1.2.
+
+
+
+7.6.1.4 Shunt Voltage Measurement (VSHUNT) Register (Address = 4h) [reset = 0h]
+The VSHUNT register is shown in Table 7-8.
+Return to the Summary Table.
+                                          Table 7-8. VSHUNT Register Field Descriptions
+      Bit       Field                         Type     Reset        Description
+     15-0       VSHUNT                        R        0h           Differential voltage measured across the shunt output. Two's
+                                                                    complement value.
+                                                                    Conversion factor:
+                                                                    5 µV/LSB when ADCRANGE = 0
+                                                                    1.25 µV/LSB when ADCRANGE = 1
+
+
+
+7.6.1.5 Bus Voltage Measurement (VBUS) Register (Address = 5h) [reset = 0h]
+The VBUS register is shown in Table 7-9.
+Return to the Summary Table.
+                                            Table 7-9. VBUS Register Field Descriptions
+      Bit       Field                         Type     Reset        Description
+     15-0       VBUS                          R        0h           Bus voltage output. Two's complement value, however always
+                                                                    positive.
+                                                                    Conversion factor: 3.125 mV/LSB
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                          Submit Document Feedback         23
+                                                      Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                             www.ti.com
+
+7.6.1.6 Temperature Measurement (DIETEMP) Register (Address = 6h) [reset = 0h]
+The DIETEMP register is shown in Table 7-10.
+Return to the Summary Table.
+                                  Table 7-10. DIETEMP Register Field Descriptions
+     Bit     Field                    Type     Reset        Description
+     15-4    DIETEMP                  R        0h           Internal die temperature measurement. Two's complement value.
+                                                            Conversion factor: 125 m°C/LSB
+     3-0     RESERVED                 R        0h           Reserved. Always reads 0.
+
+
+
+7.6.1.7 Current Result (CURRENT) Register (Address = 7h) [reset = 0h]
+The CURRENT register is shown in Table 7-11.
+Return to the Summary Table.
+                                 Table 7-11. CURRENT Register Field Descriptions
+     Bit     Field                    Type     Reset        Description
+     15-0    CURRENT                  R        0h           Calculated current output in Amperes. Two's complement value.
+                                                            Value description under Section 8.1.2.
+
+
+
+7.6.1.8 Power Result (POWER) Register (Address = 8h) [reset = 0h]
+The POWER register is shown in Table 7-12.
+Return to the Summary Table.
+                                  Table 7-12. POWER Register Field Descriptions
+     Bit     Field                    Type     Reset        Description
+     23-0    POWER                    R        0h           Calculated power output.
+                                                            Output value in watts.
+                                                            Unsigned representation. Positive value.
+                                                            Value description under Section 8.1.2.
+
+
+
+7.6.1.9 Diagnostic Flags and Alert (DIAG_ALRT) Register (Address = Bh) [reset = 0001h]
+The DIAG_ALRT register is shown in Table 7-13.
+Return to the Summary Table.
+                                 Table 7-13. DIAG_ALRT Register Field Descriptions
+     Bit     Field                    Type     Reset        Description
+     15      ALATCH                   R/W      0h           When the Alert Latch Enable bit is set to Transparent mode, the
+                                                            Alert pin and Flag bit reset to the idle state when the fault has been
+                                                            cleared.
+                                                            When the Alert Latch Enable bit is set to Latch mode, the Alert pin
+                                                            and Alert Flag bit remain active following a fault until the DIAG_ALRT
+                                                            Register has been read.
+                                                            0h = Transparent
+                                                            1h = Latched
+     14      CNVR                     R/W      0h           Setting this bit high configures the Alert pin to be asserted when
+                                                            the Conversion Ready Flag (bit 1) is asserted, indicating that a
+                                                            conversion cycle has completed.
+                                                            0h = Disable conversion ready flag on ALERT pin
+                                                            1h = Enables conversion ready flag on ALERT pin
+
+
+
+
+24    Submit Document Feedback                                                           Copyright © 2022 Texas Instruments Incorporated
+
+                                              Product Folder Links: INA237
+                                                                                                                                     INA237
+www.ti.com                                                                                 SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+                              Table 7-13. DIAG_ALRT Register Field Descriptions (continued)
+      Bit       Field                         Type    Reset        Description
+       13       SLOWALERT                     R/W     0h           When enabled, ALERT function is asserted on the completed
+                                                                   averaged value.
+                                                                   This gives the flexibility to delay the ALERT until after the averaged
+                                                                   value.
+                                                                   0h = ALERT comparison on non-averaged (ADC) value
+                                                                   1h = ALERT comparison on averaged value
+       12       APOL                          R/W     0h           Alert Polarity bit sets the Alert pin polarity.
+                                                                   0h = Normal (Active-low, open-drain)
+                                                                   1h = Inverted (active-high, open-drain )
+     11-10      RESERVED                      R       0h           Reserved. Always read 0.
+       9        MATHOF                        R       0h           This bit is set to 1 if an arithmetic operation resulted in an overflow
+                                                                   error.
+                                                                   It indicates that current and power data may be invalid.
+                                                                   0h = Normal
+                                                                   1h = Overflow
+                                                                   Must be manually cleared by triggering another conversion.
+       8        RESERVED                      R       0h           Reserved. Always read 0.
+       7        TMPOL                         R/W     0h           This bit is set to 1 if the temperature measurement exceeds the
+                                                                   threshold limit in the temperature over-limit register.
+                                                                   0h = Normal
+                                                                   1h = Over Temp Event
+                                                                   When ALATCH =1 this bit is cleared by reading this register.
+       6        SHNTOL                        R/W     0h           This bit is set to 1 if the shunt voltage measurement exceeds the
+                                                                   threshold limit in the shunt over-limit register.
+                                                                   0h = Normal
+                                                                   1h = Over Shunt Voltage Event
+                                                                   When ALATCH =1 this bit is cleared by reading this register.
+       5        SHNTUL                        R/W     0h           This bit is set to 1 if the shunt voltage measurement falls below the
+                                                                   threshold limit in the shunt under-limit register.
+                                                                   0h = Normal
+                                                                   1h = Under Shunt Voltage Event
+                                                                   When ALATCH =1 this bit is cleared by reading this register.
+       4        BUSOL                         R/W     0h           This bit is set to 1 if the bus voltage measurement exceeds the
+                                                                   threshold limit in the bus over-limit register.
+                                                                   0h = Normal
+                                                                   1h = Bus Over-Limit Event
+                                                                   When ALATCH =1 this bit is cleared by reading this register.
+       3        BUSUL                         R/W     0h           This bit is set to 1 if the bus voltage measurement falls below the
+                                                                   threshold limit in the bus under-limit register.
+                                                                   0h = Normal
+                                                                   1h = Bus Under-Limit Event
+                                                                   When ALATCH =1 this bit is cleared by reading this register.
+       2        POL                           R/W     0h           This bit is set to 1 if the power measurement exceeds the threshold
+                                                                   limit in the power limit register.
+                                                                   0h = Normal
+                                                                   1h = Power Over-Limit Event
+                                                                   When ALATCH =1 this bit is cleared by reading this register.
+       1        CNVRF                         R/W     0h           This bit is set to 1 if the conversion is completed.
+                                                                   0h = Normal
+                                                                   1h = Conversion is complete
+                                                                   When ALATCH =1 this bit is cleared by reading this register or
+                                                                   starting a new triggered conversion.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                             Submit Document Feedback         25
+                                                     Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                               www.ti.com
+
+                         Table 7-13. DIAG_ALRT Register Field Descriptions (continued)
+     Bit     Field                    Type      Reset        Description
+      0      MEMSTAT                  R/W       1h           This bit is set to 0 if a checksum error is detected in the device trim
+                                                             memory space.
+                                                             0h = Memory Checksum Error
+                                                             1h = Normal Operation
+
+
+
+7.6.1.10 Shunt Overvoltage Threshold (SOVL) Register (Address = Ch) [reset = 7FFFh]
+If negative values are entered in this register, then a shunt voltage measurement of 0 V will trip this alarm. When
+using negative values for the shunt under and overvoltage thresholds be aware that the over voltage threshold
+must be set to the larger (that is, less negative) of the two values. The SOVL register is shown in Table 7-14.
+Return to the Summary Table.
+                                    Table 7-14. SOVL Register Field Descriptions
+     Bit     Field                    Type      Reset        Description
+     15-0    SOVL                     R/W       7FFFh        Sets the threshold for comparison of the value to detect Shunt
+                                                             Overvoltage (overcurrent protection). Two's complement value.
+                                                             Conversion Factor: 5 µV/LSB when ADCRANGE = 0
+                                                             1.25 µV/LSB when ADCRANGE = 1.
+
+
+
+7.6.1.11 Shunt Undervoltage Threshold (SUVL) Register (Address = Dh) [reset = 8000h]
+The SUVL register is shown in Table 7-15.
+Return to the Summary Table.
+                                    Table 7-15. SUVL Register Field Descriptions
+     Bit     Field                    Type      Reset        Description
+     15-0    SUVL                     R/W       8000h        Sets the threshold for comparison of the value to detect Shunt
+                                                             Undervoltage (undercurrent protection). Two's complement value.
+                                                             Conversion Factor: 5 µV/LSB when ADCRANGE = 0
+                                                             1.25 µV/LSB when ADCRANGE = 1.
+
+
+
+7.6.1.12 Bus Overvoltage Threshold (BOVL) Register (Address = Eh) [reset = 7FFFh]
+The BOVL register is shown in Table 7-16.
+Return to the Summary Table.
+                                    Table 7-16. BOVL Register Field Descriptions
+     Bit     Field                    Type      Reset        Description
+     15      Reserved                 R         0h           Reserved. Always reads 0.
+     14-0    BOVL                     R/W       7FFFh        Sets the threshold for comparison of the value to detect Bus
+                                                             Overvoltage (overvoltage protection). Unsigned representation,
+                                                             positive value only. Conversion factor: 3.125 mV/LSB.
+
+
+
+7.6.1.13 Bus Undervoltage Threshold (BUVL) Register (Address = Fh) [reset = 0h]
+The BUVL register is shown in Table 7-17.
+Return to the Summary Table.
+                                    Table 7-17. BUVL Register Field Descriptions
+     Bit     Field                    Type      Reset        Description
+     15      Reserved                 R         0h           Reserved. Always reads 0.
+
+
+26    Submit Document Feedback                                                             Copyright © 2022 Texas Instruments Incorporated
+
+                                               Product Folder Links: INA237
+                                                                                                                                  INA237
+www.ti.com                                                                               SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+                                   Table 7-17. BUVL Register Field Descriptions (continued)
+      Bit       Field                         Type    Reset        Description
+     14-0       BUVL                          R/W     0h           Sets the threshold for comparison of the value to detect Bus
+                                                                   Undervoltage (undervoltage protection). Unsigned representation,
+                                                                   positive value only. Conversion factor: 3.125 mV/LSB.
+
+
+
+7.6.1.14 Temperature Over-Limit Threshold (TEMP_LIMIT) Register (Address = 10h) [reset = 7FFFh]
+The TEMP_LIMIT register is shown in Table 7-18.
+Return to the Summary Table.
+                                       Table 7-18. TEMP_LIMIT Register Field Descriptions
+      Bit       Field                         Type    Reset        Description
+     15-4       TOL                           R/W     7FFh         Sets the threshold for comparison of the value to detect over
+                                                                   temperature measurements. Two's complement value.
+                                                                   The value entered in this field compares directly against the value
+                                                                   from the DIETEMP register to determine if an over temperature
+                                                                   condition exists. Conversion factor: 125 m°C/LSB.
+      3-0       Reserved                      R       0            Reserved, always reads 0
+
+
+
+7.6.1.15 Power Over-Limit Threshold (PWR_LIMIT) Register (Address = 11h) [reset = FFFFh]
+The PWR_LIMIT register is shown in Table 7-19.
+Return to the Summary Table.
+                                       Table 7-19. PWR_LIMIT Register Field Descriptions
+      Bit       Field                         Type    Reset        Description
+     15-0       POL                           R/W     FFFFh        Sets the threshold for comparison of the value to detect power over-
+                                                                   limit measurements. Unsigned representation, positive value only.
+                                                                   The value entered in this field compares directly against the value
+                                                                   from the POWER register to determine if an over power condition
+                                                                   exists. Conversion factor: 256 × Power LSB.
+
+
+
+7.6.1.16 Manufacturer ID (MANUFACTURER_ID) Register (Address = 3Eh) [reset = 5449h]
+The MANUFACTURER_ID register is shown in Table 7-20.
+Return to the Summary Table.
+                                 Table 7-20. MANUFACTURER_ID Register Field Descriptions
+      Bit       Field                         Type    Reset        Description
+     15-0       MANFID                        R       5449h        Reads back TI in ASCII.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                         Submit Document Feedback          27
+                                                     Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                       www.ti.com
+
+
+8 Application and Implementation
+                                                              Note
+      Information in the following applications sections is not part of the TI component specification,
+      and TI does not warrant its accuracy or completeness. TI’s customers are responsible for
+      determining suitability of components for their purposes, as well as validating and testing their design
+      implementation to confirm system functionality.
+
+8.1 Application Information
+8.1.1 Device Measurement Range and Resolution
+The INA237 device supports two input ranges for the shunt voltage measurement. The supported full scale
+differential input across the IN+ and IN– pins can be either ±163.84 mV or ±40.96 mV depending on the
+ADCRANGE bit in CONFIG register. The range for the bus voltage measurement is from 0 V to 85 V. The
+internal die temperature sensor range extends from –256 °C to +256 °C but is limited by the package to –40 °C
+to 125 °C.
+Table 8-1 provides a description of full scale voltage on shunt, bus, and temperature measurements, along with
+their associated step size.
+                                              Table 8-1. ADC Full Scale Values
+         PARAMETER                                    FULL SCALE VALUE                              RESOLUTION
+                                                  ±163.84 mV (ADCRANGE = 0)                            5 µV/LSB
+          Shunt voltage
+                                                   ±40.96 mV (ADCRANGE = 1)                          1.25 µV/LSB
+          Bus voltage                                      0 V to 85 V                              3.125 mV/LSB
+          Temperature                                   –40 °C to +125 °C                           125 m°C/LSB
+
+
+The device shunt voltage measurements, bus voltage, and temperature measurements can be read through the
+VSHUNT, VBUS, and DIETEMP registers, respectively. The digital output in VSHUNT and VBUS registers is
+16-bits. The shunt voltage measurement can be positive or negative due to bidirectional currents in the system;
+therefore the data value in VSHUNT can be positive or negative. The VBUS data value is always positive. The
+output data can be directly converted into voltage by multiplying the digital value by its respective resolution size.
+The digital output in the DIETEMP register is 12-bit and can be directly converted to °C by multiplying by the
+above resolution size. This output value can also be positive or negative.
+Furthermore, the device provides the flexibility to report calculated current in Amperes, power in Watts as
+described in Section 8.1.2.
+8.1.2 Current and Power Calculations
+For the INA237 device to report current values in Ampere units, a constant conversion value must be written in
+the SHUNT_CAL register that is dependent on the maximum measured current and the shunt resistance used in
+the application. The SHUNT_CAL register is calculated based on Equation 1. The term CURRENT_LSB is the
+LSB step size for the CURRENT register where the current in Amperes is stored. The value of CURRENT_LSB
+is based on the maximum expected current as shown in Equation 2, and it directly defines the resolution of the
+CURRENT register. While the smallest CURRENT_LSB value yields highest resolution, it is common to select a
+higher round-number (no higher than 8x) value for the CURRENT_LSB in order to simplify the conversion of the
+CURRENT.
+
+
+
+
+28    Submit Document Feedback                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA237
+                                                                                                                    INA237
+www.ti.com                                                                       SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+The RSHUNT term is the resistance value of the external shunt used to develop the differential voltage across the
+IN+ and IN– pins. Use Equation 1 for ADCRANGE = 0. For ADCRANGE = 1, the value of SHUNT_CAL must be
+multiplied by 4.
+
+      SHUNT_CAL = 819.2 x 106 x CURRENT_LSB x RSHUNT                                                                (1)
+
+where
+•    819.2 x 106 is an internal fixed value used to ensure scaling is maintained properly.
+•    the value of SHUNT_CAL must be multiplied by 4 for ADCRANGE = 1.
+
+
+
+                           Maximum Expected Current
+      Current_LSB =
+                                     215                                                                            (2)
+
+Note that the current is calculated following a shunt voltage measurement based on the value set in the
+SHUNT_CAL register. If the value loaded into the SHUNT_CAL register is zero, the current value reported
+through the CURRENT register is also zero.
+After programming the SHUNT_CAL register with the calculated value, the measured current in Amperes can be
+read from the CURRENT register. The final value is scaled by CURRENT_LSB and calculated in Equation 3:
+
+      Current [A] = CURRENT_LSB x CURRENT                                                                           (3)
+
+where
+•    CURRENT is the value read from the CURRENT register
+The power value can be read from the POWER register as a 24-bit value and converted to Watts by using
+Equation 4:
+
+
+
+      Power [W] = 0.2 x CURRENT_LSB x POWER                                                                         (4)
+
+where
+•    POWER is the value read from the POWER register.
+•    CURRENT_LSB is the lsb size of the current calculation as defined by Equation 2.
+
+
+For a design example using these equations refer to Section 8.2.2.
+8.1.3 ADC Output Data Rate and Noise Performance
+The INA237 noise performance and effective resolution depend on the ADC conversion time. The device
+also supports digital averaging which can further help decrease digital noise. The flexibility of the device to
+select ADC conversion time and data averaging offers increased signal-to-noise ratio and achieves the highest
+dynamic range with lowest offset. The profile of the noise at lower signals levels is dominated by the system
+noise that is comprised mainly of 1/f noise or white noise. The INA237 effective resolution of the ADC can be
+increased by increasing the conversion time and increasing the number of averages.
+Table 8-2 summarizes the output data rate conversion settings supported by the device. The fastest conversion
+setting is 50 µs. Typical noise-free resolution is represented as Effective Number of Bits (ENOB) based on
+device measured data. The ENOB is calculated based on noise peak-to-peak values, which assures that full
+noise distribution is taken into consideration.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                               Submit Document Feedback     29
+                                                  Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                             www.ti.com
+
+                                        Table 8-2. INA237 Noise Performance
+                                                                              NOISE-FREE ENOB        NOISE-FREE ENOB
+ ADC CONVERSION         OUTPUT SAMPLE         OUTPUT SAMPLE PERIOD
+                                                                              (±163.84-mV)           (±40.96-mV)
+ TIME PERIOD [µs]     AVERAGING [SAMPLES]             [ms]
+                                                                              (ADCRANGE = 0)         (ADCRANGE = 1)
+          50                                              0.05                       12.5                         9.9
+          84                                             0.084                       12.7                        10.5
+         150                                              0.15                       13.4                        11.4
+         280                                              0.28                       13.7                        12.2
+                                  1
+         540                                              0.54                       14.1                        12.4
+         1052                                            1.052                       14.1                        12.7
+         2074                                            2.074                       15.7                        13.1
+         4120                                             4.12                       15.7                        13.4
+          50                                              0.2                        12.7                        10.6
+          84                                             0.336                       13.7                        11.4
+         150                                              0.6                        14.1                        12.2
+         280                                              1.12                       14.7                        12.7
+                                  4
+         540                                              2.16                       15.7                        13.4
+         1052                                            4.208                       15.7                        14.1
+         2074                                            8.296                       15.7                        14.7
+         4120                                            16.48                       15.7                        14.7
+          50                                              0.8                        13.7                        11.5
+          84                                             1.344                       15.7                        12.7
+         150                                              2.4                        15.7                        13.4
+         280                                              4.48                       15.7                        13.7
+                                 16
+         540                                              8.64                       15.7                        14.1
+         1052                                           16.832                       15.7                        14.7
+         2074                                           33.184                       15.7                        15.7
+         4120                                            65.92                       16.0                        15.7
+          50                                              3.2                        15.7                        12.5
+          84                                             5.376                       15.7                        13.7
+         150                                              9.6                        15.7                        14.7
+         280                                             17.92                       15.7                        14.7
+                                 64
+         540                                             34.56                       16.0                        14.7
+         1052                                           67.328                       16.0                        15.7
+         2074                                           132.736                      16.0                        15.7
+         4120                                           263.68                       16.0                        15.7
+          50                                              6.4                        15.7                        13.1
+          84                                            10.752                       15.7                        14.1
+         150                                              19.2                       15.7                        14.7
+         280                                             35.84                       16.0                        15.7
+                                 128
+         540                                             69.12                       16.0                        15.7
+         1052                                           134.656                      16.0                        15.7
+         2074                                           265.472                      16.0                        15.7
+         4120                                           527.36                       16.0                        16.0
+
+
+
+
+30    Submit Document Feedback                                                         Copyright © 2022 Texas Instruments Incorporated
+
+                                               Product Folder Links: INA237
+                                                                                                                           INA237
+www.ti.com                                                                              SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+                                         Table 8-2. INA237 Noise Performance (continued)
+                                                                                    NOISE-FREE ENOB       NOISE-FREE ENOB
+  ADC CONVERSION             OUTPUT SAMPLE           OUTPUT SAMPLE PERIOD
+                                                                                    (±163.84-mV)          (±40.96-mV)
+  TIME PERIOD [µs]         AVERAGING [SAMPLES]               [ms]
+                                                                                    (ADCRANGE = 0)        (ADCRANGE = 1)
+            50                                                  12.8                       15.7                     13.7
+            84                                                21.504                       15.7                     14.7
+           150                                                  38.4                       15.7                     15.7
+           280                                                 71.68                       16.0                     15.7
+                                        256
+           540                                                138.24                       16.0                     15.7
+          1052                                                269.312                      16.0                     16.0
+          2074                                                530.944                      16.0                     16.0
+          4120                                                1054.72                      16.0                     16.0
+            50                                                  25.6                       15.7                     14.1
+            84                                                   43                        16.0                     15.7
+           150                                                  76.8                       16.0                     15.7
+           280                                                143.36                       16.0                     15.7
+                                        512
+           540                                                276.48                       16.0                     15.7
+          1052                                                538.624                      16.0                     16.0
+          2074                                               1061.888                      16.0                     16.0
+          4120                                                2109.44                      16.0                     16.0
+            50                                                  51.2                       15.7                     14.7
+            84                                                86.016                       15.7                     15.7
+           150                                                 153.6                       16.0                     16.0
+           280                                                286.72                       16.0                     16.0
+                                       1024
+           540                                                552.96                       16.0                     16.0
+          1052                                               1077.248                      16.0                     16.0
+          2074                                               2123.776                      16.0                     16.0
+          4120                                                4218.88                      16.0                     16.0
+
+
+8.1.4 Input Filtering Considerations
+As previously discussed, INA237 offers several options for noise filtering by allowing the user to select the
+conversion times and number of averages independently in the ADC_CONFIG register. The conversion times
+can be set independently for the shunt voltage and bus voltage measurements to allow added flexibility in
+monitoring of the power-supply bus.
+The internal ADC has good inherent noise rejection; however, the transients that occur at or very close to the
+sampling rate harmonics can cause problems. Because these signals are at 1 MHz and higher, they can be
+managed by incorporating filtering at the input of the device. Filtering high frequency signals enables the use of
+low-value series resistors on the filter with negligible effects on measurement accuracy. For best results, filter
+using the lowest possible series resistance (typically 100 Ω or less) and a ceramic capacitor. Recommended
+values for this capacitor are between 0.1 µF and 1 µF. Figure 8-1 shows the device with a filter added at the
+input.
+Overload conditions are another consideration for the device inputs. The device inputs are specified to tolerate
+±40 V differential across the IN+ and IN– pins. A large differential scenario might be a short to ground on the
+load side of the shunt. This type of event can result in full power-supply voltage across the shunt (as long
+the power supply or energy storage capacitors support it). Removing a short to ground can result in inductive
+kickbacks that could exceed the 40-V differential or 85-V common-mode absolute maximum rating of the device.
+Inductive kickback voltages are best controlled by Zener-type transient-absorbing devices (commonly called
+transzorbs) combined with sufficient energy storage capacitance. See the Transient Robustness for Current
+Shunt Monitors reference design which describes a high-side current shunt monitor used to measure the voltage
+developed across a current-sensing resistor when current passes through it.
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    31
+                                                     Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                                                      www.ti.com
+
+In applications that do not have large energy storage, electrolytic capacitors on one or both sides of the shunt,
+an input overstress condition may result from an excessive dV/dt of the voltage applied to the input. A hard
+physical short is the most likely cause of this event. This problem occurs because an excessive dV/dt can
+activate the ESD protection in the device in systems where large currents are available. Testing demonstrates
+that the addition of 10-Ω resistors in series with each input of the device sufficiently protects the inputs against
+this dV/dt failure up to the 40-V maximum differential voltage rating of the device. Selecting these resistors in the
+range noted has minimal effect on accuracy.
+                                                        Load           VS = 2.7V± 5.5V
+                                                       Supply
+
+                                                                  100 nF
+                                                                                     VS
+                                               RFILTER
+                                                                                    VBUS
+                                                                <100
+                                                                                    IN+
+
+                                               RSHUNT                                     RDIFF
+                                                                <100
+                                                                                    IN-
+
+                                                         Load                        GND
+
+                                                                     CFILTER
+                                                                  0.1µF to 1µF
+
+
+                                                   Figure 8-1. Input Filtering
+
+Do not use values greater than 100 ohms for RFILTER. Doing so will degrade gain error and increase non-
+linearity.
+8.2 Typical Application
+The low offset voltage and low input bias current of the INA237 allow accurate monitoring of a wide range of
+currents. To accurately monitor currents with high resolution, select the value of the shunt resistor so that the
+resulting sense voltage is close to the maximum allowable differential input voltage range (either ±163.84 mV
+or ±40.96 mV, depending on register settings). The circuit for monitoring currents in a high-side configuration is
+shown in Figure 8-2.
+                                              VS = 2.7V± 5.5V                                                VS
+
+
+                                          100 nF                                                         10k 10k     10k
+                                                                 VS                          A0
+
+                                                                 VBUS                       A1
+                                                                                                  *
+                          48V
+                                                                  IN+                     SCL
+                          BATT                                                                                             I2C
+                                        RSHUNT
+                                                                                                                            I/F    To
+                                                                  IN-                     SDA
+                                                                                                                                  MCU
+                                                                 GND                ALERT
+
+
+                                 LOAD
+                                                                                                  * I2C ADDR: 0x40
+                                              +    ±
+
+                                          CHARGER
+                             GND
+
+                            Figure 8-2. INA237 High-Side Sensing Application Diagram
+
+8.2.1 Design Requirements
+The INA237 measures the voltage developed across a current-sensing resistor (RSHUNT) when current passes
+through it. The device also measures the bus supply voltage and calculates power when calibrated. It also
+comes with alert capability, where the alert pin can be programmed to respond to a user-defined event or a
+conversion ready notification.
+The design requirements for the circuit shown in Figure 8-2 are listed in Table 8-3.
+
+
+32    Submit Document Feedback                                                                                    Copyright © 2022 Texas Instruments Incorporated
+
+                                                         Product Folder Links: INA237
+                                                                                                                             INA237
+www.ti.com                                                                               SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+                                                     Table 8-3. Design Parameters
+                         DESIGN PARAMETER                                                  EXAMPLE VALUE
+                       Power-supply voltage (VS)                                                  5V
+                          Bus supply rail (VCM)                                                  48 V
+               Bus supply rail over voltage fault threshold                                      52 V
+                             Average Current                                                      6A
+                    Overcurrent fault threshold (IMAX)                                           10 A
+                  ADC Range Selection (VSENSE_MAX)                                            ±163.84 mV
+                               Temperature                                                       25 ºC
+
+
+8.2.2 Detailed Design Procedure
+8.2.2.1 Select the Shunt Resistor
+Using values from Table 8-3, the maximum value of the shunt resistor is calculated based on the value of
+the maximum current to be sensed (IMAX) and the maximum allowable sense voltage (VSENSE_MAX) for the
+chosen ADC range. When operating at the maximum current, the differential input voltage must not exceed the
+maximum full scale range of the device, VSENSE_MAX. Using Equation 5 for the given design parameters, the
+maximum value for RSHUNT is calculated to be 16.38 mΩ. The closest standard resistor value that is smaller than
+the maximum calculated value is 16.2 mΩ. Also keep in mind that RSHUNT must be able to handle the power
+dissipated across it in the maximum load condition.
+
+                  VSENSE_MAX
+      RSHUNT <
+                     IMAX                                                                                                   (5)
+
+8.2.2.2 Configure the Device
+The first step to program the INA237 is to properly set the device and ADC configuration registers. On initial
+power up the CONFIG and ADC_CONFIG registers are set to the reset values as shown in Table 7-5 and
+Table 7-6. In this default power on state the device is set to measured on the ±163.84 mV range with the ADC
+continuously converting the shunt voltage, bus voltage, and temperature. If the default power up conditions do
+not meet the design requirements, these registers will need to be set properly after each VS power cycle event.
+8.2.2.3 Program the Shunt Calibration Register
+The shunt calibration register needs to be correctly programmed at each VS power up in order for the device to
+properly report any result based on current. The first step in properly setting this register is to calculate the LSB
+value for the current by using Equation 2. Applying this equation with the maximum expected current of 10 A
+results in an LSB size of 305.1758 μA. Applying Equation 1 to the CURRENT_LSB and selected value for the
+shunt resistor results in a shunt calibration register setting of 4050d (FD2h). Failure to set the value of the shunt
+calibration register will result in a zero value for any result based on current.
+8.2.2.4 Set Desired Fault Thresholds
+Fault thresholds are set by programming the desired trip threshold into the corresponding fault register. The list
+of supported fault registers is shown in Table 7-1.
+An over current threshold is set by programming the shunt over voltage limit register (SOVL). The voltage that
+needs to be programmed into this register is calculated by multiplying the over current threshold by the shunt
+resistor. In this example the over current threshold is 10 A and the value of the current sense resistor is 16.2 mΩ,
+which give a shunt voltage limit of 162 mV. Once the shunt voltage limit is known, the value for the shunt over
+voltage limit register is calculated by dividing the shunt voltage limit by the shunt voltage LSB size.
+In this example, the calculated value of the shunt over voltage limit register is 162 mV / 5 μV = 32400d (7E90h).
+An over voltage fault threshold on the bus voltage is set by programming the bus over voltage limit register
+(BOVL). In this example the desired over voltage threshold is 52 V. The value that needs to be programmed into
+this register is calculated by dividing the target threshold voltage by the bus voltage fault limit LSB value of 3.125
+mV. For this example, the target value for the BOVL register is 52 V / 3.125 mV = 16640d (4100h).
+
+Copyright © 2022 Texas Instruments Incorporated                                                         Submit Document Feedback   33
+                                                          Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                               www.ti.com
+
+When setting the power over-limit value, the LSB size used to calculate the value needed in the limit registers
+will be 256 times greater than the power LSB. This is because the power register is a 24 bits in length while the
+power fault limit register is 16 bits.
+Values stored in the alert limit registers are set to the default values after VS power cycle events and need to be
+reprogrammed each time power is applied.
+8.2.2.5 Calculate Returned Values
+Parametric values are calculated by multiplying the returned value by the LSB value. Table 8-4 below shows the
+returned values for this application example assuming the design requirements shown in Table 8-3.
+                                        Table 8-4. Calculating Returned Values
+      PARAMETER                   Returned Value                           LSB Value                        Calculated Value
+     Shunt voltage (V)               19440d                                5 µV/LSB                              0.0972 V
+        Current (A)                  19660d                        10 A/215 = 305.176 µA/LSB                     5.9997 A
+     Bus voltage (V)                 15360d                              3.125 mV/LSB                              48 V
+        Power (W)                   4718604d                 Current LSB x 0.2 = 61.035156 µW/LSB                 288 W
+     Temperature (°C)                 200d                                125 m°C/LSB                              25°C
+
+
+Shunt Voltage, Current, Bus Voltage (positive only), and Temperature return values in two's complement format.
+In two's complement format a negative value in binary is represented by having a 1 in the most significant bit
+of the returned value. These values can be converted to decimal by first inverting all the bits and adding 1 to
+obtain the unsigned binary value. This value should then be converted to decimal with the negative sign applied.
+For example, assume a shunt voltage reading returns 1011 0100 0001 0000. This is a negative value due to the
+MSB having a value of one. Inverting the bits and adding one results in 0100 1011 1111 0000 (19440d) which
+from the shunt voltage example in Table 8-4 correlates to a voltage of 97.2 mV. Since the returned value was
+negative the measured shunt voltage value is -97.2 mV.
+8.2.3 Application Curves
+Figure 8-3 and Figure 8-4 show the ALERT pin response to a bus overvoltage fault with a conversion time of
+50 μs, averaging set to 1, and the SLOWALERT bit set to 0 for bus only conversions. For these scope shots,
+persistence was enabled on the ALERT channel to show the variation in the alert response for many sequential
+fault events. If the magnitude of the fault is sufficient the ALERT response can be as fast as one quarter of the
+ADC conversion time as shown in Figure 8-3. For fault conditions that are just exceeding the limit threshold,
+the response time for the ALERT pin can vary from approximately 0.5 to 1.5 conversion cycles as shown in
+Figure 8-4. Variation in the alert response exists because the external fault event is not synchronized to the
+internal ADC conversion start. Also the ADC is constantly sampling to get a result, so the response time for fault
+events starting from zero will slower than fault events starting from values near the set fault threshold. Since the
+timing of the alert can be difficult to predict, applications where the alert timing is critical should assume a alert
+response equal to 1.5 times the ADC conversion time for bus voltage or shunt voltage only conversions.
+
+
+
+
+34     Submit Document Feedback                                                            Copyright © 2022 Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA237
+                                                                                                                              INA237
+www.ti.com                                                                              SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+
+
+
+     BUS Voltage                                                         BUS Voltage              Fault Threshold: 1.9 V
+
+      (1V / div)           Fault Threshold: 0.2 V                         (1V / div)
+                       Maximum Delay: 37.9 µs
+                                                                                                  Maximum Delay: 73.2 µs
+
+
+
+
+      ALERT                                                               ALERT
+
+     (1V / div)                                                          (1V / div)
+
+
+
+                       Minimum Delay: 12.4 µs                                          Minimum Delay: 24 µs
+
+                                  TIME (10 µs / div)                                             TIME (10 µs / div)
+
+   Figure 8-3. Alert Response Time (Sampled Values                    Figure 8-4. Alert Response Time (Sampled Values
+            Significantly Above Threshold)                                        Slightly Above Threshold)
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                          Submit Document Feedback   35
+                                                       Product Folder Links: INA237
+INA237
+SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022                                                                                         www.ti.com
+
+
+9 Power Supply Recommendations
+The input circuitry of the device can accurately measure signals on common-mode voltages beyond its power-
+supply voltage, VS. For example, the voltage applied to the VS power supply terminal can be 5 V, whereas the
+load power-supply voltage being monitored (the common-mode voltage) can be as high as 85 V. Note that the
+device can also withstand the full 0 V to 85 V range at the input terminals, regardless of whether the device has
+power applied or not. Avoid applications where the GND pin is disconnected while device is actively powered.
+Place the required power-supply bypass capacitors as close as possible to the supply and ground terminals of
+the device. A typical value for this supply bypass capacitor is 0.1 µF. Applications with noisy or high-impedance
+power supplies may require additional decoupling capacitors to reject power-supply noise.
+10 Layout
+10.1 Layout Guidelines
+Connect the input pins (IN+ and IN–) to the sensing resistor using a Kelvin connection or a 4-wire connection.
+This connection technique ensures that only the current-sensing resistor impedance is sensed between the input
+pins. Poor routing of the current-sensing resistor commonly results in additional resistance present between
+the input pins. Given the very low ohmic value of the current-sensing resistor, any additional high-current
+carrying impedance causes significant measurement errors. Place the power-supply bypass capacitor as close
+as possible to the supply and ground pins.
+10.2 Layout Example
+
+
+
+
+                                                     A1                 IN+
+                                                                                                                 Sense/Shunt
+                                                     A0                 INt                                        Resistor
+
+                                                                                    (1)
+                                                     ALERT            VBUS
+                Alert output
+                          (2)                        SDA               GND
+
+                      2                                                                        Supply bypass
+                     I C                             SCL                 VS
+                  interface                                                                      capacitor
+
+
+
+
+                                                                                          Via to Ground Plane
+
+                                                                                          Via to Power Plane
+     (1) Connect the VBUS pin to the voltage powering the load for load power calculations..
+     (2) Can be left floating if unused.
+
+                                             Figure 10-1. INA237 Layout Example
+
+
+
+
+36    Submit Document Feedback                                                                       Copyright © 2022 Texas Instruments Incorporated
+
+                                                       Product Folder Links: INA237
+                                                                                                                                   INA237
+www.ti.com                                                                                  SBOSA20A – FEBRUARY 2021 – REVISED MAY 2022
+
+
+11 Device and Documentation Support
+11.1 Receiving Notification of Documentation Updates
+To receive notification of documentation updates, navigate to the device product folder on ti.com. Click on
+Subscribe to updates to register and receive a weekly digest of any product information that has changed. For
+change details, review the revision history included in any revised document.
+11.2 Support Resources
+TI E2E™ support forums are an engineer's go-to source for fast, verified answers and design help — straight
+from the experts. Search existing answers or ask your own question to get the quick design help you need.
+Linked content is provided "AS IS" by the respective contributors. They do not constitute TI specifications and do
+not necessarily reflect TI's views; see TI's Terms of Use.
+11.3 Trademarks
+TI E2E™ is a trademark of Texas Instruments.
+All trademarks are the property of their respective owners.
+11.4 Electrostatic Discharge Caution
+                    This integrated circuit can be damaged by ESD. Texas Instruments recommends that all integrated circuits be handled
+                    with appropriate precautions. Failure to observe proper handling and installation procedures can cause damage.
+                    ESD damage can range from subtle performance degradation to complete device failure. Precision integrated circuits may
+                    be more susceptible to damage because very small parametric changes could cause the device not to meet its published
+                    specifications.
+
+
+11.5 Glossary
+ TI Glossary             This glossary lists and explains terms, acronyms, and definitions.
+
+12 Mechanical, Packaging, and Orderable Information
+The following pages include mechanical, packaging, and orderable information. This information is the most
+current data available for the designated devices. This data is subject to change without notice and revision of
+this document. For browser-based versions of this data sheet, refer to the left-hand navigation.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                            Submit Document Feedback          37
+                                                        Product Folder Links: INA237
+                                                                                                                                                                      PACKAGE OPTION ADDENDUM
+
+       www.ti.com                                                                                                                                                                                                    17-Apr-2026
+
+
+
+
+PACKAGING INFORMATION
+
+       Orderable part number          Status     Material type      Package | Pins      Package qty | Carrier        RoHS             Lead finish/              MSL rating/               Op temp (°C)          Part marking
+                                        (1)            (2)                                                             (3)            Ball material             Peak reflow                                           (6)
+                                                                                                                                            (4)                      (5)
+
+           INA237AIDGSR               Active      Production      VSSOP (DGS) | 10       2500 | LARGE T&R             Yes                  SN             Level-2-260C-1 YEAR              -40 to 125                237I
+          INA237AIDGSR.A              Active      Production      VSSOP (DGS) | 10       2500 | LARGE T&R             Yes                  SN             Level-2-260C-1 YEAR              -40 to 125                237I
+
+(1)
+      Status: For more details on status, see our product life cycle.
+
+(2)
+   Material type: When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+
+(3)
+      RoHS values: Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+
+(4)
+   Lead finish/Ball material: Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+
+(5)
+  MSL rating/Peak reflow: The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+
+(6)
+      Part marking: There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information provided by third parties, and
+makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and continues to take reasonable steps to provide representative
+and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers
+and other limited information may not be available for release.
+
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+
+OTHER QUALIFIED VERSIONS OF INA237 :
+
+• Automotive : INA237-Q1
+
+
+
+                                                                                                          Addendum-Page 1
+                                                                                                                          PACKAGE OPTION ADDENDUM
+
+   www.ti.com                                                                                                                               17-Apr-2026
+
+
+
+
+NOTE: Qualified Version Definitions:
+
+       • Automotive - Q100 devices qualified for high-reliability automotive applications targeting zero defects
+
+
+
+
+                                                                                                        Addendum-Page 2
+                                                                               PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                                                        18-Apr-2026
+
+
+
+TAPE AND REEL INFORMATION
+
+       REEL DIMENSIONS                                                                      TAPE DIMENSIONS
+                                                                                       K0       P1
+
+
+
+                                                                                                                       B0 W
+                                        Reel
+                                      Diameter
+                                                                                    Cavity           A0
+                                                                A0   Dimension designed to accommodate the component width
+                                                                B0   Dimension designed to accommodate the component length
+                                                                K0   Dimension designed to accommodate the component thickness
+                                                                W    Overall width of the carrier tape
+                                                                P1   Pitch between successive cavity centers
+
+
+                                       Reel Width (W1)
+                              QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+
+                                                                                                      Sprocket Holes
+
+
+                                                 Q1        Q2          Q1    Q2
+
+                                                 Q3        Q4          Q3    Q4                  User Direction of Feed
+
+
+
+                                                            Pocket Quadrants
+
+
+*All dimensions are nominal
+             Device           Package Package Pins              SPQ       Reel   Reel   A0                   B0         K0     P1     W     Pin1
+                               Type Drawing                             Diameter Width (mm)                 (mm)       (mm)   (mm)   (mm) Quadrant
+                                                                          (mm) W1 (mm)
+     INA237AIDGSR             VSSOP     DGS           10        2500        330.0        12.4        5.25   3.35       1.25   8.0    12.0    Q1
+
+
+
+
+                                                                      Pack Materials-Page 1
+                                                                PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                              18-Apr-2026
+
+
+
+ TAPE AND REEL BOX DIMENSIONS
+
+
+
+
+                                                               Width (mm)
+                                                                              H
+
+
+
+
+                      W                                   L
+
+
+
+
+*All dimensions are nominal
+             Device           Package Type   Package Drawing   Pins         SPQ    Length (mm)   Width (mm)   Height (mm)
+      INA237AIDGSR              VSSOP             DGS           10          2500      366.0        364.0         50.0
+
+
+
+
+                                                        Pack Materials-Page 2
+                                                                                                           PACKAGE OUTLINE
+DGS0010A                                                        SCALE 3.200
+                                                                                                      VSSOP - 1.1 mm max height
+                                                                                                                   SMALL OUTLINE PACKAGE
+
+
+
+
+                                                                                                                            C
+                                        5.05
+                                             TYP                                                           SEATING PLANE
+                                        4.75
+
+             A                                  PIN 1 ID                                                                0.1 C
+                                                AREA
+
+                                                                                         8X 0.5
+                                                                                  10
+                    1
+
+           3.1
+           2.9                                                                           2X
+          NOTE 3                                                                          2
+
+
+                    5
+                                                                              6
+                                                                                              0.27
+                                                                                       10X
+                                                                                              0.17
+                                          3.1                                                  0.1   C A   B              1.1 MAX
+                        B
+                                          2.9
+                                        NOTE 4
+
+
+
+
+                                                                                       0.23
+                                                                                            TYP
+                                        SEE DETAIL A                                   0.13
+
+
+
+
+                                                                                         0.25
+                                                                                  GAGE PLANE
+
+
+
+
+                                                                                                                  0.7                    0.15
+                                                                                       0 -8                                              0.05
+                                                                                                                  0.4
+
+                                                                                                                 DETAIL A
+                                                                                                                  TYPICAL
+
+
+                                                                                                                                4221984/A 05/2015
+
+NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+   per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. This dimension does not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+   exceed 0.15 mm per side.
+4. This dimension does not include interlead flash. Interlead flash shall not exceed 0.25 mm per side.
+5. Reference JEDEC registration MO-187, variation BA.
+
+
+
+
+                                                                              www.ti.com
+                                                                                EXAMPLE BOARD LAYOUT
+DGS0010A                                                                                VSSOP - 1.1 mm max height
+                                                                                                          SMALL OUTLINE PACKAGE
+
+
+
+
+                                                10X (1.45)
+                             10X (0.3)                           SYMM                           (R0.05)
+                                            1                                                   TYP
+                                                                                          10
+
+                                                                                               SYMM
+
+
+
+                           8X (0.5)         5                                             6
+
+
+                                                                  (4.4)
+
+
+                                                     LAND PATTERN EXAMPLE
+                                                              SCALE:10X
+
+
+
+
+                SOLDER MASK                                               METAL UNDER                     SOLDER MASK
+                                                 METAL                                                    OPENING
+                OPENING                                                   SOLDER MASK
+
+
+
+
+                                      0.05 MAX                                                0.05 MIN
+                                      ALL AROUND                                              ALL AROUND
+
+                             NON SOLDER MASK                                            SOLDER MASK
+                                 DEFINED                                                  DEFINED
+
+                                                      SOLDER MASK DETAILS
+                                                             NOT TO SCALE
+
+
+
+
+                                                                                                                4221984/A 05/2015
+NOTES: (continued)
+
+6. Publication IPC-7351 may have alternate designs.
+7. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+
+
+
+                                                                www.ti.com
+                                                                               EXAMPLE STENCIL DESIGN
+DGS0010A                                                                                VSSOP - 1.1 mm max height
+                                                                                                         SMALL OUTLINE PACKAGE
+
+
+
+
+                                                10X (1.45)
+                                                                 SYMM                           (R0.05) TYP
+                              10X (0.3)
+                                            1
+                                                                                           10
+
+                                                                                                SYMM
+                                 8X (0.5)
+
+                                            5                                              6
+
+                                                                  (4.4)
+
+
+
+                                                     SOLDER PASTE EXAMPLE
+                                                   BASED ON 0.125 mm THICK STENCIL
+                                                              SCALE:10X
+
+
+
+
+                                                                                                                  4221984/A 05/2015
+NOTES: (continued)
+
+8. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+   design recommendations.
+9. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+                                                                 www.ti.com
+                                         IMPORTANT NOTICE AND DISCLAIMER
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATASHEETS), DESIGN RESOURCES (INCLUDING REFERENCE
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS”
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable
+standards, and any other safety, security, regulatory or other requirements.
+These resources are subject to change without notice. TI grants you permission to use these resources only for development of an
+application that uses the TI products described in the resource. Other reproduction and display of these resources is prohibited. No license
+is granted to any other TI intellectual property right or to any third party intellectual property right. TI disclaims responsibility for, and you fully
+indemnify TI and its representatives against any claims, damages, costs, losses, and liabilities arising out of your use of these resources.
+TI’s products are provided subject to TI’s Terms of Sale, TI’s General Quality Guidelines, or other applicable terms available either on
+ti.com or provided in conjunction with such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable
+warranties or warranty disclaimers for TI products. Unless TI explicitly designates a product as custom or customer-specified, TI products
+are standard, catalog, general purpose devices.
+TI objects to and rejects any additional or different terms you may propose.
+IMPORTANT NOTICE
+
+                                                Copyright © 2026, Texas Instruments Incorporated
+                                                                Last updated 10/2025
+

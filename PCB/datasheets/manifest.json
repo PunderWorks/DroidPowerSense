@@ -53,6 +53,12 @@
     "sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
     "url": "https://www.ti.com/lit/ds/symlink/ina226.pdf"
   },
+  "INA237": {
+    "fetched": "2026-11-07",
+    "file": "INA237.pdf",
+    "sha256": "bd31a3a82fb8e946d22607fbc0ba830c55bb5179bf91b54a9269fe5c17039c19",
+    "url": "https://www.ti.com/lit/ds/symlink/ina237.pdf"
+  },
   "JST-XH": {
     "fetched": "2026-11-07",
     "file": "JST-XH.pdf",

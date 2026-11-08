@@ -3,7 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(general
-		(thickness 1.6008)
+		(thickness 1.6)
 		(legacy_teardrops no)
 	)
 	(paper "A4")
@@ -57,7 +57,7 @@
 			)
 			(layer "dielectric 1"
 				(type "prepreg")
-				(thickness 0.2104)
+				(thickness 0.1)
 				(material "FR4")
 				(epsilon_r 4.5)
 				(loss_tangent 0.02)
@@ -68,7 +68,7 @@
 			)
 			(layer "dielectric 2"
 				(type "core")
-				(thickness 0.95)
+				(thickness 0.45)
 				(material "FR4")
 				(epsilon_r 4.5)
 				(loss_tangent 0.02)
@@ -79,7 +79,29 @@
 			)
 			(layer "dielectric 3"
 				(type "prepreg")
-				(thickness 0.2104)
+				(thickness 0.2)
+				(material "FR4")
+				(epsilon_r 4.5)
+				(loss_tangent 0.02)
+			)
+			(layer "In3.Cu"
+				(type "copper")
+				(thickness 0.035)
+			)
+			(layer "dielectric 4"
+				(type "core")
+				(thickness 0.45)
+				(material "FR4")
+				(epsilon_r 4.5)
+				(loss_tangent 0.02)
+			)
+			(layer "In4.Cu"
+				(type "copper")
+				(thickness 0.035)
+			)
+			(layer "dielectric 5"
+				(type "prepreg")
+				(thickness 0.1)
 				(material "FR4")
 				(epsilon_r 4.5)
 				(loss_tangent 0.02)
@@ -283,7 +305,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:194"
+		(property "Stackup Source" "PCB/stackup/board.kdl:196"
 			(at 0 2 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -656,7 +678,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:412"
+		(property "Stackup Source" "PCB/stackup/board.kdl:437"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -979,7 +1001,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:276"
+		(property "Stackup Source" "PCB/stackup/board.kdl:284"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -1224,7 +1246,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:429"
+		(property "Stackup Source" "PCB/stackup/board.kdl:454"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -1547,7 +1569,7 @@
 		(at 66.4 93.6 90)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R19"
+		(property "Reference" "R20"
 			(at 0 -1.43 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -1677,7 +1699,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:336"
+		(property "Stackup Source" "PCB/stackup/board.kdl:361"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -1910,7 +1932,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:367"
+		(property "Stackup Source" "PCB/stackup/board.kdl:392"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2201,7 +2223,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:449"
+		(property "Stackup Source" "PCB/stackup/board.kdl:474"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2367,7 +2389,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:174"
+		(property "Stackup Source" "PCB/stackup/board.kdl:176"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2704,7 +2726,7 @@
 				)
 			)
 		)
-		(property "Voltage" "50V"
+		(property "Voltage" "100V"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2716,7 +2738,7 @@
 				)
 			)
 		)
-		(property "MF" "YAGEO"
+		(property "MF" "Murata Electronics"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2728,7 +2750,7 @@
 				)
 			)
 		)
-		(property "Manufacturer_Part_Number" "CC0603KRX7R9BB104"
+		(property "Manufacturer_Part_Number" "GRM188R72A104KA35D"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2740,7 +2762,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C14663"
+		(property "LCSC" "C77058"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2752,7 +2774,7 @@
 				)
 			)
 		)
-		(property "Mouser" "603-CC603KRX7R9BB104"
+		(property "Mouser" "81-GRM188R72A104KA35"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2764,7 +2786,7 @@
 				)
 			)
 		)
-		(property "DigiKey" "311-1088-1-ND"
+		(property "DigiKey" "490-3285-1-ND"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3000,7 +3022,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:175"
+		(property "Stackup Source" "PCB/stackup/board.kdl:177"
 			(at 0 2 270)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3515,7 +3537,7 @@
 				)
 			)
 		)
-		(property "Voltage" "50V"
+		(property "Voltage" "100V"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3527,7 +3549,7 @@
 				)
 			)
 		)
-		(property "MF" "YAGEO"
+		(property "MF" "Murata Electronics"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3539,7 +3561,7 @@
 				)
 			)
 		)
-		(property "Manufacturer_Part_Number" "CC0603KRX7R9BB104"
+		(property "Manufacturer_Part_Number" "GRM188R72A104KA35D"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3551,7 +3573,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C14663"
+		(property "LCSC" "C77058"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3563,7 +3585,7 @@
 				)
 			)
 		)
-		(property "Mouser" "603-CC603KRX7R9BB104"
+		(property "Mouser" "81-GRM188R72A104KA35"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3575,7 +3597,7 @@
 				)
 			)
 		)
-		(property "DigiKey" "311-1088-1-ND"
+		(property "DigiKey" "490-3285-1-ND"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3599,7 +3621,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:348"
+		(property "Stackup Source" "PCB/stackup/board.kdl:373"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3844,7 +3866,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:250"
+		(property "Stackup Source" "PCB/stackup/board.kdl:258"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -4089,7 +4111,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:419"
+		(property "Stackup Source" "PCB/stackup/board.kdl:444"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -4412,7 +4434,7 @@
 		(at 102.2 87.9 90)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R30"
+		(property "Reference" "R31"
 			(at 0 -1.43 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -4766,7 +4788,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:180"
+		(property "Stackup Source" "PCB/stackup/board.kdl:182"
 			(at 0 2 270)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5004,6 +5026,159 @@
 			)
 		)
 	)
+	(footprint "BOM_Only_JumperShunt"
+		(layer "F.Cu")
+		(uuid "34169fd0-e344-48e3-a511-5164dcb1ab09")
+		(at 93.8 73.04)
+		(descr "BOM-only placeholder for a loose 2.54 mm jumper shunt: no pads, no courtyard, Fab outline only. Placed beside the header it fits.")
+		(tags "BOM only jumper shunt")
+		(property "Reference" "SH1"
+			(at 0 -2 0)
+			(layer "F.Fab")
+			(uuid "66490d5c-37ff-4e5b-8a83-8687f39bf2c7")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Value" "Jumper shunt for 2.54mm PinHeader"
+			(at 0 2 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3957e764-4357-4988-b77e-62b2ae6a1eaf")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "94067a76-fa0d-4393-94d7-29c87809ee6c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "2.54 mm jumper shunt (BOM only)"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c935572c-ca45-4d96-9282-090365639aab")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "Würth Elektronik"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "f4917ddc-d211-4ce3-8622-b69a0ea9efc2")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "60900213421"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "34502067-b093-4579-a522-7953b71159ee")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser" "710-60900213421"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "ef0ce64a-8dd5-4476-aeee-3eafdd7fdcf1")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "DigiKey" "732-2678-ND"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "8750cd32-5595-46fe-9c1b-61f645dc556c")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Path" "SH_VIO"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "2be4b0bb-a930-433f-baae-9893d5a109de")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Source" "PCB/stackup/board.kdl:477"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "bd53f162-c2a8-48d9-87c1-2861584c0d79")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Why" "For J_VIO: 1-2 = 3.3 V UART, 2-3 = 5 V UART"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "ce3fafc0-f0d4-4f32-be46-3b1c5e575216")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/41357c63-ca57-5dfe-9554-fa9134ea25fd")
+		(attr exclude_from_pos_files allow_missing_courtyard)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_rect
+			(start -1.25 -2.5)
+			(end 1.25 2.5)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "986e241c-50e2-415d-8002-d43065a2f925")
+		)
+		(embedded_fonts no)
+	)
 	(footprint "C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "37ac7eb9-868b-4a88-b983-dbfde5251f3a")
@@ -5022,7 +5197,7 @@
 				)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "100nF"
 			(at 0 1.43 0)
 			(layer "F.Fab")
 			(uuid "83f56f69-ee66-4a03-8396-b2f0c8b93c1a")
@@ -5067,7 +5242,7 @@
 				)
 			)
 		)
-		(property "Voltage" "50V"
+		(property "Voltage" "100V"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5079,7 +5254,7 @@
 				)
 			)
 		)
-		(property "MF" "Samsung Electro-Mechanics"
+		(property "MF" "Murata Electronics"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5091,7 +5266,7 @@
 				)
 			)
 		)
-		(property "Manufacturer_Part_Number" "CL10B224KB8NNNC"
+		(property "Manufacturer_Part_Number" "GRM188R72A104KA35D"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5103,7 +5278,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C64705"
+		(property "LCSC" "C77058"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5115,7 +5290,7 @@
 				)
 			)
 		)
-		(property "Mouser" "187-CL10B224KB8NNNC"
+		(property "Mouser" "81-GRM188R72A104KA35"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5127,7 +5302,7 @@
 				)
 			)
 		)
-		(property "DigiKey" "1276-1105-1-ND"
+		(property "DigiKey" "490-3285-1-ND"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5151,7 +5326,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:225"
+		(property "Stackup Source" "PCB/stackup/board.kdl:232"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5163,7 +5338,7 @@
 				)
 			)
 		)
-		(property "Stackup Why" "Gate dV/dt inrush control capacitor"
+		(property "Stackup Why" "Gate dV/dt inrush control capacitor, 100 V X7R"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5277,7 +5452,7 @@
 				)
 			)
 		)
-		(property "Value" "CSD18532Q5B"
+		(property "Value" "CSD18532Q5B | VSON-CLIP-8 5x6mm (DNK)"
 			(at 0 3.5 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -5387,7 +5562,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:210"
+		(property "Stackup Source" "PCB/stackup/board.kdl:212"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5837,7 +6012,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:285"
+		(property "Stackup Source" "PCB/stackup/board.kdl:295"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5946,13 +6121,269 @@
 			)
 		)
 	)
+	(footprint "C_0603_1608Metric"
+		(layer "F.Cu")
+		(uuid "44aa12db-ab11-42d6-bff2-f1557917fc32")
+		(at 93.3 60 90)
+		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
+		(tags "capacitor")
+		(property "Reference" "C4"
+			(at 0 -1.43 90)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "58624cfe-39ad-4d7d-9a3e-5401fa3c4347")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "100nF"
+			(at 0 1.43 90)
+			(layer "F.Fab")
+			(uuid "28e55545-b968-48fa-a0f3-f1b5a8dfbc8e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ab4ca392-9829-4174-966b-122402f255fd")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b16fbdef-675a-4023-83da-7186b57f13e9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 0 0 90)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "3323104d-0ed8-4d06-89f8-ef1cfae54146")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Voltage" "100V"
+			(at 0 2 90)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "bfc19d99-1939-487b-b958-52a888f13d65")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MF" "Murata Electronics"
+			(at 0 2 90)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "61e66813-e88e-4976-b3f4-2e7f7e1c00a4")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "GRM188R72A104KA35D"
+			(at 0 2 90)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "f1601a19-9608-4b03-b905-db05dfd1e03e")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C77058"
+			(at 0 2 90)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "b3bad361-3edb-4457-8d36-8f9a43ea0219")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser" "81-GRM188R72A104KA35"
+			(at 0 2 90)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "b134d120-a87e-4088-aa95-2375477ed683")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "DigiKey" "490-3285-1-ND"
+			(at 0 2 90)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "bef79fbd-f86e-409b-8f53-02b1a20e6f5a")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Path" "C_INA_VS"
+			(at 0 2 90)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "72162041-f53f-479a-bd53-1287d3d73020")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Source" "PCB/stackup/board.kdl:304"
+			(at 0 2 90)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "32262167-b107-4acd-b233-8980978f61ef")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Why" "INA237 VS bypass"
+			(at 0 2 90)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "93883028-a1e4-4519-aa67-6a76bcf4230a")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/41c18994-0e20-5ad0-bd17-dd5e9b625001")
+		(attr smd)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -0.14058 -0.51)
+			(end 0.14058 -0.51)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "695d0f8b-0317-43c4-a418-8181a4b6ae94")
+		)
+		(fp_line
+			(start -0.14058 0.51)
+			(end 0.14058 0.51)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "ba55c590-de13-4724-9157-87d3f5efac80")
+		)
+		(fp_rect
+			(start -1.48 -0.73)
+			(end 1.48 0.73)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "3ebe49c6-2d15-44e6-a895-788b1ee97a23")
+		)
+		(fp_rect
+			(start -0.8 -0.4)
+			(end 0.8 0.4)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "fc14c607-3282-43bf-aab8-838b42fbd36a")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(uuid "1986c4cc-4e42-4af1-baa1-9ecde1fe0a31")
+			(effects
+				(font
+					(size 0.4 0.4)
+					(thickness 0.06)
+				)
+			)
+		)
+		(pad "1" smd roundrect
+			(at -0.775 0 90)
+			(size 0.9 0.95)
+			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.25)
+			(net "+3V3")
+			(uuid "a46c294b-ba2f-4f4f-9f89-365de98f9cc8")
+		)
+		(pad "2" smd roundrect
+			(at 0.775 0 90)
+			(size 0.9 0.95)
+			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.25)
+			(net "GND")
+			(uuid "b2d27e8f-bb81-492e-9e8b-df25c7a07751")
+		)
+		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
 	(footprint "R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "450d86ef-8c21-4938-9366-8c6febf3efb0")
 		(at 60 67.5)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R25"
+		(property "Reference" "R26"
 			(at 0 -1.43 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -6082,7 +6513,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:373"
+		(property "Stackup Source" "PCB/stackup/board.kdl:398"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -6315,7 +6746,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:264"
+		(property "Stackup Source" "PCB/stackup/board.kdl:272"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -6418,7 +6849,7 @@
 		(at 61 93.6 90)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R16"
+		(property "Reference" "R17"
 			(at 0 -1.43 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -6548,7 +6979,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:317"
+		(property "Stackup Source" "PCB/stackup/board.kdl:342"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -6621,7 +7052,7 @@
 			(size 0.8 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "VSW_CTRL")
+			(net "BUCK_VIN")
 			(uuid "a532b2e0-d3c3-471a-b94c-d1d5c8818be7")
 		)
 		(pad "2" smd roundrect
@@ -6781,7 +7212,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:258"
+		(property "Stackup Source" "PCB/stackup/board.kdl:266"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -7014,7 +7445,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:303"
+		(property "Stackup Source" "PCB/stackup/board.kdl:319"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -7259,7 +7690,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:337"
+		(property "Stackup Source" "PCB/stackup/board.kdl:362"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -7483,7 +7914,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:297"
+		(property "Stackup Source" "PCB/stackup/board.kdl:313"
 			(at 0 2 270)
 			(layer "F.SilkS")
 			(hide yes)
@@ -7845,7 +8276,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:397"
+		(property "Stackup Source" "PCB/stackup/board.kdl:422"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -8087,7 +8518,7 @@
 		(at 80.6 82.2)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R20"
+		(property "Reference" "R21"
 			(at 0 -1.43 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -8320,7 +8751,7 @@
 		(at 98.6 87.9 90)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R28"
+		(property "Reference" "R29"
 			(at 0 -1.43 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -8547,258 +8978,13 @@
 			)
 		)
 	)
-	(footprint "C_0603_1608Metric"
-		(layer "F.Cu")
-		(uuid "5e17c694-c11b-4c3f-aee2-08517ad60fd7")
-		(at 93.3 60 90)
-		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
-		(tags "capacitor")
-		(property "Reference" "C4"
-			(at 0 -1.43 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "db16045f-b2bc-4495-a269-fe507c97e53b")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 0 1.43 90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "4b2b1160-ca16-44af-a2e1-066bf4b62a0b")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "1c1ea639-2142-4789-84d4-de6148d05b1b")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "342261f7-5b8e-4fa1-9e44-8bed4031991f")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "5ede0869-fa0e-4109-b844-b01a27ec6063")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Voltage" "50V"
-			(at 0 2 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "91a9f1d0-1c98-4b35-bb2a-4e2dbb21ebb0")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "MF" "YAGEO"
-			(at 0 2 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "c30b4910-24af-452e-994e-451764fb2981")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Manufacturer_Part_Number" "CC0603KRX7R9BB104"
-			(at 0 2 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "f366c076-592c-4677-95f3-1281a4be8a36")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "LCSC" "C14663"
-			(at 0 2 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "ace76896-f19a-489c-aa3b-5c65ae9da450")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Mouser" "603-CC603KRX7R9BB104"
-			(at 0 2 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "e39cd0fe-23ea-4ba2-b900-51dab66fa261")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "DigiKey" "311-1088-1-ND"
-			(at 0 2 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "3970ab9f-ff46-4163-8126-b9e323804ee7")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Stackup Path" "U_INA/supply/Cvs"
-			(at 0 2 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "81f86928-16e7-4e7c-ba29-26cf08886eed")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Stackup Source" "@stackup/passives.kdl:87"
-			(at 0 2 90)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "c98d8aa0-9f5e-4098-9377-24491a15bced")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(path "/07072be1-7182-5a2d-9310-47b0c4633fa4")
-		(attr smd)
-		(duplicate_pad_numbers_are_jumpers no)
-		(fp_line
-			(start -0.14058 -0.51)
-			(end 0.14058 -0.51)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "6135891d-16f4-469b-859b-d6e7ced1f9bc")
-		)
-		(fp_line
-			(start -0.14058 0.51)
-			(end 0.14058 0.51)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "18f53f1d-6627-406c-aa49-203c03f9da21")
-		)
-		(fp_rect
-			(start -1.48 -0.73)
-			(end 1.48 0.73)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill no)
-			(layer "F.CrtYd")
-			(uuid "3901728c-157e-444b-95e3-4541abdd60ea")
-		)
-		(fp_rect
-			(start -0.8 -0.4)
-			(end 0.8 0.4)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(fill no)
-			(layer "F.Fab")
-			(uuid "4b9565e2-8ee0-4638-b3ce-12b2fc34d82a")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 90)
-			(layer "F.Fab")
-			(uuid "658d3c37-6a4f-4e17-baf8-d4fe5b5ee2dc")
-			(effects
-				(font
-					(size 0.4 0.4)
-					(thickness 0.06)
-				)
-			)
-		)
-		(pad "1" smd roundrect
-			(at -0.775 0 90)
-			(size 0.9 0.95)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(roundrect_rratio 0.25)
-			(net "+3V3")
-			(uuid "4864f36b-1626-46c1-9d1d-c24c670b411f")
-		)
-		(pad "2" smd roundrect
-			(at 0.775 0 90)
-			(size 0.9 0.95)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(roundrect_rratio 0.25)
-			(net "GND")
-			(uuid "02d4a6b4-18d3-43c3-bcde-a526c1ff718b")
-		)
-		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
-	)
 	(footprint "R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "602814a3-2c0c-46b3-bd83-d2dd9bffa0bb")
 		(at 68.2 93.6 90)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R18"
+		(property "Reference" "R19"
 			(at 0 -1.43 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -8928,7 +9114,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:335"
+		(property "Stackup Source" "PCB/stackup/board.kdl:360"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -9042,7 +9228,7 @@
 				)
 			)
 		)
-		(property "Value" "INA226"
+		(property "Value" "INA237"
 			(at 0 2.45 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -9100,7 +9286,7 @@
 				)
 			)
 		)
-		(property "Manufacturer_Part_Number" "INA226AIDGSR"
+		(property "Manufacturer_Part_Number" "INA237AIDGSR"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -9112,7 +9298,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C49851"
+		(property "LCSC" "C2864837"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -9124,7 +9310,7 @@
 				)
 			)
 		)
-		(property "Mouser" "595-INA226AIDGSR"
+		(property "Mouser" "595-INA237AIDGSR"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -9136,7 +9322,7 @@
 				)
 			)
 		)
-		(property "DigiKey" "296-30327-1-ND"
+		(property "DigiKey" "296-INA237AIDGSRCT-ND"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -9160,7 +9346,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:287"
+		(property "Stackup Source" "PCB/stackup/board.kdl:299"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -9483,6 +9669,159 @@
 			)
 		)
 	)
+	(footprint "BOM_Only_JumperShunt"
+		(layer "F.Cu")
+		(uuid "61ae898c-f043-40d6-93bb-7a9fb44c4459")
+		(at 105.77 70.4)
+		(descr "BOM-only placeholder for a loose 2.54 mm jumper shunt: no pads, no courtyard, Fab outline only. Placed beside the header it fits.")
+		(tags "BOM only jumper shunt")
+		(property "Reference" "SH2"
+			(at 0 -2 0)
+			(layer "F.Fab")
+			(uuid "643360e6-c5d6-44eb-8875-40b2a77e25f4")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Value" "Jumper shunt for 2.54mm PinHeader"
+			(at 0 2 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4da3d7e5-637b-44a4-bfb1-9f1ac9871552")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "24fd9572-598a-4a61-91cc-f789c26e9e7a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "2.54 mm jumper shunt (BOM only)"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f73c5f00-0183-4e5e-b906-1b95d457b884")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "Würth Elektronik"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "4d74d7ef-cb7e-4cd5-9aa7-408aeeeb6482")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "60900213421"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "68fdab62-2a2d-4b3b-8e57-50fb11b615d2")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser" "710-60900213421"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "696f6751-b34c-4b41-9d37-905002e0b68f")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "DigiKey" "732-2678-ND"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "789fb908-32dd-4047-af25-213116992410")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Path" "SH_TERM"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "8ca0a523-6f52-4f68-8c3a-18f8d078de94")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Source" "PCB/stackup/board.kdl:478"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "06ed2eac-d24a-4a03-bb1c-3282ec29bf49")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Why" "For J_TERM: fit on the bus-end boards only"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "0d89c90d-5451-476c-b5cf-9a6308c554d3")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/7fd0ac6a-03c8-54ce-8fec-eab0df5bc05a")
+		(attr exclude_from_pos_files allow_missing_courtyard)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_rect
+			(start -1.25 -2.5)
+			(end 1.25 2.5)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "c2108917-d181-4b8c-94f7-2158f00de6bc")
+		)
+		(embedded_fonts no)
+	)
 	(footprint "C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "65886e03-dfbe-4f04-9ac5-0aaa19f47e1f")
@@ -9547,7 +9886,7 @@
 				)
 			)
 		)
-		(property "Voltage" "50V"
+		(property "Voltage" "100V"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -9559,7 +9898,7 @@
 				)
 			)
 		)
-		(property "MF" "YAGEO"
+		(property "MF" "Murata Electronics"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -9571,7 +9910,7 @@
 				)
 			)
 		)
-		(property "Manufacturer_Part_Number" "CC0603KRX7R9BB104"
+		(property "Manufacturer_Part_Number" "GRM188R72A104KA35D"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -9583,7 +9922,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C14663"
+		(property "LCSC" "C77058"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -9595,7 +9934,7 @@
 				)
 			)
 		)
-		(property "Mouser" "603-CC603KRX7R9BB104"
+		(property "Mouser" "81-GRM188R72A104KA35"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -9607,7 +9946,7 @@
 				)
 			)
 		)
-		(property "DigiKey" "311-1088-1-ND"
+		(property "DigiKey" "490-3285-1-ND"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -9631,7 +9970,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:328"
+		(property "Stackup Source" "PCB/stackup/board.kdl:353"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -9816,7 +10155,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:347"
+		(property "Stackup Source" "PCB/stackup/board.kdl:372"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -10324,7 +10663,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:235"
+		(property "Stackup Source" "PCB/stackup/board.kdl:243"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -10635,7 +10974,7 @@
 				)
 			)
 		)
-		(property "Voltage" "50V"
+		(property "Voltage" "100V"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -10647,7 +10986,7 @@
 				)
 			)
 		)
-		(property "MF" "YAGEO"
+		(property "MF" "Murata Electronics"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -10659,7 +10998,7 @@
 				)
 			)
 		)
-		(property "Manufacturer_Part_Number" "CC0603KRX7R9BB104"
+		(property "Manufacturer_Part_Number" "GRM188R72A104KA35D"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -10671,7 +11010,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C14663"
+		(property "LCSC" "C77058"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -10683,7 +11022,7 @@
 				)
 			)
 		)
-		(property "Mouser" "603-CC603KRX7R9BB104"
+		(property "Mouser" "81-GRM188R72A104KA35"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -10695,7 +11034,7 @@
 				)
 			)
 		)
-		(property "DigiKey" "311-1088-1-ND"
+		(property "DigiKey" "490-3285-1-ND"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -10719,7 +11058,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:314"
+		(property "Stackup Source" "PCB/stackup/board.kdl:330"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -10792,7 +11131,7 @@
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "VSW_CTRL")
+			(net "BUCK_VIN")
 			(uuid "0131537d-5c28-48a7-b7b6-b4f5891f6fe0")
 		)
 		(pad "2" smd roundrect
@@ -10952,7 +11291,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:273"
+		(property "Stackup Source" "PCB/stackup/board.kdl:281"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -11298,7 +11637,7 @@
 				)
 			)
 		)
-		(property "Value" "CSD18532Q5B"
+		(property "Value" "CSD18532Q5B | VSON-CLIP-8 5x6mm (DNK)"
 			(at 0 3.5 180)
 			(layer "F.Fab")
 			(hide yes)
@@ -11408,7 +11747,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:209"
+		(property "Stackup Source" "PCB/stackup/board.kdl:211"
 			(at 0 2 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -11722,6 +12061,250 @@
 			)
 		)
 	)
+	(footprint "R_1206_3216Metric"
+		(layer "F.Cu")
+		(uuid "73628879-66c3-4da9-a077-02879be183ba")
+		(at 72 79.42)
+		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
+		(tags "resistor")
+		(property "Reference" "R16"
+			(at 0 -1.83 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "13eeb48d-9361-4a59-89d5-9a704c7bc6bb")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "3.3Ω"
+			(at 0 1.83 0)
+			(layer "F.Fab")
+			(uuid "fc0cda0a-1c1c-4cd2-a7e9-9eb941adf911")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0fecacb3-2995-49a4-b973-1cac946f5db8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f137ca1f-aae7-4e03-ba70-bfc3c8c2a679")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "232e7178-3559-4454-a841-a9ebd9ed0e70")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MF" "YAGEO"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "32da49a5-8893-43f0-aad7-0c08604f2f38")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "RC1206FR-073R3L"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "28ca1066-1408-4f2b-a8cc-5eaba6256089")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C137283"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "55b5f64a-89ef-4607-81af-11f2adb0de43")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser" "603-RC1206FR-073R3L"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "9e3bc137-bd40-491e-a060-b5f8203fba5e")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "DigiKey" "311-3.30FRCT-ND"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "b4172eec-2c41-48d5-9266-20bb93a9073e")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Path" "R_BUCK_IN"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "0a701648-0d61-46d4-9946-c34cb5f554d8")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Source" "PCB/stackup/board.kdl:335"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "d8a4a388-778d-4c95-8853-164144a813df")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Why" "Buck input surge filter resistor (1206, 0.25 W)"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "3222e06a-e08b-46c2-a629-6b84e654dbb9")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/9f9afe98-cae9-571e-9d85-14837eac6dd6")
+		(attr smd)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start -0.727064 -0.91)
+			(end 0.727064 -0.91)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "c51db059-70c3-47d6-b360-21865f4ba3a0")
+		)
+		(fp_line
+			(start -0.727064 0.91)
+			(end 0.727064 0.91)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "dd54c9da-f5f5-4012-aed8-e5ed633b6abd")
+		)
+		(fp_rect
+			(start -2.28 -1.13)
+			(end 2.28 1.13)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.CrtYd")
+			(uuid "de5d38b6-c8c4-4e29-b89f-6fbf4c066991")
+		)
+		(fp_rect
+			(start -1.6 -0.8)
+			(end 1.6 0.8)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "db1cd361-3bba-499f-ad49-0c04e9d6714f")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(uuid "82476419-f076-4f7b-8056-e01bfa69c1f3")
+			(effects
+				(font
+					(size 0.8 0.8)
+					(thickness 0.12)
+				)
+			)
+		)
+		(pad "1" smd roundrect
+			(at -1.4625 0)
+			(size 1.125 1.75)
+			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.222222)
+			(net "VSW_CTRL")
+			(uuid "df144aa2-6b38-43db-b55e-76533fd2e97e")
+		)
+		(pad "2" smd roundrect
+			(at 1.4625 0)
+			(size 1.125 1.75)
+			(layers "F.Cu" "F.Mask" "F.Paste")
+			(roundrect_rratio 0.222222)
+			(net "BUCK_VIN")
+			(uuid "4d9f62f3-d3b3-40d9-bd63-649d8fd84b82")
+		)
+		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_1206_3216Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
 	(footprint "R_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "74afaf3b-1e45-4b7d-a767-4423d45ec7b5")
@@ -11858,7 +12441,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:263"
+		(property "Stackup Source" "PCB/stackup/board.kdl:271"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -11961,7 +12544,7 @@
 		(at 80.6 86.4)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R22"
+		(property "Reference" "R23"
 			(at 0 -1.43 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -12194,7 +12777,7 @@
 		(at 89.4 72.4)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R26"
+		(property "Reference" "R27"
 			(at 0 2.77 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -12555,7 +13138,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:391"
+		(property "Stackup Source" "PCB/stackup/board.kdl:416"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -12866,7 +13449,7 @@
 		(at 62.8 93.6 90)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R17"
+		(property "Reference" "R18"
 			(at 0 -1.43 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -12996,7 +13579,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:322"
+		(property "Stackup Source" "PCB/stackup/board.kdl:347"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -13207,7 +13790,7 @@
 		(at 100.4 87.9 90)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R29"
+		(property "Reference" "R30"
 			(at 0 -1.43 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -13337,7 +13920,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:422"
+		(property "Stackup Source" "PCB/stackup/board.kdl:447"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -13561,7 +14144,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:331"
+		(property "Stackup Source" "PCB/stackup/board.kdl:356"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -13890,7 +14473,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:249"
+		(property "Stackup Source" "PCB/stackup/board.kdl:257"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -14135,7 +14718,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:302"
+		(property "Stackup Source" "PCB/stackup/board.kdl:318"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -14367,7 +14950,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:204"
+		(property "Stackup Source" "PCB/stackup/board.kdl:206"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -14826,7 +15409,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:239"
+		(property "Stackup Source" "PCB/stackup/board.kdl:247"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -14999,7 +15582,7 @@
 				)
 			)
 		)
-		(property "Voltage" "50V"
+		(property "Voltage" "100V"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -15011,7 +15594,7 @@
 				)
 			)
 		)
-		(property "MF" "YAGEO"
+		(property "MF" "Murata Electronics"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -15023,7 +15606,7 @@
 				)
 			)
 		)
-		(property "Manufacturer_Part_Number" "CC0603KRX7R9BB104"
+		(property "Manufacturer_Part_Number" "GRM188R72A104KA35D"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -15035,7 +15618,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C14663"
+		(property "LCSC" "C77058"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -15047,7 +15630,7 @@
 				)
 			)
 		)
-		(property "Mouser" "603-CC603KRX7R9BB104"
+		(property "Mouser" "81-GRM188R72A104KA35"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -15059,7 +15642,7 @@
 				)
 			)
 		)
-		(property "DigiKey" "311-1088-1-ND"
+		(property "DigiKey" "490-3285-1-ND"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -15083,7 +15666,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:339"
+		(property "Stackup Source" "PCB/stackup/board.kdl:364"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -15316,7 +15899,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:404"
+		(property "Stackup Source" "PCB/stackup/board.kdl:429"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -15500,7 +16083,7 @@
 		(at 80.6 84.6)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R21"
+		(property "Reference" "R22"
 			(at 0 -1.43 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -15839,7 +16422,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:448"
+		(property "Stackup Source" "PCB/stackup/board.kdl:473"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -16001,7 +16584,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:193"
+		(property "Stackup Source" "PCB/stackup/board.kdl:195"
 			(at 2 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -16018,6 +16601,18 @@
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "7e6e93bf-5358-4c40-9c92-ce8cb955c43a")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser" "306-B4BXHALFSN"
+			(at 2 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "4d88311b-47c9-48bb-ba50-fb9b5ba7c203")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16389,7 +16984,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:382"
+		(property "Stackup Source" "PCB/stackup/board.kdl:407"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -16854,7 +17449,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:372"
+		(property "Stackup Source" "PCB/stackup/board.kdl:397"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -17136,7 +17731,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:259"
+		(property "Stackup Source" "PCB/stackup/board.kdl:267"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -17369,7 +17964,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:232"
+		(property "Stackup Source" "PCB/stackup/board.kdl:240"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -17825,7 +18420,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:296"
+		(property "Stackup Source" "PCB/stackup/board.kdl:312"
 			(at 0 2 270)
 			(layer "F.SilkS")
 			(hide yes)
@@ -18199,7 +18794,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:248"
+		(property "Stackup Source" "PCB/stackup/board.kdl:256"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -18311,12 +18906,13 @@
 	(footprint "D_SMA"
 		(layer "F.Cu")
 		(uuid "c375896e-8c3a-4715-926b-c74d612c6860")
-		(at 72 82)
+		(at 72 82.35)
 		(descr "Diode SMA (DO-214AC)")
 		(tags "Diode SMA (DO-214AC)")
 		(property "Reference" "D7"
 			(at 0 -2.5 0)
 			(layer "F.SilkS")
+			(hide yes)
 			(uuid "c830e654-c980-400c-a94e-d5a711e8fd67")
 			(effects
 				(font
@@ -18435,7 +19031,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:330"
+		(property "Stackup Source" "PCB/stackup/board.kdl:355"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -18678,7 +19274,7 @@
 		(at 110.5 73)
 		(descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R27"
+		(property "Reference" "R28"
 			(at 0 2.4 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -18808,7 +19404,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:402"
+		(property "Stackup Source" "PCB/stackup/board.kdl:427"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -19161,7 +19757,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:216"
+		(property "Stackup Source" "PCB/stackup/board.kdl:218"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -19418,7 +20014,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:338"
+		(property "Stackup Source" "PCB/stackup/board.kdl:363"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -19533,7 +20129,7 @@
 				)
 			)
 		)
-		(property "Value" "LMR14030SDDAR"
+		(property "Value" "LMR14030SDDAR | HSOIC-8 PowerPAD (DDA)"
 			(at 0 3.5 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -19643,7 +20239,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:311"
+		(property "Stackup Source" "PCB/stackup/board.kdl:327"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -19802,7 +20398,7 @@
 			(at -2.7 -0.635)
 			(size 1.55 0.6)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(net "VSW_CTRL")
+			(net "BUCK_VIN")
 			(uuid "08297988-3d1a-4b58-8132-c2e52c1c1a30")
 		)
 		(pad "3" smd rect
@@ -20089,7 +20685,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:272"
+		(property "Stackup Source" "PCB/stackup/board.kdl:280"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -20334,7 +20930,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:324"
+		(property "Stackup Source" "PCB/stackup/board.kdl:349"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -20495,7 +21091,7 @@
 				)
 			)
 		)
-		(property "Voltage" "50V"
+		(property "Voltage" "100V"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -20507,7 +21103,7 @@
 				)
 			)
 		)
-		(property "MF" "YAGEO"
+		(property "MF" "Murata Electronics"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -20519,7 +21115,7 @@
 				)
 			)
 		)
-		(property "Manufacturer_Part_Number" "CC0603KRX7R9BB104"
+		(property "Manufacturer_Part_Number" "GRM188R72A104KA35D"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -20531,7 +21127,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C14663"
+		(property "LCSC" "C77058"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -20543,7 +21139,7 @@
 				)
 			)
 		)
-		(property "Mouser" "603-CC603KRX7R9BB104"
+		(property "Mouser" "81-GRM188R72A104KA35"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -20555,7 +21151,7 @@
 				)
 			)
 		)
-		(property "DigiKey" "311-1088-1-ND"
+		(property "DigiKey" "490-3285-1-ND"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -20579,7 +21175,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:205"
+		(property "Stackup Source" "PCB/stackup/board.kdl:207"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -20802,7 +21398,7 @@
 		(at 104 87.9 90)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R31"
+		(property "Reference" "R32"
 			(at 0 -1.43 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -20932,7 +21528,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:432"
+		(property "Stackup Source" "PCB/stackup/board.kdl:457"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -21035,7 +21631,7 @@
 		(at 89.4 85)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R24"
+		(property "Reference" "R25"
 			(at 0 -1.43 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -21262,6 +21858,159 @@
 			)
 		)
 	)
+	(footprint "BOM_Only_JumperShunt"
+		(layer "F.Cu")
+		(uuid "e727ccb0-2e0e-4ca7-8cbf-dffddc0f4f3d")
+		(at 98 65.769999)
+		(descr "BOM-only placeholder for a loose 2.54 mm jumper shunt: no pads, no courtyard, Fab outline only. Placed beside the header it fits.")
+		(tags "BOM only jumper shunt")
+		(property "Reference" "SH3"
+			(at 0 -2 0)
+			(layer "F.Fab")
+			(uuid "9f004f46-e53f-46c4-83e2-763b27ae6bbf")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Value" "Jumper shunt for 2.54mm PinHeader"
+			(at 0 2 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ca6d36b4-d21f-4cd8-86a0-44f7e60e33dc")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "54bd0964-1eda-4cef-92fa-67a2f18ac3cc")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "2.54 mm jumper shunt (BOM only)"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f36f4338-f55f-491d-8481-41bf642b7f8f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MF" "Würth Elektronik"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "86b2ae74-0352-4e49-997d-5a766b928636")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "60900213421"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "5d9acb81-9c1c-49a1-9c45-edff50fa3cd8")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser" "710-60900213421"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "e0d51a5f-6526-4905-afbf-0b93a8ab5ac9")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "DigiKey" "732-2678-ND"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "b8c1ef74-4b8f-4f97-8927-cb9dba36a0e9")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Path" "SH_CIRCUIT"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "17a402ad-8149-4f0e-987e-caaceb5bc5fb")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Source" "PCB/stackup/board.kdl:479"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "200c4824-c9e0-49f5-8252-642e46e243a6")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Stackup Why" "For J_CIRCUIT: fit only on the circuit 2 board"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "a67c4506-9381-4c47-8cb9-a2f1d27c94cc")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/b8e34c76-3c3d-5fa5-8f97-cbcd997aba63")
+		(attr exclude_from_pos_files allow_missing_courtyard)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_rect
+			(start -1.25 -2.5)
+			(end 1.25 2.5)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(fill no)
+			(layer "F.Fab")
+			(uuid "6f2e62d5-e4a8-4c14-8290-cc1215ca2f62")
+		)
+		(embedded_fonts no)
+	)
 	(footprint "C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "e78c7d36-acfd-437f-88e2-f2a2002778f5")
@@ -21326,7 +22075,7 @@
 				)
 			)
 		)
-		(property "Voltage" "50V"
+		(property "Voltage" "100V"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -21338,7 +22087,7 @@
 				)
 			)
 		)
-		(property "MF" "YAGEO"
+		(property "MF" "Murata Electronics"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -21350,7 +22099,7 @@
 				)
 			)
 		)
-		(property "Manufacturer_Part_Number" "CC0603KRX7R9BB104"
+		(property "Manufacturer_Part_Number" "GRM188R72A104KA35D"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -21362,7 +22111,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C14663"
+		(property "LCSC" "C77058"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -21374,7 +22123,7 @@
 				)
 			)
 		)
-		(property "Mouser" "603-CC603KRX7R9BB104"
+		(property "Mouser" "81-GRM188R72A104KA35"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -21386,7 +22135,7 @@
 				)
 			)
 		)
-		(property "DigiKey" "311-1088-1-ND"
+		(property "DigiKey" "490-3285-1-ND"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -21410,7 +22159,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:304"
+		(property "Stackup Source" "PCB/stackup/board.kdl:320"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -21655,7 +22404,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:313"
+		(property "Stackup Source" "PCB/stackup/board.kdl:329"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -21728,7 +22477,7 @@
 			(size 1.15 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
-			(net "VSW_CTRL")
+			(net "BUCK_VIN")
 			(uuid "195d5179-e82c-4795-ac69-26daf340e85c")
 		)
 		(pad "2" smd roundrect
@@ -21887,7 +22636,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:224"
+		(property "Stackup Source" "PCB/stackup/board.kdl:231"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -22120,7 +22869,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:398"
+		(property "Stackup Source" "PCB/stackup/board.kdl:423"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -22362,7 +23111,7 @@
 		(at 80.6 78)
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
-		(property "Reference" "R23"
+		(property "Reference" "R24"
 			(at 0 -1.43 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -22713,7 +23462,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:411"
+		(property "Stackup Source" "PCB/stackup/board.kdl:436"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -23085,7 +23834,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:271"
+		(property "Stackup Source" "PCB/stackup/board.kdl:279"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -23310,7 +24059,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:217"
+		(property "Stackup Source" "PCB/stackup/board.kdl:219"
 			(at 0 2 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -23695,7 +24444,7 @@
 				)
 			)
 		)
-		(property "Stackup Source" "PCB/stackup/board.kdl:312"
+		(property "Stackup Source" "PCB/stackup/board.kdl:328"
 			(at 0 2 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -23768,7 +24517,7 @@
 			(size 1.15 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
-			(net "VSW_CTRL")
+			(net "BUCK_VIN")
 			(uuid "a7871213-78bc-40e3-ad00-a51828f36391")
 		)
 		(pad "2" smd roundrect
@@ -24307,6 +25056,30 @@
 			(justify mirror)
 		)
 	)
+	(gr_text "rev 1.0  2026-11-08"
+		(at 85 66.3 0)
+		(layer "B.SilkS")
+		(uuid "13e08915-143c-4462-9714-fe6537659ac6")
+		(effects
+			(font
+				(size 0.9 0.9)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(gr_text "DroidPowerSense"
+		(at 85 64.599999 0)
+		(layer "B.SilkS")
+		(uuid "1006577a-29f6-4e30-9ec2-c1d8fa5dcaea")
+		(effects
+			(font
+				(size 1.2 1.2)
+				(thickness 0.18)
+			)
+			(justify mirror)
+		)
+	)
 	(segment
 		(start 67.175 67)
 		(end 67.175 65)
@@ -24324,28 +25097,12 @@
 		(uuid "37d0aee1-339e-4fb0-bec0-0d1818f27895")
 	)
 	(segment
-		(start 57.5 94.375)
-		(end 59.2 94.375)
-		(width 0.5)
-		(layer "F.Cu")
-		(net "VSW_CTRL")
-		(uuid "5178ab47-2248-4961-8456-79eb2aae15cc")
-	)
-	(segment
 		(start 76.6 65.775)
 		(end 75 65.775)
 		(width 0.5)
 		(layer "F.Cu")
 		(net "VSW_CTRL")
 		(uuid "69940b06-b025-4b76-80c7-0691cf649979")
-	)
-	(segment
-		(start 58.9 88.365)
-		(end 58.9 90.075)
-		(width 0.5)
-		(layer "F.Cu")
-		(net "VSW_CTRL")
-		(uuid "7a528602-e1ef-4eb1-b273-6d84a5f6e58e")
 	)
 	(segment
 		(start 67.175 69)
@@ -24358,26 +25115,18 @@
 	(segment
 		(start 79.85 62.5)
 		(end 82 62.5)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "VSW_CTRL")
 		(uuid "82913fde-60fd-412e-a9cc-ca6f8158388b")
 	)
 	(segment
-		(start 57.5 90.075)
-		(end 57.5 94.375)
+		(start 68 78)
+		(end 69.42 79.42)
 		(width 0.5)
 		(layer "F.Cu")
 		(net "VSW_CTRL")
-		(uuid "a1528876-7d10-434d-b247-ed788524b70b")
-	)
-	(segment
-		(start 59.2 94.375)
-		(end 61 94.425)
-		(width 0.5)
-		(layer "F.Cu")
-		(net "VSW_CTRL")
-		(uuid "a79dac91-60b0-469b-a41a-b1f5594f5d0c")
+		(uuid "8842e998-fdac-4e64-b95b-22a34b363b28")
 	)
 	(segment
 		(start 75 71)
@@ -24404,22 +25153,6 @@
 		(uuid "d460f304-c046-4481-9fd1-fe0221b489a6")
 	)
 	(segment
-		(start 61.3 88.365)
-		(end 58.9 88.365)
-		(width 0.5)
-		(layer "F.Cu")
-		(net "VSW_CTRL")
-		(uuid "d4645e8f-d44d-4740-b5a2-b7be25081c8b")
-	)
-	(segment
-		(start 63.525 81.6)
-		(end 63.525 80.2)
-		(width 0.5)
-		(layer "F.Cu")
-		(net "VSW_CTRL")
-		(uuid "d7f2c9f3-60e8-442e-850c-e5dc0c1b5069")
-	)
-	(segment
 		(start 68 76.5)
 		(end 68 78)
 		(width 0.5)
@@ -24436,12 +25169,12 @@
 		(uuid "f0cb740a-8927-4d48-bfe8-6d7138b60d5e")
 	)
 	(segment
-		(start 58.9 90.075)
-		(end 57.5 90.075)
+		(start 69.42 79.42)
+		(end 70.54 79.42)
 		(width 0.5)
 		(layer "F.Cu")
 		(net "VSW_CTRL")
-		(uuid "fb1340b5-cecd-43e1-aad1-545b773978bf")
+		(uuid "f6febe7d-d6bd-434f-a06f-6331d03f9080")
 	)
 	(segment
 		(start 68 76.5)
@@ -24450,14 +25183,6 @@
 		(layer "F.Cu")
 		(net "VSW_CTRL")
 		(uuid "fd3ced9a-02f4-425b-8b72-095c7bfd1c0d")
-	)
-	(via
-		(at 63.525 80.2)
-		(size 0.6)
-		(drill 0.3)
-		(layers "F.Cu" "B.Cu")
-		(net "VSW_CTRL")
-		(uuid "1735dca5-2a7c-42df-861f-1f970c9b17e7")
 	)
 	(via
 		(at 84.5 87.4)
@@ -24474,22 +25199,6 @@
 		(layers "F.Cu" "B.Cu")
 		(net "VSW_CTRL")
 		(uuid "424dfe7c-0a4f-4868-88c6-93da7dac69e0")
-	)
-	(via
-		(at 68 78)
-		(size 0.6)
-		(drill 0.3)
-		(layers "F.Cu" "B.Cu")
-		(net "VSW_CTRL")
-		(uuid "59dcd9b9-7d83-4faf-985f-8a685cbcec61")
-	)
-	(via
-		(at 57.5 92)
-		(size 0.6)
-		(drill 0.3)
-		(layers "F.Cu" "B.Cu")
-		(net "VSW_CTRL")
-		(uuid "98cc127e-5c5c-4899-9081-5133f443550e")
 	)
 	(via
 		(at 82 62.2)
@@ -24516,28 +25225,12 @@
 		(uuid "2c5758b4-4f90-4a8f-90ad-6d3ae2884b4b")
 	)
 	(segment
-		(start 68 78)
-		(end 63.525 80.2)
-		(width 0.5)
-		(layer "In2.Cu")
-		(net "VSW_CTRL")
-		(uuid "46f52e4b-8ea7-4444-8da6-9f49e2155027")
-	)
-	(segment
 		(start 82 62.2)
 		(end 82.7 62.2)
 		(width 0.5)
 		(layer "In2.Cu")
 		(net "VSW_CTRL")
 		(uuid "4d844237-ce17-454d-a7ec-95520bf00e9c")
-	)
-	(segment
-		(start 57.5 92)
-		(end 57.5 86.225)
-		(width 0.5)
-		(layer "In2.Cu")
-		(net "VSW_CTRL")
-		(uuid "7a503a0f-b356-471f-ab91-20c490b416ca")
 	)
 	(segment
 		(start 84.5 64)
@@ -24562,14 +25255,6 @@
 		(layer "In2.Cu")
 		(net "VSW_CTRL")
 		(uuid "a8f5fe2f-2eba-4e05-b11a-7c0fd2c8b69e")
-	)
-	(segment
-		(start 57.5 86.225)
-		(end 63.525 80.2)
-		(width 0.5)
-		(layer "In2.Cu")
-		(net "VSW_CTRL")
-		(uuid "bb1a1df2-a117-45c4-bd68-cacc17994453")
 	)
 	(segment
 		(start 55.5 76.5)
@@ -26824,7 +27509,7 @@
 	(segment
 		(start 79.85 63)
 		(end 74 63)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "PROT_OVP")
 		(uuid "8facba23-af36-4cac-ac51-58b611e57d6f")
@@ -26832,7 +27517,7 @@
 	(segment
 		(start 74 63)
 		(end 73.4 63.6)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "PROT_OVP")
 		(uuid "98e4a745-3705-4b83-bd7a-801f45c23f35")
@@ -26870,6 +27555,134 @@
 		(uuid "fa0b2fb5-3943-495c-b223-e495ef89928d")
 	)
 	(segment
+		(start 57.5 94.375)
+		(end 59.2 94.375)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "BUCK_VIN")
+		(uuid "5178ab47-2248-4961-8456-79eb2aae15cc")
+	)
+	(segment
+		(start 73.46 79.42)
+		(end 75.15 80.3)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "BUCK_VIN")
+		(uuid "78cfccf6-a80f-4079-b019-b8e707fd7dcc")
+	)
+	(segment
+		(start 58.9 88.365)
+		(end 58.9 90.075)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "BUCK_VIN")
+		(uuid "7a528602-e1ef-4eb1-b273-6d84a5f6e58e")
+	)
+	(segment
+		(start 57.5 90.075)
+		(end 57.5 94.375)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "BUCK_VIN")
+		(uuid "a1528876-7d10-434d-b247-ed788524b70b")
+	)
+	(segment
+		(start 59.2 94.375)
+		(end 61 94.425)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "BUCK_VIN")
+		(uuid "a79dac91-60b0-469b-a41a-b1f5594f5d0c")
+	)
+	(segment
+		(start 61.3 88.365)
+		(end 58.9 88.365)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "BUCK_VIN")
+		(uuid "d4645e8f-d44d-4740-b5a2-b7be25081c8b")
+	)
+	(segment
+		(start 63.525 81.6)
+		(end 63.525 80.2)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "BUCK_VIN")
+		(uuid "d7f2c9f3-60e8-442e-850c-e5dc0c1b5069")
+	)
+	(segment
+		(start 58.9 90.075)
+		(end 57.5 90.075)
+		(width 0.5)
+		(layer "F.Cu")
+		(net "BUCK_VIN")
+		(uuid "fb1340b5-cecd-43e1-aad1-545b773978bf")
+	)
+	(via
+		(at 63.525 80.2)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "BUCK_VIN")
+		(uuid "1735dca5-2a7c-42df-861f-1f970c9b17e7")
+	)
+	(via
+		(at 57.5 92)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "BUCK_VIN")
+		(uuid "98cc127e-5c5c-4899-9081-5133f443550e")
+	)
+	(via
+		(at 75.15 80.3)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(net "BUCK_VIN")
+		(uuid "f9486e45-75af-4aef-8cd4-7004128525c4")
+	)
+	(segment
+		(start 75.15 80.3)
+		(end 74.85 80.6)
+		(width 0.5)
+		(layer "In2.Cu")
+		(net "BUCK_VIN")
+		(uuid "235667ec-2cb0-419f-8497-dad170f31869")
+	)
+	(segment
+		(start 57.5 92)
+		(end 57.5 86.225)
+		(width 0.5)
+		(layer "In2.Cu")
+		(net "BUCK_VIN")
+		(uuid "7a503a0f-b356-471f-ab91-20c490b416ca")
+	)
+	(segment
+		(start 57.5 86.225)
+		(end 63.525 80.2)
+		(width 0.5)
+		(layer "In2.Cu")
+		(net "BUCK_VIN")
+		(uuid "bb1a1df2-a117-45c4-bd68-cacc17994453")
+	)
+	(segment
+		(start 74.85 80.6)
+		(end 63.92 80.6)
+		(width 0.5)
+		(layer "In2.Cu")
+		(net "BUCK_VIN")
+		(uuid "daf0d141-1867-4983-b58c-2fd78a9c2d3e")
+	)
+	(segment
+		(start 63.92 80.6)
+		(end 63.52 80.2)
+		(width 0.5)
+		(layer "In2.Cu")
+		(net "BUCK_VIN")
+		(uuid "f42199b3-8ad0-45bf-8825-51f4a64ce56e")
+	)
+	(segment
 		(start 60.1 89.635)
 		(end 60.1 92.775)
 		(width 0.2)
@@ -26904,7 +27717,7 @@
 	(segment
 		(start 79.85 63.5)
 		(end 78.5 63.5)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "PROT_UVLO")
 		(uuid "b84d7cf1-2882-487e-af3a-ae5c130ed588")
@@ -26912,7 +27725,7 @@
 	(segment
 		(start 78.5 63.5)
 		(end 78.5 65.5)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "PROT_UVLO")
 		(uuid "c1f3c32d-7050-408a-bcd1-99c2bb40b956")
@@ -27112,7 +27925,7 @@
 	(segment
 		(start 79.97 80)
 		(end 77.38 82.59)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SDA")
 		(uuid "4413750e-015f-49e8-9549-785c2aeba451")
@@ -27120,7 +27933,7 @@
 	(segment
 		(start 86.6 72.834301)
 		(end 86.6 77)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SDA")
 		(uuid "6352d410-eed0-42fb-8685-cb3030f232d1")
@@ -27128,7 +27941,7 @@
 	(segment
 		(start 77.38 82.59)
 		(end 79.385 82.59)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SDA")
 		(uuid "654612a0-06b3-486e-bd9d-d542fe817c56")
@@ -27136,7 +27949,7 @@
 	(segment
 		(start 79.385 82.59)
 		(end 79.775 82.2)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SDA")
 		(uuid "677bc5b5-a562-49b0-9b5b-df4392dcb22f")
@@ -27144,7 +27957,7 @@
 	(segment
 		(start 90.9 60.75)
 		(end 90.9 62.311)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SDA")
 		(uuid "756a41a7-3140-4f96-b16f-96b9c2eda8ff")
@@ -27176,7 +27989,7 @@
 	(segment
 		(start 86.6 77)
 		(end 83.6 80)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SDA")
 		(uuid "87a34a7a-4481-4589-abc6-7cbf6d413703")
@@ -27184,7 +27997,7 @@
 	(segment
 		(start 83.6 80)
 		(end 79.97 80)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SDA")
 		(uuid "96ec9373-5b13-49d7-bde9-ee2d4b5abd40")
@@ -27192,7 +28005,7 @@
 	(segment
 		(start 90.9 62.311)
 		(end 90.830778 62.380222)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SDA")
 		(uuid "a7535c70-1dbf-40df-a94f-1342bdecc63a")
@@ -27216,7 +28029,7 @@
 	(segment
 		(start 86.705 72.729301)
 		(end 86.6 72.834301)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SDA")
 		(uuid "bf9468cd-df75-4ff4-8371-e876f740c7fa")
@@ -27248,7 +28061,7 @@
 	(segment
 		(start 90.4 62.590921)
 		(end 90.240778 62.750143)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "INA_ALERT")
 		(uuid "60106ca2-ef52-407e-80e6-499b2c71e131")
@@ -27256,7 +28069,7 @@
 	(segment
 		(start 90.4 60.75)
 		(end 90.4 62.590921)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "INA_ALERT")
 		(uuid "78d0ad5b-ac55-4690-945f-a63646ba25ce")
@@ -27272,7 +28085,7 @@
 	(segment
 		(start 90.240778 62.750143)
 		(end 83.09 69.900921)
-		(width 0.18)
+		(width 0.2)
 		(layer "B.Cu")
 		(net "INA_ALERT")
 		(uuid "6bd2e32b-37ee-4378-b484-81e1b9231c81")
@@ -27280,7 +28093,7 @@
 	(segment
 		(start 83.09 81.96)
 		(end 77.38 87.67)
-		(width 0.18)
+		(width 0.2)
 		(layer "B.Cu")
 		(net "INA_ALERT")
 		(uuid "93c3df78-da25-4498-b0d9-fd56f1486767")
@@ -27320,7 +28133,7 @@
 	(segment
 		(start 79.245 85.13)
 		(end 79.775 84.6)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SCL")
 		(uuid "2ef5c05d-345c-4552-b1a6-8e608e4fadcb")
@@ -27344,7 +28157,7 @@
 	(segment
 		(start 77.38 85.13)
 		(end 79.245 85.13)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SCL")
 		(uuid "895e21cf-1aaa-4b05-b3b1-c4e81cd1b88c")
@@ -27352,7 +28165,7 @@
 	(segment
 		(start 82.565 83.635)
 		(end 78.875 83.635)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SCL")
 		(uuid "97edee32-ce46-4f8e-a093-5f59318fe489")
@@ -27360,7 +28173,7 @@
 	(segment
 		(start 91.4 60.75)
 		(end 91.4 66.465613)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SCL")
 		(uuid "99469588-dee3-45b5-b87e-0019bd6b32e8")
@@ -27392,7 +28205,7 @@
 	(segment
 		(start 78.875 83.635)
 		(end 77.38 85.13)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SCL")
 		(uuid "ecc8c970-298b-4bab-82b8-193b73d2cbc0")
@@ -27400,7 +28213,7 @@
 	(segment
 		(start 87.6 78.6)
 		(end 82.565 83.635)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "I2C_SCL")
 		(uuid "f4e13983-c088-4ae7-9e30-b269441df394")
@@ -27486,7 +28299,7 @@
 		(uuid "af49c110-80b3-4c9d-95ca-0deaae71dfc5")
 	)
 	(segment
-		(start 70 82)
+		(start 70 82.35)
 		(end 70 86.5)
 		(width 0.6)
 		(layer "F.Cu")
@@ -27912,7 +28725,7 @@
 	(segment
 		(start 79.85 64)
 		(end 79.85 66.4)
-		(width 0.18)
+		(width 0.2)
 		(layer "F.Cu")
 		(net "PROT_EN")
 		(uuid "5c733312-5c4f-4ae7-b14c-8b9d302fbbf4")

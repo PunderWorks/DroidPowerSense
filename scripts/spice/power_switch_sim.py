@@ -28,7 +28,7 @@ VALUES = dict(
     C_BUCK_IN=20e-6,            # C_BUCK_IN1 + C_BUCK_IN2 (2 x 10 uF)
     R_VBAT=110e3,               # R_VBAT_TOP + R_VBAT_BOT
     R_SHUNT=1e-3,
-    C_GATE=220e-9, R_GATE_C=1e3, # gate dV/dt capacitor (220 nF) and its damping resistor
+    C_GATE=100e-9, R_GATE_C=1e3, # gate dV/dt capacitor (100 nF, 100 V) and its damping resistor
 )
 
 # ── Datasheet limits ────────────────────────────────────────────────────────────────────────────
@@ -41,20 +41,24 @@ VALUES = dict(
 #   IGATE 17 / 24 / 31 uA; VGATE (GATE - VIN) 10 / 12 / 14 V; VGATE-CLAMP (GATE - OUT) 16.8 V
 #   IGATE-OFF 2.2 mA (EN/UVLO low); IGATE-FLT 80 mA (timer fault)
 #   VGATE-TH (GATE - OUT, ends start-up) 3.5 / 5 / 6.5 V
-#   VTMRH 2.0 V; VTMRL 0.3 V; ITIMERL (start-up) 4 / 6 / 7 uA; ITIMERH (VDS fault) 8.5 / 11 / 13 uA
+#   VTMRH 1.70 / 2.0 / 2.30 V; VTMRL 0.3 V; ITIMERL (start-up) 4 / 6 / 7 uA; ITIMERH (VDS fault) 8.5 / 11 / 13 uA
 #   ITIMERR 6 mA reset discharge
 # CSD18532Q5B (SLPS322E Section 4.1): VGS(th) 1.5 / 1.8 / 2.2 V; RDS(on) 2.5 / 3.2 mOhm at VGS 10 V;
 #   gfs 143 S at 25 A; Ciss 3900 pF; Crss 13 pF at 30 V; Qgd 6.9 nC; VDS 60 V; VGS +/-20 V
 # BSS138 (Q_CUTOFF): VGS(th) 0.8..1.5 V
 # SMBJ33CA (D_TVS_OUT): VBR 36.7 V min, VC 53.3 V at IPP 11.3 A; SMCJ33CA (D_TVS_IN): VC 53.3 V at 28.2 A
+# cg / ct scale C_GATE / C_TIMER for part tolerance (+/-10 %, X7R/X5R K grade), so each corner
+# stacks capacitor tolerance with the LM5060 limits that push the same way.
 LM5060_TYP = dict(por=5.1, enth=2.0, enbias=6e-6, uvth=1.6, uvbias=5.5e-6, ovth=2.0, isense=16e-6,
-                  iratio=2.0, igate=24e-6, vgate=12.0, vgth=5.0, itl=6e-6, ith=11e-6)
+                  iratio=2.0, igate=24e-6, vgate=12.0, vgth=5.0, itl=6e-6, ith=11e-6, vtmrh=2.0,
+                  cg=1.0, ct=1.0)
 # The corner that makes start-up slowest against the fastest timer (start-up timer fault):
-LM5060_SLOW_START = dict(LM5060_TYP, igate=17e-6, vgate=10.0, vgth=6.5, itl=7e-6)
+LM5060_SLOW_START = dict(LM5060_TYP, igate=17e-6, vgate=10.0, vgth=6.5, itl=7e-6, vtmrh=1.70,
+                         cg=1.10, ct=0.90)
 # The corner that charges the gate fastest (highest inrush current):
-LM5060_FAST_START = dict(LM5060_TYP, igate=31e-6, vgate=14.0)
+LM5060_FAST_START = dict(LM5060_TYP, igate=31e-6, vgate=14.0, cg=0.90)
 # The corner with the longest overcurrent fault delay:
-LM5060_SLOW_TRIP = dict(LM5060_TYP, ith=8.5e-6, isense=18e-6, iratio=2.3)
+LM5060_SLOW_TRIP = dict(LM5060_TYP, ith=8.5e-6, isense=18e-6, iratio=2.3, vtmrh=2.30, ct=1.10)
 
 FET_VTH = (1.5, 2.2)
 CUTOFF_VTH = (0.8, 1.5)
@@ -92,7 +96,7 @@ def netlist(vbat=24.0, rise="1m", sw_closed=True, cutoff_at=None, vth_fet=1.8, v
         regen_src = f"Iregen 0 vout PWL(0 0 {t0} 0 {t0 + 1e-4} {amps} {t0 + length / 2} {amps} {t0 + length} 0 100 0)"
     else:
         regen_src = ""
-    gate_cap = (f"Rgc gate_fet gc {v['R_GATE_C']}\nCgate gc 0 {v['C_GATE']}" if v["C_GATE"] > 0 else "")
+    gate_cap = (f"Rgc gate_fet gc {v['R_GATE_C']}\nCgate gc 0 {v['C_GATE'] * ic['cg']}" if v["C_GATE"] > 0 else "")
     # run: VIN, EN and UVLO all high. Only these reset the fault latch (SNVS628H 8.1.2, 8.1.6);
     # OVP holds the gate off and discharges the timer but does not clear a latched fault.
     run = "*".join((step(f"v(vsw_ctrl)-{ic['por']}", 20), step(f"v(en)-{ic['enth']}"),
@@ -166,10 +170,10 @@ Rsd sud sud_d 100k
 Csd sud_d 0 1n
 Brst rst 0 V = max(v(sud)-v(sud_d), 0)
 Btmr 0 timer I = v(en_ok)*(1-v(flt))*((1-v(sud))*{ic['itl']} + v(sud)*(v(vdsflt)*{ic['ith']} - (1-v(vdsflt))*6m*tanh(v(timer)/0.05))) - v(rst)*6m*tanh((v(timer)-0.3)/0.05) - (1-v(en_ok))*(1-v(flt))*6m*tanh(v(timer)/0.05)
-Ctimer timer 0 {v['C_TIMER']}
+Ctimer timer 0 {v['C_TIMER'] * ic['ct']}
 Rtimer timer 0 1G
-* flt: timer reached VTMRH (2.0 V); latched until EN, UVLO or VIN drops
-Bflt 0 flt I = 100m*{step('v(timer)-2.0 + 0.5*v(flt)', 1000)}*(1-v(flt)) - 10m*(1-v(run))*v(flt)
+* flt: timer reached VTMRH; latched until EN, UVLO or VIN drops
+Bflt 0 flt I = 100m*{step(f"v(timer)-{ic['vtmrh']} + 0.5*v(flt)", 1000)}*(1-v(flt)) - 10m*(1-v(run))*v(flt)
 Cflt flt 0 1n
 Rflt flt 0 1G
 * GATE: IGATE source toward VIN + VGATE; 2.2 mA sink when off; 80 mA sink on fault; GATE-OUT clamp
@@ -236,12 +240,12 @@ def on_time(vbat, ic=LM5060_TYP):
     """Time for the output to be fully on: the gate (plus any gate capacitor) charged to VBAT +
     VGATE-TH + 2 V by IGATE, with 30% margin."""
     c_gate = DESIGN.get("c_gate", VALUES["C_GATE"])
-    return max(0.03, 1.3 * (vbat + ic["vgth"] + 2.0) * (c_gate + 10e-9) / ic["igate"] + 0.01)
+    return max(0.03, 1.3 * (vbat + ic["vgth"] + 2.0) * (c_gate * ic["cg"] + 10e-9) / ic["igate"] + 0.01)
 
 
 def fault_delay(ic=LM5060_TYP):
-    """VDS fault delay: C_TIMER charged from VTMRL (0.3 V) to VTMRH (2.0 V) by ITIMERH."""
-    return DESIGN.get("c_timer", VALUES["C_TIMER"]) * 1.7 / ic["ith"]
+    """VDS fault delay: C_TIMER charged from VTMRL (0.3 V) to VTMRH by ITIMERH."""
+    return DESIGN.get("c_timer", VALUES["C_TIMER"]) * ic["ct"] * (ic["vtmrh"] - 0.3) / ic["ith"]
 
 
 def vgs_peak(tr):
@@ -311,7 +315,9 @@ def reverse_pol(sim):
                       corners(vbat=(-12.0, -24.0, -32.0)), NODES, check)
 
 
-INRUSH_LOADS = (100e-6, 1000e-6, 4700e-6, 10000e-6)
+# Rated LOAD OUT capacitance: up to 4.7 mF. 10 mF at 32 V exceeds Q1's SOA at the fast corner with
+# C_GATE = 100 nF (1.4-1.5x); a larger C_GATE would need a larger C_TIMER and a longer overload delay.
+INRUSH_LOADS = (100e-6, 1000e-6, 4700e-6)
 INRUSH_CORNERS = {"fast": LM5060_FAST_START, "slow": LM5060_SLOW_START}
 
 
@@ -322,7 +328,7 @@ def inrush(sim):
     def b(c_load, vbat, corner):
         c_gate = DESIGN.get("c_gate", VALUES["C_GATE"])
         ic = INRUSH_CORNERS[corner]
-        ramp_s = (vbat + ic["vgth"]) * (c_gate + 10e-9) / ic["igate"]
+        ramp_s = (vbat + ic["vgth"]) * (c_gate * ic["cg"] + 10e-9) / ic["igate"]
         tstop = min(1.5, max(0.08, 2.0 * ramp_s + 0.03))
         return build(vbat=vbat, c_load=c_load, ic=ic, tstop=tstop, tmax=5e-6 if c_gate == 0 else 50e-6)
 
@@ -410,16 +416,11 @@ SCENARIOS = dict(sw_open=sw_open, turn_on=turn_on, mcu_cutoff=mcu_cutoff, revers
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--scenario", choices=[*SCENARIOS, "all"], default="all")
-    ap.add_argument("--recommended", action="store_true",
-                    help="Use recommended values: C_GATE=220nF, C_TIMER=2.2uF, R_SENSE=33k")
+
     ap.add_argument("--c-gate", type=float, help="gate dV/dt capacitor in farads (board value by default)")
     ap.add_argument("--c-timer", type=float, help="C_TIMER in farads (board value by default)")
     ap.add_argument("--r-sense", type=float, help="R_SENSE in ohms (board value by default)")
     args = ap.parse_args()
-    if args.recommended:
-        DESIGN.setdefault("c_gate", 220e-9)
-        DESIGN.setdefault("c_timer", 2.2e-6)
-        DESIGN.setdefault("r_sense", 33e3)
     if args.c_gate is not None:
         DESIGN["c_gate"] = args.c_gate
     if args.c_timer is not None:
