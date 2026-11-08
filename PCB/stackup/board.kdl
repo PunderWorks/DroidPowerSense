@@ -21,6 +21,12 @@ mpn "CC0603KRX7R9BB104" manufacturer="YAGEO" kind=capacitor value="100nF" rated_
 mpn "CL10B103KB8NNNC" manufacturer="Samsung Electro-Mechanics" kind=capacitor value="10nF" rated_voltage="50V" {
     catalog mouser="187-CL10B103KB8NNNC" digikey="1276-1009-1-ND" lcsc="C1589"
 }
+mpn "CL10B224KB8NNNC" manufacturer="Samsung Electro-Mechanics" kind=capacitor value="220nF" rated_voltage="50V" {
+    catalog mouser="187-CL10B224KB8NNNC" digikey="1276-1105-1-ND" lcsc="C64705"
+}
+mpn "CL10A225KO8NNNC" manufacturer="Samsung Electro-Mechanics" kind=capacitor value="2.2µF" rated_voltage="16V" {
+    catalog mouser="187-CL10A225KO8NNNC" digikey="1276-1119-1-ND" lcsc="C23630"
+}
 mpn "CL31A106KBHNNNE" manufacturer="Samsung Electro-Mechanics" kind=capacitor value="10µF" footprint="Capacitor_SMD:C_1206_3216Metric" rated_voltage="50V" {
     catalog mouser="187-CL31A106KBHNNNE" digikey="1276-2876-1-ND" lcsc="C13585"
 }
@@ -76,6 +82,16 @@ design droidpowersense {
         when kind=capacitor
         when value="10nF"
         set mpn="CL10B103KB8NNNC"
+    }
+    match placement {
+        when kind=capacitor
+        when value="220nF"
+        set mpn="CL10B224KB8NNNC"
+    }
+    match placement {
+        when kind=capacitor
+        when value="2.2µF"
+        set mpn="CL10A225KO8NNNC"
     }
     match placement {
         when kind=capacitor
@@ -202,6 +218,14 @@ design droidpowersense {
     circuit U_PROT.GATE R_GATE.A D_GOFF.K name="GATE_DRV"
     circuit R_GATE.B D_GOFF.A Q1.GATE Q2.GATE name="GATE_FET"
 
+    // Gate dV/dt inrush slew network (LM5060 Fig. 28 / Fig. 41):
+    // C_GATE = 220nF limits output slew rate to ~100 V/s, dropping peak inrush into >= 1000 uF loads to < 1.7 A.
+    // R_GATE_C = 1k isolates C_GATE during 80 mA fast fault discharge and damps gate ringing.
+    place resistor R_GATE_C value="1kΩ" intent=damping note="Gate slew damping resistor"
+    place capacitor C_GATE value="220nF" footprint="Capacitor_SMD:C_0603_1608Metric" intent=timing note="Gate dV/dt inrush control capacitor"
+    circuit R_GATE_C.A Q1.GATE name="GATE_FET"
+    circuit R_GATE_C.B C_GATE.A name="GATE_C"
+
     // Reverse-polarity VGS clamp (LM5060 Figure 41: Q3 NPN + D5 + R2):
     // When VBAT_IN < 0V, Q1 body diode pulls VSW_MID negative; R_REV forward-biases Q_REV (NPN),
     // clamping GATE_FET to VSW_MID (VGS = 0.1V) so Q2 stays strictly off during reverse battery.
@@ -218,12 +242,12 @@ design droidpowersense {
     circuit Q_REV.BASE D_REV.K R_REV.A name="REV_BASE"
 
     // LM5060 SENSE, OUT, and TIMER (VDS overcurrent/short-circuit protection):
-    // R_SENSE = 22k (16 uA * 22k = 352 mV VDS threshold -> ~70A hardware short-circuit trip across Q1+Q2).
+    // R_SENSE = 33k (16 uA * 33k = 528 mV VDS threshold -> ~45A hot / ~70A cold trip across Q1+Q2).
     // R_OUT = 10k limits reverse current out of OUT pin to < 3 mA during reverse polarity.
-    // C_TIMER = 100nF sets ~33 ms startup VGS window and ~18 ms overcurrent latch delay.
-    place resistor R_SENSE value="22kΩ" intent=sense note="LM5060 VDS fault threshold programming"
+    // C_TIMER = 2.2uF sets ~500 ms startup VGS window and ~340 ms overcurrent latch delay.
+    place resistor R_SENSE value="33kΩ" intent=sense note="LM5060 VDS fault threshold programming"
     place resistor R_OUT value="10kΩ" intent=protection note="LM5060 OUT pin reverse-polarity current limiter"
-    place capacitor C_TIMER value="100nF" intent=timing note="LM5060 fault timer capacitor"
+    place capacitor C_TIMER value="2.2µF" intent=timing note="LM5060 fault timer capacitor"
     circuit J_PWR_IN.POS R_SENSE.A name="VBAT_IN"
     circuit R_SENSE.B U_PROT.SENSE name="PROT_SENSE"
     circuit Q2.DRAIN R_OUT.A name="VSW_OUT"
@@ -413,7 +437,7 @@ design droidpowersense {
 
     // ── Ground ───────────────────────────────────────────────────────────────────────────
     circuit U_MCU.GND J_PWR_IN.GND J_PWR_OUT.GND D_TVS_IN.A2 D_FLY.A D_TVS_OUT.A2 \
-        U_PROT.GND C_PROT_VIN.B R_REV.B C_TIMER.B R_UVLO2.B R_OVP2.B R_EN2.B \
+        U_PROT.GND C_PROT_VIN.B R_REV.B C_TIMER.B C_GATE.B R_UVLO2.B R_OVP2.B R_EN2.B \
         Q_CUTOFF.SOURCE R_CUTOFF_PD.B R_VBAT_BOT.B C_VBAT_ADC.B \
         U_BUCK.GND C_BUCK_IN1.B C_BUCK_IN2.B C_BUCK_IN3.B R_BUCK_RT.B C_BUCK_SS.B \
         D_BUCK.A R_FB_BOT.B C_BUCK_OUT1.B C_BUCK_OUT2.B C_BUCK_OUT3.B \
