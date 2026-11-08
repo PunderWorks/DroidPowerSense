@@ -185,11 +185,35 @@ expected XT60 silk-to-edge warnings and the not-yet-connected In2 VSW_CTRL plane
 
 ## Verification
 
-- `scripts/spice/power_switch_sim.py`: switch open (no drain), turn-on across 9-30 V and V_GS(th)
-  corners, MCU cutoff, and reverse polarity (-12 to -30 V). All 23 checks pass. See
-  [`scripts/spice/README.md`](../scripts/spice/README.md).
+- `scripts/spice/power_switch_sim.py`: switch open (no drain), turn-on across 9-32 V and V_GS(th)
+  corners, MCU cutoff, reverse polarity (-12 to -32 V), capacitive inrush (100 µF to 10 mF),
+  hot-FET 30 A continuous margin, overcurrent stall vs dead short, and motor regeneration.
+  See [`scripts/spice/README.md`](../scripts/spice/README.md).
+- `scripts/spice/uart_shifter_sim.py`: bidirectional BSS138 level shifter verification across 3.3 V
+  and 5.0 V VIO, threshold corners, and cable capacitances up to 500 pF.
+- `scripts/spice/test_soa.py`: unit tests for the Safe Operating Area and moving-window thermal
+  integrator library (`scripts/spice/soa.py`). All 10 tests pass.
 
 ## Accepted risks and known gaps
+
+- **Upstream battery fuse is required for dead-short protection.** The LM5060 acts as an electronic
+  circuit breaker with a ~20 ms fault delay, not a current limiter. A dead short (<10 mΩ) directly on
+  the output draws >1000 A from low-impedance lithium batteries, which violates FET single-pulse SOA
+  before the LM5060 timer elapses. An upstream fast-acting fuse (30-50 A blade or MIDI fuse) on the main
+  battery feed is required to clear dead shorts (<2 ms).
+- **Inrush into capacitive loads >= 1000 µF.** With unconstrained gate slew rate (no C_GATE), charging
+  large capacitor banks at 32 V produces peak currents >120 A. Sizing C_GATE = 220 nF and C_TIMER = 2.2 µF
+  slows turn-on to ~100 V/s and reduces peak inrush into 10 mF to <1.7 A (within SOA).
+- **Hot-FET overcurrent threshold margin.** At 100 °C junction temperature, R_DS(on) rises 1.55x.
+  With R_SENSE = 22 kΩ and minimum I_SENSE (13.6 µA), the LM5060 will false-trip at 30 A continuous.
+  Increasing R_SENSE to 33 kΩ raises the hot threshold to ~45 A, safely clearing 30 A continuous.
+- **Motor regeneration into cutoff FETs.** When the FETs are ON, motor regen flows safely back into
+  the battery pack (VOUT ~32.7 V). If firmware shuts off the FETs or asserts `PWR_CUTOFF` while motors
+  are actively generating, current dumps into D_TVS_OUT (SMBJ33CA), exceeding its continuous pulse
+  rating. Firmware policy: never assert cutoff while motors are spinning.
+- **High-speed UART over long cables.** The BSS138 passive pull-ups pass timing up to 115.2 kbps on
+  cables up to 5 m (500 pF) and up to 1 Mbps on cables under 1.5 m (150 pF). For 1 Mbps over long droid
+  wiring harnesses, use the onboard TCAN334G CAN FD transceiver instead.
 
 - **Copper temperature at 30 A is calculated, not measured.** Measure the shunt, FETs and the XT60
   pins at 30 A continuous on the first board (bench step 6).
