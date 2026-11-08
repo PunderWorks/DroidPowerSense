@@ -101,8 +101,8 @@ PLACEMENTS: dict[str, tuple[float, float, float]] = {
 
     # ── ESP32-C5-Zero-M on sockets; antenna at the bottom edge, USB-C toward the power row
     "U4": (85.0, 82.3, 0.0),
-    "J10": (77.38, 82.3, 0.0),    # socket under pins 1-9
-    "J11": (92.62, 82.3, 0.0),    # socket under pins 10-18
+    "J10": (77.38, 80.05, 0.0),   # socket under pins 1-9 (U4 pins 1-9 span y 69.89-90.21)
+    "J11": (92.62, 80.05, 0.0),   # socket under pins 10-18
 
     # ── Under the module (low parts only; the module sits ~11 mm up)
     "C12": (80.6, 70.0, 0.0),     # +5V at module pin 1

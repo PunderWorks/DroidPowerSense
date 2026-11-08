@@ -128,7 +128,9 @@ J1/J2 XT60 silkscreen overhangs the board edge by design; check any new edge-mou
 - **ESP32 on sockets.** U_MCU is the ESP32-C5-Zero-M (headers pre-soldered) in two 1x9 sockets
   (J_MCU_L/J_MCU_R, Sullins PPPC091LFBN-RC, 8.5 mm). The module sits ~11 mm up, so the USB-C plug
   clears everything, low parts sit under the module (pull-ups, cutoff FET, ADC divider), and the
-  module can be swapped. The sockets are pinless BOM parts: their pins use U_MCU's holes. The antenna
+  module can be swapped. The sockets are pinless BOM parts: their pins use U_MCU's holes. They carry KiCad's stock
+  1x09 socket 3D model (the module's STEP already includes its own headers), so the 3D view shows the
+  full stack. The antenna
   end keeps its all-layer copper and footprint keep-out at the bottom edge.
 - **Mounting holes:** four M3, at the bottom corners and on the side edges just below the XT60s (the
   top corners are under the connectors).

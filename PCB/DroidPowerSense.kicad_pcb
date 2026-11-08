@@ -2090,7 +2090,7 @@
 	(footprint "PinSocket_1x09_P2.54mm_Vertical_NoPads"
 		(layer "F.Cu")
 		(uuid "18befdac-e3e3-47ca-89bc-d34966363b0c")
-		(at 92.62 82.3)
+		(at 92.62 80.05)
 		(descr "Outline-only BOM placeholder for a 1x9 2.54 mm female socket (Sullins PPPC091LFBN-RC). Its pins go through the holes of the module footprint it sits under (Waveshare_ESP32-C5-Zero-M_Socketed), so this footprint has no pads and no courtyard.")
 		(tags "socket header outline")
 		(property "Reference" "J11"
@@ -2239,6 +2239,17 @@
 			(uuid "97df513d-00c1-483c-8488-20562566d89e")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x09_P2.54mm_Vertical.step"
+			(offset
+				(xyz 0 10.16 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "AMASS_XT60PW-M_1x02_P7.20mm_Horizontal"
 		(layer "F.Cu")
@@ -15462,7 +15473,7 @@
 	(footprint "PinSocket_1x09_P2.54mm_Vertical_NoPads"
 		(layer "F.Cu")
 		(uuid "a7e95037-2d6f-4357-b864-600873ac8154")
-		(at 77.38 82.3)
+		(at 77.38 80.05)
 		(descr "Outline-only BOM placeholder for a 1x9 2.54 mm female socket (Sullins PPPC091LFBN-RC). Its pins go through the holes of the module footprint it sits under (Waveshare_ESP32-C5-Zero-M_Socketed), so this footprint has no pads and no courtyard.")
 		(tags "socket header outline")
 		(property "Reference" "J10"
@@ -15610,6 +15621,17 @@
 			(uuid "838b6951-7297-4791-8ede-dd9afb264922")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x09_P2.54mm_Vertical.step"
+			(offset
+				(xyz 0 10.16 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical"
 		(layer "F.Cu")
