@@ -30,14 +30,20 @@ droid's electronics, and reports battery voltage and current over CAN FD and UAR
 ## How it fits in a droid
 
 ```
-Battery ── fuse (30-50 A, required) ── XT60 ─▶ BAT IN [ DroidPowerSense ] LOAD OUT ─▶ XT60 ── droid fuses / motor controllers / electronics
+Battery ── XT60 lead with in-line blade fuse (30 A) ─▶ BAT IN [ DroidPowerSense ] LOAD OUT ─▶ droid fuse box ── motor controllers / electronics
                                                           │      │     │
                                          remote switch ───┘      │     └── CAN FD in / out (daisy chain)
                                                                  └──────── UART (3.3 V or 5 V)
 ```
 
-- **Fit a fast 30-50 A fuse (blade or MIDI) in the battery lead, before the board.** The board is an
-  electronic circuit breaker, not a current limiter: only a fuse clears a dead short quickly.
+- **Use an XT60 battery lead with an in-line blade fuse** (a common off-the-shelf part) between the
+  battery and BAT IN: **30 A** for most builds, 40 A at most. The board is an electronic circuit
+  breaker, not a current limiter, so only a fuse clears a dead short quickly. Fused at the battery,
+  everything after it is covered: the battery lead, the board, and the remote-switch lead.
+- **Wire the remote switch with 22 AWG or heavier.** Its `BAT+` wire carries battery voltage, so a
+  chafed lead must draw enough current to blow the battery fuse before the wire overheats; 26 AWG can
+  melt first.
+- A fuse box for the droid's branch circuits can go after LOAD OUT as usual.
 - Up to **4.7 mF** of capacitance on LOAD OUT at 32 V (more at lower battery voltages).
 - One board per power circuit.
 
@@ -62,7 +68,7 @@ Every connector has its pin functions printed on the board next to each pin.
 
 | Ref | Silkscreen | Type | Pins / settings |
 |---|---|---|---|
-| J1 | BAT IN | XT60PW-M | + / − from the battery (through the fuse) |
+| J1 | BAT IN | XT60PW-M | + / − from the battery, through the in-line fused XT60 lead |
 | J2 | LOAD OUT | XT60PW-F | + / − to the droid |
 | J3 | REMOTE SW | JST-XH 4-pin | `BAT+`, `SW`, `LED-`, `LED+` (see below) |
 | J5 / J6 | CAN IN / CAN OUT | JST-XH 2-pin | `CANH`, `CANL`; wired in parallel, so IN and OUT are a cabling convention |
@@ -89,7 +95,8 @@ The three jumper shunts (Würth 60900213421) are in the BOM.
 
 ## Before you power it up
 
-- **Fuse the battery lead** (30-50 A, fast) ahead of BAT IN.
+- **Fuse the battery lead:** an XT60 lead with an in-line blade fuse (30 A, 40 A max) ahead of
+  BAT IN, and 22 AWG or heavier for the remote-switch lead.
 - **Heatsink (optional):** at 30 A continuous the power stage runs warm. The marked area on the back
   takes a small stick-on heatsink, but **only with an electrically insulating thermal pad**. Bare
   metal would short the power nets underneath and bypass the switch.
