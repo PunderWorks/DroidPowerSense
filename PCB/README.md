@@ -194,10 +194,13 @@ Status (2026-11-08): routed; DRC 0 violations / 0 unconnected; `stackup check` 8
 drills with maps in `production/gerbers/`; the purchasing BOM (`stackup bom`) and the placement file in
 `production/bom/`. The placement file lists only assembler-placed parts (67): the BOM's hand-soldered
 parts (connectors, module, sockets, loose jumper shunts) are left out to match its DNP column.
-Regenerate both after any board change:
+Regenerate both after any board change. **Refill and save the pours first:** the exporters plot the
+fills stored in the board file, and a script or sync that edits copper without refilling leaves stale
+fills that would go to the fab (this happened once; the fix was this refill).
 
 ```sh
 K=/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli; B=PCB/DroidPowerSense.kicad_pcb
+$K pcb drc --refill-zones --save-board --severity-all -o /tmp/drc.rpt $B   # refill, save, and check
 $K pcb export gerbers --board-plot-params -o PCB/production/gerbers/ $B
 $K pcb export drill --excellon-separate-th --generate-map --map-format gerberx2 -o PCB/production/gerbers/ $B
 $K pcb export pos --format csv --units mm --side both --exclude-dnp -o PCB/production/bom/DroidPowerSense-pos.csv $B
