@@ -187,8 +187,9 @@ the board is hand-routed, the board file is the source of truth: don't re-run it
 `scripts/layout_pcb.py` generated the earlier 90 × 66 mm layout and is kept for its helpers.
 
 Status (2026-11-08): routed; DRC 0 violations / 0 unconnected; `stackup check` 82 parts / 46 nets,
-0/0/0; PCB sync clean. 19 signal tracks stay at 0.18 mm where 0.2 mm would break 0.2 mm clearance
-(I²C / SW_LED_EN by the module); confirm the fab's 2 oz outer-layer minimum covers 0.18 mm.
+0/0/0; PCB sync clean. Minimum track width and clearance are both 0.2 mm on every layer (the I²C
+pair and INA_ALERT were re-routed from 0.18 mm); confirm the fab's 2 oz outer-layer minimum covers
+0.2 mm / 0.2 mm.
 
 **Fab files** are in [`production/`](production/): Gerbers + job file (6 layers, 1.6 mm) and PTH/NPTH
 drills with maps in `production/gerbers/`; the purchasing BOM (`stackup bom`) and the placement file in
