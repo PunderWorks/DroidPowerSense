@@ -6,7 +6,7 @@
 
 use "@stackup/passives"
 use "@stackup/bus/can/tcan334g"
-use "@stackup/sensor/current/ina226"
+use "@stackup/sensor/current/ina237"
 use "@stackup/discrete/fet/bss138"
 use "@stackup/discrete/bjt/mmbt3904"
 use "@stackup/discrete/diode/diode"
@@ -15,11 +15,11 @@ use "@stackup/connector/jumper"
 use "./parts.kdl"
 
 // ── Purchasing catalog (stocked across Mouser, DigiKey, and LCSC/JLCPCB, checked 2026-11-07) ─────
-mpn "CC0603KRX7R9BB104" manufacturer="YAGEO" kind=capacitor value="100nF" rated_voltage="50V" {
-    catalog mouser="603-CC603KRX7R9BB104" digikey="311-1088-1-ND" lcsc="C14663"
-}
 mpn "CL10B103KB8NNNC" manufacturer="Samsung Electro-Mechanics" kind=capacitor value="10nF" rated_voltage="50V" {
     catalog mouser="187-CL10B103KB8NNNC" digikey="1276-1009-1-ND" lcsc="C1589"
+}
+mpn "GRM188R72A104KA35D" manufacturer="Murata Electronics" kind=capacitor value="100nF" rated_voltage="100V" {
+    catalog mouser="81-GRM188R72A104KA35" digikey="490-3285-1-ND" lcsc="C77058"
 }
 mpn "CL10B224KB8NNNC" manufacturer="Samsung Electro-Mechanics" kind=capacitor value="220nF" rated_voltage="50V" {
     catalog mouser="187-CL10B224KB8NNNC" digikey="1276-1105-1-ND" lcsc="C64705"
@@ -76,7 +76,9 @@ design droidpowersense {
     match placement {
         when kind=capacitor
         when value="100nF"
-        set mpn="CC0603KRX7R9BB104"
+        // 100 V for every 100 nF: C_GATE sits at VIN + 14 V, and the VSW_CTRL / BUCK_VIN bypasses see
+        // the 37-53 V input surge. Second source: Samsung CL10B104KC8NNNC (100 V X7R 0603).
+        set mpn="GRM188R72A104KA35D"
     }
     match placement {
         when kind=capacitor
@@ -206,8 +208,8 @@ design droidpowersense {
     circuit D_SW.K U_PROT.VIN C_PROT_VIN.A name="VSW_CTRL"
 
     // Back-to-back 60V 2.5mOhm N-MOSFETs (SON 5x6)
-    place csd18532q5b Q1 note="High-side forward switch MOSFET (drain=VBAT_IN, source=VSW_MID)"
-    place csd18532q5b Q2 note="High-side reverse-blocking MOSFET (source=VSW_MID, drain=VSW_OUT)"
+    place csd18532q5b Q1 bom_value="CSD18532Q5B | VSON-CLIP-8 5x6mm (DNK)" note="High-side forward switch MOSFET (drain=VBAT_IN, source=VSW_MID)"
+    place csd18532q5b Q2 bom_value="CSD18532Q5B | VSON-CLIP-8 5x6mm (DNK)" note="High-side reverse-blocking MOSFET (source=VSW_MID, drain=VSW_OUT)"
     circuit J_PWR_IN.POS Q1.DRAIN name="VBAT_IN"
     circuit Q1.SOURCE Q2.SOURCE name="VSW_MID"
 
@@ -219,10 +221,16 @@ design droidpowersense {
     circuit R_GATE.B D_GOFF.A Q1.GATE Q2.GATE name="GATE_FET"
 
     // Gate dV/dt inrush slew network (LM5060 Fig. 28 / Fig. 41):
-    // C_GATE = 220nF limits output slew rate to ~100 V/s, dropping peak inrush into >= 1000 uF loads to < 1.7 A.
+    // C_GATE = 100nF slews the output at IGATE / C_GATE (~240 V/s typ). It must stay small enough that
+    // the gate reaches VOUT + VGATE-TH before C_TIMER's start-up ramp faults: worst case at 32 V the gate
+    // takes 110 nF x 38.5 V / 17 uA = 0.25 s against 1.98 uF x 1.70 V / 7 uA = 0.48 s (LM5060 Table 6.5:
+    // IGATE min, VGATE-TH max, ITIMERL max, VTMRH min; +/-10% parts). 220 nF took 0.55 s and could latch a
+    // start-up fault. Inrush is within Q1's SOA for up to 4.7 mF of load capacitance at 32 V
+    // (scripts/spice/power_switch_sim.py). It sits at GATE = VIN + 10-14 V (52 V just below OVP): 100 V part.
     // R_GATE_C = 1k isolates C_GATE during 80 mA fast fault discharge and damps gate ringing.
     place resistor R_GATE_C value="1kΩ" intent=damping note="Gate slew damping resistor"
-    place capacitor C_GATE value="220nF" footprint="Capacitor_SMD:C_0603_1608Metric" intent=timing note="Gate dV/dt inrush control capacitor"
+    place capacitor C_GATE value="100nF" footprint="Capacitor_SMD:C_0603_1608Metric" \
+        required_voltage="60V" intent=timing note="Gate dV/dt inrush control capacitor, 100 V X7R"
     circuit R_GATE_C.A Q1.GATE name="GATE_FET"
     circuit R_GATE_C.B C_GATE.A name="GATE_C"
 
@@ -278,15 +286,23 @@ design droidpowersense {
     circuit R_EN1.B R_EN2.A Q_CUTOFF.DRAIN U_PROT.EN name="PROT_EN"
     circuit U_MCU.IO1 Q_CUTOFF.GATE R_CUTOFF_PD.A name="PWR_CUTOFF"
 
-    // ── High-Side Current & Voltage Monitor (INA226 + 1 mOhm 5W 2512 Shunt) ──────────────
+    // ── High-Side Current & Voltage Monitor (INA237 + 1 mOhm 5W 2512 Shunt) ──────────────
     // R_SHUNT (CSS2H-2512R-1L00F, 1 mOhm 1% 5W) sits between VSW_OUT (Q2 drain) and VOUT (J_PWR_OUT.+).
-    // At 1 mOhm, INA226 (+/-81.92 mV full-scale, 2.5 uV LSB) resolves 2.5 mA/LSB up to +/-81.92 A.
+    // INA237: 85 V common-mode / VBUS (datasheet 6.1). VOUT can reach 42 V before D_TVS_OUT conducts
+    // (SMBJ33CA V_BR max) and 53 V clamped, above the INA226's 40 V limit. Same DGS pinout as the INA226.
+    // ADCRANGE 0: +/-163.84 mV = +/-163.84 A at 5 mA/LSB on 1 mOhm; offset +/-50 uV max, gain +/-0.3 %.
     // Dissipation at 30 A continuous is 0.9 W (18% of the 5 W rating); at 60 A peak, 3.6 W.
     place resistor R_SHUNT value="1mΩ" intent=shunt footprint="Resistor_SMD:R_2512_6332Metric" \
         note="1 mOhm 1% 5W metal-element current sense shunt (Bourns CSS2H-2512R-1L00F)"
-    place ina226 U_INA footprint="Package_SO:TSSOP-10_3x3mm_P0.5mm" mpn="INA226AIDGSR" \
-        mouser="595-INA226AIDGSR" digikey="296-30327-1-ND" lcsc=C49851 \
-        vs=U_MCU.v3v3 a0=gnd a1=gnd
+    // The library's default supply block straps A1 to VS (address 0x44); here A0 and A1 both go to GND
+    // (address 0x40, as routed) and the bypass is placed explicitly.
+    place ina237 U_INA footprint="Package_SO:TSSOP-10_3x3mm_P0.5mm" mpn="INA237AIDGSR" \
+        manufacturer="Texas Instruments" mouser="595-INA237AIDGSR" digikey="296-INA237AIDGSRCT-ND" lcsc=C2864837 \
+        vs=U_MCU.v3v3 {
+        without supply
+    }
+    place capacitor C_INA_VS value="100nF" intent=decouple note="INA237 VS bypass"
+    circuit U_MCU.3V3 U_INA.VS C_INA_VS.A name="+3V3"
     circuit Q2.DRAIN R_SHUNT.A U_INA.VIN+ name="VSW_OUT"
     circuit R_SHUNT.B U_INA.VIN- U_INA.VBUS J_PWR_OUT.POS name="VOUT"
     set J_PWR_OUT.POS net.voltage min="0.0V" max="32.0V"
@@ -308,14 +324,25 @@ design droidpowersense {
     // ── 5V Step-Down Buck Converter (LMR14030SDDAR, 4-40V in -> 5.0V out) ────────────────
     // Powers the Waveshare ESP32-C5-Zero (5V pin -> onboard MP1605GTF-Z 3.3V buck) and the 5V
     // option on the UART VIO jumper (J_VIO).
-    place lmr14030 U_BUCK
+    place lmr14030 U_BUCK bom_value="LMR14030SDDAR | HSOIC-8 PowerPAD (DDA)"
     place capacitor C_BUCK_IN1 value="10µF" footprint="Capacitor_SMD:C_1206_3216Metric" intent=bulk
     place capacitor C_BUCK_IN2 value="10µF" footprint="Capacitor_SMD:C_1206_3216Metric" intent=bulk
     place capacitor C_BUCK_IN3 value="100nF" intent=decouple
-    circuit D_SW.K U_BUCK.VIN C_BUCK_IN1.A C_BUCK_IN2.A C_BUCK_IN3.A name="VSW_CTRL"
+    // R_BUCK_IN + C_BUCK_IN1/2 low-pass the buck input: VSW_CTRL follows VBAT_IN, which D_TVS_IN lets
+    // reach 36.7-53.3 V in a surge (SMCJ33CA: V_BR 36.7-40.6 V, V_C 53.3 V at 28.1 A, 10/1000 us;
+    // ../datasheets/SMCJ.pdf p. 3-4), above the LMR14030's 44 V VIN/EN absolute maximum.
+    // 3.3 Ohm x 20 uF = 66 us (~25 us after X5R DC-bias loss) absorbs the battery-lead inductance kick
+    // when the FETs open under load (~3 us) and hot-plug ringing; not a full 1 ms surge. Drop at the
+    // worst load (~0.23 A at 9 V in) is 0.76 V, 0.17 W in a 0.25 W 1206.
+    place resistor R_BUCK_IN value="3.3Ω" footprint="Resistor_SMD:R_1206_3216Metric" \
+        manufacturer="YAGEO" mpn="RC1206FR-073R3L" mouser="603-RC1206FR-073R3L" digikey="311-3.30FRCT-ND" lcsc=C137283 \
+        intent=filter note="Buck input surge filter resistor (1206, 0.25 W)"
+    circuit D_SW.K R_BUCK_IN.A name="VSW_CTRL"
+    circuit R_BUCK_IN.B U_BUCK.VIN C_BUCK_IN1.A C_BUCK_IN2.A C_BUCK_IN3.A name="BUCK_VIN"
+    set U_BUCK.VIN net.voltage min="7.7V" max="31.6V"
 
     place resistor R_BUCK_EN value="100kΩ" intent=pull-up
-    circuit D_SW.K R_BUCK_EN.A name="VSW_CTRL"
+    circuit R_BUCK_IN.B R_BUCK_EN.A name="BUCK_VIN"
     circuit R_BUCK_EN.B U_BUCK.EN name="BUCK_EN"
 
     // RT = 100k sets fSW = 400 kHz (LMR14030 Eq. 3); SS = 10nF sets 2.5 ms soft-start.
@@ -437,7 +464,7 @@ design droidpowersense {
 
     // ── Ground ───────────────────────────────────────────────────────────────────────────
     circuit U_MCU.GND J_PWR_IN.GND J_PWR_OUT.GND D_TVS_IN.A2 D_FLY.A D_TVS_OUT.A2 \
-        U_PROT.GND C_PROT_VIN.B R_REV.B C_TIMER.B C_GATE.B R_UVLO2.B R_OVP2.B R_EN2.B \
+        U_PROT.GND C_PROT_VIN.B U_INA.A0 U_INA.A1 C_INA_VS.B R_REV.B C_TIMER.B C_GATE.B R_UVLO2.B R_OVP2.B R_EN2.B \
         Q_CUTOFF.SOURCE R_CUTOFF_PD.B R_VBAT_BOT.B C_VBAT_ADC.B \
         U_BUCK.GND C_BUCK_IN1.B C_BUCK_IN2.B C_BUCK_IN3.B R_BUCK_RT.B C_BUCK_SS.B \
         D_BUCK.A R_FB_BOT.B C_BUCK_OUT1.B C_BUCK_OUT2.B C_BUCK_OUT3.B \
@@ -447,6 +474,11 @@ design droidpowersense {
     // Placed last so adding them does not renumber the other connectors.
     place mcu-socket-1x9 J_MCU_L hand=#true note="Module pins 1-9"
     place mcu-socket-1x9 J_MCU_R hand=#true note="Module pins 10-18"
+
+    // ── Jumper shunts (BOM only, placed last so references don't shift) ────────────────────
+    place jumper-shunt SH_VIO hand=#true note="For J_VIO: 1-2 = 3.3 V UART, 2-3 = 5 V UART"
+    place jumper-shunt SH_TERM hand=#true note="For J_TERM: fit on the bus-end boards only"
+    place jumper-shunt SH_CIRCUIT hand=#true note="For J_CIRCUIT: fit only on the circuit 2 board"
 
     // ── Unconnected Daughterboard Pins ───────────────────────────────────────────────────
     nc U_MCU.IO11 note="U0TXD: left free for the ROM boot log (J_UART uses UART1 on IO5/IO10)"

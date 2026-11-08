@@ -94,6 +94,21 @@ part mcu-socket-1x9 {
     }
 }
 
+// Würth 60900213421: 2.54 mm closed-top jumper shunt for the J_VIO / J_TERM / J_CIRCUIT headers
+// (Würth 61300x11121). BOM-only: no pins, outline-only footprint. Mouser 710-60900213421,
+// DigiKey 732-2678-ND (checked 2026-11-08).
+part jumper-shunt {
+    symbol "Connector_Generic:Conn_01x02"
+    reference SH
+    value "Jumper shunt for 2.54mm PinHeader"
+    description "2.54 mm pitch 2-position jumper shunt, closed top"
+    manufacturer "Würth Elektronik"
+    order mpn="60900213421" mouser="710-60900213421" digikey="732-2678-ND"
+
+    package shunt footprint="DroidPowerSense:BOM_Only_JumperShunt" {
+    }
+}
+
 // Changzhou Amass XT60PW-M: horizontal right-angle PCB-mount male power connector (mates with
 // battery XT60-F plug). Rated 30 A continuous / 45 A RC / 60 A peak, 500 V DC, 0.50 mOhm contact.
 // Source: ../datasheets/XT60PW-M.pdf (V1.2) and ../datasheets/XT60PW-F.pdf (p. 2).
@@ -170,7 +185,7 @@ part jst-xh-4 {
     description "JST XH 2.50 mm four-position polarized, top-entry through-hole header"
     datasheet "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf"
     manufacturer "JST"
-    order mpn="B4B-XH-A(LF)(SN)" lcsc=C144395
+    order mpn="B4B-XH-A(LF)(SN)" mouser="306-B4BXHALFSN" lcsc=C144395
 
     pin 1 passive
     pin 2 passive

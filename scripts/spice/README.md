@@ -18,8 +18,8 @@ python3 scripts/spice/uart_shifter_sim.py
 # 3. Run power switch simulation with current board values (baseline)
 python3 scripts/spice/power_switch_sim.py
 
-# 4. Run power switch simulation with recommended mitigations
-python3 scripts/spice/power_switch_sim.py --recommended
+# 4. Try other values (overrides apply to every scenario)
+python3 scripts/spice/power_switch_sim.py --c-gate 220e-9 --scenario inrush
 ```
 
 ---
@@ -65,11 +65,12 @@ python3 scripts/spice/power_switch_sim.py --recommended
 - **Status**: **PASS** (3/3 corners).
 
 ### 5. `inrush` — Turn-On into Capacitive Loads
-- **Conditions**: Output turned on into bulk capacitive loads ($100\ \mu\text{F}$, $1000\ \mu\text{F}$, $4700\ \mu\text{F}$, $10000\ \mu\text{F}$) at `12 V` and `32 V` across fast and slow charge-pump corners.
+- **Conditions**: Output turned on into bulk capacitive loads ($100\ \mu\text{F}$, $1000\ \mu\text{F}$, $4700\ \mu\text{F}$ — the rated maximum at 32 V) at `12 V` and `32 V`. The **slow** corner stacks every start-up limit against the timer: IGATE 17 µA, VGATE-TH 6.5 V, ITIMERL 7 µA, VTMRH 1.70 V, C_GATE +10 %, C_TIMER −10 %. The **fast** corner is IGATE 31 µA, VGATE 14 V, C_GATE −10 %.
 - **Findings**:
   - **Baseline ($C_{GATE} = 0$, $C_{TIMER} = 100\text{ nF}$)**: The gate charges in $\sim 1\text{ ms}$, dumping high instantaneous current into large capacitors ($120\text{ A}$ into $1000\ \mu\text{F}$; $480\text{ A}$ into $10,000\ \mu\text{F}$ at 32 V), exceeding the CSD18532Q5B SOA rating by up to $13.8\times$.
-  - **Mitigation ($C_{GATE} = 220\text{ nF}$, $R_{GATE\_C} = 1\text{ k}\Omega$, $C_{TIMER} = 2.2\ \mu\text{F}$)**: Output slew rate is controlled to $\sim 100\text{ V/s}$. Peak inrush into $10,000\ \mu\text{F}$ drops from $480\text{ A}$ to **$1.7\text{ A}$**, passing derated SOA with **$0.88\times$** margin.
-- **Status**: **PASS** (16/16 corners with recommended values).
+  - **220 nF (PR #5)**: tamed inrush, but with the tolerances above the gate needs 0.55 s to finish while the start-up timer allows 0.48 s: **TIMER FAULT** at 32 V on every load (the board would latch off).
+  - **Board ($C_{GATE} = 100\text{ nF}$ 100 V, $R_{GATE\_C} = 1\text{ k}\Omega$, $C_{TIMER} = 2.2\ \mu\text{F}$)**: worst-case start-up completes at 0.20 s. Peak inrush into $4.7\text{ mF}$ at 32 V is $1.9\text{ A}$, Q1 at **$0.72\times$** derated SOA. 10 mF at 32 V would exceed it (1.4-1.5×), so 4.7 mF is the rated maximum.
+- **Status**: **PASS** (12/12 corners).
 
 ### 6. `hot_30a` — Continuous 30 A Rated Load at Elevated Die Temperatures
 - **Conditions**: 30 A continuous load with hot FET junction ($T_J = 100^\circ\text{C}$, $R_{DS(on)}$ increased by $1.55\times$) across typical and worst-case LM5060 $I_{SENSE}$ tolerance ($13.6\ \mu\text{A}$ min).
@@ -79,9 +80,9 @@ python3 scripts/spice/power_switch_sim.py --recommended
 - **Status**: **PASS** (4/4 corners with $R_{SENSE} = 33\text{ k}\Omega$).
 
 ### 7. `overcurrent` — Overload Stall vs Dead Short
-- **Conditions**: 120 A overload (motor stall) and $5\text{ m}\Omega$ dead short directly across `LOAD OUT` terminals.
+- **Conditions**: 120 A overload (motor stall) and $5\text{ m}\Omega$ dead short directly across `LOAD OUT` terminals, at the slowest-trip corner (ITIMERH 8.5 µA, VTMRH 2.30 V, C_TIMER +10 %: 0.65 s delay).
 - **Findings**:
-  - **120 A Overload**: The LM5060 detects $V_{DS}$ fault, charges $C_{TIMER}$, and latches off cleanly. At 32 V, trip occurs within timer delay and Q1 SOA margin is respected ($0.39\times$ of single-pulse limit).
+  - **120 A Overload** (**FAIL, by design**): at 32 V the LM5060 trips after 0.65 s with Q1 at $1.05\times$ SOA; at 12 V the battery-limited 104 A sits under the cold trip point (~105 A) and never trips ($1.1\times$ over 1 s). The timer can't be shortened without breaking start-up, so sustained overloads are firmware's job (INA237 ALERT → `PWR_CUTOFF`) with the upstream fuse as backup.
   - **$5\text{ m}\Omega$ Dead Short**: Drawing $\sim 1200\text{ A}$ from a low-impedance lithium pack for the LM5060's electronic circuit breaker delay ($20\text{--}500\text{ ms}$) exceeds silicon SOA ($>50\times$).
   - **Physical Requirement**: The LM5060 is an electronic circuit breaker and motor overload protector, **not a current limiter**. A fast-acting upstream battery fuse ($30\text{--}50\text{ A}$ automotive blade or MIDI fuse) with $<2\text{ ms}$ clearing time on short circuits is **mandatory** on the main battery lead.
 
@@ -108,7 +109,10 @@ Simulates the bidirectional `BSS138` level shifters (`Q_TX`, `Q_RX`) connecting 
 | Parameter | Baseline (Current PCB) | Recommended | Reason |
 |:---|:---|:---|:---|
 | **$R_{SENSE}$** | $22\text{ k}\Omega$ | **$33\text{ k}\Omega$** | Eliminates false overcurrent trips under 30 A continuous load when FETs reach $100^\circ\text{C}$. |
-| **$C_{GATE}$ & $R_{GATE\_C}$** | Unpopulated ($0\text{ nF}$) | **$220\text{ nF}$ + $1\text{ k}\Omega$** | Tames capacitive inrush into large motor controller capacitors ($\ge 1000\ \mu\text{F}$) from $480\text{ A}$ down to $<1.7\text{ A}$. |
+| **$C_{GATE}$ & $R_{GATE\_C}$** | Unpopulated ($0\text{ nF}$) | **$100\text{ nF}$ 100 V + $1\text{ k}\Omega$** | Tames capacitive inrush (≤ 4.7 mF at 32 V) while the worst-case gate ramp still finishes inside the start-up timer. 220 nF could latch a start-up fault. |
 | **$C_{TIMER}$** | $100\text{ nF}$ | **$2.2\ \mu\text{F}$** | Accommodates gate slew ramp into bulk capacitance without premature start-up timer fault. |
 | **Battery Fuse** | None on board | **$30\text{--}50\text{ A}$ Inline Fuse** | Essential protection against instantaneous dead shorts (<2 ms clearing). |
 | **Firmware Policy** | Unspecified | **No Cutoff During Decel** | Prevents dumping sustained motor regeneration energy into the output TVS diode. |
+| **Firmware Overcurrent** | Unspecified | **INA237 ALERT → `PWR_CUTOFF`** | Primary protection for overloads between 30 A and the LM5060 V_DS trip. |
+
+The full suite reports 7 failures on purpose: the dead short and 120 A overload (fuse and firmware cover them) and regen with the switch cut off (firmware rule).
