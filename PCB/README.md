@@ -105,8 +105,9 @@ needs. The labels sit over the tracks that run into each pin, which prints legib
 
 **70 × 50 mm**, 6 layers (F.Cu / In1.Cu GND / In2.Cu VSW_CTRL & routing / In3.Cu +3V3 / In4.Cu GND / B.Cu heatsink & GND), all parts on the top side.
 Placement and pours come from `scripts/layout_compact.py`; signal routing is done by hand in KiCad.
-The script also lays down a first-pass route (0 unconnected, ~42 DRC errors left); finish it with the
-interactive router and don't re-run the script afterwards, or it will overwrite the hand routing.
+The routing is finished by hand (0 DRC violations). **Don't re-run the script**: it rebuilds every track
+and would overwrite the hand routing. The DRC's `silk_edge_clearance` check is set to ignore because the
+J1/J2 XT60 silkscreen overhangs the board edge by design; check any new edge-mounted part by eye.
 
 ```
  ┌──────────────────────────────────────────────────────────────────┐
