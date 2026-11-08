@@ -1,0 +1,170 @@
+                   Sullins Headers
+                   .100” [2.54 mm] Contact Centers, Female Headers,
+                   Straight/Right Angle/SMT
+
+                   SPECIFICATIONS
+                   •   3 Amps current rating
+                   •   UL Flammability Rating : 94V-0
+                   •   Insulator Material : PBT, Nylon
+                   •   Contact Material : Phosphor Bronze
+
+                   TERMINATION TYPE
+                                         B
+                                                                                        P/N      TERMINATION
+                                                                                            ROWS                          A              B                TAIL
+                                                                                       CODE         TYPE
+                              A
+                                                                                                1      STRAIGHT      .335” [8.50]   .100” [2.54]      .126” [3.20]
+                                                                            STRAIGHT   LFB
+                                                                                                2      STRAIGHT      .335” [8.50]   .200” [5.08]      .126” [3.20]
+                         TAIL
+
+
+                                     B
+                                                                                        P/N      TERMINATION
+                                                                                            ROWS                          A              B                TAIL
+                                                                                       CODE         TYPE
+                          A
+                                                                                       LGB      1     RIGHT ANGLE    .335” [8.50]   0.100” [2.54]     .124” [3.15]
+                                                                        RIGHT ANGLE    LJB      2     RIGHT ANGLE    .335” [8.50]   0.200” [5.08]     .124” [3.15]
+
+
+                                  TAIL
+
+
+                                             B                                          P/N      TERMINATION
+                                                                                            ROWS                         ENTRY           A                B             TAIL
+                                                                                       CODE         TYPE
+
+
+
+
+Sullins Headers
+                                                                                SMT    KFX       1        SMT        TOP ENTRY .280” [7.10]         .098” [2.50]     .169” [4.30]
+                                                 A
+                                                                                       KFM       2        SMT        TOP ENTRY .280” [7.10]         .197” [5.00]     .270” [6.85]
+
+
+                          TAIL                   Refer to
+                                                 Mounting Style
+                                                                                        P/N           MODIFI-       # OF
+                                                                                            ROWS                                    A                 B                TAIL
+                                                                                       CODE           CATION      SPACERS
+                                             .200”[5.08]                                         2     M44           1        .435” [11.04]    .725” [18.42]       .291” [7.38]
+                                                                                                 2     M45           2        .535” [13.58]    .725” [18.42]       .191” [4.84]
+                                                                                                 2     M46           3        .635” [16.12]    .725” [18.42]       .091” [2.30]
+                                                 A
+                                                                                                 2     M50           1        .435” [11.04]    .525” [13.34]       .091” [2.30]
+                                                     B                                  LFH
+                                                                                                 2     M51           1        .435” [11.04]    .915” [23.24]       .480” [12.20]
+                                                                 2 ROW STRAIGHT WITH
+                                                                    ELEVATED SPACER              2     M52           2        .535” [13.58]    .915” [23.24]       .380” [9.65]
+                                         TAIL                                                    2     M53           3        .635” [16.12]    .914” [23.22]       .280” [7.10]
+                                                                                                 2     M54           4        .735” [18.66]    .916” [23.26]       .181” [4.60]
+
+
+                   MOUNTING STYLE
+
+
+
+                                                         PIN 1                                PIN 1
+
+
+
+
+                                                                                                                                                              Guide Post
+                         No Mounting                       One Row SMT,           One Row SMT,              Two Row SMT,                    Two Row SMT,
+                         Standard (N)                      Pin 1 Left (C)         Pin 1 Right (D)       Without Guide Post (S)            With Guide Post (P)
+
+
+             114         www.sullinscorp.com | 760-744-0125 | toll-free 888-774-3100 | fax 760-744-6081 | info@sullinscorp.com
+                                                                                                                        Sullins Headers
+                                                                      .100” [2.54 mm] Contact Centers, Female Headers,
+                                                                                             Straight/Right Angle/SMT
+PART NUMBER OPTIONS
+                                                         PP P C 36 1 LFB N - Mxx RC
+MATERIALS (INSULATOR/CONTACT)
+                                                                                                         RoHS Compliant
+PP = Polyester/Phosphor Bronze (Thru Hole Only)
+NP = Nylon /Phosphor Bronze                                                                              MODIFICATION (Consult Factory)
+                                                                                                         Required for LFH Termination
+                                                                                                         See Termination Type on Opposite Page
+CONTACT FINISH - RoHS Compliant
+ P = Gold Flash Overall                                                                                  MOUNTING STYLE
+ T = Tin Overall                                                                                           N = No Mounting
+                                                                                                           C = SMT, Single Row, pin 1 Left
+CONTACT CENTERS                                                                                            D = SMT, Single Row, pin 1 Right
+ C = .100” [2.54 mm]                                                                                       P = SMT, Dual Row with guide posts
+                                                                                                           S = SMT, Dual Row without guide posts
+NUMBER OF POSITIONS                                                                                      TERMINATION TYPE
+Contact per row, 02 Thru 40                                                                               LFB = Straight
+                                                                                                          LGB = Single Row Right Angle
+                                                                                                           LJB = Dual Row Right Angle
+PCB LAYOUT                                                                                                KFX = Single Row SMT (NP SERIES ONLY)
+                                                                                                         KFM = Dual Row SMT (NP SERIES ONLY)
+              A                                  A          .100”[2.54]                                   LFH = Dual Row Straight with Elevated Spacer
+                                                                                                                 (Requires Modification see Opposite Page)
+  .100”
+ [2.54]                Ø.040”[1.02]
+                                                                                                         NUMBER OF ROWS (Opposite Page)
+                                   .100”                Ø.040”[1.02]
+                                  [2.54]                                                                   1 = Single Row
+                                                                                                           2 = Dual Row
+            Recommended P.C.Board
+                 Hole Layout
+DIMENSIONS Dimensions in [ ] are in millimeters, all others are in inches.
+
+
+                                                                                                                                      B
+                   B
+                                                                              B
+
+
+
+
+                                                                                                                                                                     Sullins Headers
+                                     .236[6.00]
+                                     INSERTION DEPTH                                        .236[6.00]
+                                                                                            INSERTION DEPTH
+
+
+
+          .100[2.54]                  .050[1.27]
+                  A                                                   .100[2.54]               .050[1.27]               .100[2.54]
+                                                                             A                                                        A
+                               .030X.016
+                              [0.75X0.40]                                              .030X.016
+                                                                                      [0.75X0.40]
+        SINGLE READOUT,                                           DUAL READOUT,                                 DUAL READOUT STRAIGHT TAIL
+      STRAIGHT TAIL SHOWN                                       STRAIGHT TAIL SHOWN                             WITH ELEVATED SPACER SHOWN
+
+
+                  NUMBER OF                                                                     NUMBER OF
+                                            A                     B                                                       A                       B
+NUMBER OF          CONTACTS                                                        NUMBER OF     CONTACTS
+POSITIONS           1    2                                                         POSITIONS      1    2
+                                    in          mm         in          mm                                          in         mm           in          mm
+                  Row   Row                                                                     Row   Row
+     02             2    4         .100         2.54      .220        5.58            22         22    44         2.100       53.34       2.220       56.38
+     03             3    6         .200         5.08      .320        8.12            23         23    46         2.200       55.88       2.320       58.92
+     04             4    8         .300         7.62      .420        10.66           24         24    48         2.300       58.42       2.420       61.46
+     05             5    10        .400         10.16     .520        13.20           25         25    50         2.400       60.96       2.520       64.00
+     06             6    12        .500         12.70     .620        15.74           26         26    52         2.500       63.50       2.620       66.54
+     07             7    14        .600         15.24     .720        18.28           27         27    54         2.600       66.04       2.720       69.08
+     08             8    16        .700         17.78     .820        20.82           28         28    56         2.700       68.58       2.820       71.62
+     09             9    18        .800         20.32     .920        23.36           29         29    58         2.800       71.12       2.920       74.16
+     10            10    20        .900         22.86     1.020       25.90           30         30    60         2.900       73.66       3.020       76.70
+     11            11    22        1.000        25.40     1.120       28.44           31         31    62         3.000       76.20       3.120       79.24
+     12            12    24        1.100        27.94     1.220       30.98           32         32    64         3.100       78.74       3.220       81.78
+     13            13    26        1.200        30.48     1.320       33.52           33         33    66         3.200       81.28       3.320       84.32
+     14            14    28        1.300        33.02     1.420       36.06           34         34    68         3.300       83.82       3.420       86.86
+     15            15    30        1.400        35.56     1.520       38.60           35         35    70         3.400       86.36       3.520       89.40
+     16            16    32        1.500        38.10     1.620       41.14           36         36    72         3.500       88.90       3.620       91.94
+     17            17    34        1.600        40.64     1.720       43.68           37         37    74         3.600       91.44       3.720       94.48
+     18            18    36        1.700        43.18     1.820       46.22           38         38    76         3.700       93.98       3.820       97.02
+     19            19    38        1.800        45.72     1.920       48.76           39         39    78         3.800       96.52       3.920       99.56
+     20            20    40        1.900        48.26     2.020       51.30           40         40    80         3.900       99.06       4.020       102.10
+     21            21    42        2.000        50.80     2.120       53.84
+
+ www.sullinscorp.com | 760-744-0125 | toll-free 888-774-3100 | fax 760-744-6081 | info@sullinscorp.com                                                         115
+
