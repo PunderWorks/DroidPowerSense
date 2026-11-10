@@ -184,7 +184,7 @@ Net classes (Board Setup → Net Classes, assigned by net-name pattern in `Droid
 | CAN | 0.35 mm | 0.2 mm | 0.6 / 0.3 | CANH, CANL, Net-(J7-A) |
 | Default | 0.25 mm | 0.2 mm | 0.6 / 0.3 | all other signals |
 
-Stackup 0.2.0 doesn't derive net classes, so these are plain KiCad classes (no `stackup:` prefix)
+Stackup 0.3.0 doesn't derive net classes, so these are plain KiCad classes (no `stackup:` prefix)
 and the sync leaves them alone. Expected exceptions when routing: the HighCurrent nets' thin
 branches (Kelvin sense to U2, VBAT_IN sense to R3, the VSW_MID spur to the reverse clamp; all carry
 mA or less) and neck-downs where Power tracks meet the 0.5 mm-pitch pins of U1 and U2.
@@ -202,7 +202,9 @@ pair and INA_ALERT were re-routed from 0.18 mm); confirm the fab's 2 oz outer-la
 **Fab files** are in [`production/`](production/): Gerbers + job file (6 layers, 1.6 mm) and PTH/NPTH
 drills with maps in `production/gerbers/`; the purchasing BOM (`stackup bom`) and the placement file in
 `production/bom/`. The placement file lists only assembler-placed parts (67): the BOM's hand-soldered
-parts (connectors, module, sockets, loose jumper shunts) are left out to match its DNP column.
+parts (connectors, module, sockets, loose jumper shunts) are left out to match its DNP column. The
+sync marks every `hand=#true` footprint *Exclude from position files* and *Exclude from BOM*, so
+`kicad-cli` and the PCBWay plugin leave them out on their own.
 Regenerate both after any board change. **Refill and save the pours first:** the exporters plot the
 fills stored in the board file, and a script or sync that edits copper without refilling leaves stale
 fills that would go to the fab (this happened once; the fix was this refill).
@@ -212,11 +214,9 @@ K=/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli; B=PCB/DroidPowerSense.
 $K pcb drc --refill-zones --save-board --severity-all -o /tmp/drc.rpt $B   # refill, save, and check
 $K pcb export gerbers --board-plot-params -o PCB/production/gerbers/ $B
 $K pcb export drill --excellon-separate-th --generate-map --map-format gerberx2 -o PCB/production/gerbers/ $B
-$K pcb export pos --format csv --units mm --side both --exclude-dnp -o PCB/production/bom/DroidPowerSense-pos.csv $B
+$K pcb export pos --format csv --units mm --side both -o PCB/production/bom/DroidPowerSense-pos.csv $B
 stackup bom PCB/stackup/board.kdl --locked -o PCB/production/bom/DroidPowerSense-bom.csv
 ```
-
-(then drop the BOM's hand-soldered references from the placement file.)
 
 ## Verification
 

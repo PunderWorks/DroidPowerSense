@@ -690,8 +690,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom exclude_from_pos_files"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "09da608d-36bb-456c-bd54-0087740ed7a5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/21a166bb-2a69-53e9-a60a-c91706f33716")
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -1.38 -1.38)
@@ -1944,8 +1955,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom exclude_from_pos_files"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "fec63783-3fa5-4c7e-9e3e-b062f17c2eef")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/fc26e93a-2fca-5b6b-b7f6-8278b36bf3f6")
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -1.38 -1.38)
@@ -2247,8 +2269,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom exclude_from_pos_files"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "c98d284e-f6bd-4166-93b8-a1b0b34de4d3")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/c5594c1d-5a19-5fcb-b3ee-4804b19037b2")
-		(attr through_hole allow_missing_courtyard)
+		(attr through_hole exclude_from_pos_files exclude_from_bom allow_missing_courtyard)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_rect
 			(start -1.27 -11.43)
@@ -2413,8 +2446,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom exclude_from_pos_files"
+			(at -2 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "33de596a-8e68-49b0-9589-cf9ddd8426a7")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/5e34f78f-89f4-5f25-ba0a-18258dc99e26")
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start 11.46 -16.46)
@@ -3046,8 +3090,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom exclude_from_pos_files"
+			(at 2 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "c78a439b-a025-47c7-bf91-3daa696ad84a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/ac45b62d-9ca7-51ff-b51a-67526993dc6a")
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -6.05 1.96)
@@ -5163,8 +5218,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "767beed4-5feb-4ebe-9e17-3fe859c5f165")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/41357c63-ca57-5dfe-9554-fa9134ea25fd")
-		(attr exclude_from_pos_files allow_missing_courtyard)
+		(attr exclude_from_pos_files exclude_from_bom allow_missing_courtyard)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_rect
 			(start -1.25 -2.5)
@@ -8300,8 +8366,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom exclude_from_pos_files"
+			(at -2 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "639cf713-7c53-4ec1-b498-a5875dce88e0")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/a4f50d0e-7926-5aa7-96e6-a413c63a081e")
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -1.6 -2.75)
@@ -9806,8 +9883,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "68bf5833-c06d-4a38-89ec-e3ab95c38bfd")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/7fd0ac6a-03c8-54ce-8fec-eab0df5bc05a")
-		(attr exclude_from_pos_files allow_missing_courtyard)
+		(attr exclude_from_pos_files exclude_from_bom allow_missing_courtyard)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_rect
 			(start -1.25 -2.5)
@@ -10179,8 +10267,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom exclude_from_pos_files"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "a693ad66-abaa-4e06-bb25-420a5ff65d56")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/74a76e6d-68dd-53b1-8d4f-1fdd90a2ee86")
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -9 -14)
@@ -15911,8 +16010,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom exclude_from_pos_files"
+			(at -2 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "fdf6ea74-5433-42db-afb3-c1dee132333d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/b297c981-c182-57af-8d39-df87caabe335")
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -1.38 -1.38)
@@ -16446,8 +16556,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom exclude_from_pos_files"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "5e428029-db33-4d63-966b-42b2b86ff0c8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/ea1eed0c-955f-5ba8-9369-5e33a0bda853")
-		(attr through_hole allow_missing_courtyard)
+		(attr through_hole exclude_from_pos_files exclude_from_bom allow_missing_courtyard)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_rect
 			(start -1.27 -11.43)
@@ -16620,8 +16741,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom exclude_from_pos_files"
+			(at 2 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "d6e52023-c1a7-4fd5-8a7a-95a68d46cd01")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/a189ce4e-51f3-5dc4-9e70-0ce8eeabc6b6")
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -1.8 2.75)
@@ -21995,8 +22127,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "18d13561-4e12-4a3d-b07a-ce9e9413b50e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/b8e34c76-3c3d-5fa5-8f97-cbcd997aba63")
-		(attr exclude_from_pos_files allow_missing_courtyard)
+		(attr exclude_from_pos_files exclude_from_bom allow_missing_courtyard)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_rect
 			(start -1.25 -2.5)
@@ -22893,8 +23036,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom exclude_from_pos_files"
+			(at -2 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "ceb6178b-aaaf-429e-83a4-1d5ff9659b3f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/7046010d-63f8-5271-801e-33c9b58835ad")
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -1.6 -2.75)
@@ -23486,8 +23640,19 @@
 				)
 			)
 		)
+		(property "Stackup Hand Excluded" "exclude_from_bom exclude_from_pos_files"
+			(at 0 2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "24d2a3b2-fe38-4804-81c7-332f6afd8e19")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(path "/d23af4a5-6171-5f13-bfd6-236f9ca50276")
-		(attr through_hole)
+		(attr through_hole exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -2.85 -2.75)
