@@ -116,7 +116,7 @@ Always connect battery negative through the XT60s.
 | Area | Status |
 |---|---|
 | Hardware design | Complete and reviewed: all design and layout checks pass, power stage verified in simulation |
-| PCB | In progress: moved from 70 × 50 mm on 6 layers to 76 × 58 mm on 4 layers (cheaper to fab) with 3-pin CAN/UART connectors. Placed and poured; signal routing to redo by hand. [`PCB/production/`](PCB/production/) still holds the superseded 6-layer v1.0 files, and the renders above show that board. |
+| PCB | v1.0 routed and reviewed for fab: 76 × 58 mm on 4 layers (moved from 70 × 50 mm on 6 layers, cheaper to fab) with 3-pin CAN/UART connectors. DRC and all design checks clean; fab files in [`PCB/production/`](PCB/production/). The renders above are of the earlier 6-layer layout until they are re-rendered. |
 | Firmware | Not started (Rust on the ESP32-C5). Requirements captured in [docs/firmware-requirements.md](docs/firmware-requirements.md). |
 | Bench testing | Not started. The first-board checklist is in [PCB/README.md](PCB/README.md#bench-checklist-first-board). |
 

@@ -118,9 +118,9 @@ Firmware-side requirements (overcurrent cutoff, regen rule, INA237 setup, antenn
 and VSW_CTRL routing / B.Cu heatsink copper, GND and short routes), all parts on the top side.
 `scripts/layout_4layer.py` converted the hand-placed 70 × 50 mm 6-layer layout: it moved parts and
 silkscreen by region, rebuilt the outline, pours and stitching vias, and deleted the old routing.
-**Signal routing is not done yet** (114 unrouted connections; DRC otherwise clean). Route by hand
-in KiCad; the script refuses to run on anything but the 6-layer board, so it can't overwrite the
-routing. The DRC's `silk_edge_clearance` check is set to ignore because the
+Signals were then routed by hand in KiCad; the script refuses to run on anything but the 6-layer
+board, so it can't overwrite the routing. GND stitching and the decoupling-cap ground vias come from
+`scripts/stitch_gnd.py` (see Pours below). The DRC's `silk_edge_clearance` check is set to ignore because the
 J1/J2 XT60 silkscreen overhangs the board edge by design; check any new edge-mounted part by eye.
 
 ```
@@ -158,6 +158,15 @@ J1/J2 XT60 silkscreen overhangs the board edge by design; check any new edge-mou
   No through-hole tails land in it. An optional stick-on heatsink must go on with an **electrically
   insulating** thermal pad or tape: bare metal would short the three power nets and bypass the switch.
   The area is marked with corner brackets and a note on B.SilkS.
+- **5 V buck (U_BUCK, bottom left)** follows the LMR14030 layout example (datasheet §7.4.1,
+  Fig. 7-10 on p. 23). The input caps stand left of U_BUCK with their + pads level with VIN (pin 2)
+  and their GND pads up. D_BUCK lies flat above the IC, its cathode over SW (pin 8) and its anode
+  over the input caps' ground. L_BUCK stands upright beside D_BUCK's cathode with its output pad up
+  next to the output caps, which sit above D_BUCK. All of their ground pads, U_BUCK pin 7 and the
+  SS/RT/FB parts share one top-side GND area. That area ties to the plane at the output-cap ground
+  (two vias, at C_BUCK_OUT1/2) and through U_BUCK's thermal-pad vias; the input caps
+  deliberately have no vias of their own, so the switching current stays on the top-side ground.
+  Keep it that way if the buck is re-routed. The feedback divider sits at the FB pin.
 
 **Fab spec: 1.6 mm, 4 layers, 2 oz outer / 1 oz inner copper** (0.21 mm prepreg, 0.95 mm core). The
 board needs this for the 30 A path; don't order it with 1 oz outer. If a fab offers 2 oz inner
@@ -167,14 +176,25 @@ Pours (added by `scripts/layout_4layer.py`):
 - VBAT_IN, VSW_OUT and VOUT on F.Cu, In2.Cu and B.Cu along the power row (y 44.4-55.6, about 11.2 mm
   tall), priority 3, pads connected solidly; 183 stitching vias (0.8 / 0.4 mm, 1.27 mm grid, kept
   0.4 mm off every pad). Three layers (2 + 1 + 2 oz) × 11.2 mm is about the copper cross-section the
-  6-layer board had in four layers (2 + 1 + 1 + 2 oz) × 8.7 mm. The pours are placeholders for
-  routing: trim them (and the vias in them) where the gate-drive and Kelvin tracks need to cross.
-- VSW_MID (Q1 sources to Q2 sources) is F.Cu only: 1.8 mm long, ~0.1 mΩ. The gap is too narrow for a
-  via, and keeping it off B.Cu leaves room for the GATE_FET link from Q1's gate (top) to Q2's gate
-  (bottom) to cross there.
+  6-layer board had in four layers (2 + 1 + 1 + 2 oz) × 8.7 mm. Narrowest cross-sections as routed:
+  VBAT_IN 1.96 mm², VSW_OUT 1.5 mm², VOUT 1.96 mm², GND 5.2 mm². Each of the Q1/Q2 drain tabs and
+  R_SHUNT pads has 5-12 of these vias within 2.5 mm to carry the current between layers.
+- VSW_MID (Q1 sources to Q2 sources) is F.Cu only, across the 0.95 mm gap between the two rows of
+  source pins; the gap is too narrow for a via. **Nothing may be routed through that gap.** The
+  GATE_FET link from Q1's gate (top of its row) to Q2's gate (bottom of its row) goes around the
+  outside of Q2's source pins instead, leaving the gap as solid copper about 3.9 mm wide
+  (~0.06 mΩ). An earlier route ran the gate track down the gap and left 0.11 mm² for the full load
+  current (~270 A/mm² at 30 A); the 2026-11-09 review caught it.
 - Ground planes (priority 0) on all 4 layers: In1.Cu is the solid reference plane. J1/J2
   GND pins and the D1/D5/D6 GND pads connect solidly (thermal spokes would choke 30 A); the XT60 GND
   pins need a large iron to hand-solder.
+- GND stitching and decoupling vias (0.6 / 0.3 mm, tented) come from `scripts/stitch_gnd.py`: a
+  2.5 mm grid wherever a via fits wholly inside the GND fill on F.Cu, In1.Cu and B.Cu (clear of the
+  In2 power pours, courtyards, the antenna keep-out, the QR code and the logos), at least two vias on
+  every F.Cu GND island, and a via with a short track at each ground pad in its `PAD_VIAS` list
+  (C_PROT_VIN, C_INA_VS, the TCAN334G's VCC cap and GND pin, and the buck output caps). Refill the
+  zones, run it with KiCad's Python, refill again. It skips spots near existing GND vias, so it is
+  safe to rerun after routing changes.
 - In2.Cu is the internal signal layer (referenced to the In1.Cu GND plane). It carries the power-row
   pours, a +3V3 pour (priority 1) under the module, CAN and UART (y 61.5 to the bottom edge, x ≥ 76.2),
   and a GND fill elsewhere. VSW_CTRL runs on it as 0.35-0.5 mm tracks (LM5060, dividers, buck input),
@@ -216,14 +236,10 @@ routing problem, and above 80 × 60 the board is bigger than it needs to be. The
 original was larger than needed because its parts were not yet compacted (module on sockets with
 parts under it, XT60 overhang).
 
-Status (2026-11-09): placed and poured on 4 layers, **not routed**: DRC 0 violations / 114
-unconnected; `stackup check` 84 parts / 48 nets, 0/0/0; PCB sync clean. The previous 6-layer board
-(2026-11-08) was routed with DRC 0 / 0. Minimum track width and clearance are both 0.2 mm on every layer (the I²C
-pair and INA_ALERT were re-routed from 0.18 mm); confirm the fab's 2 oz outer-layer minimum covers
-0.2 mm / 0.2 mm.
-
-**The files in [`production/`](production/) are the superseded 6-layer 70 × 50 mm board** (2-pin
-CAN/UART connectors). Don't order from them; regenerate everything once the 4-layer board is routed.
+Status (2026-11-09): routed on 4 layers. DRC (all severities, zones refilled) 0 violations / 0
+unconnected; `stackup check` 84 parts / 48 nets, 0/0/0; PCB sync clean. 433 tracks, 312 vias (101
+GND). Minimum track width is 0.25 mm and minimum clearance 0.2 mm; the 0.5 mm-pitch U1/U2 pads
+have 0.2 mm gaps. Confirm the fab's 2 oz outer-layer minimums cover 0.2 mm / 0.2 mm.
 
 **Fab files** are in [`production/`](production/): Gerbers + job file (1.6 mm) and PTH/NPTH
 drills with maps in `production/gerbers/`; the purchasing BOM (`stackup bom`) and the placement file in
@@ -305,6 +321,18 @@ stackup bom PCB/stackup/board.kdl --locked -o PCB/production/bom/DroidPowerSense
   against the package drawings (Q1/Q2 use KiCad's TDSON-8-1: pin-compatible with TI's DNK land
   pattern, drain pad ~0.2 mm larger), diode and transistor orientation by net, Kelvin sense routing
   (each U_INA sense track leaves from inside its own shunt pad), DRC, and the SPICE suite.
+- **Pre-fab review of the 4-layer board (2026-11-09).** Checked: every pad's net against the
+  Stackup design (sync check); the LM5060, INA237, LMR14030 (SO-8) and TCAN334 pin numbers against
+  their datasheet pin tables; the ESP32-C5-Zero-M header order against the module schematic
+  (pin 17 = IO12/U0RXD, 18 = IO11/U0TXD); transistor and diode pins by net; Kelvin sense (unchanged
+  from the 6-layer review); copper cross-sections along the 30 A path; decoupling placement and
+  ground vias. Fixed from the review: the GATE_FET track that cut VSW_MID (see Pours), the buck
+  layout (its top-side ground was split into five islands joined only through In1, and the catch
+  diode sat 6-8 mm from the SW pin; now re-placed after TI's layout example, see Layout), ground
+  vias at the LM5060, INA237 and TCAN334G decoupling caps, and C_BUCK_OUT2 moved off the board
+  edge (it was 0.4 mm from it, parallel, where depaneling can crack an MLCC). Not changed: the
+  ESP32 module's own decoupling is on the module, and the board's C_3V3_1 / C_BUCK_OUT3 sit at its
+  3V3 and 5V pins.
 - **Comms ground pins (2026-11-09).** J_CAN1/J_CAN2/J_UART pin 1 is a ground reference: UART is
   single-ended and needs one whenever the other end isn't on the same battery (a USB adapter, a
   separately powered board), and a CAN ground wire keeps nodes within the TCAN334G's common-mode
@@ -370,6 +398,9 @@ stackup bom PCB/stackup/board.kdl --locked -o PCB/production/bom/DroidPowerSense
 3a. Start-up margin: at 32 V into ~4.7 mF on LOAD OUT, scope GATE and TIMER. The gate must reach
    VOUT + 5 V while TIMER is still well under 2.0 V (simulated worst case 0.25 s vs 0.48 s); record
    the TIMER voltage at the end of the ramp.
+3b. Buck: at 9 V and 32 V in, with the module running Wi-Fi, scope the SW node (U_BUCK pin 8,
+   ground the probe tip at C_BUCK_OUT's ground) for ringing below ground and above VIN, and +5V for
+   ripple. Check the module's RSSI against a module on a bench supply.
 4. Reverse 12 V on J_PWR_IN (current-limited): no current into VSW_CTRL or VOUT.
 5. Drive IO1 high: VOUT drops, MCU stays up.
 5a. J3 lit switch: with a 5 V separate-terminal switch on pins 3-4, the light comes on with the board

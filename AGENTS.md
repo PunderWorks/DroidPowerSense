@@ -17,7 +17,9 @@ before changing the hardware, and add to it rather than re-deciding something al
 - `scripts/spice/` — ngspice verification of the power switch; `scripts/layout_4layer.py` — converted
   the 70 × 50 mm 6-layer board to 76 × 58 mm on 4 layers (runs only on the 6-layer board, so it can't
   overwrite routing); `scripts/layout_compact.py` (70 × 50 mm) and `scripts/layout_pcb.py`
-  (90 × 66 mm) are the earlier generators, kept for their helpers.
+  (90 × 66 mm) are the earlier generators, kept for their helpers. `scripts/stitch_gnd.py` adds GND
+  stitching and decoupling-cap ground vias (KiCad's Python; refill zones before and after; safe to
+  rerun).
 - `src/` — firmware (Rust, ESP32-C5). Not started yet.
 
 ## Git workflow
