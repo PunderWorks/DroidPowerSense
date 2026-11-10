@@ -32,7 +32,7 @@ via `git log --oneline` or `gh pr view <branch> --json state`, then `git branch 
 The electrical design is Stackup KDL — `PCB/stackup/board.kdl` and `PCB/stackup/parts.kdl` — not
 KiCad schematics (there are none). Hardware work follows the `pcb-design` skill.
 
-- Check the design with `stackup check PCB/stackup/board.kdl --locked` (CLI 0.2.0; the Cargo-locked
+- Check the design with `stackup check PCB/stackup/board.kdl --locked` (CLI 0.3.0; the Cargo-locked
   copy in `ci/stackup/` is the reference version). The parts library is pinned by commit in
   `manifest.kdl`.
 - After any change to the KDL, sync `PCB/DroidPowerSense.kicad_pcb` from it with the Stackup KiCad
