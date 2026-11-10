@@ -51,11 +51,11 @@
 			)
 			(layer "F.Cu"
 				(type "copper")
-				(thickness 0.07)
+				(thickness 0.035)
 			)
 			(layer "dielectric 1"
 				(type "prepreg")
-				(thickness 0.2104)
+				(thickness 0.2454)
 				(material "FR4")
 				(epsilon_r 4.5)
 				(loss_tangent 0.02)
@@ -77,14 +77,14 @@
 			)
 			(layer "dielectric 3"
 				(type "prepreg")
-				(thickness 0.2104)
+				(thickness 0.2454)
 				(material "FR4")
 				(epsilon_r 4.5)
 				(loss_tangent 0.02)
 			)
 			(layer "B.Cu"
 				(type "copper")
-				(thickness 0.07)
+				(thickness 0.035)
 			)
 			(layer "B.Mask"
 				(type "Bottom Solder Mask")

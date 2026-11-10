@@ -59,7 +59,7 @@ Battery ── XT60 lead with in-line blade fuse (30 A) ─▶ BAT IN [ DroidPow
 | Battery voltage sensing | ESP32-C5 ADC through a ÷ 11 divider |
 | MCU | Waveshare ESP32-C5-Zero-M (Wi-Fi 6, BLE 5, CAN FD), on 2.54 mm sockets |
 | Comms | CAN FD (TI TCAN334G, 2 × 3-pin JST-XH with bus ground, jumper termination); UART (3-pin JST-XH with ground, 3.3 V / 5 V) |
-| Board | 76 × 58 mm, 4 layers, 1.6 mm, 2 oz outer / 1 oz inner copper, components on one side |
+| Board | 76 × 58 mm, 4 layers, 1.6 mm, 1 oz copper, components on one side |
 | Mounting | 4 × M3 holes |
 
 ## Connectors and jumpers
@@ -102,8 +102,9 @@ Always connect battery negative through the XT60s.
 
 - **Fuse the battery lead:** an XT60 lead with an in-line blade fuse (30 A, 40 A max) ahead of
   BAT IN, and 22 AWG or heavier for the remote-switch lead.
-- **Heatsink (optional):** at 30 A continuous the power stage runs warm. The marked area on the back
-  takes a small stick-on heatsink, but **only with an electrically insulating thermal pad**. Bare
+- **Heatsink for high continuous current:** typical droid loads (under about 1 A average, with
+  short motor peaks) need none. For continuous loads above about 15 A, fit a small stick-on
+  heatsink to the marked area on the back, but **only with an electrically insulating thermal pad**. Bare
   metal would short the power nets underneath and bypass the switch.
 - **Secure the module** in a droid that vibrates: a dab of hot glue or a cable tie at the antenna end.
   It stands about 11 mm tall on its sockets.
@@ -154,8 +155,9 @@ python3 scripts/spice/test_soa.py             # SOA checker unit tests
 
 ## Ordering
 
-- **Fab:** 4 layers, 1.6 mm, **2 oz outer / 1 oz inner** copper; minimum track and spacing 0.2 mm.
-  Don't order it with 1 oz outer copper: the 30 A path needs the 2 oz.
+- **Fab:** 4 layers, 1.6 mm, 1 oz copper; minimum track and spacing 0.2 mm. 2 oz outer copper
+  roughly doubles the price and isn't needed for typical droid loads; see
+  [PCB/README.md](PCB/README.md) for the trade-off.
 - **Parts:** the BOM lists Mouser and DigiKey numbers (LCSC where available). The XT60 connectors
   (Amass) and the ESP32-C5-Zero-M module (Waveshare) come from their own channels.
 - **Hand assembly:** the connectors, jumpers, module sockets and module are through-hole and

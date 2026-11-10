@@ -38,7 +38,7 @@ Commit the synced PCB with the KDL. CI fails if syncing would change the committ
 | MCU | ESP32-C5 (CAN FD + firmware) on a plug-in module (sockets), serviceable and programmable in place over its USB-C. Firmware in Rust. |
 | Comms | CAN FD (two 3-pin JST-XH for daisy-chain, jumper termination), UART (3-pin JST-XH, 3.3 V / 5 V jumper). Pin 1 of each is a ground reference, tied to board GND through a PTC so it can never carry the load's return current. |
 | Circuit ID | Firmware must tell circuit 1 from circuit 2. |
-| Board | 76 × 58 mm, 4 layers (2 oz outer / 1 oz inner) for the high-current path and a solid ground plane, components on one side. Back-side area for an optional user-fitted heatsink. |
+| Board | 76 × 58 mm, 4 layers, 1 oz copper, with three layers for the high-current path and a solid ground plane, components on one side. Back-side area for a user-fitted heatsink, recommended above about 15 A continuous. |
 | Sourcing | Mouser and DigiKey first; LCSC numbers recorded but JLCPCB is not the planned assembler. |
 
 ## Circuit
@@ -65,7 +65,7 @@ fitted = 120 Ω terminator.
 **J_CIRCUIT** no jumper = circuit 1, jumper on = circuit 2. The three shunts are in the BOM
 (SH_VIO / SH_TERM / SH_CIRCUIT, Würth 60900213421) as BOM-only parts with outline-only footprints.
 
-**Not in the BOM (user-supplied):** the optional heatsink and its electrically insulating thermal
+**Not in the BOM (user-supplied):** the heatsink (recommended above about 15 A continuous) and its electrically insulating thermal
 pad (see Layout), M3 mounting hardware, and the upstream battery fuse.
 
 Silkscreen convention: every JST connector has its pin functions printed in line with each pin
@@ -155,8 +155,9 @@ J1/J2 XT60 silkscreen overhangs the board edge by design; check any new edge-mou
   top corners are under the connectors).
 - **Heatsink area (back, 43 × 16 mm under D_TVS_IN … D_FLY).** The back copper there is the
   VBAT_IN / VSW_OUT / VOUT pours plus GND, under soldermask, tied to the top pours by stitching vias.
-  No through-hole tails land in it. An optional stick-on heatsink must go on with an **electrically
-  insulating** thermal pad or tape: bare metal would short the three power nets and bypass the switch.
+  No through-hole tails land in it. A stick-on heatsink is recommended for continuous loads above
+  about 15 A (see FET heat below) and must go on with an **electrically insulating** thermal pad or
+  tape: bare metal would short the three power nets and bypass the switch.
   The area is marked with corner brackets and a note on B.SilkS.
 - **5 V buck (U_BUCK, bottom left)** follows the LMR14030 layout example (datasheet §7.4.1,
   Fig. 7-10 on p. 23). The input caps stand left of U_BUCK with their + pads level with VIN (pin 2)
@@ -168,16 +169,31 @@ J1/J2 XT60 silkscreen overhangs the board edge by design; check any new edge-mou
   deliberately have no vias of their own, so the switching current stays on the top-side ground.
   Keep it that way if the buck is re-routed. The feedback divider sits at the FB pin.
 
-**Fab spec: 1.6 mm, 4 layers, 2 oz outer / 1 oz inner copper** (0.21 mm prepreg, 0.95 mm core). The
-board needs this for the 30 A path; don't order it with 1 oz outer. If a fab offers 2 oz inner
-copper cheaply, take it: it adds back most of the copper and heat spreading the 6-layer board had.
+**Fab spec: 1.6 mm, 4 layers, 1 oz copper on all layers** (0.245 mm prepreg, 0.95 mm core in the
+board file; the fab sets its own stackup). v1 was ordered this way from PCBWay (2026-11-10). 2 oz
+outer copper doubled the price, and a droid's average load is under 1 A, with 30 A continuous a rare
+ceiling. On the 30 A path, 1 oz against 2 oz outer copper (estimates from copper sheet resistance
+and IPC-2221, not measured):
+
+| | 2 oz outer | 1 oz outer |
+|---|---|---|
+| Power-path copper resistance | 0.31 mΩ | 0.51 mΩ |
+| Copper heat at 30 A | 0.27 W | 0.46 W |
+| Narrowest section (VSW_OUT) | 1.51 mm² | 0.90 mm² |
+| Q1-Q2 link (VSW_MID) | 0.06 mΩ | 0.12 mΩ |
+
+The copper carries 30 A either way: the extra ~0.2 W is small next to the FETs' 5-8 W. What 1 oz
+loses is heat spreading around Q1, Q2 and R_SHUNT, which is why the heatsink is recommended for
+sustained high current. Order 2 oz outer only if bench step 6 shows the board runs too hot at the
+loads it will really see.
 
 Pours (added by `scripts/layout_4layer.py`):
 - VBAT_IN, VSW_OUT and VOUT on F.Cu, In2.Cu and B.Cu along the power row (y 44.4-55.6, about 11.2 mm
   tall), priority 3, pads connected solidly; 183 stitching vias (0.8 / 0.4 mm, 1.27 mm grid, kept
-  0.4 mm off every pad). Three layers (2 + 1 + 2 oz) × 11.2 mm is about the copper cross-section the
-  6-layer board had in four layers (2 + 1 + 1 + 2 oz) × 8.7 mm. Narrowest cross-sections as routed:
-  VBAT_IN 1.96 mm², VSW_OUT 1.5 mm², VOUT 1.96 mm², GND 5.2 mm². Each of the Q1/Q2 drain tabs and
+  0.4 mm off every pad). The 11.2 mm row was sized so three layers with 2 oz outer copper
+  (2 + 1 + 2 oz) matched the 6-layer board's four layers × 8.7 mm. With the 1 oz copper ordered, the
+  narrowest cross-sections as routed are VBAT_IN 1.18 mm², VSW_OUT 0.90 mm², VOUT 1.18 mm² (1.96,
+  1.5 and 1.96 mm² at 2 oz outer). Each of the Q1/Q2 drain tabs and
   R_SHUNT pads has 5-12 of these vias within 2.5 mm to carry the current between layers.
 - VSW_MID (Q1 sources to Q2 sources) is F.Cu only, across the 0.95 mm gap between the two rows of
   source pins; the gap is too narrow for a via. **Nothing may be routed through that gap.** The
@@ -239,7 +255,7 @@ parts under it, XT60 overhang).
 Status (2026-11-09): routed on 4 layers. DRC (all severities, zones refilled) 0 violations / 0
 unconnected; `stackup check` 84 parts / 48 nets, 0/0/0; PCB sync clean. 433 tracks, 312 vias (101
 GND). Minimum track width is 0.25 mm and minimum clearance 0.2 mm; the 0.5 mm-pitch U1/U2 pads
-have 0.2 mm gaps. Confirm the fab's 2 oz outer-layer minimums cover 0.2 mm / 0.2 mm.
+have 0.2 mm gaps. 0.2 mm / 0.2 mm is within standard 1 oz rules.
 
 **Fab files** are in [`production/`](production/): Gerbers + job file (1.6 mm) and PTH/NPTH
 drills with maps in `production/gerbers/`; the purchasing BOM (`stackup bom`) and the placement file in
@@ -370,13 +386,24 @@ stackup bom PCB/stackup/board.kdl --locked -o PCB/production/bom/DroidPowerSense
 - **J_SW miswiring:** shorting SW (battery, when on) to LED- while Q_LED is on overloads Q_LED (it
   fails; the board otherwise survives). Shorting LED+ to anything grounded trips the buck's
   current limit and resets the MCU until removed.
-- **FET heat at 30 A continuous in still air.** Each CSD18532Q5B dissipates ~2.3 W typical (2.5 mΩ
-  at 25 °C) to ~3.4 W hot, plus ~0.9 W in the shunt: about 5.4-7.7 W on a 76 × 58 mm board. The
-  4-layer board has two fewer buried copper planes to spread it than the 6-layer one, and 26 % more
-  area to shed it; expect similar or slightly higher temperatures. Without a
-  heatsink that is roughly 65-90 °C above ambient by a still-air rule of thumb (not simulated). The
-  back-side heatsink area is the mitigation; measure FET and shunt temperatures at 30 A on the first
-  board with and without a heatsink (bench step 6).
+- **FET heat at high continuous current, in still air.** Each CSD18532Q5B dissipates ~2.3 W typical
+  (2.5 mΩ at 25 °C) to ~3.4 W hot at 30 A, plus ~0.9 W in the shunt: about 5.4-7.7 W on a
+  76 × 58 mm board. Heat goes with the square of the current. By a still-air rule of thumb (not
+  simulated), the rise above ambient is about:
+
+  | Continuous load | FET + shunt heat | Rise above ambient |
+  |---|---|---|
+  | 1 A (typical average) | ~6-9 mW | negligible |
+  | 10 A | ~0.6-0.9 W | ~10 °C |
+  | 15 A | ~1.4-1.9 W | ~20-25 °C |
+  | 20 A | ~2.4-3.4 W | ~30-40 °C |
+  | 30 A | ~5.4-7.7 W | ~65-90 °C |
+
+  The rule of thumb was worked out for 2 oz outer copper; the 1 oz board spreads heat less well and
+  runs somewhat hotter. Hence the guidance: **fit the heatsink for continuous loads above about
+  15 A** (held for more than a minute or so). Short peaks such as motor starts and stalls are
+  absorbed by the copper's and FETs' thermal mass. Measure FET and shunt temperatures on the first
+  board with and without a heatsink (bench step 6) and move the 15 A line to match.
 - **XT60 bodies overhang the board edge ~5 mm** (pins and pegs on board). Plug forces go into the
   pins and pegs, which is what they are rated for; the front of the plastic body is unsupported.
 - **The module stands ~11 mm tall on 18 socket contacts.** In a vibrating droid, add a dab of hot
