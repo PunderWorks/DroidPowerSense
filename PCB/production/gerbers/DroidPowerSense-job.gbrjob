@@ -5,7 +5,7 @@
       "Application": "Pcbnew",
       "Version": "10.0.5"
     },
-    "CreationDate": "2026-11-09T23:15:27-08:00"
+    "CreationDate": "2026-11-10T14:47:53-08:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
@@ -115,12 +115,12 @@
     },
     {
       "Type": "Copper",
-      "Thickness": 0.07,
+      "Thickness": 0.035,
       "Name": "F.Cu"
     },
     {
       "Type": "Dielectric",
-      "Thickness": 0.2104,
+      "Thickness": 0.2454,
       "Material": "FR4",
       "Name": "F.Cu/In1.Cu",
       "Notes": "Type: dielectric layer 1 (from F.Cu to In1.Cu)"
@@ -144,14 +144,14 @@
     },
     {
       "Type": "Dielectric",
-      "Thickness": 0.2104,
+      "Thickness": 0.2454,
       "Material": "FR4",
       "Name": "In2.Cu/B.Cu",
       "Notes": "Type: dielectric layer 3 (from In2.Cu to B.Cu)"
     },
     {
       "Type": "Copper",
-      "Thickness": 0.07,
+      "Thickness": 0.035,
       "Name": "B.Cu"
     },
     {
