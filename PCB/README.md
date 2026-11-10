@@ -36,9 +36,9 @@ Commit the synced PCB with the KDL. CI fails if syncing would change the committ
 | Overcurrent | **Firmware is the primary overload protection:** INA237 ALERT (IO4) set to the over-current limit, firmware asserts PWR_CUTOFF. The LM5060 V_DS trip (~45 A hot / ~105 A cold) is the hardware backstop; between 30 A and the trip point the hardware alone does not open the switch. |
 | Load capacitance | Up to 4.7 mF on LOAD OUT at 32 V (Q1 stays within its SOA during turn-on; larger banks at 32 V exceed it). |
 | MCU | ESP32-C5 (CAN FD + firmware) on a plug-in module (sockets), serviceable and programmable in place over its USB-C. Firmware in Rust. |
-| Comms | CAN FD (two JST-XH for daisy-chain, jumper termination), UART (JST-XH, 3.3 V / 5 V jumper). |
+| Comms | CAN FD (two 3-pin JST-XH for daisy-chain, jumper termination), UART (3-pin JST-XH, 3.3 V / 5 V jumper). Pin 1 of each is a ground reference, tied to board GND through a PTC so it can never carry the load's return current. |
 | Circuit ID | Firmware must tell circuit 1 from circuit 2. |
-| Board | 70 × 50 mm, 6 layers for the high-current path and dedicated power/ground planes, components on one side. Back-side area for an optional user-fitted heatsink. |
+| Board | 76 × 58 mm, 4 layers (2 oz outer / 1 oz inner) for the high-current path and a solid ground plane, components on one side. Back-side area for an optional user-fitted heatsink. |
 | Sourcing | Mouser and DigiKey first; LCSC numbers recorded but JLCPCB is not the planned assembler. |
 
 ## Circuit
@@ -55,8 +55,8 @@ Commit the synced PCB with the KDL. CI fails if syncing would change the committ
 | Battery ADC | R_VBAT_TOP 100 k / R_VBAT_BOT 10 k, C_VBAT_ADC | VSW_CTRL ÷ 11 into IO6, so battery voltage is readable with the MOSFETs off. |
 | 5 V | U_BUCK (LMR14030, 4-40 V), R_BUCK_IN 3.3 Ω, L_BUCK 10 µH, D_BUCK (B360A) | 400 kHz, FB 56.2 k/10 k → 4.97 V. Feeds the module's 5 V pin and the UART 5 V option. R_BUCK_IN with C_BUCK_IN1/2 (BUCK_VIN) low-passes the buck input (~66 µs, ~25 µs after X5R DC-bias loss): VSW_CTRL can reach 37-53 V in an input surge, above the LMR14030's 44 V VIN/EN absolute maximum. Drop 0.76 V / 0.17 W at the worst load (0.23 A at 9 V). R_BUCK_EN pulls EN from BUCK_VIN. |
 | MCU | U_MCU (Waveshare ESP32-C5-Zero-M), J_MCU_L/J_MCU_R sockets | The module plugs into two 1x9 sockets. The module's own buck makes +3V3 for the carrier (pin 3). USB-C on the module is the programming path. The module has both an onboard ceramic antenna (J2, OA-W03) and an IPEX-1/U.FL connector (J3), chosen by an RF switch on internal GPIO26 (ANT_Ctrl, 200 k pull-up to 3V3; module schematic). Firmware must drive GPIO26 to select the onboard antenna. No U.FL-free variant exists (the -M SKU only adds headers). |
-| CAN FD | U_CAN (TCAN334GDR), J_CAN1/J_CAN2, R_TERM + J_TERM | 3.3 V transceiver, normal mode (STB/SHDN internal pull-downs). |
-| UART | J_UART, J_VIO, Q_TX/Q_RX (BSS138) + pull-ups | ESP32-C5 pins are not 5 V tolerant, so both directions are level-shifted. |
+| CAN FD | U_CAN (TCAN334GDR), J_CAN1/J_CAN2, R_TERM + J_TERM, F_CAN_GND | 3.3 V transceiver, normal mode (STB/SHDN internal pull-downs). Connectors: pin 1 CAN_GND, 2 CANL, 3 CANH. CAN_GND runs straight from J_CAN1 to J_CAN2 (the bus ground daisy-chains) and reaches board GND through F_CAN_GND (see Comms ground pins below). |
+| UART | J_UART, J_VIO, Q_TX/Q_RX (BSS138) + pull-ups, F_UART_GND | ESP32-C5 pins are not 5 V tolerant, so both directions are level-shifted. J_UART: pin 1 UART_GND (to GND through F_UART_GND), 2 RX, 3 TX. |
 | Circuit ID | J_CIRCUIT, R_CIRCUIT_PU | Open = circuit 1, shorted = circuit 2. |
 | Indicator | D_PWR_LED + 1 k | On when +3V3 is up (remote switch closed). |
 
@@ -69,8 +69,8 @@ fitted = 120 Ω terminator.
 pad (see Layout), M3 mounting hardware, and the upstream battery fuse.
 
 Silkscreen convention: every JST connector has its pin functions printed in line with each pin
-(J3 `BAT+`/`SW`/`LED-`/`LED+`, J5/J6 `CANH`/`CANL`, J8 `TX`/`RX`), not pin numbers. J5 is marked CAN IN and J6
-CAN OUT; they are wired in parallel, so the marking is a cabling convention, not a direction the bus
+(J3 `BAT+`/`SW`/`LED-`/`LED+`, J5/J6 `CANH`/`CANL`/`GND`, J8 `GND`/`RX`/`TX`), not pin numbers. J5 is marked CAN IN and J6
+CAN OUT (vertical text beside their pin labels); they are wired in parallel, so the marking is a cabling convention, not a direction the bus
 needs. The labels sit over the tracks that run into each pin, which prints legibly over soldermask.
 
 ## Remote switch wiring (J3)
@@ -102,33 +102,36 @@ Firmware-side requirements (overcurrent cutoff, regen rule, INA237 setup, antenn
 | IO2 | I2C_SDA | INA237 | 4.7 k pull-up. Strapping pin MTMS (SDIO edge only; harmless). |
 | IO3 | I2C_SCL | INA237 | 4.7 k pull-up. Strapping pin MTDI (SDIO edge only; harmless). |
 | IO4 | INA_ALERT | INA237 ALERT (open drain): firmware over-current cutoff | 10 k pull-up. |
-| IO5 | UART_TX_3V3 | UART TX | Via Q_TX to J_UART.2. |
+| IO5 | UART_TX_3V3 | UART TX | Via Q_TX to J_UART.3. |
 | IO6 | VBAT_ADC | ADC1 | Battery ÷ 11. |
 | IO7 | CIRCUIT_ID | Input | 10 k pull-up. Strapping pin for JTAG source, only read if EFUSE_JTAG_SEL_ENABLE is burnt (default not). |
 | IO8 | CAN_TX | TWAI/CAN FD TX | |
 | IO9 | CAN_RX | TWAI/CAN FD RX | |
-| IO10 | UART_RX_3V3 | UART RX | Via Q_RX from J_UART.1. |
+| IO10 | UART_RX_3V3 | UART RX | Via Q_RX from J_UART.2. |
 | IO11 | — | U0TXD | Left free for the ROM boot log. |
 | IO12 | SW_LED_EN | Lit-switch LED (Q_LED gate) | 10 k pull-up: light on by default; drive low to blink. U0RXD, not a strapping pin (ESP32-C5 datasheet p. 27); input with weak pull-up at reset (p. 20). The J_UART port is unaffected: it uses UART1 on IO5/IO10. |
 | IO13/IO14 | — | USB D-/D+ | Module USB-C. |
 
 ## Layout
 
-**70 × 50 mm**, 6 layers (F.Cu / In1.Cu GND / In2.Cu VSW_CTRL & routing / In3.Cu +3V3 / In4.Cu GND / B.Cu heatsink & GND), all parts on the top side.
-Placement and pours come from `scripts/layout_compact.py`; signal routing is done by hand in KiCad.
-The routing is finished by hand (0 DRC violations). **Don't re-run the script**: it rebuilds every track
-and would overwrite the hand routing. The DRC's `silk_edge_clearance` check is set to ignore because the
+**76 × 58 mm**, 4 layers (F.Cu parts and routing / In1.Cu solid GND / In2.Cu power pours, +3V3 pour
+and VSW_CTRL routing / B.Cu heatsink copper, GND and short routes), all parts on the top side.
+`scripts/layout_4layer.py` converted the hand-placed 70 × 50 mm 6-layer layout: it moved parts and
+silkscreen by region, rebuilt the outline, pours and stitching vias, and deleted the old routing.
+**Signal routing is not done yet** (114 unrouted connections; DRC otherwise clean). Route by hand
+in KiCad; the script refuses to run on anything but the 6-layer board, so it can't overwrite the
+routing. The DRC's `silk_edge_clearance` check is set to ignore because the
 J1/J2 XT60 silkscreen overhangs the board edge by design; check any new edge-mounted part by eye.
 
 ```
- ┌──────────────────────────────────────────────────────────────────┐
- │ J1 XT60 │D1│ Q1 │ Q2 │ R12 │D6│ D5 │ J2 XT60   power row (y 0-17)    │
- │  in     ├──┴─ gate clamp, LM5060, INA237 ─┤  out                     │
- │ ○ PWR LED, dividers         CIRCUIT ID  ○                            │
- │ J3 switch │ ESP32-C5-Zero-M │ VIO  U5 CAN  J5 CAN IN                  │
- │ buck      │ on sockets,     │ level shift  J6 CAN OUT                 │
- │ ○         │ antenna at edge │ J8 UART     ○                           │
- └──────────────────────────────────────────────────────────────────┘
+ ┌────────────────────────────────────────────────────────────────────────┐
+ │ J1 XT60 │D1│ Q1 │ Q2 │ R13 │ D6 │ D5 │ J2 XT60   power row (y 0-19)        │
+ │  in     ├──┴─ gate clamp, LM5060, INA237 ──┤  out                         │
+ │ ○ PWR LED, dividers               CIRCUIT ID   ○                         │
+ │ J3 switch │ ESP32-C5-Zero-M │ VIO  U5 CAN  TERM   J5 CAN IN              │
+ │ buck      │ on sockets,     │ level shift   F1    J6 CAN OUT             │
+ │ ○         │ antenna at edge │ F2  J8 UART          ○                     │
+ └────────────────────────────────────────────────────────────────────────┘
 ```
 
 - **XT60 overhang.** Both XT60PW bodies overhang the side edges by about 5 mm; the pins and both
@@ -150,58 +153,81 @@ J1/J2 XT60 silkscreen overhangs the board edge by design; check any new edge-mou
   `python3 scripts/make_logo_footprint.py PCB/libraries/logos/PunderWorks-black.png <width_mm> <out.kicad_mod>`.
 - **Mounting holes:** four M3, at the bottom corners and on the side edges just below the XT60s (the
   top corners are under the connectors).
-- **Heatsink area (back, 40 × 13.5 mm under D_TVS_IN … D_FLY).** The back copper there is the
+- **Heatsink area (back, 43 × 16 mm under D_TVS_IN … D_FLY).** The back copper there is the
   VBAT_IN / VSW_OUT / VOUT pours plus GND, under soldermask, tied to the top pours by stitching vias.
   No through-hole tails land in it. An optional stick-on heatsink must go on with an **electrically
   insulating** thermal pad or tape: bare metal would short the three power nets and bypass the switch.
   The area is marked with corner brackets and a note on B.SilkS.
 
-**Fab spec: 1.6 mm, 6 layers, 2 oz outer / 1 oz inner copper** (0.1 mm outer prepreg, 0.45 mm cores,
-0.2 mm center prepreg). The board needs this for the 30 A path; don't order it with 1 oz outer.
+**Fab spec: 1.6 mm, 4 layers, 2 oz outer / 1 oz inner copper** (0.21 mm prepreg, 0.95 mm core). The
+board needs this for the 30 A path; don't order it with 1 oz outer. If a fab offers 2 oz inner
+copper cheaply, take it: it adds back most of the copper and heat spreading the 6-layer board had.
 
-Pours (added by `scripts/layout_compact.py`):
-- VBAT_IN, VSW_OUT and VOUT on F.Cu, In2.Cu, In3.Cu and B.Cu along the power row (y 46.9-55.6, about 8.5 mm
-  tall), priority 3, pads connected solidly; 85 stitching vias (0.8 / 0.4 mm, 1.27 mm grid, kept
-  0.4 mm off every pad).
+Pours (added by `scripts/layout_4layer.py`):
+- VBAT_IN, VSW_OUT and VOUT on F.Cu, In2.Cu and B.Cu along the power row (y 44.4-55.6, about 11.2 mm
+  tall), priority 3, pads connected solidly; 183 stitching vias (0.8 / 0.4 mm, 1.27 mm grid, kept
+  0.4 mm off every pad). Three layers (2 + 1 + 2 oz) × 11.2 mm is about the copper cross-section the
+  6-layer board had in four layers (2 + 1 + 1 + 2 oz) × 8.7 mm. The pours are placeholders for
+  routing: trim them (and the vias in them) where the gate-drive and Kelvin tracks need to cross.
 - VSW_MID (Q1 sources to Q2 sources) is F.Cu only: 1.8 mm long, ~0.1 mΩ. The gap is too narrow for a
   via, and keeping it off B.Cu leaves room for the GATE_FET link from Q1's gate (top) to Q2's gate
   (bottom) to cross there.
-- Ground planes (priority 0) on all 6 layers: In1.Cu and In4.Cu are solid reference planes. J1/J2
+- Ground planes (priority 0) on all 4 layers: In1.Cu is the solid reference plane. J1/J2
   GND pins and the D1/D5/D6 GND pads connect solidly (thermal spokes would choke 30 A); the XT60 GND
   pins need a large iron to hand-solder.
-- In2.Cu is the internal signal layer (referenced to the In1.Cu GND plane), with a GND fill behind the
-  tracks. VSW_CTRL runs on it as 0.35-0.5 mm tracks (LM5060, dividers, buck input), not a pour.
-- In3.Cu supply plane: dedicated +3V3 logic supply plane across the middle and right (ESP32 module,
-  INA237, CAN transceiver, UART level shifters, pull-ups).
+- In2.Cu is the internal signal layer (referenced to the In1.Cu GND plane). It carries the power-row
+  pours, a +3V3 pour (priority 1) under the module, CAN and UART (y 61.5 to the bottom edge, x ≥ 76.2),
+  and a GND fill elsewhere. VSW_CTRL runs on it as 0.35-0.5 mm tracks (LM5060, dividers, buck input),
+  not a pour. Keep In2 tracks short where they cut the +3V3 pour; +3V3 can also run as Power-class
+  tracks on F.Cu.
 
 Net classes (Board Setup → Net Classes, assigned by net-name pattern in `DroidPowerSense.kicad_pro`):
 
 | Class | Track | Clearance | Via | Nets |
 |---|---|---|---|---|
 | HighCurrent | 3.0 mm | 0.2 mm | 0.8 / 0.4 | VBAT_IN, VSW_MID, VSW_OUT, VOUT |
-| Power | 0.5 mm | 0.2 mm | 0.6 / 0.3 | GND, VSW_CTRL, VSW_RAW, +5V, +3V3, BUCK_SW, UART_VIO |
+| Power | 0.5 mm | 0.2 mm | 0.6 / 0.3 | GND, VSW_CTRL, VSW_RAW, +5V, +3V3, BUCK_SW, UART_VIO, CAN_GND, UART_GND |
 | GateDrive | 0.3 mm | 0.2 mm | 0.6 / 0.3 | GATE_FET, GATE_DRV, REV_BASE |
 | CAN | 0.35 mm | 0.2 mm | 0.6 / 0.3 | CANH, CANL, Net-(J7-A) |
 | Default | 0.25 mm | 0.2 mm | 0.6 / 0.3 | all other signals |
 
 Stackup 0.3.0 doesn't derive net classes, so these are plain KiCad classes (no `stackup:` prefix)
 and the sync leaves them alone. Expected exceptions when routing: the HighCurrent nets' thin
-branches (Kelvin sense to U2, VBAT_IN sense to R3, the VSW_MID spur to the reverse clamp; all carry
+branches (Kelvin sense to U2, VBAT_IN sense to R4 R_SENSE, the VSW_MID spur to the reverse clamp; all carry
 mA or less) and neck-downs where Power tracks meet the 0.5 mm-pitch pins of U1 and U2.
 0.2 mm clearance is well above what 32 V needs.
 
-`scripts/layout_compact.py` is the starting point for this layout (sync from Stackup first). Once
-the board is hand-routed, the board file is the source of truth: don't re-run it.
-`scripts/layout_pcb.py` generated the earlier 90 × 66 mm layout and is kept for its helpers.
+`scripts/layout_4layer.py` made this layout from the 70 × 50 mm 6-layer one; the board file is now
+the source of truth. `scripts/layout_compact.py` (70 × 50 mm, 6 layers) and `scripts/layout_pcb.py`
+(90 × 66 mm, 4 layers) are kept for their helpers and history; their reference designators no longer
+match the board.
 
-Status (2026-11-08): routed; DRC 0 violations / 0 unconnected; `stackup check` 82 parts / 46 nets,
-0/0/0; PCB sync clean. Minimum track width and clearance are both 0.2 mm on every layer (the I²C
+**Why 4 layers at 76 × 58 mm (2026-11-09).** At 70 × 50 mm the board needed 6 layers: 4 layers
+there could not be routed cleanly, because the band under the power row (gate clamp, LM5060,
+INA237, dividers) is where every left-to-right signal crosses, and the power row blocks every layer
+above it. The 6-layer board used only F.Cu, In2.Cu and B.Cu for signals; In3.Cu (+3V3 plane and a
+fourth power pour) and In4.Cu (second GND plane) were planes. Going to 4 layers loses one 1 oz
+power layer (made up by an 11.2 mm instead of 8.7 mm power row), the +3V3 plane (now an In2 pour
+and tracks) and some heat spreading (partly made up by 26 % more board area). The extra 6 mm of
+width spreads the gate-drive cluster and the CAN/UART column; the extra 8 mm of height goes to the
+power row (2.5 mm), the routing band below it (3 mm) and the bottom edge (2.5 mm). 76 × 58 is
+about 52 % component density, against ~65 % at 70 × 50; going below about 74 × 56 brings back the
+routing problem, and above 80 × 60 the board is bigger than it needs to be. The 90 × 66 mm 4-layer
+original was larger than needed because its parts were not yet compacted (module on sockets with
+parts under it, XT60 overhang).
+
+Status (2026-11-09): placed and poured on 4 layers, **not routed**: DRC 0 violations / 114
+unconnected; `stackup check` 84 parts / 48 nets, 0/0/0; PCB sync clean. The previous 6-layer board
+(2026-11-08) was routed with DRC 0 / 0. Minimum track width and clearance are both 0.2 mm on every layer (the I²C
 pair and INA_ALERT were re-routed from 0.18 mm); confirm the fab's 2 oz outer-layer minimum covers
 0.2 mm / 0.2 mm.
 
-**Fab files** are in [`production/`](production/): Gerbers + job file (6 layers, 1.6 mm) and PTH/NPTH
+**The files in [`production/`](production/) are the superseded 6-layer 70 × 50 mm board** (2-pin
+CAN/UART connectors). Don't order from them; regenerate everything once the 4-layer board is routed.
+
+**Fab files** are in [`production/`](production/): Gerbers + job file (1.6 mm) and PTH/NPTH
 drills with maps in `production/gerbers/`; the purchasing BOM (`stackup bom`) and the placement file in
-`production/bom/`. The placement file lists only assembler-placed parts (67): the BOM's hand-soldered
+`production/bom/`. The placement file lists only assembler-placed parts (69 on the 4-layer board): the BOM's hand-soldered
 parts (connectors, module, sockets, loose jumper shunts) are left out to match its DNP column. The
 sync marks every `hand=#true` footprint *Exclude from position files* and *Exclude from BOM*, so
 `kicad-cli` and the PCBWay plugin leave them out on their own.
@@ -279,8 +305,28 @@ stackup bom PCB/stackup/board.kdl --locked -o PCB/production/bom/DroidPowerSense
   against the package drawings (Q1/Q2 use KiCad's TDSON-8-1: pin-compatible with TI's DNK land
   pattern, drain pad ~0.2 mm larger), diode and transistor orientation by net, Kelvin sense routing
   (each U_INA sense track leaves from inside its own shunt pad), DRC, and the SPICE suite.
-- **Reversed power with CAN/UART grounds connected.** All connectors share GND; a reversed battery
-  with another ground path drives current through the board's ground copper.
+- **Comms ground pins (2026-11-09).** J_CAN1/J_CAN2/J_UART pin 1 is a ground reference: UART is
+  single-ended and needs one whenever the other end isn't on the same battery (a USB adapter, a
+  separately powered board), and a CAN ground wire keeps nodes within the TCAN334G's common-mode
+  range and gives CANH/CANL a defined return. Each reaches board GND through a Bourns
+  MF-MSMF014/60X-2 PTC (F_CAN_GND, F_UART_GND) so it can't become the load's return path: if this
+  board's battery-negative XT60 comes off while a cable stays connected, the return current would
+  otherwise flow through a 3 A JST contact and thin signal wire. A plain series resistor can't do
+  this (10 Ω would dissipate ~100 W at 32 V). The fault current is bounded by the load current
+  (firmware INA237 cutoff ~30 A, 30-40 A fuse), inside the PTC's Imax 40 A at Vmax 60 V
+  (`datasheets/MF-MSMF.pdf` p. 1). Rejected: MF-MSMF010/014 without the X suffix (not recommended
+  for new designs), MF-MSMF010/60X (barely stocked), and the Bel 0ZCJ0010FF2E 1206 (60 V but Imax
+  only 10 A, `datasheets/0ZCJ.pdf`). Signal-reference current is about 1 mA (UART pull-ups), so R1max 6 Ω adds ~6 mV.
+  The KiCad 1812 fuse footprint doesn't match Bourns' Style 2 land pattern, so the board uses
+  `DroidPowerSense:Bourns_MF-MSMF_1812_Style2` (1.68 × 2.95 mm pads, 3.1 mm gap, p. 7). Stock
+  2026-11-09: Mouser 3,560, DigiKey 3,613; not at LCSC. The B3B-XH-A(LF)(SN) has no DigiKey listing
+  and Mouser is at 0 with stock on order; LCSC has 175k.
+- **Reversed power with CAN/UART grounds connected.** A reversed battery with another board's
+  ground connected through a comms cable drives current through that ground pin; the PTC trips and
+  limits it to tens of mA (tripped dissipation ~0.8 W, `datasheets/MF-MSMF.pdf` p. 1).
+- **PTC fault current above Imax.** With no load resistance at all, 32 V across Rmin 0.40 Ω would be
+  80 A, above the 40 A Imax. In practice the load sets the current and firmware and the fuse cap it
+  near 30-40 A; a PTC pushed past Imax can fail open.
 - **Mounting holes have no MPN** (drill only).
 - **J_SW has no DigiKey number.** B4B-XH-A(LF)(SN): Mouser 306-B4BXHALFSN (49,815), LCSC C144395
   (636k), checked 2026-11-08. DigiKey lists only a different plating variant (B4B-XH-A).
@@ -297,7 +343,9 @@ stackup bom PCB/stackup/board.kdl --locked -o PCB/production/bom/DroidPowerSense
   fails; the board otherwise survives). Shorting LED+ to anything grounded trips the buck's
   current limit and resets the MCU until removed.
 - **FET heat at 30 A continuous in still air.** Each CSD18532Q5B dissipates ~2.3 W typical (2.5 mΩ
-  at 25 °C) to ~3.4 W hot, plus ~0.9 W in the shunt: about 5.4-7.7 W on a 70 × 50 mm board. Without a
+  at 25 °C) to ~3.4 W hot, plus ~0.9 W in the shunt: about 5.4-7.7 W on a 76 × 58 mm board. The
+  4-layer board has two fewer buried copper planes to spread it than the 6-layer one, and 26 % more
+  area to shed it; expect similar or slightly higher temperatures. Without a
   heatsink that is roughly 65-90 °C above ambient by a still-air rule of thumb (not simulated). The
   back-side heatsink area is the mitigation; measure FET and shunt temperatures at 30 A on the first
   board with and without a heatsink (bench step 6).
@@ -332,3 +380,6 @@ stackup bom PCB/stackup/board.kdl --locked -o PCB/production/bom/DroidPowerSense
    and confirm PWR_CUTOFF opens the switch within a few ms, well inside the LM5060 fault delay.
 7. CAN: exchange FD frames with a known node; 60 Ω across the bus with both ends terminated.
 8. UART loopback at the 3.3 V and 5 V J_VIO settings.
+9. Comms grounds: continuity from J5.1, J6.1 and J8.1 to GND (a few ohms through the PTCs), and
+   J5.1 to J6.1 directly. With J_PWR_IN's negative disconnected and a current-limited load on LOAD
+   OUT returning through a CAN cable's ground, F_CAN_GND trips and the current falls to mA.

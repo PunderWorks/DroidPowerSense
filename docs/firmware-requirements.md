@@ -44,12 +44,12 @@ references point to the files in [PCB/datasheets/](../PCB/datasheets/).
 | IO2 | I2C_SDA | INA237 | 4.7 k pull-up. Strapping pin (MTMS), harmless here. |
 | IO3 | I2C_SCL | INA237 | 4.7 k pull-up. Strapping pin (MTDI), harmless here. |
 | IO4 | INA_ALERT | INA237 ALERT input | Open-drain, 10 k pull-up, **active low** by default. |
-| IO5 | UART_TX_3V3 | UART1 TX → J8 pin 2 | Through a BSS138 level shifter. |
+| IO5 | UART_TX_3V3 | UART1 TX → J8 pin 3 | Through a BSS138 level shifter. |
 | IO6 | VBAT_ADC | ADC1 battery voltage | VSW_CTRL ÷ 11 (100 k / 10 k, 100 nF). |
 | IO7 | CIRCUIT_ID | Input | 10 k pull-up. **High = circuit 1, low (jumper on) = circuit 2.** JTAG-source strap: don't burn EFUSE_JTAG_SEL_ENABLE. |
 | IO8 | CAN_TX | TWAI TX → TCAN334G | |
 | IO9 | CAN_RX | TWAI RX ← TCAN334G | |
-| IO10 | UART_RX_3V3 | UART1 RX ← J8 pin 1 | Through a BSS138 level shifter. |
+| IO10 | UART_RX_3V3 | UART1 RX ← J8 pin 2 | Through a BSS138 level shifter. |
 | IO11 | — | U0TXD | Left free for the ROM boot log. |
 | IO12 | SW_LED_EN | Lit remote-switch LED | 10 k pull-up: **on by default**, drive low to turn off or blink. Also U0RXD, so don't enable UART0 RX. |
 | IO13/IO14 | — | USB D−/D+ | Module USB-C: programming and console (USB-Serial-JTAG). |

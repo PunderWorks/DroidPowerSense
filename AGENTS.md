@@ -14,9 +14,10 @@ before changing the hardware, and add to it rather than re-deciding something al
   (`DroidPowerSense.*`) lives beside them. `PCB/libraries/` holds the custom footprints
   (ESP32-C5-Zero-M socketed module, socket outline, XT60PW-M/F).
 - `ci/` — the Cargo-locked Stackup CLI (`ci/stackup/`) and the PCB sync check (`check_pcb_sync.py`).
-- `scripts/spice/` — ngspice verification of the power switch; `scripts/layout_compact.py` — placement
-  and pours for the 70 × 50 mm board (do not re-run once the board is hand-routed);
-  `scripts/layout_pcb.py` — the earlier 90 × 66 mm generator, kept for its helpers.
+- `scripts/spice/` — ngspice verification of the power switch; `scripts/layout_4layer.py` — converted
+  the 70 × 50 mm 6-layer board to 76 × 58 mm on 4 layers (runs only on the 6-layer board, so it can't
+  overwrite routing); `scripts/layout_compact.py` (70 × 50 mm) and `scripts/layout_pcb.py`
+  (90 × 66 mm) are the earlier generators, kept for their helpers.
 - `src/` — firmware (Rust, ESP32-C5). Not started yet.
 
 ## Git workflow

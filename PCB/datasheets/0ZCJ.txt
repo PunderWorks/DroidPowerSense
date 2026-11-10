@@ -1,0 +1,269 @@
+                                                                                                Surface Mount PTC
+                                                                                                                                0ZCJ Series
+
+                                                                  0ZCJ Series – 1206 Chip                                             RoHS Compliant
+
+
+                                                      Product Features
+                                                           - 1206 Chip Size, Fast Trip Time, Low DCR Resistance
+                                                           - Full compliance with EU Directive 2011/65/EU and amending directive 2015/863
+                                                           - AEC-Q Compliant
+                                                           - Meets Bel automotive qualification*
+                                                              * - Largely based on internal AEC-Q test plan
+                                                          Operating (Hold Current) Range
+                                                            50mA - 2A
+                                                          Maximum Voltage
+                                                            6 - 60V (per table)
+                                                          Temperature Range
+                                                            -40°C to 85°C
+
+                                                          Agency Approval
+                                                           TUV (Std. EN/IEC 60738-1-1 and EN/IEC 60730-1, Cert. R50102117)
+                                                           UL Recognized Component (Std. UL1434, File E305051)
+
+                   AEC-Q Compliant                                                                                      LEAD FREE =
+                                                                                                                        HALOGEN FREE =
+
+Electrical Characteristics (23°
+                              C)
+                         Hold       Trip         Rated       Maximum     Typical   Max Time to Trip    Resistance Tolerance Agency Approvals
+       Part Number      Current    Current      Voltage       Current    Power     Current   Time        Rmin      R1max
+                          IH, A      IT, A     Vmax, Vdc      Imax, A    Pd, W       A       Sec        Ohms        Ohms
+ Z  0ZCJ0005FF2E         0.05      0.15        60            10            0.4          0.25    1.50      3.600        50.00      Y          Y
+ A  0ZCJ0010FF2E         0.10      0.25        60            10            0.4          0.50    1.00      1.600       15.000      Y          Y
+ B  0ZCJ0012FF2E         0.12      0.39        48            10            0.5          1.00    0.20      1.400        6.500      Y          Y
+ C  0ZCJ0016FF2E         0.16      0.45        48            10            0.5          1.00    0.30      1.100        5.000      Y          Y
+ D  0ZCJ0020FF2E         0.20      0.40        30            10            0.4          8.00    0.10      0.600        2.500      Y          Y
+    0ZCJ0025FF2E         0.25      0.50        16           100            0.6          8.00    0.08      0.550        2.300      Y          Y
+ E
+    0ZCJ0025AF2E         0.25      0.50        24            40            0.6          8.00    0.08      0.550        2.300      Y          Y
+    0ZCJ0035FF2G         0.35      0.75        16            40            0.4          8.00    0.10      0.300        1.200      Y          Y
+  F
+    0ZCJ0035AF2E         0.35      0.75        30            40            0.6          8.00    0.10      0.300        1.200      Y          Y
+    0ZCJ0050FF2G         0.50      1.00         8           100            0.4          8.00    0.10      0.150        0.700      Y          Y
+ G
+    0ZCJ0050AF2E         0.50      1.00        24           100            0.6          8.00    0.10      0.150        0.750      Y          Y
+    0ZCJ0075FF2E         0.75      1.50         8           100            0.6          8.00    0.20      0.090        0.290      Y          Y
+ H
+    0ZCJ0075AF2E         0.75      1.50        16           100            0.6          8.00    0.20      0.090        0.290      Y          Y
+  I 0ZCJ0100FF2E         1.00      1.80         6           100            0.6          8.00    0.30      0.055        0.210      Y          Y
+    0ZCJ0110FF2E         1.10      2.20         8           100            0.8          8.00    0.30      0.040        0.180      Y          Y
+  J
+    0ZCJ0110AF2C         1.10      2.20        16           100            0.8          8.00    0.30      0.040        0.180      Y          Y
+ K 0ZCJ0150FF2C          1.50      3.00         8           100            0.8          8.00    1.00      0.040        0.120      Y          Y
+  L 0ZCJ0200FF2C         2.00      3.50         6           100            0.8          8.00    1.50      0.018        0.080      Y          Y
+IH    Hold Current- The maximum current at which the device will not trip in still air at 23°C.
+IT    Trip current- The minimum current at which the device will trip in still air at 23°C.
+Vmax Maximum voltage device can withstand at its rated current without suffering damage.
+Imax Maximum fault current device can withstand at rated voltage (Vmax) without damage.
+Pd    Typical power dissipated by device when in tripped state in 23°C still air environment.
+Rmin Minimum device resistance at 23°C in initial un-soldered state.
+R1max Maximum device resistance at 23°C, 1 hour after initial device trip, or after being soldered to PCB in end application.
+
+
+
+                                                                                              Specifications subject to change without notice
+
+
+
+                                                                                                  belfuse.com/circuit-protection
+                                             Please read our datasheet & drawing disclaimer here.
+Type 0ZCJ Series                                                                                                                    2/4
+
+
+ PTC’s – Basic Theory of Operation / “Tripped” Resistance Explanation
+ A Bel PTC consists of a block of polymeric material containing conductive carbon granules which is
+ sandwiched between two conductive metal plates. When this polymer block reaches approximately 125C,
+ either due to current passing through it via conductive chains of carbon particles or due to an external heat
+ source; it swells volumetrically. This expansion breaks apart a majority of the chains of carbon granules that
+ run randomly between the two conductive plates. This behavior results in a sharp increase in resistance
+ across the two plates which all but eliminates current flow through the device, allowing just enough residual
+ current flow to maintain the block’s internal temperature at 125C. Once this “tripped” state current is cut off,
+ the polymer brick cools and shrinks to its original size, thereby allowing its broken carbon chains to
+ reestablish themselves and permit the part to return to its low resistance state. Once cooled to room
+ ambient, the PTC will once again exhibit a resistance less than its “R1max” rating.
+ At currents below the device IHOLD rating, AND at temperatures below 100C, the PTC maintains a
+ resistance value below its R1 MAX rating.
+ The catalog data for each device specifies a "Typical Power" value. This is the power required to exactly
+ match the heat lost by the tripped device to its ambient surroundings at 23C. By Ohm's Law, power can be
+ stated as: W = E²/R. Thus the approximate resistance of a “Tripped” PTC can be determined by: R = E²/W,
+ where "E" is the voltage appearing across the PTC (usually the supply's open circuit voltage), and "W" is the
+ Typical Power value for the particular PTC.
+ Since the PPTC acts to maintain a constant internal temperature, its apparent resistance will change based
+ upon applied voltage and, to a lesser degree, ambient conditions. Consider the following example....
+ A PTC with a Typical Power of 1 watt protecting a circuit using a 60V supply will demonstrate an apparent,
+ tripped resistance "R" of:
+ R = 60²/1 = 3,600 ohms
+ This same tripped device when used to protect a 12V circuit would now present an apparent resistance of:
+ R = 12²/1 = 144 ohms
+ The value for Typical Power is "typical" because any physical factors that affect heat loss (such as ambient
+ temperature or air convection) will somewhat alter the level of power that the PTC needs to maintain its
+ internal temperature. In short, PTCs do not exhibit a constant, quantifiable tripped resistance value.
+
+ Average Time Current Characteristic Curve at 23°C
+
+
+
+
+ The Average Time Current Characteristic Curve and Temperature Rerating Curve are affected by a number of variables and these curves are
+ provided for guidance only.
+
+
+
+                                                                                         Specifications subject to change without notice
+
+                                                                                Bel Fuse Inc.                          +1 201.432.0463
+                                                                300 Executive Drive, Suite 300,                    Bel.US.CS@belf.com
+                                                                West Orange, NJ 07052 USA                belfuse.com/circuit-protection
+
+                                                                          © 2025 Bel Fuse, Inc.                       Rev. 0ZCJ Sep2025
+Type 0ZCJ Series                                                                                                                                                                    3/4
+
+
+ .Pad Layout                                                                                                                             Termination Pad Materials
+ The dimensions in the table below provide the recommended                                                                               Matte Tin – Plated Copper
+ pad layout.
+
+                                                                         P                       S                      W
+                                                                     Nominal               Nominal                  Nominal
+                                                                   mm        Inch        mm          Inch         mm        Inch
+                                                                  2.00       0.079       1.00        0.039       1.90       0.075
+
+                                                                                                                                                                     All dimensions in mm.
+ Mechanical Dimensions and Marking                                                                                                         Dimensions                     Marking Code
+                                                                                                        Part Number                  C                    D
+                                                                                                                              Min        Max     Min          Max             “b”, IH code
+                                                                                                     0ZCJ0005FF2E             0.45       0.85    0.10         0.75              C
+                                                                                                     0ZCJ0010FF2E             0.45       0.85    0.10         0.75              D
+                                                                                                     0ZCJ0012FF2E             0.45       0.85    0.10         0.75              Y
+                                                                                                     0ZCJ0016FF2E             0.45       0.75    0.10         0.75              Z
+ Temperature Derating Table                                                                          0ZCJ0020FF2E             0.45       0.75    0.10         0.75              F
+                                                                                                     0ZCJ0025FF2E             0.45       0.75    0.10         0.75              G
+                                                                                                     0ZCJ0025AF2E             0.45       0.75    0.10         0.75              g
+                                                                                                     0ZCJ0035FF2G             0.30       0.75    0.10         0.75              J
+                                                                                                     0ZCJ0035AF2E             0.90       1.30    0.25         0.75              j
+                                                                                                     0ZCJ0050FF2G             0.25       0.55    0.10         0.75              M
+                                                                                                     0ZCJ0050AF2E             0.80       1.20    0.25         0.75              m
+                                                                                                     0ZCJ0075FF2E             0.45       1.25    0.25         0.75              P
+                                                                                                     0ZCJ0075AF2E             0.45       1.25    0.25         0.75              p
+                                                                                                     0ZCJ0100FF2E             0.45       1.00    0.25         0.75              1
+                                                                                                     0ZCJ0110FF2E             0.45       1.00    0.25         0.75              R
+                                                                                                     0ZCJ0110AF2C             0.80       1.40    0.25         0.75              r
+                                                                                                     0ZCJ0150FF2C             0.80       1.40    0.25         0.75              S
+                                                                                                     0ZCJ0200FF2C             0.85       1.60    0.25         0.75              2
+                                                                                                                   Temperature Derating
+           I Hold Value                                       -40             -20             0                   23       30        40            50          60          70        85
+           0005 and 0010                                     152%            136%           120%                 100%     92%      81%            71%         60%         48%       30%
+           0012 thru 0200                                    145%            131%           116%                 100%     94%      86%            77%         69%         60%       48%
+
+ Thermal Derating Curve                                                                                             Cautionary Notes
+                                                                                                                    1. Operation beyond the specified maximum ratings or improper use
+                                                                                                                         may result in damage and possible electrical arcing and/or flame.
+                                                   Temperature Derating Curve                                       2. These Polymer PTC (PPTC) devices are intended for protection
+                                     180%                                                                              against occasional overcurrent/overtemperature fault conditions
+                                                                                                                       and may not be suitable for use in applications where repeated
+                                     160%
+
+
+
+
+  Percent of Hold and Trip Current
+                                                                                                                       and/or prolonged fault conditions are anticipated.
+                                     140%                                                                           3. Avoid contact of PTC device with chemical solvent. Prolonged
+                                                                                                                       contact may adversely impact the PTC performance.
+                                     120%
+                                                                                                                    4. These PTC devices may not be suitable for use in circuits with a
+                                     100%                                                                              large inductance, as the PTC trip can generate circuit voltage
+                                     80%                                                                               spikes above the PTC rated voltage.
+                                                                                                                    5. These devices may be used in both DC and AC circuits provided
+                                     60%                                                                               that peak-to-peak line voltage when carrying AC does not exceed
+                                     40%                                                                               the PTC’s Vmax rating. As PTCs are essentially thermal devices,
+                                                                                                                       the RMS value of AC current carried by a PTC will produce
+                                     20%                                                                               tripping parameters and times-to-trip similar to those of a DC
+                                      0%                                                                               voltage of the same magnitude.
+                                            -40   -20        0          20          40          60          80      6. If potting is mandated, avoid rigid potting compounds as they will
+                                                                  Temperature(°
+                                                                              C)                                       encase the PTC and prevent it from volumetrically expanding to
+                                                  0005 and 0010                  0012 thru 0200
+                                                                                                                       properly respond to a trip event.
+                                                                                                                    7. MSL: 2a (According to IPC J-Std-020).
+
+ Environmental Specifications
+
+                                                                                                                                     Specifications subject to change without notice
+
+                                                                                                                       Bel Fuse Inc.                                  +1 201.432.0463
+                                                                                                       300 Executive Drive, Suite 300,                            Bel.US.CS@belf.com
+                                                                                                       West Orange, NJ 07052 USA                        belfuse.com/circuit-protection
+
+                                                                                                                    © 2025 Bel Fuse, Inc.                              Rev. 0ZCJ Sep2025
+Type 0ZCJ Series                                                                                                                      4/4
+
+
+  Temperature cycling                              JESD22 Method JA-104
+  Biased humidity                                  MIL-STD-202 Method 103
+  Operational life                                 MIL-STD-202 Method 108
+  Resistance to solvents                           MIL-STD-202 Method 215
+  Mechanical shock                                 MIL-STD-202 Method 213
+  Vibration                                        MIL-STD-202 Method 204
+  Resistance to soldering heat                     MIL-STD-202 Method 210
+  Thermal shock                                    MIL-STD-202 Method 107
+  Solderability                                    ANSI/J-STD-002
+  Board flex(SMD)                                  AEC-Q200-005
+  Terminal strength                                AEC-Q200-006
+
+ Solder Reflow and Rework Recommendations
+ Profile Feature                          Pb-Free Assembly
+ Average Ramp-Up Rate (Tsmax to Tp)       3°C/second max
+ Preheat :
+ Temperature Min (Tsmin)                  150°C
+ Temperature Max (Tsmax)                  200°C
+ Time (tsmin to tsmax)                    60-180 seconds
+ Time maintained above:
+ Temperature(TL)                          217°C
+ Time (tL)                                60-150 seconds
+ Peak/Classification Temperature(Tp) :    260°C
+ Time within 5°C of actual Peak :
+ Temperature (tp)                         20-40 seconds
+ Ramp-Down Rate :                         6°C/second max.
+ Time 25°C to Peak Temperature :          8 minutes max
+
+ Solder Reflow
+ Due to “lead free / RoHS Compliant” construction of these PTC devices, the required Temperature and Dwell Time in the “ Soldering ” zone of
+ the reflow profile are greater than those used for non-RoHS devices.
+ 1. Recommended reflow methods; IR, vapor phase oven, hot air oven.
+ 2. Not Recommended For Wave Solder / Direct Immersion.
+ 3. Recommended paste thickness range – 0.20 – 0.25mm.
+ 4. Devices are compatible with standard industry cleaning solvents and methods.
+ 5. MSL: 2a (According to IPC J-Std-020).
+ Caution
+ If reflow temperature / dwell times exceed the recommended profile, the electrical performance of the PTC may be affected.
+ Rework: MIL-STD-202G Method 210F, Test Condition A.
+
+ Standard Packaging                                                  P/N Explanation and Ordering Information
+   Part Number        Tape/Reel Qty      4000, 3000 or 2000
+  0ZCJ0005FF2E                           fuses in 7 inches dia.
+       Thru                3,000         Reel, 8mm wide tape,
+  0ZCJ0025AF2E                           4mm pitch, per
+  0ZCJ0035FF2G             4,000         EIA-481(equivalent
+                                         IEC-286 part 3).
+  0ZCJ0035AF2E             3,000
+  0ZCJ0050FF2G             4,000
+  0ZCJ0050AF2E
+       Thru                3,000
+  0ZCJ0110FF2E
+  0ZCJ0110AF2C
+       Thru                2,000
+  0ZCJ0200FF2C
+
+
+
+
+                                                                                           Specifications subject to change without notice
+
+                                                                                  Bel Fuse Inc.                          +1 201.432.0463
+                                                                  300 Executive Drive, Suite 300,                    Bel.US.CS@belf.com
+                                                                  West Orange, NJ 07052 USA                belfuse.com/circuit-protection
+
+                                                                            © 2025 Bel Fuse, Inc.                        Rev. 0ZCJ Sep2025
+

@@ -175,6 +175,55 @@ part jst-xh-2 {
     }
 }
 
+// JST XH 2.50 mm, 3-position, top-entry through-hole header (CAN and UART: GND + two signals).
+// Source: ../datasheets/JST-XH.pdf (B3B-XH-A: 3 circuits, A = 5.0 mm, B = 9.9 mm; 3 A, 250 V).
+// DigiKey number not yet confirmed (DigiKey refuses automated lookups); LCSC C144394 checked 2026-11-09.
+part jst-xh-3 {
+    symbol "Connector_Generic:Conn_01x03"
+    reference J
+    value "JST XH 3-pin"
+    description "JST XH 2.50 mm three-position polarized, top-entry through-hole header"
+    datasheet "https://www.jst-mfg.com/product/pdf/eng/eXH.pdf"
+    manufacturer "JST"
+    order mpn="B3B-XH-A(LF)(SN)" mouser="306-B3BXHALFSNP" lcsc=C144394
+
+    pin 1 passive
+    pin 2 passive
+    pin 3 passive
+
+    package vertical footprint="Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical" {
+        pad 1 1
+        pad 2 2
+        pad 3 3
+    }
+}
+
+// Bourns MF-MSMF014/60X-2: PTC resettable fuse, 1812, Style 2 (freeXpansion).
+// Source: ../datasheets/MF-MSMF.pdf: Vmax 60 V, Imax 40 A, Ihold 0.14 A, Itrip 0.34 A,
+// Rmin 0.40 ohm, R1max 6.0 ohm, max time to trip 0.15 s at 1.5 A, tripped dissipation 0.8 W (p. 1);
+// Style 2 body 4.37-4.83 x 3.07-3.41 mm (p. 4); recommended pads 1.68 x 2.95 mm, 3.1 mm gap (p. 7).
+// MF-MSMF010/014 without the X suffix are marked "not recommended for new designs" (p. 1).
+// Non-polarized; pads 1/2 are interchangeable.
+part ptc-mf-msmf014-60x {
+    symbol "Device:Polyfuse"
+    reference F
+    value "MF-MSMF014/60X-2"
+    description "PTC resettable fuse, 60 V, 40 A max fault, 0.14 A hold, 1812"
+    datasheet "https://www.bourns.com/docs/Product-Datasheets/mf-msmf.pdf"
+    manufacturer "Bourns"
+    order mpn="MF-MSMF014/60X-2" mouser="652-MF-MSMF014/60X-2" digikey="118-MF-MSMF014/60X-2CT-ND"
+
+    pin 1 passive
+    pin 2 passive
+    port a pin=1
+    port b pin=2
+
+    package smd-1812 footprint="DroidPowerSense:Bourns_MF-MSMF_1812_Style2" {
+        pad 1 1
+        pad 2 2
+    }
+}
+
 // JST XH 2.50 mm, 4-position, top-entry through-hole header (remote switch with lit-switch LED pins).
 // Source: ../datasheets/JST-XH.pdf (B4B-XH-A: 4 circuits, A = 7.5 mm, B = 12.4 mm; 3 A, 250 V).
 // DigiKey number not yet confirmed (DigiKey refuses automated lookups); LCSC C144395 checked 2026-11-07.

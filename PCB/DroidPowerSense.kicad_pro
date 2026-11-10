@@ -441,6 +441,14 @@
         "pattern": "UART_VIO"
       },
       {
+        "netclass": "Power",
+        "pattern": "CAN_GND"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "UART_GND"
+      },
+      {
         "netclass": "GateDrive",
         "pattern": "GATE_FET"
       },
