@@ -1,4 +1,10 @@
 {
+  "0ZCJ": {
+    "fetched": "2026-11-09",
+    "file": "0ZCJ.pdf",
+    "sha256": "907b94c3649e5394b2287886f16dc783d499803fd072276604d70a5bb5b1dce6",
+    "url": "https://www.belfuse.com/resources/datasheets/circuitprotection/ds-cp-0zcj-series.pdf"
+  },
   "B360A": {
     "fetched": "2026-11-07",
     "file": "B360A.pdf",
@@ -76,6 +82,12 @@
     "file": "LMR14030.pdf",
     "sha256": "60fab340a8d414e2ad9c1ba6a0da8e5edd202acabd464fb42163729100ef5b13",
     "url": "https://www.ti.com/lit/ds/symlink/lmr14030-q1.pdf"
+  },
+  "MF-MSMF": {
+    "fetched": "2026-11-09",
+    "file": "MF-MSMF.pdf",
+    "sha256": "50d80228581842471d563e28ba0f1b67ab095ee95dfac4079f4a49f7f7bbf3c8",
+    "url": "https://www.bourns.com/docs/Product-Datasheets/mf-msmf.pdf"
   },
   "SMBJ": {
     "fetched": "2026-11-07",

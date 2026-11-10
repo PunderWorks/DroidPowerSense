@@ -421,10 +421,19 @@ design droidpowersense {
     circuit U_MCU.IO8 U_CAN.TXD name="CAN_TX"
     circuit U_CAN.RXD U_MCU.IO9 name="CAN_RX"
 
-    place jst-xh-2 J_CAN1 hand=#true note="CAN in: pin 1 CANL, pin 2 CANH"
-    place jst-xh-2 J_CAN2 hand=#true note="CAN out (daisy-chain): pin 1 CANL, pin 2 CANH"
-    circuit U_CAN.CANH J_CAN1.2 J_CAN2.2 name="CANH"
-    circuit U_CAN.CANL J_CAN1.1 J_CAN2.1 name="CANL"
+    // Pin 1 is a bus ground reference on both CAN and UART connectors (GND first everywhere, so a
+    // slipped cable never moves GND onto a signal). CAN_GND passes straight from J_CAN1 to J_CAN2 so
+    // the bus ground daisy-chains; each board ties it to its own GND through a PTC. If this board's
+    // battery-negative XT60 comes off while a cable stays connected, the load's return current
+    // would otherwise flow through the 3 A JST contact and thin signal wire. The fault current is
+    // bounded by the load current (firmware INA237 cutoff ~30 A, 30-40 A upstream fuse), inside
+    // the PTC's 40 A / 60 V Imax/Vmax. UART pull-up current ~1.1 mA: ~6.4 mV across R1max 6 ohm.
+    place jst-xh-3 J_CAN1 hand=#true note="CAN in: pin 1 GND (CAN_GND), pin 2 CANL, pin 3 CANH"
+    place jst-xh-3 J_CAN2 hand=#true note="CAN out (daisy-chain): pin 1 GND (CAN_GND), pin 2 CANL, pin 3 CANH"
+    circuit U_CAN.CANH J_CAN1.3 J_CAN2.3 name="CANH"
+    circuit U_CAN.CANL J_CAN1.2 J_CAN2.2 name="CANL"
+    place ptc-mf-msmf014-60x F_CAN_GND note="CAN bus ground reference to board GND (PTC limits fault current)"
+    circuit J_CAN1.1 J_CAN2.1 F_CAN_GND.1 name="CAN_GND"
 
     place resistor R_TERM value="120Ω" footprint="Resistor_SMD:R_0805_2012Metric" \
         note="120 Ohm CAN bus termination resistor (0805)"
@@ -435,14 +444,16 @@ design droidpowersense {
     // ── Level-Shifted UART Interface (J_UART JST-XH + J_VIO 3.3V/5V Jumper) ──────────────
     // ESP32-C5 GPIOs are 3.3V-only (not 5V-tolerant), so both RX and TX use BSS138 level shifters
     // between +3V3 and UART_VIO (selected by J_VIO: 1-2 = 3.3V, 2-3 = 5V).
-    place jst-xh-2 J_UART hand=#true note="UART: pin 1 RX (into this board), pin 2 TX (out of this board)"
+    place jst-xh-3 J_UART hand=#true note="UART: pin 1 GND (UART_GND), pin 2 RX (into this board), pin 3 TX (out of this board)"
+    place ptc-mf-msmf014-60x F_UART_GND note="UART ground reference to board GND (PTC limits fault current)"
+    circuit J_UART.1 F_UART_GND.1 name="UART_GND"
     place conn-1x3 J_VIO footprint="Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" \
         manufacturer="Würth Elektronik" mpn="61300311121" mouser="710-61300311121" digikey="732-5316-ND" lcsc=C2915006 hand=#true value="3V3 | VIO | 5V"
     circuit U_MCU.3V3 J_VIO.1 name="+3V3"
     circuit L_BUCK.B J_VIO.3 name="+5V"
     set J_VIO.2 net.name "UART_VIO"
 
-    // UART TX shifter (IO5 -> Q_TX -> J_UART.2):
+    // UART TX shifter (IO5 -> Q_TX -> J_UART.3):
     place bss138 Q_TX footprint="Package_TO_SOT_SMD:SOT-23" manufacturer="Diodes Incorporated" mpn="BSS138-7-F" \
         mouser="621-BSS138-7-F" digikey="BSS138-7-FDICT-ND" lcsc=C40912
     place pull-up R_TX_3V3 node=U_MCU.IO5 rail=U_MCU.v3v3 value="4.7kΩ"
@@ -450,9 +461,9 @@ design droidpowersense {
     circuit U_MCU.3V3 Q_TX.GATE name="+3V3"
     circuit U_MCU.IO5 Q_TX.SOURCE name="UART_TX_3V3"
     circuit J_VIO.2 R_TX_VIO.A name="UART_VIO"
-    circuit R_TX_VIO.B Q_TX.DRAIN J_UART.2 name="UART_TX"
+    circuit R_TX_VIO.B Q_TX.DRAIN J_UART.3 name="UART_TX"
 
-    // UART RX shifter (J_UART.1 -> Q_RX -> IO10):
+    // UART RX shifter (J_UART.2 -> Q_RX -> IO10):
     place bss138 Q_RX footprint="Package_TO_SOT_SMD:SOT-23" manufacturer="Diodes Incorporated" mpn="BSS138-7-F" \
         mouser="621-BSS138-7-F" digikey="BSS138-7-FDICT-ND" lcsc=C40912
     place pull-up R_RX_3V3 node=U_MCU.IO10 rail=U_MCU.v3v3 value="4.7kΩ"
@@ -460,7 +471,7 @@ design droidpowersense {
     circuit U_MCU.3V3 Q_RX.GATE name="+3V3"
     circuit U_MCU.IO10 Q_RX.SOURCE name="UART_RX_3V3"
     circuit J_VIO.2 R_RX_VIO.A name="UART_VIO"
-    circuit R_RX_VIO.B Q_RX.DRAIN J_UART.1 name="UART_RX"
+    circuit R_RX_VIO.B Q_RX.DRAIN J_UART.2 name="UART_RX"
 
     // ── Ground ───────────────────────────────────────────────────────────────────────────
     circuit U_MCU.GND J_PWR_IN.GND J_PWR_OUT.GND D_TVS_IN.A2 D_FLY.A D_TVS_OUT.A2 \
@@ -468,7 +479,7 @@ design droidpowersense {
         Q_CUTOFF.SOURCE R_CUTOFF_PD.B R_VBAT_BOT.B C_VBAT_ADC.B \
         U_BUCK.GND C_BUCK_IN1.B C_BUCK_IN2.B C_BUCK_IN3.B R_BUCK_RT.B C_BUCK_SS.B \
         D_BUCK.A R_FB_BOT.B C_BUCK_OUT1.B C_BUCK_OUT2.B C_BUCK_OUT3.B \
-        C_3V3_1.B J_CIRCUIT.B D_PWR_LED.K Q_LED.SOURCE name="GND"
+        C_3V3_1.B J_CIRCUIT.B D_PWR_LED.K Q_LED.SOURCE F_CAN_GND.2 F_UART_GND.2 name="GND"
 
     // ── ESP32-C5-Zero-M sockets (BOM only: their pins use U_MCU's holes) ─────────────────────
     // Placed last so adding them does not renumber the other connectors.

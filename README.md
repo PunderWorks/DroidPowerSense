@@ -58,8 +58,8 @@ Battery ── XT60 lead with in-line blade fuse (30 A) ─▶ BAT IN [ DroidPow
 | Current / voltage sensing | TI INA237 on a 1 mΩ shunt: ±164 A range, 5 mA resolution; also measures the LOAD OUT voltage |
 | Battery voltage sensing | ESP32-C5 ADC through a ÷ 11 divider |
 | MCU | Waveshare ESP32-C5-Zero-M (Wi-Fi 6, BLE 5, CAN FD), on 2.54 mm sockets |
-| Comms | CAN FD (TI TCAN334G, 2 × JST-XH, jumper termination); UART (JST-XH, 3.3 V / 5 V) |
-| Board | 70 × 50 mm, 6 layers, 1.6 mm, 2 oz outer / 1 oz inner copper, components on one side |
+| Comms | CAN FD (TI TCAN334G, 2 × 3-pin JST-XH with bus ground, jumper termination); UART (3-pin JST-XH with ground, 3.3 V / 5 V) |
+| Board | 76 × 58 mm, 4 layers, 1.6 mm, 2 oz outer / 1 oz inner copper, components on one side |
 | Mounting | 4 × M3 holes |
 
 ## Connectors and jumpers
@@ -71,13 +71,18 @@ Every connector has its pin functions printed on the board next to each pin.
 | J1 | BAT IN | XT60PW-M | + / − from the battery, through the in-line fused XT60 lead |
 | J2 | LOAD OUT | XT60PW-F | + / − to the droid |
 | J3 | REMOTE SW | JST-XH 4-pin | `BAT+`, `SW`, `LED-`, `LED+` (see below) |
-| J5 / J6 | CAN IN / CAN OUT | JST-XH 2-pin | `CANH`, `CANL`; wired in parallel, so IN and OUT are a cabling convention |
-| J8 | UART | JST-XH 2-pin | `RX` (into the board), `TX` (out of the board) |
+| J5 / J6 | CAN IN / CAN OUT | JST-XH 3-pin | `GND`, `CANL`, `CANH`; wired in parallel, so IN and OUT are a cabling convention. `GND` is a bus ground reference: run it through every CAN cable |
+| J8 | UART | JST-XH 3-pin | `GND`, `RX` (into the board), `TX` (out of the board). Connect `GND` to the other device's ground |
 | J7 | TERM | 2-pin jumper | Fitted = 120 Ω CAN termination. Fit only on the boards at the two ends of the bus. |
 | J9 | UART V | 3-pin jumper | `3V3`-`UART` = 3.3 V UART; `UART`-`5V` = 5 V UART |
 | J4 | CIRCUIT ID | 2-pin jumper | No jumper = circuit 1, jumper on = circuit 2 |
 
 The three jumper shunts (Würth 60900213421) are in the BOM.
+
+The CAN and UART `GND` pins are signal references, not power returns: each goes to the board's
+ground through a resettable fuse (PTC), so if a battery-negative lead comes off while a comms cable
+is still plugged in, the fuse trips instead of the load current flowing through the thin comms wire.
+Always connect battery negative through the XT60s.
 
 ### Wiring the remote switch (J3)
 
@@ -111,7 +116,7 @@ The three jumper shunts (Würth 60900213421) are in the BOM.
 | Area | Status |
 |---|---|
 | Hardware design | Complete and reviewed: all design and layout checks pass, power stage verified in simulation |
-| PCB | Complete: routed, silkscreen and graphics done (PunderWorks logo and a QR code to this repo on the back). Gerbers, drills, BOM and placement in [`PCB/production/`](PCB/production/). |
+| PCB | v1.0 routed and reviewed for fab: 76 × 58 mm on 4 layers (moved from 70 × 50 mm on 6 layers, cheaper to fab) with 3-pin CAN/UART connectors. DRC and all design checks clean; fab files in [`PCB/production/`](PCB/production/). The renders above are of the earlier 6-layer layout until they are re-rendered. |
 | Firmware | Not started (Rust on the ESP32-C5). Requirements captured in [docs/firmware-requirements.md](docs/firmware-requirements.md). |
 | Bench testing | Not started. The first-board checklist is in [PCB/README.md](PCB/README.md#bench-checklist-first-board). |
 
@@ -149,9 +154,9 @@ python3 scripts/spice/test_soa.py             # SOA checker unit tests
 
 ## Ordering
 
-- **Fab:** 6 layers, 1.6 mm, **2 oz outer / 1 oz inner** copper; minimum track and spacing 0.2 mm.
+- **Fab:** 4 layers, 1.6 mm, **2 oz outer / 1 oz inner** copper; minimum track and spacing 0.2 mm.
   Don't order it with 1 oz outer copper: the 30 A path needs the 2 oz.
 - **Parts:** the BOM lists Mouser and DigiKey numbers (LCSC where available). The XT60 connectors
   (Amass) and the ESP32-C5-Zero-M module (Waveshare) come from their own channels.
 - **Hand assembly:** the connectors, jumpers, module sockets and module are through-hole and
-  hand-soldered; the placement file lists only the 67 surface-mount parts.
+  hand-soldered; the placement file lists only the 69 surface-mount parts.
