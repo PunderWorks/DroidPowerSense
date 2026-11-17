@@ -50,6 +50,7 @@ jobs:
     needs: changes
     if: needs.changes.outputs.pcb == 'true'
     runs-on: ubuntu-24.04
+    timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@v7
@@ -70,11 +71,19 @@ jobs:
       - name: Check purchasing BOM
         run: cargo +1.96.0 run --locked --manifest-path ci/stackup/Cargo.toml -- bom PCB/stackup/board.kdl --locked -o /tmp/droidpowersense-bom.csv
 
+      # Only what the sync check needs: pcbnew and its Python module (`kicad`) and the stock
+      # footprints (`kicad-footprints`, in case the plugin has to load one). `--install-recommends`
+      # also pulled in the 3D models (280 MB), demos and docs: 581 MB, mostly from Launchpad's PPA
+      # at about 0.5 MB/s, and the 3D-model download timed out every few runs. A missing 3D model
+      # is reported by the sync, not counted as a change. Retries ride out a dropped connection;
+      # the timeout stops a hung download from holding the job for hours.
       - name: Install KiCad 10
+        timeout-minutes: 15
         run: |
           sudo add-apt-repository --yes ppa:kicad/kicad-10.0-releases
           sudo apt-get update
-          sudo apt-get install -y --install-recommends kicad
+          sudo apt-get install -y --no-install-recommends -o Acquire::Retries=5 \
+            kicad kicad-footprints
 
       - name: Check PCB sync
         run: |
