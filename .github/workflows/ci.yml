@@ -102,10 +102,20 @@ jobs:
         timeout-minutes: 20
         run: ci/install_kicad.sh ~/apt-cache
 
-      # apt leaves root-owned files the cache action can't read.
-      - name: Make the package cache readable
+      # A timed-out install leaves apt's download processes running, still writing to the cache
+      # (tar then fails with "file changed as we read it" and nothing is saved): stop them first.
+      # Half-downloaded files in partial/ stay; apt resumes them. apt also leaves root-owned files
+      # the cache action can't read.
+      - name: Prepare the package cache for saving
         if: always() && steps.cache.outcome == 'success' && steps.install.outputs.changed != 'false'
-        run: sudo chown -R "$USER" ~/apt-cache
+        run: |
+          running() { pgrep -x apt-get || pgrep -f '^/usr/lib/apt/methods/'; } > /dev/null
+          sudo pkill -x apt-get || true
+          sudo pkill -f '^/usr/lib/apt/methods/' || true
+          for _ in $(seq 10); do running || break; sleep 1; done
+          sudo pkill -9 -x apt-get || true
+          sudo pkill -9 -f '^/usr/lib/apt/methods/' || true
+          sudo chown -R "$USER" ~/apt-cache
 
       - name: Save KiCad package cache
         if: always() && steps.cache.outcome == 'success' && steps.install.outputs.changed != 'false'
