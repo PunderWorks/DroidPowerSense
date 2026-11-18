@@ -77,13 +77,42 @@ jobs:
       # at about 0.5 MB/s, and the 3D-model download timed out every few runs. A missing 3D model
       # is reported by the sync, not counted as a change. Retries ride out a dropped connection;
       # the timeout stops a hung download from holding the job for hours.
+      #
+      # ci/install_kicad.sh keeps apt's lists and .debs in ~/apt-cache and, when that cache is
+      # recent, installs from it with no network: Launchpad and the Ubuntu mirrors are each slow
+      # or down at times (see the script). The cache is saved after every run that changed it,
+      # including one that failed or timed out, so a partial download is never thrown away.
+      # Each save gets a new key (caches are immutable); restores take the newest by prefix.
+      # A PR can restore main's cache, but main can't restore a PR's.
+      # ImageOS is a runner environment variable, not in the `env` context.
+      - name: Read runner image
+        id: image
+        run: echo "os=${ImageOS}" >> "$GITHUB_OUTPUT"
+
+      - name: Restore KiCad package cache
+        id: cache
+        uses: actions/cache/restore@v6
+        with:
+          path: ~/apt-cache
+          key: kicad-apt-${{ steps.image.outputs.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: kicad-apt-${{ steps.image.outputs.os }}-
+
       - name: Install KiCad 10
-        timeout-minutes: 15
-        run: |
-          sudo add-apt-repository --yes ppa:kicad/kicad-10.0-releases
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends -o Acquire::Retries=5 \
-            kicad kicad-footprints
+        id: install
+        timeout-minutes: 20
+        run: ci/install_kicad.sh ~/apt-cache
+
+      # apt leaves root-owned files the cache action can't read.
+      - name: Make the package cache readable
+        if: always() && steps.cache.outcome == 'success' && steps.install.outputs.changed != 'false'
+        run: sudo chown -R "$USER" ~/apt-cache
+
+      - name: Save KiCad package cache
+        if: always() && steps.cache.outcome == 'success' && steps.install.outputs.changed != 'false'
+        uses: actions/cache/save@v6
+        with:
+          path: ~/apt-cache
+          key: ${{ steps.cache.outputs.cache-primary-key }}
 
       - name: Check PCB sync
         run: |
